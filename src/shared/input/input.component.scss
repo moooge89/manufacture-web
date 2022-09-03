@@ -1,0 +1,21 @@
+@import "src/assets/variables";
+
+input {
+
+  width: 100%;
+
+  border-radius: 5px;
+  padding: 5px;
+
+  background-color: inherit;
+  border: 1px solid $input-bg-color;
+  color: $white;
+
+  transition: border-color $animation-time;
+
+  &:focus {
+    outline: none;
+
+    border-color: $input-border-color;
+  }
+}
