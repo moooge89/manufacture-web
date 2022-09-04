@@ -1,0 +1,20 @@
+@import "src/assets/variables";
+
+button {
+  width: 100%;
+
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+
+  font-size: inherit;
+  background-color: $button-bg;
+  color: $white;
+
+  transition: background-color $animation-time;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $button-hover;
+  }
+}
