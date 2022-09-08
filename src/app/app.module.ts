@@ -3,6 +3,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {IsLoggedInGuard} from "./guard/is-loggen-in.guard";
 import {AppRoutingModule} from "./app-routing.module";
+import {environment} from "../environments/environment";
+import {HttpServiceModule} from "../service/http/http-service.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -11,6 +14,8 @@ import {AppRoutingModule} from "./app-routing.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    HttpServiceModule.forRoot(environment.urlPrefix),
   ],
   providers: [
     IsLoggedInGuard,

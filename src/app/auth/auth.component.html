@@ -3,14 +3,21 @@
   <header>LOGIN</header>
 
   <div class="input-container">
-    <app-input placeholder="Enter username"></app-input>
+    <app-input
+      placeholder="Enter username"
+      (valueChanged)="username = $event"
+    ></app-input>
 
     <app-input
       placeholder="Enter password"
       type="password"
+      (valueChanged)="password = $event"
     ></app-input>
   </div>
 
-  <app-button text="Login"></app-button>
+  <app-button
+    text="Login"
+    (clicked)="login()"
+  ></app-button>
 
 </div>

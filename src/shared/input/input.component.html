@@ -1,4 +1,6 @@
 <input
+  #inputElement
   [placeholder]="placeholder"
   [type]="type"
+  (input)="valueChanged.emit(inputElement.value)"
 >
