@@ -1,0 +1,18 @@
+<div class="menu-item-container">
+  <div
+    *ngFor="let item of menuItems"
+    class="menu-item"
+    routerLinkActive="active"
+    [routerLink]="item.route"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    {{item.label}}
+  </div>
+</div>
+
+<div
+  class="menu-item logout"
+  (click)="logout()"
+>
+  Logout
+</div>

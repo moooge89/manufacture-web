@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {IsLoggedInGuard} from "./guard/is-loggen-in.guard";
 
+// todo era add guards
 const routes: Routes = [
   {
     path: 'auth',
@@ -14,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'main',
+    redirectTo: 'auth',
     pathMatch: 'full',
   },
   {

@@ -28,8 +28,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     const token = localStorage.getItem(TOKEN);
 
-    if (!token) {
-      await this.router.navigate(['/']);
+    // todo era resolve this
+    if (token) {
+      await this.router.navigate(['/main']);
     }
   }
 
@@ -53,11 +54,14 @@ export class AuthComponent implements OnInit, OnDestroy {
     const encodedUsername = encode(this.username);
     const encodedPassword = encode(this.password);
 
-    const loginInfo = new LoginInfo(encodedUsername, encodedPassword);
+    const loginInfo: LoginInfo = {
+      username: encodedUsername,
+      password: encodedPassword,
+    }
 
     this.unsub.sub = this.authController.login(loginInfo).subscribe(token => {
       localStorage.setItem(TOKEN, token);
-      this.router.navigateByUrl('/main').then();
+      this.router.navigate(['/main']).then();
     });
   }
 

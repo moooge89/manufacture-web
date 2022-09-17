@@ -1,6 +1,6 @@
-export class LoginInfo {
+export interface LoginInfo {
 
-  public constructor(public username: number[], public password: number[]) {
-  }
+  username: number[];
+  password: number[];
 
 }
