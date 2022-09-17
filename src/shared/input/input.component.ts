@@ -9,7 +9,9 @@ export class InputComponent {
 
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
+  @Input() hasError: boolean = false;
 
   @Output() valueChanged = new EventEmitter<string>();
+  @Output() focused = new EventEmitter<void>();
 
 }

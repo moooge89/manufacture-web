@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpService} from "../service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {LoginInfo} from "../model/auth/LoginInfo";
+import {of} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class AuthController {
@@ -12,8 +13,9 @@ export class AuthController {
     this.http = http.setControllerPrefix('');
   }
 
-  login(loginInfo: LoginInfo): Observable<any> {
-    return this.http.postBodyString('/login', loginInfo);
+  login(loginInfo: LoginInfo): Observable<string> {
+    // return this.http.postBodyString('/login', loginInfo);
+    return of('token');
   }
 
 }

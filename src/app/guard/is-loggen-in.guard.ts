@@ -3,6 +3,7 @@ import {CanLoad, Router} from '@angular/router';
 import {Observable} from 'rxjs/internal/Observable';
 import {tap} from 'rxjs/operators';
 import {of} from "rxjs";
+import {TOKEN} from "../../consts/LocalStorageConst";
 
 @Injectable()
 export class IsLoggedInGuard implements CanLoad {
@@ -17,9 +18,13 @@ export class IsLoggedInGuard implements CanLoad {
     // 1. init auth service
     // 2. check, if logged in
 
-    return of(true).pipe(
-      tap(() => {
-        this.router.navigateByUrl('/auth').then();
+    const token = localStorage.getItem(TOKEN);
+
+    return of(!!token).pipe(
+      tap(isValid => {
+        if (!isValid) {
+          this.router.navigateByUrl('/auth').then();
+        }
       }),
     );
   }
