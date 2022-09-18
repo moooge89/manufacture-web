@@ -19,6 +19,9 @@
 }
 
 .menu-item {
+  display: flex;
+  align-items: center;
+
   font-size: 24px;
   padding: 1.5rem 1rem;
   cursor: pointer;
@@ -28,17 +31,19 @@
 
   transition: background-color $animation-time;
 
-  &:hover {
-    background-color: $menu-item-hover-color;
-  }
-
-  &.active {
+  &:hover, &.active {
     background-color: $menu-item-hover-color;
   }
 }
 
-.logout {
-  &:hover {
-    background-color: $error-color;
-  }
+.logout:hover {
+  background-color: $error-color;
+}
+
+.menu-mat-icon {
+  margin-right: 1rem;
+}
+
+.red-icon {
+  color: red;
 }

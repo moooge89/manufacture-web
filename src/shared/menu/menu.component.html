@@ -6,6 +6,10 @@
     [routerLink]="item.route"
     [routerLinkActiveOptions]="{ exact: true }"
   >
+    <mat-icon
+      class="menu-mat-icon"
+      [svgIcon]="item.icon"
+    ></mat-icon>
     {{item.label}}
   </div>
 </div>
@@ -14,5 +18,9 @@
   class="menu-item logout"
   (click)="logout()"
 >
+  <mat-icon
+    class="menu-mat-icon red-icon"
+    svgIcon="logout"
+  ></mat-icon>
   Logout
 </div>

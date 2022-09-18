@@ -3,9 +3,9 @@ import {MenuItem} from "../../model/web/MenuItem";
 import {Router} from "@angular/router";
 
 const finalItems: MenuItem[] = [
-  {label: 'Factory', route: ['/factory']},
-  {label: 'Teams', route: ['/factory/team']},
-  {label: 'Warehouse', route: ['/factory/warehouse']},
+  {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
+  {label: 'Teams', route: ['/main/team'], icon: 'team'},
+  {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
 ];
 
 @Component({
@@ -21,6 +21,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    // todo era remove
     this.router.navigate(['/main/factory']);
   }
 
