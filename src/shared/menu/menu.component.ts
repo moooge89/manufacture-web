@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {MenuItem} from "../../model/web/MenuItem";
-import {Router} from "@angular/router";
-import {TOKEN} from "../../consts/LocalStorageConst";
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
   selector: 'app-menu',
@@ -12,13 +11,11 @@ export class MenuComponent {
 
   @Input() menuItems: MenuItem[] = [];
 
-  constructor(private readonly router: Router) {
+  constructor(private readonly authService: AuthService) {
   }
 
   async logout() {
-    // todo era use authService.logout()
-    localStorage.setItem(TOKEN, '');
-    await this.router.navigate(['/auth']);
+    await this.authService.logout();
   }
 
 }
