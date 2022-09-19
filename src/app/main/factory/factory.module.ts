@@ -5,10 +5,10 @@ import {FactoryRoutingModule} from "./factory-routing.module";
 
 @NgModule({
   declarations: [FactoryComponent],
-    imports: [
-        CommonModule,
-        FactoryRoutingModule,
-    ],
+  imports: [
+    CommonModule,
+    FactoryRoutingModule,
+  ],
   bootstrap: [FactoryComponent]
 })
 export class FactoryModule {
