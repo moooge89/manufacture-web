@@ -1,16 +1,33 @@
+@import "src/assets/variables";
+
 :host {
   width: 100%;
   height: 100%;
   display: flex;
   flex: 1;
+  flex-direction: column;
+
+  //padding: 1.5rem;
+  background-color: $main-bg-color;
 }
 
-app-menu {
-  width: 20%;
-  height: 100%;
+.factory-info {
+  box-shadow: 0 2px 12px rgb(0 0 0 / 5%);
 }
 
 .map {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 50%;
+
+  transition: height $animation-time;
+
+  &.map-expanded {
+    height: 90%;
+  }
+
+  ::ng-deep {
+    .leaflet-popup-close-button, .leaflet-control-attribution {
+      display: none;
+    }
+  }
 }

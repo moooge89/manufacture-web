@@ -1,22 +1,12 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import * as L from "leaflet";
 import {Browser, LeafletMouseEvent, map, tileLayer} from "leaflet";
-import * as L from 'leaflet';
 import {PopUpService} from "../../../service/map-popup/PopUpService";
-
-function calculateRadius(people: number): number {
-  if (people <= 10) {
-    return 5;
-  }
-
-  const res = 5 + (people - 5) * 0.01;
-
-  if (res > 20) {
-    return 20;
-  }
-
-  return res;
-}
-
+import {calculateFactoryRadius} from "../../../util/CalculateUtil";
+import {LEAFLET_API_TOKEN, LEAFLET_BASE_URL, LEAFLET_RETINA_URL} from "../../../consts/LeafletConst";
+import {FactoryController} from "../../../controller/FactoryController";
+import {FactoryInfo} from "../../../model/api/FactoryInfo";
+import {GeoPoint} from "../../../model/api/GeoPoint";
 
 @Component({
   selector: 'app-factory',
@@ -28,41 +18,46 @@ export class FactoryComponent implements AfterViewInit {
   @ViewChild('map')
   private mapContainer: ElementRef<HTMLElement> | undefined;
 
+  factoryInfo: FactoryInfo | undefined = undefined;
+  mapExpanded: boolean = true;
+
   constructor(
     private readonly popupService: PopUpService,
+    private readonly factoryController: FactoryController,
   ) {
   }
 
-  ngAfterViewInit() {
-    if (!this.mapContainer) {
+  async ngAfterViewInit() {
+    this.factoryInfo = await this.factoryController.loadFactoryInfo().toPromise();
+    this.initMap();
+  }
+
+  private initMap(): void {
+    if (!this.mapContainer || !this.factoryInfo) {
       return;
     }
 
-    const initialState = {lng: 76.97141432814534, lat: 43.26501881519278, zoom: 10};
+    this.mapExpanded = false;
 
-    const leafletMap = map(this.mapContainer.nativeElement).setView([initialState.lat, initialState.lng], initialState.zoom);
+    const geoPoint: GeoPoint = this.factoryInfo.geoPoint;
 
-    const isRetina = Browser.retina;
-    const baseUrl = "https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey={apiKey}";
-    const retinaUrl = "https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}@2x.png?apiKey={apiKey}";
+    const leafletMap = map(this.mapContainer.nativeElement).setView([geoPoint.latitude, geoPoint.longitude], 10);
 
-    const data = {name: 'Almaty', state: 'Almaty', population: 10};
+    tileLayer(Browser.retina ? LEAFLET_RETINA_URL : LEAFLET_BASE_URL, {
+      attribution: '',
+      apiKey: LEAFLET_API_TOKEN,
+      maxZoom: 20,
+      id: 'osm-bright',
+    } as any).addTo(leafletMap);
 
-    const circle = L.circleMarker([initialState.lat, initialState.lng], {radius: calculateRadius(data.population)});
+    const circle = L.circleMarker([geoPoint.latitude, geoPoint.longitude], {radius: calculateFactoryRadius(this.factoryInfo.workerCount)});
 
-    circle.bindPopup(this.popupService.makeCapitalPopup(data));
+    circle.bindPopup(this.popupService.makeFactoryInfoPopup(this.factoryInfo));
 
     circle.addTo(leafletMap);
 
     leafletMap.addEventListener("click", function (event: LeafletMouseEvent) {
       console.log(event.latlng);
     });
-
-    tileLayer(isRetina ? retinaUrl : baseUrl, {
-      attribution: '',
-      apiKey: '97f969d8d494421a91ed6ae444aff320',
-      maxZoom: 20,
-      id: 'osm-bright',
-    } as any).addTo(leafletMap);
   }
 }

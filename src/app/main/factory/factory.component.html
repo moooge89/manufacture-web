@@ -1,3 +1,15 @@
-It is main
+<div #map
+     class="map"
+     [class.map-expanded]="mapExpanded"
+></div>
+<button (click)="mapExpanded = !mapExpanded">click me</button>
 
-<div #map class="map"></div>
+<div
+  *ngIf="factoryInfo"
+  class="factory-info"
+>
+  <div>Name: {{factoryInfo.name}}</div>
+  <div>Director: {{factoryInfo.director}}</div>
+  <div>Workers: {{factoryInfo.workerCount}}</div>
+</div>
+

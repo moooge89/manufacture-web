@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
+import {FactoryInfo} from "../../model/api/FactoryInfo";
 
 @Injectable({providedIn: 'root'})
 export class PopUpService {
 
-  constructor() {
-  }
-
-  makeCapitalPopup(data: any): string {
+  makeFactoryInfoPopup(factoryInfo: FactoryInfo): string {
     return `` +
-      `<div>Capital: ${data.name}</div>` +
-      `<div>State: ${data.state}</div>` +
-      `<div>Population: ${data.population}</div>`
+      `<div>Name: ${factoryInfo.name}</div>` +
+      `<div>Director: ${factoryInfo.director}</div>` +
+      `<div>Workers: ${factoryInfo.workerCount}</div>`
   }
 }
