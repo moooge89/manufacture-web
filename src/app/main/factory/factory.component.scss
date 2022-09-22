@@ -1,33 +1,90 @@
 @import "src/assets/variables";
+@import "src/assets/global";
 
 :host {
   width: 100%;
   height: 100%;
   display: flex;
-  flex: 1;
   flex-direction: column;
+  justify-content: space-between;
 
-  //padding: 1.5rem;
+  padding: 2rem;
   background-color: $main-bg-color;
 }
 
+.top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(50% - 1rem);
+}
+
 .factory-info {
-  box-shadow: 0 2px 12px rgb(0 0 0 / 5%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100%;
+  width: calc(50% - 1rem);
+
+  padding: 1rem;
+}
+
+.factory-name {
+  font-size: 24px;
+  font-weight: bold;
+
+  margin-bottom: 1rem;
+}
+
+.factory-body {
+  width: 70%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  span {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+}
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.image-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+
+  width: calc(50% - 1rem);
+  height: 100%;
+
+  img {
+    max-height: 100%;
+    max-width: 90%;
+  }
+}
+
+.left-icon {
+  transform: rotate(180deg);
 }
 
 .map {
+  display: flex;
   width: 100%;
-  height: 50%;
+  height: calc(50% - 1rem);
 
-  transition: height $animation-time;
-
-  &.map-expanded {
-    height: 90%;
-  }
-
-  ::ng-deep {
+  &::ng-deep {
     .leaflet-popup-close-button, .leaflet-control-attribution {
       display: none;
     }
   }
+
 }

@@ -6,4 +6,5 @@ export interface FactoryInfo {
   workerCount: number;
   director: string;
   teamCount: number;
+  year: number;
 }

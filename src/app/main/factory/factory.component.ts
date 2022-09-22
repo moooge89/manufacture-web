@@ -7,6 +7,7 @@ import {LEAFLET_API_TOKEN, LEAFLET_BASE_URL, LEAFLET_RETINA_URL} from "../../../
 import {FactoryController} from "../../../controller/FactoryController";
 import {FactoryInfo} from "../../../model/api/FactoryInfo";
 import {GeoPoint} from "../../../model/api/GeoPoint";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-factory',
@@ -19,9 +20,9 @@ export class FactoryComponent implements AfterViewInit {
   private mapContainer: ElementRef<HTMLElement> | undefined;
 
   factoryInfo: FactoryInfo | undefined = undefined;
-  mapExpanded: boolean = true;
 
   constructor(
+    private readonly router: Router,
     private readonly popupService: PopUpService,
     private readonly factoryController: FactoryController,
   ) {
@@ -32,12 +33,14 @@ export class FactoryComponent implements AfterViewInit {
     this.initMap();
   }
 
+  async goToTeams() {
+    await this.router.navigate(['/main/teams']);
+  }
+
   private initMap(): void {
     if (!this.mapContainer || !this.factoryInfo) {
       return;
     }
-
-    this.mapExpanded = false;
 
     const geoPoint: GeoPoint = this.factoryInfo.geoPoint;
 

@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 
 const finalItems: MenuItem[] = [
   {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
-  {label: 'Teams', route: ['/main/team'], icon: 'team'},
+  {label: 'Teams', route: ['/main/teams'], icon: 'team'},
   {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
 ];
 

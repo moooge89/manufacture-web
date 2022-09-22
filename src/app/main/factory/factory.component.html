@@ -1,15 +1,52 @@
-<div #map
-     class="map"
-     [class.map-expanded]="mapExpanded"
-></div>
-<button (click)="mapExpanded = !mapExpanded">click me</button>
+<section class="top">
+  <div
+    *ngIf="factoryInfo"
+    class="factory-info block"
+  >
+    <div class="factory-name">{{factoryInfo.name}}</div>
 
-<div
-  *ngIf="factoryInfo"
-  class="factory-info"
->
-  <div>Name: {{factoryInfo.name}}</div>
-  <div>Director: {{factoryInfo.director}}</div>
-  <div>Workers: {{factoryInfo.workerCount}}</div>
-</div>
+    <div class="factory-body">
+      <span>Director:</span>
+      <span>{{factoryInfo.director}}</span>
 
+      <span>Build year:</span>
+      <span>{{factoryInfo.year}}</span>
+
+      <span>Workers:</span>
+      <span>{{factoryInfo.workerCount}}</span>
+
+      <span>Teams:</span>
+      <span>{{factoryInfo.teamCount}}</span>
+
+    </div>
+
+    <span
+      class="link"
+      (click)="goToTeams()"
+    >See all teams</span>
+  </div>
+
+  <div class="block image-holder">
+    <mat-icon
+      class="left-icon"
+      svgIcon="right"
+    >
+    </mat-icon>
+
+    <img
+      src="https://time.kz/files/000/009/we9qcHT897.jpg"
+      alt="factory"
+    >
+
+    <mat-icon
+      class="right-icon"
+      svgIcon="right"
+    >
+    </mat-icon>
+
+  </div>
+</section>
+
+<section #map
+         class="map block"
+></section>

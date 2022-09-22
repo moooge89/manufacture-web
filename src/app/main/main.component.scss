@@ -8,3 +8,7 @@ app-menu {
   width: 256px;
   height: 100%;
 }
+
+section {
+  width: calc(100% - 256px);
+}
