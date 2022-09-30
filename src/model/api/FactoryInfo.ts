@@ -5,6 +5,6 @@ export interface FactoryInfo {
   geoPoint: GeoPoint;
   workerCount: number;
   director: string;
-  teamCount: number;
+  departmentCount: number;
   year: number;
 }

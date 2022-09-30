@@ -22,7 +22,7 @@ export class FactoryController {
         latitude: 43.26501881519278,
         longitude: 76.97141432814534,
       },
-      teamCount: 3,
+      departmentCount: 3,
       year: 2022,
     };
     return of(factoryInfo);

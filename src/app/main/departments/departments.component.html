@@ -1,0 +1,32 @@
+<section class="block">
+
+  <span>Our staff</span>
+
+  <div
+    cdkDropListGroup
+    class="scrollable"
+  >
+
+    <div
+      cdkDropList
+      *ngFor="let department of departments; let i = index"
+      class="department-container"
+      [cdkDropListData]="department.persons"
+      (cdkDropListDropped)="drop($event)"
+    >
+
+      <h2>{{department.name}}</h2>
+
+      <div
+        cdkDrag
+        *ngFor="let person of department.persons"
+        class="person-container"
+      >
+        {{person.name}}
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

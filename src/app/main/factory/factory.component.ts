@@ -33,8 +33,8 @@ export class FactoryComponent implements AfterViewInit {
     this.initMap();
   }
 
-  async goToTeams() {
-    await this.router.navigate(['/main/teams']);
+  async goToDepartments() {
+    await this.router.navigate(['/main/departments']);
   }
 
   private initMap(): void {

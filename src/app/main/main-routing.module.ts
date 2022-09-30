@@ -12,8 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('./factory/factory.module').then(x => x.FactoryModule),
       },
       {
-        path: 'teams',
-        loadChildren: () => import('./teams/teams.module').then(x => x.TeamsModule),
+        path: 'departments',
+        loadChildren: () => import('./departments/departments.module').then(x => x.DepartmentsModule),
       }
     ],
   },
