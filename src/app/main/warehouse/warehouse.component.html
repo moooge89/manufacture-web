@@ -14,7 +14,10 @@
     </thead>
 
     <tbody>
-    <tr *ngFor="let material of materials">
+    <tr
+      *ngFor="let material of materials"
+      (click)="onRowClick(material)"
+    >
       <td>
         <mat-icon [svgIcon]="material.icon"></mat-icon>
       </td>
