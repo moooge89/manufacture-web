@@ -1,0 +1,74 @@
+@import "src/assets/global";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  padding: 2rem;
+  background-color: $main-bg-color;
+}
+
+section {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow-y: auto;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+
+th span {
+  display: flex;
+  width: 100%;
+  color: $main-text-color;
+}
+
+tbody tr {
+
+  cursor: pointer;
+  transition: background-color $animation-time;
+
+  &:hover {
+    background-color: #e5e5e5;
+  }
+}
+
+tr {
+  border-bottom: 1px solid #f1f1f4;
+}
+
+tr td {
+  text-align: start;
+  color: $secondary-text-color;
+  letter-spacing: .01em;
+  font-size: 13px;
+  font-weight: 200;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 60px;
+}
+
+.second-th {
+  min-width: 150px;
+}
+
+.third-th {
+  min-width: 130px;
+}

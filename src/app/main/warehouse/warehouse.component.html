@@ -1,0 +1,29 @@
+<section class="block">
+
+  <h1>Materials</h1>
+
+  <table>
+
+    <thead>
+    <tr>
+      <th><span>Icon</span></th>
+      <th class="second-th"><span>Material name</span></th>
+      <th class="third-th"><span>Available (kg)</span></th>
+      <th><span>Used in</span></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let material of materials">
+      <td>
+        <mat-icon [svgIcon]="material.icon"></mat-icon>
+      </td>
+      <td>{{material.name}}</td>
+      <td>{{material.available}}</td>
+      <td>{{material.usedIn}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</section>
