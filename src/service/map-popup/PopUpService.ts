@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FactoryInfo} from "../../model/api/FactoryInfo";
+import {FactoryInfo} from "@model/api/FactoryInfo";
 
 @Injectable({providedIn: 'root'})
 export class PopUpService {

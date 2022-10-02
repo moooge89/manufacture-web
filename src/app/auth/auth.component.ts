@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Unsub} from "../../util/Unsub";
-import {AuthController} from "../../controller/AuthController";
-import {encode} from "../../util/Encoder";
-import {LoginInfo} from "../../model/auth/LoginInfo";
+import {Unsub} from "@util/Unsub";
+import {AuthController} from "@controller/AuthController";
+import {encode} from "@util/Encoder";
+import {LoginInfo} from "@model/auth/LoginInfo";
 import {Router} from "@angular/router";
-import {TOKEN} from "../../consts/LocalStorageConst";
+import {TOKEN} from "@const/LocalStorageConst";
 
 @Component({
   selector: 'app-auth',

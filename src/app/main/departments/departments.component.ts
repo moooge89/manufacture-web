@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from "../../../model/api/Department";
-import {Person} from "../../../model/api/Person";
+import {Department} from "@model/api/Department";
+import {Person} from "@model/api/Person";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
 
 @Component({

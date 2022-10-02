@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import * as L from "leaflet";
 import {Browser, LeafletMouseEvent, map, tileLayer} from "leaflet";
-import {PopUpService} from "../../../service/map-popup/PopUpService";
-import {calculateFactoryRadius} from "../../../util/CalculateUtil";
-import {LEAFLET_API_TOKEN, LEAFLET_BASE_URL, LEAFLET_RETINA_URL} from "../../../consts/LeafletConst";
-import {FactoryController} from "../../../controller/FactoryController";
-import {FactoryInfo} from "../../../model/api/FactoryInfo";
-import {GeoPoint} from "../../../model/api/GeoPoint";
+import {PopUpService} from "@service/map-popup/PopUpService";
+import {calculateFactoryRadius} from "@util/CalculateUtil";
+import {LEAFLET_API_TOKEN, LEAFLET_BASE_URL, LEAFLET_RETINA_URL} from "@const/LeafletConst";
+import {FactoryController} from "@controller/FactoryController";
+import {FactoryInfo} from "@model/api/FactoryInfo";
+import {GeoPoint} from "@model/api/GeoPoint";
 import {Router} from "@angular/router";
 
 @Component({

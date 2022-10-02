@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Material} from "../../../model/api/Material";
+import {Material} from "@model/api/Material";
 
 @Component({
   selector: 'app-warehouse',

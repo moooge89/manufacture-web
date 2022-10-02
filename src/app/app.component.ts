@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IconRegisterService} from "../service/icon/icon-register.service";
+import {IconRegisterService} from "@service/icon/icon-register.service";
 
 @Component({
   selector: 'app-root',

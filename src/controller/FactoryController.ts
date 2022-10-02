@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from "../service/http/http.service";
+import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {FactoryInfo} from "../model/api/FactoryInfo";
+import {FactoryInfo} from "@model/api/FactoryInfo";
 
 @Injectable({providedIn: 'root'})
 export class FactoryController {

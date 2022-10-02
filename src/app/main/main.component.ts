@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "../../model/web/MenuItem";
+import {MenuItem} from "@model/web/MenuItem";
 import {Router} from "@angular/router";
 
 const finalItems: MenuItem[] = [

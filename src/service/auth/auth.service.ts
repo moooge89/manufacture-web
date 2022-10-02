@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {TOKEN} from "../../consts/LocalStorageConst";
+import {TOKEN} from "@const/LocalStorageConst";
 import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})

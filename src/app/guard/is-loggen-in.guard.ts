@@ -3,7 +3,7 @@ import {CanLoad, Router} from '@angular/router';
 import {Observable} from 'rxjs/internal/Observable';
 import {tap} from 'rxjs/operators';
 import {of} from "rxjs";
-import {TOKEN} from "../../consts/LocalStorageConst";
+import {TOKEN} from "@const/LocalStorageConst";
 
 @Injectable()
 export class IsLoggedInGuard implements CanLoad {
