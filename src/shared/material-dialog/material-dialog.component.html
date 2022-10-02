@@ -1,14 +1,22 @@
-<div *ngIf="material">
-  {{material.name}}
-</div>
+<span class="dialog-title">{{material.name}}</span>
 
-<div id="chart">
+<section>
+
   <apx-chart
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [labels]="chartOptions.labels"
     [responsive]="chartOptions.responsive"
   ></apx-chart>
-</div>
 
-<button (click)="closeDialog()">Close</button>
+  <div class="right-section">
+    <span>Min cost in market (kg): 12$</span>
+    <span>Max cost in market (kg): 24$</span>
+    <span>Avg cost in market (kg): 18$</span>
+    <app-button
+      text="Go to market"
+      (clicked)="closeDialog()"
+    ></app-button>
+  </div>
+
+</section>

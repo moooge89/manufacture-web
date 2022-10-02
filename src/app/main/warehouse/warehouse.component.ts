@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Material} from "@model/api/Material";
 import {MatDialog} from "@angular/material/dialog";
 import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.component";
-import {DEFAULT_CONFIG} from "@const/DialogConst";
 
 @Component({
   selector: 'app-warehouse',
@@ -25,11 +24,13 @@ export class WarehouseComponent {
 
   onRowClick(material: Material): void {
     const dialogRef = this.dialog.open(MaterialDialogComponent, {
-      ...DEFAULT_CONFIG,
+      width: '720px',
+      height: '320px',
       data: {material: material},
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      // todo era handle 'Go to market' click
       console.log('The dialog was closed');
     });
   }
