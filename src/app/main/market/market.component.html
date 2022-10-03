@@ -1,12 +1,13 @@
 <section class="block table-section">
 
-  <h1>Materials</h1>
+  <h1>Market</h1>
 
   <app-table
-    [headers]="['Icon', 'Material name', 'Available (kg)', 'Used in']"
+    [headers]="['Icon', 'Material name', 'Country', 'Price']"
     [rows]="materials"
-    [columnNames]="['icon', 'name', 'available', 'usedIn']"
+    [columnNames]="['icon', 'name', 'country', 'price']"
     [isMatIcon]="isMatIcon"
+    [isMoney]="isMoney"
     (rowClicked)="onRowClick($event)"
   ></app-table>
 

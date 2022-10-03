@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {WarehouseComponent} from "./warehouse.component";
 import {WarehouseRoutingModule} from "./warehouse-routing.module";
 import {MatIconModule} from "@angular/material/icon";
+import {TableModule} from "@shared/table/table.module";
 
 @NgModule({
   declarations: [WarehouseComponent],
@@ -10,6 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
     CommonModule,
     WarehouseRoutingModule,
     MatIconModule,
+    TableModule,
   ],
   bootstrap: [WarehouseComponent]
 })

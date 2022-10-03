@@ -1,0 +1,30 @@
+<table>
+
+  <thead>
+  <tr>
+    <th *ngFor="let header of headers">
+      <span>{{header}}</span>
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr
+    *ngFor="let row of rows"
+    (click)="onRowClick(row)"
+  >
+    <td *ngFor="let column of columnNames; let i = index;">
+      <mat-icon
+        *ngIf="isMatIcon(i); else commonColumn"
+        [svgIcon]="row[column]"
+      ></mat-icon>
+
+      <ng-template #commonColumn>
+        {{row[column]}}
+        <span *ngIf="isMoney(i)">$</span>
+      </ng-template>
+    </td>
+  </tr>
+  </tbody>
+
+</table>

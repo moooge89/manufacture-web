@@ -9,6 +9,7 @@ import {CommonModule} from "@angular/common";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialDialogModule} from "@shared/material-dialog/material-dialog.module";
+import {MarketMaterialDialogModule} from "@shared/market-material-dialog/market-material-dialog.module";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {MaterialDialogModule} from "@shared/material-dialog/material-dialog.modu
     HttpServiceModule.forRoot(environment.urlPrefix),
     BrowserAnimationsModule,
     MaterialDialogModule,
+    MarketMaterialDialogModule,
   ],
   providers: [
     IsLoggedInGuard,

@@ -1,11 +1,12 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Material} from "@model/api/Material";
+import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
+import {Router} from "@angular/router";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -21,12 +22,15 @@ export type ChartOptions = {
 })
 export class MaterialDialogComponent {
 
-  material: Material;
+  material: WarehouseMaterial;
 
   public chartOptions: Partial<ChartOptions>;
 
-  constructor(private dialogRef: MatDialogRef<MaterialDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) data: { material: Material }) {
+  constructor(
+    private dialogRef: MatDialogRef<MaterialDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) data: { material: WarehouseMaterial },
+    private readonly router: Router,
+  ) {
     this.material = data.material;
 
     this.chartOptions = {
@@ -52,8 +56,8 @@ export class MaterialDialogComponent {
     };
   }
 
-  closeDialog(): void {
-    this.dialogRef.close();
+  async goToMarket(): Promise<void> {
+    await this.router.navigate(['/main/market']);
   }
 
 }

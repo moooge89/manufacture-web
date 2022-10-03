@@ -1,0 +1,23 @@
+<span class="dialog-title">{{material.name}}</span>
+
+<section>
+  <span>Available budget: 100$</span>
+  <span>Price for kg: 16$</span>
+  <mat-slider
+    thumbLabel
+    min="1"
+    max="100"
+    step="1"
+    aria-label="units"
+    tickInterval="1000"
+    value="1"
+  ></mat-slider>
+
+  <div class="min-max-bar">
+    <span>1</span>
+    <span>100</span>
+  </div>
+
+</section>
+
+<app-button text="Buy"></app-button>

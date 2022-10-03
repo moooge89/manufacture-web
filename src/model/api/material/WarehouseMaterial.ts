@@ -1,4 +1,4 @@
-export interface Material {
+export interface WarehouseMaterial {
   icon: string;
   name: string;
   available: number;

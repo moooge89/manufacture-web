@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {Material} from "@model/api/Material";
-import {MatDialog} from "@angular/material/dialog";
+import {Component, OnDestroy} from '@angular/core';
+import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.component";
 
 @Component({
@@ -8,12 +8,9 @@ import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.c
   templateUrl: './warehouse.component.html',
   styleUrls: ['./warehouse.component.scss']
 })
-export class WarehouseComponent {
+export class WarehouseComponent implements OnDestroy {
 
-  constructor(private readonly dialog: MatDialog,) {
-  }
-
-  materials: Material[] = [
+  materials: WarehouseMaterial[] = [
     {
       icon: 'sand',
       name: 'Sand',
@@ -22,16 +19,25 @@ export class WarehouseComponent {
     },
   ];
 
-  onRowClick(material: Material): void {
-    const dialogRef = this.dialog.open(MaterialDialogComponent, {
+  private dialogRef: MatDialogRef<MaterialDialogComponent> | undefined;
+
+  constructor(private readonly dialog: MatDialog,) {
+  }
+
+  ngOnDestroy(): void {
+    this.dialogRef?.close();
+  }
+
+  isMatIcon = (index: number) => {
+    return index === 0;
+  }
+
+  onRowClick(material: WarehouseMaterial): void {
+    this.dialogRef?.close();
+    this.dialogRef = this.dialog.open(MaterialDialogComponent, {
       width: '720px',
       height: '320px',
       data: {material: material},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // todo era handle 'Go to market' click
-      console.log('The dialog was closed');
     });
   }
 
