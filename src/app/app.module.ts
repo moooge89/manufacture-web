@@ -10,6 +10,8 @@ import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialDialogModule} from "@shared/material-dialog/material-dialog.module";
 import {MarketMaterialDialogModule} from "@shared/market-material-dialog/market-material-dialog.module";
+import {BottomNotificationModule} from "@shared/bottom-notification/bottom-notification.module";
+import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -24,6 +26,9 @@ import {MarketMaterialDialogModule} from "@shared/market-material-dialog/market-
     BrowserAnimationsModule,
     MaterialDialogModule,
     MarketMaterialDialogModule,
+    BottomNotificationModule,
+    ToastrModule.forRoot(),
+    ToastNoAnimationModule.forRoot(),
   ],
   providers: [
     IsLoggedInGuard,

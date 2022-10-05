@@ -23,6 +23,7 @@
     "apexcharts": "^3.19.2",
     "leaflet": "^1.8.0",
     "ng-apexcharts": "^1.5.11",
+    "ngx-toastr": "^14.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

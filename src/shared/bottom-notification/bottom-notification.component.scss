@@ -1,0 +1,104 @@
+
+
+:host {
+  display: contents;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.notification-item {
+  vertical-align: middle;
+}
+
+.notification-container {
+  width: 288px;
+  height: auto;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 10px;
+}
+
+.title-container {
+  border-radius: 5px 5px 0 0;
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 15px;
+}
+
+//.warning-header {
+//  background: $main-orange;
+//}
+//
+//.info-header {
+//  background: $main-green;
+//}
+//
+//.error-header {
+//  background: $main-red;
+//}
+//
+//.custom-header {
+//  background: $main-blue;
+//}
+//
+//.blue-header {
+//  background: $main-blue;
+//}
+//
+//.body-container {
+//  display: flex;
+//  flex-direction: column;
+//  justify-content: flex-start;
+//  align-items: flex-start;
+//
+//  min-height: 80px;
+//  background-color: $main-white;
+//
+//  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+//  border-radius: 0 0 0 5px;
+//
+//  padding: 15px;
+//
+//  span {
+//    width: 100%;
+//    max-height: 100px;
+//    overflow-y: auto;
+//    font-size: 14px;
+//    line-height: 126.39%;
+//    color: $main-user-color;
+//  }
+//}
+//
+//.title-text {
+//  display: flex;
+//  justify-content: flex-start;
+//  align-items: center;
+//
+//  span {
+//    max-height: 100px;
+//    overflow-y: auto;
+//    margin-left: 9px;
+//    font-size: 14px;
+//    color: #FFFFFF;
+//    font-weight: bold;
+//    margin-right: 4px;
+//  }
+//
+//  mat-icon {
+//    @extend %middle-icon;
+//    fill: $main-white;
+//
+//  }
+//}
+
+
+
+::ng-deep.snack-bar-container {
+  margin: 0;
+  background: none;
+  box-shadow: unset;
+  padding: 0;
+}
