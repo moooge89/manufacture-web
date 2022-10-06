@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
-// import {BottomNotificationService} from "@service/bottom-notification/bottom-notification.service";
+import {BottomNotificationService} from "@service/bottom-notification/bottom-notification.service";
 
 @Component({
   selector: 'app-market-material-dialog',
@@ -18,7 +18,7 @@ export class MarketMarketDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<MarketMarketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: MarketMaterial },
-    // private readonly notificationService: BottomNotificationService,
+    private readonly notificationService: BottomNotificationService,
   ) {
     this.material = data.material;
 
@@ -34,7 +34,7 @@ export class MarketMarketDialogComponent {
   }
 
   buyMaterial(): void {
-    // this.notificationService.showInfo('123');
+    this.notificationService.showInfo('123');
     this.dialogRef.close();
   }
 

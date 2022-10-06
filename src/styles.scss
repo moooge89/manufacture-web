@@ -1,4 +1,5 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "assets/variables";
 
 html {
   box-sizing: border-box;
@@ -36,3 +37,14 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+// region toast
+
+#toast-container {
+  background-color: $white;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  height: 150px;
+}
+
+// endregion
