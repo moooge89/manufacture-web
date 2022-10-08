@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  urlPrefix: 'http' + '://' + 'localhost' + ':8080',
+  urlPrefix: 'http' + '://' + 'localhost' + ':8760',
   production: false,
 };
 

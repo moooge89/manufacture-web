@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Unsub} from "@util/Unsub";
 import {AuthController} from "@controller/AuthController";
 import {encode} from "@util/Encoder";
-import {LoginInfo} from "@model/auth/LoginInfo";
+import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {Router} from "@angular/router";
 import {TOKEN} from "@const/LocalStorageConst";
 
@@ -54,12 +54,12 @@ export class AuthComponent implements OnInit, OnDestroy {
     const encodedUsername = encode(this.username);
     const encodedPassword = encode(this.password);
 
-    const loginInfo: LoginInfo = {
+    const securedLoginRequest: SecuredLoginRequest = {
       username: encodedUsername,
       password: encodedPassword,
     }
 
-    this.unsub.sub = this.authController.login(loginInfo).subscribe(token => {
+    this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(token => {
       localStorage.setItem(TOKEN, token);
       this.router.navigate(['/main']).then();
     });
