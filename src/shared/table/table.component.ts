@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Observable} from "rxjs/internal/Observable";
-import {of} from "rxjs";
 import {Unsub} from "@util/Unsub";
 
 @Component({
@@ -8,11 +7,13 @@ import {Unsub} from "@util/Unsub";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent<T> implements OnInit, OnDestroy {
+export class TableComponent<T> implements OnDestroy {
 
   @Input() headers: string[] = [];
 
-  @Input() rows$: Observable<T[]> = of([]);
+  @Input() set rows$(rows$: Observable<T[]>) {
+    this.loadContent(rows$);
+  }
 
   @Input() columnNames: string[] = [];
 
@@ -27,20 +28,21 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   private unsub = new Unsub();
 
-  ngOnInit() {
-    this.unsub.sub = this.rows$.pipe(
-    ).subscribe(rows => {
-      this.isLoading = false;
-      this.rows = rows;
-    });
-  }
-
   ngOnDestroy() {
     this.unsub.unsubscribe();
   }
 
   onRowClick(row: T): void {
     this.rowClicked.emit(row);
+  }
+
+  private loadContent(rows$: Observable<T[]>) {
+    this.isLoading = true;
+
+    this.unsub.sub = rows$.subscribe(rows => {
+      this.isLoading = false;
+      this.rows = rows;
+    });
   }
 
 }
