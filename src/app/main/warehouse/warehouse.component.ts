@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.component";
+import {WarehouseController} from "@controller/WarehouseController";
 
 @Component({
   selector: 'app-warehouse',
@@ -10,18 +11,12 @@ import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.c
 })
 export class WarehouseComponent implements OnDestroy {
 
-  materials: WarehouseMaterial[] = [
-    {
-      icon: 'sand',
-      name: 'Sand',
-      available: 1000.2,
-      usedIn: 'window, and in other staffs'
-    },
-  ];
+  materials$ = this.warehouseController.loadWarehouseMaterials();
 
   private dialogRef: MatDialogRef<MaterialDialogComponent> | undefined;
 
-  constructor(private readonly dialog: MatDialog,) {
+  constructor(private readonly dialog: MatDialog,
+              private readonly warehouseController: WarehouseController,) {
   }
 
   ngOnDestroy(): void {

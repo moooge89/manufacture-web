@@ -4,7 +4,7 @@
 
   <app-table
     [headers]="['Icon', 'Material name', 'Country', 'Price']"
-    [rows]="materials"
+    [rows$]="materials$"
     [columnNames]="['icon', 'name', 'country', 'price']"
     [isMatIcon]="isMatIcon"
     [isMoney]="isMoney"

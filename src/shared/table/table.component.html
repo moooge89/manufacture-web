@@ -8,7 +8,7 @@
   </tr>
   </thead>
 
-  <tbody>
+  <tbody *ngIf="!isLoading">
   <tr
     *ngFor="let row of rows"
     (click)="onRowClick(row)"
@@ -27,4 +27,53 @@
   </tr>
   </tbody>
 
+  <tbody *ngIf="isLoading">
+  <tr
+    *ngFor="let row of [].constructor(7)"
+  >
+    <td
+      *ngFor="let column of columnNames"
+    >
+
+      <div class="loading-column"></div>
+
+    </td>
+  </tr>
+  </tbody>
+
 </table>
+
+
+<!--<div class="container">-->
+<!--  <div class="post">-->
+<!--    <div class="avatar"></div>-->
+<!--    <div class="line"></div>-->
+<!--    <div class="line"></div>-->
+<!--  </div>-->
+
+<!--  <div class="post">-->
+<!--    <div class="avatar"></div>-->
+<!--    <div class="line"></div>-->
+<!--    <div class="line"></div>-->
+<!--  </div>-->
+
+<!--  <div class="post">-->
+<!--    <div class="avatar"></div>-->
+<!--    <div class="line"></div>-->
+<!--    <div class="line"></div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="table-loading-container">-->
+
+<!--  <div-->
+<!--    *ngFor="let row of [].constructor(10)"-->
+<!--    class="loading-row"-->
+<!--  >-->
+<!--    <div class="loading-column"></div>-->
+<!--    <div class="loading-column"></div>-->
+<!--    <div class="loading-column"></div>-->
+<!--    <div class="loading-column"></div>-->
+<!--  </div>-->
+
+<!--</div>-->

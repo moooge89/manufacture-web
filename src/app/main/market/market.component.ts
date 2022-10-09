@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketMarketDialogComponent} from "@shared/market-material-dialog/market-material-dialog.component";
+import {MarketController} from "@controller/MarketController";
 
 @Component({
   selector: 'app-market',
@@ -10,18 +11,12 @@ import {MarketMarketDialogComponent} from "@shared/market-material-dialog/market
 })
 export class MarketComponent implements OnDestroy {
 
-  materials: MarketMaterial[] = [
-    {
-      icon: 'sand',
-      name: 'Sand',
-      country: 'Kazakhstan',
-      price: 16,
-    },
-  ];
+  materials$ = this.marketController.loadMarketMaterials();
 
   private dialogRef: MatDialogRef<MarketMarketDialogComponent> | undefined;
 
-  constructor(private readonly dialog: MatDialog,) {
+  constructor(private readonly dialog: MatDialog,
+              private readonly marketController: MarketController,) {
   }
 
   ngOnDestroy(): void {
