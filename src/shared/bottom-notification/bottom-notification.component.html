@@ -1,1 +1,11 @@
-hello
+<section class="notification">
+
+  <div
+    class="notification-header"
+    [class.info-header]="isInfo"
+    [class.error-header]="isError"
+  >{{data?.title}}
+  </div>
+  <div class="notification-body">{{data?.message}}</div>
+
+</section>

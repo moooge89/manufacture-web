@@ -34,7 +34,7 @@ export class MarketMarketDialogComponent {
   }
 
   buyMaterial(): void {
-    this.notificationService.showInfo('123');
+    this.notificationService.showInfo('You successfully bought an material!');
     this.dialogRef.close();
   }
 

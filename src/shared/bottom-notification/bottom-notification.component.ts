@@ -1,15 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Toast, ToastPackage, ToastrService} from 'ngx-toastr';
-
-export class NotificationData {
-  title: string;
-  message: string;
-
-  constructor(title: string, message: string) {
-    this.title = title;
-    this.message = message;
-  }
-}
+import {NotificationData} from "@model/bottom-notification/NotificationData";
+import {NotificationType} from "@model/bottom-notification/NotificationType";
 
 @Component({
   templateUrl: './bottom-notification.component.html',
@@ -29,4 +21,13 @@ export class BottomNotificationComponent extends Toast {
   close() {
     this.toast.clear(this.toastPackage.toastId);
   }
+
+  get isInfo(): boolean {
+    return this.data?.type === NotificationType.INFO;
+  }
+
+  get isError(): boolean {
+    return this.data?.type === NotificationType.ERROR;
+  }
+
 }
