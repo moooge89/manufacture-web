@@ -13,6 +13,8 @@ export class WarehouseComponent implements OnDestroy {
 
   materials$ = this.warehouseController.loadWarehouseMaterials();
 
+  panelOpenState = false;
+
   private dialogRef: MatDialogRef<MaterialDialogComponent> | undefined;
 
   constructor(private readonly dialog: MatDialog,

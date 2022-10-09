@@ -13,6 +13,8 @@ export class MarketComponent implements OnDestroy {
 
   materials$ = this.marketController.loadMarketMaterials();
 
+  panelOpenState = false;
+
   private dialogRef: MatDialogRef<MarketMarketDialogComponent> | undefined;
 
   constructor(private readonly dialog: MatDialog,

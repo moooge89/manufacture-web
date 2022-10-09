@@ -16,3 +16,18 @@
 
   overflow-y: auto;
 }
+
+mat-expansion-panel {
+  width: 100%;
+
+  box-shadow: none !important;
+}
+
+mat-expansion-panel-header {
+  padding: 0 2rem;
+  transition: background-color $animation-time !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  height: 48px !important;
+}
