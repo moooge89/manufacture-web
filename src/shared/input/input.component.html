@@ -3,6 +3,6 @@
   [placeholder]="placeholder"
   [type]="type"
   [class.red-border]="hasError"
-  (input)="valueChanged.emit(inputElement.value)"
+  (input)="onValueChange(inputElement.value)"
   (focus)="focused.emit()"
 >

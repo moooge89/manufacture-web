@@ -1,1 +1,22 @@
-it is filter
+<div
+  *ngIf="filterDescription"
+  class="filter-container"
+>
+
+  <app-input
+    class="name-filter"
+    placeholder="Name..."
+    [withDebounce]="true"
+  ></app-input>
+
+  <app-dropdown
+    class="country-filter"
+    label="Country"
+    [getId]="getId"
+    [getName]="getName"
+    [elements]="filterDescription.countries"
+  ></app-dropdown>
+
+  <input type="range">
+
+</div>

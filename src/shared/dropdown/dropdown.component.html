@@ -1,0 +1,30 @@
+<mat-form-field appearance="fill">
+
+  <mat-label>{{label}}</mat-label>
+
+  <mat-select
+    multiple
+    (valueChange)="onValueChange($event)"
+  >
+    <app-input
+      placeholder="Search..."
+      [withDebounce]="true"
+      (valueChanged)="onSearchChange($event)"
+    ></app-input>
+
+    <div
+      *ngIf="shownElements?.length === 0"
+      class="no-element"
+    >
+      No element can be found
+    </div>
+
+    <mat-option
+      *ngFor="let element of shownElements"
+      [value]="getId(element)"
+    >
+      {{getName(element)}}
+    </mat-option>
+  </mat-select>
+
+</mat-form-field>
