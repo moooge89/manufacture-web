@@ -1,0 +1,34 @@
+<span
+  class="title"
+  [class.focused]="isFocused"
+>{{title}}</span>
+
+<mat-form-field appearance="fill">
+  <mat-label>Min</mat-label>
+  <input
+    matInput
+    type="number"
+    [(ngModel)]="min"
+    [ngModelOptions]="{standalone: true}"
+    [min]="minValue"
+    [max]="maxValue"
+    (ngModelChange)="onMinChange()"
+    (focus)="isFocused = true"
+    (focusout)="isFocused = false"
+  >
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Max</mat-label>
+  <input
+    matInput
+    type="number"
+    [(ngModel)]="max"
+    [ngModelOptions]="{standalone: true}"
+    [min]="minValue"
+    [max]="maxValue"
+    (ngModelChange)="onMaxChange()"
+    (focus)="isFocused = true"
+    (focusout)="isFocused = false"
+  >
+</mat-form-field>

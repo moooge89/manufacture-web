@@ -3,7 +3,7 @@
 :host {
   width: 100vw;
   height: 100vh;
-  background-color: $bg-color;
+  background-color: $white;
 
   display: flex;
   align-items: center;
@@ -18,8 +18,9 @@
 
   width: 30%;
   height: 40%;
+  padding: 1rem 0;
 
-  background-color: #333333;
+  background-color: #eeeeee;
   border-radius: 5px;
 
   font-size: 20px;
@@ -27,7 +28,7 @@
 }
 
 header {
-  color: $white;
+  color: $secondary-text-color;
   letter-spacing: 0.05rem;
   font-size: 24px;
   font-weight: 700;
@@ -43,7 +44,6 @@ header {
 }
 
 app-input {
-  width: 70%;
   font-size: 16px;
 
   &:first-child {
@@ -53,11 +53,10 @@ app-input {
   ::ng-deep {
     input {
       font-size: 16px;
-      color: $white;
     }
   }
 }
 
 app-button {
-  width: 70%
+  width: 60%;
 }

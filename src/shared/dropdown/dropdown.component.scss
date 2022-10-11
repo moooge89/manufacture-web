@@ -1,14 +1,4 @@
-:host ::ng-deep {
-
-  .mat-form-field-underline {
-    display: none;
-  }
-
-  .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
-
-}
+@import "correct-mat-input";
 
 app-input ::ng-deep input {
   width: 100%;

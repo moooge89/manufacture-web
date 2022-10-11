@@ -1,8 +1,14 @@
-<input
-  #inputElement
-  [placeholder]="placeholder"
-  [type]="type"
-  [class.red-border]="hasError"
-  (input)="onValueChange(inputElement.value)"
-  (focus)="focused.emit()"
->
+
+<!-- todo era handle error -->
+<mat-form-field appearance="fill">
+  <mat-label>{{placeholder}}</mat-label>
+  <input
+    matInput
+    [(ngModel)]="value"
+    [ngModelOptions]="{standalone: true}"
+    [placeholder]="placeholder"
+    [type]="type"
+    (ngModelChange)="onValueChange(value)"
+    (focus)="focused.emit()"
+  >
+</mat-form-field>

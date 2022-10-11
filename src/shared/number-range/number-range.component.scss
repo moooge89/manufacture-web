@@ -1,0 +1,32 @@
+@import "variables";
+@import "correct-mat-input";
+
+:host {
+  display: flex;
+
+  padding: 0.4rem;
+  border: 1px solid $bottom-notification-border-color;
+  border-radius: 10px;
+
+  position: relative;
+}
+
+mat-form-field:last-child {
+  margin-left: 0.5rem;
+}
+
+.title {
+  font-size: 13px;
+  user-select: none;
+
+  position: absolute;
+  top: -16px;
+  left: 2px;
+
+  transition: color $animation-time;
+
+  &.focused {
+    color: $material-purple;
+  }
+
+}

@@ -2,6 +2,15 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {Unsub} from "@util/Unsub";
+import {ErrorStateMatcher} from "@angular/material/core";
+import {FormControl, FormGroupDirective, NgForm} from "@angular/forms";
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
     selector: 'app-input',
@@ -17,6 +26,9 @@ export class InputComponent implements OnInit, OnDestroy {
 
     @Output() valueChanged = new EventEmitter<string>();
     @Output() focused = new EventEmitter<void>();
+
+    value: string = '';
+    errorStateMatcher = new MyErrorStateMatcher();
 
     private readonly valueChangeSubject = new Subject<string>();
     private readonly unsub = new Unsub();
