@@ -5,6 +5,7 @@ import {encode} from "@util/Encoder";
 import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {Router} from "@angular/router";
 import {TOKEN} from "@const/LocalStorageConst";
+import {InputError} from "@model/web/InputError";
 
 @Component({
   selector: 'app-auth',
@@ -16,8 +17,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   username: string = '';
   password: string = '';
 
-  usernameHasError: boolean = false;
-  passwordHasError: boolean = false;
+  usernameError: InputError = {hasError: false, errorText: ''};
+  passwordError: InputError = {hasError: false, errorText: ''};
 
   private unsub = new Unsub();
 
@@ -40,14 +41,16 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   login(): void {
     if (!this.username) {
-      this.usernameHasError = true;
+      this.usernameError.hasError = true;
+      this.usernameError.errorText = 'Username is blank';
     }
 
     if (!this.password) {
-      this.passwordHasError = true;
+      this.passwordError.hasError = true;
+      this.passwordError.errorText = 'Password is blank';
     }
 
-    if (this.usernameHasError || this.passwordHasError) {
+    if (this.hasAnyError) {
       return;
     }
 
@@ -66,19 +69,23 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   usernameFocused(): void {
-    if (!this.usernameHasError) {
+    if (!this.usernameError.hasError) {
       return;
     }
 
-    this.usernameHasError = false;
+    this.usernameError.hasError = false;
   }
 
   passwordFocused(): void {
-    if (!this.passwordHasError) {
+    if (!this.passwordError.hasError) {
       return;
     }
 
-    this.passwordHasError = false;
+    this.passwordError.hasError = false;
+  }
+
+  get hasAnyError(): boolean {
+    return this.usernameError.hasError || this.passwordError.hasError;
   }
 
 }

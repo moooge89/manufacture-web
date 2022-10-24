@@ -1,4 +1,3 @@
-<!-- todo era handle error -->
 <mat-form-field
   *ngIf="useMatInput"
   appearance="fill"
@@ -12,7 +11,13 @@
     [type]="type"
     (ngModelChange)="onValueChange(value)"
     (focus)="focused.emit()"
+    [errorStateMatcher]="errorStateMatcher"
   >
+
+  <mat-error>
+    {{inputError.errorText}}
+  </mat-error>
+
 </mat-form-field>
 
 <input
@@ -21,7 +26,7 @@
   class="not-mat-input"
   [placeholder]="placeholder"
   [type]="type"
-  [class.red-border]="hasError"
+  [class.red-border]="inputError.hasError"
   (input)="onValueChange(inputElement.value)"
   (focus)="focused.emit()"
 >

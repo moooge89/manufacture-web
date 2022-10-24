@@ -5,7 +5,7 @@
   <div class="input-container">
     <app-input
       placeholder="Enter username"
-      [hasError]="usernameHasError"
+      [inputError]="usernameError"
       (valueChanged)="username = $event"
       (focused)="usernameFocused()"
     ></app-input>
@@ -13,7 +13,7 @@
     <app-input
       placeholder="Enter password"
       type="password"
-      [hasError]="passwordHasError"
+      [inputError]="passwordError"
       (valueChanged)="password = $event"
       (focused)="passwordFocused()"
     ></app-input>
