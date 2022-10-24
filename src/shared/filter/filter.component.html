@@ -4,22 +4,45 @@
 >
 
   <app-input
+    *ngIf="filterMetaInfo.useMaterialName"
     class="name-filter"
     placeholder="Name..."
     [withDebounce]="true"
+    (valueChanged)="onMaterialNameChange($event)"
   ></app-input>
 
   <app-dropdown
-    class="country-filter"
+    *ngIf="filterMetaInfo.useCountries"
+    class="m-left"
     label="Country"
     [getId]="getId"
     [getName]="getName"
     [elements]="filterDescription.countries"
+    (valueChanged)="onCountriesChange($event)"
   ></app-dropdown>
 
   <app-number-range
-    class="price-filter"
+    *ngIf="filterMetaInfo.usePrice"
+    class="m-left"
     title="Price"
+    (valueChanged)="onPriceChange($event)"
   ></app-number-range>
+
+  <app-number-range
+    *ngIf="filterMetaInfo.useAvailable"
+    class="m-left"
+    title="Available"
+    (valueChanged)="onAvailableChange($event)"
+  ></app-number-range>
+
+  <app-dropdown
+    *ngIf="filterMetaInfo.useDepartments"
+    class="m-left"
+    label="Departments"
+    [getId]="getId"
+    [getName]="getName"
+    [elements]="filterDescription.departments"
+    (valueChanged)="onDepartmentsChange($event)"
+  ></app-dropdown>
 
 </div>

@@ -3,6 +3,9 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketMarketDialogComponent} from "@shared/market-material-dialog/market-material-dialog.component";
 import {MarketController} from "@controller/MarketController";
+import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
+import {defaultFilter} from "@util/FilterUtil";
+import {MaterialFilter} from "@model/filter/MaterialFilter";
 
 @Component({
   selector: 'app-market',
@@ -11,9 +14,17 @@ import {MarketController} from "@controller/MarketController";
 })
 export class MarketComponent implements OnDestroy {
 
-  materials$ = this.marketController.loadMarketMaterials();
+  materials$ = this.marketController.loadMarketMaterials(defaultFilter());
 
   panelOpenState = false;
+
+  filterMetaInfo: MaterialFilterMetaInfo = {
+    useAvailable: false,
+    useCountries: true,
+    useDepartments: false,
+    useMaterialName: true,
+    usePrice: true,
+  };
 
   private dialogRef: MatDialogRef<MarketMarketDialogComponent> | undefined;
 
@@ -41,6 +52,10 @@ export class MarketComponent implements OnDestroy {
       height: '320px',
       data: {material: material},
     });
+  }
+
+  onFilterChange(filter: MaterialFilter): void {
+    this.materials$ = this.marketController.loadMarketMaterials(filter);
   }
 
 }

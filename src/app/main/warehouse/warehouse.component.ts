@@ -3,6 +3,9 @@ import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.component";
 import {WarehouseController} from "@controller/WarehouseController";
+import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
+import {defaultFilter} from "@util/FilterUtil";
+import {MaterialFilter} from "@model/filter/MaterialFilter";
 
 @Component({
   selector: 'app-warehouse',
@@ -11,9 +14,17 @@ import {WarehouseController} from "@controller/WarehouseController";
 })
 export class WarehouseComponent implements OnDestroy {
 
-  materials$ = this.warehouseController.loadWarehouseMaterials();
+  materials$ = this.warehouseController.loadWarehouseMaterials(defaultFilter());
 
   panelOpenState = false;
+
+  filterMetaInfo: MaterialFilterMetaInfo = {
+    useAvailable: true,
+    useCountries: false,
+    useDepartments: true,
+    useMaterialName: true,
+    usePrice: false,
+  };
 
   private dialogRef: MatDialogRef<MaterialDialogComponent> | undefined;
 
@@ -36,6 +47,10 @@ export class WarehouseComponent implements OnDestroy {
       height: '320px',
       data: {material: material},
     });
+  }
+
+  onFilterChange(filter: MaterialFilter): void {
+    this.materials$ = this.warehouseController.loadWarehouseMaterials(filter);
   }
 
 }

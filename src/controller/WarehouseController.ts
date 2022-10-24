@@ -3,6 +3,7 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
+import {MaterialFilter} from "@model/filter/MaterialFilter";
 
 @Injectable({providedIn: 'root'})
 export class WarehouseController {
@@ -13,7 +14,7 @@ export class WarehouseController {
     this.http = http.setControllerPrefix('/warehouse');
   }
 
-  loadWarehouseMaterials(): Observable<WarehouseMaterial[]> {
+  loadWarehouseMaterials(materialFilter: MaterialFilter): Observable<WarehouseMaterial[]> {
     const materials: WarehouseMaterial[] = [
       {
         icon: 'sand',

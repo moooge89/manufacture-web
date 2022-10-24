@@ -3,6 +3,7 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MaterialFilter} from "@model/filter/MaterialFilter";
 
 @Injectable({providedIn: 'root'})
 export class MarketController {
@@ -13,7 +14,7 @@ export class MarketController {
     this.http = http.setControllerPrefix('/market');
   }
 
-  loadMarketMaterials(): Observable<MarketMaterial[]> {
+  loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
     const materials: MarketMaterial[] = [
       {
         icon: 'sand',

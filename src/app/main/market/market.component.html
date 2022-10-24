@@ -11,7 +11,10 @@
         <mat-icon svgIcon="filter"></mat-icon>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <app-filter></app-filter>
+    <app-filter
+      [filterMetaInfo]="filterMetaInfo"
+      (filterChanged)="onFilterChange($event)"
+    ></app-filter>
   </mat-expansion-panel>
 
   <app-table
