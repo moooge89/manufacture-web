@@ -7,6 +7,7 @@ import {
   ApexChart
 } from "ng-apexcharts";
 import {Router} from "@angular/router";
+import {MarketFilterService} from "@service/filter/market-filter.service";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -30,6 +31,7 @@ export class MaterialDialogComponent {
     private dialogRef: MatDialogRef<MaterialDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: WarehouseMaterial },
     private readonly router: Router,
+    private readonly marketFilterService: MarketFilterService,
   ) {
     this.material = data.material;
 
@@ -57,6 +59,7 @@ export class MaterialDialogComponent {
   }
 
   async goToMarket(): Promise<void> {
+    this.marketFilterService.materialName = this.material.name;
     await this.router.navigate(['/main/market']);
   }
 

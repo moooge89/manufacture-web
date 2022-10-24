@@ -29,7 +29,7 @@ export class MarketComponent implements OnDestroy {
   private dialogRef: MatDialogRef<MarketMarketDialogComponent> | undefined;
 
   constructor(private readonly dialog: MatDialog,
-              private readonly marketController: MarketController,) {
+              private readonly marketController: MarketController) {
   }
 
   ngOnDestroy(): void {

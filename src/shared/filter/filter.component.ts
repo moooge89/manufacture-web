@@ -9,6 +9,7 @@ import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {NumberRange} from "@model/filter/NumberRange";
 import {defaultFilter} from "@util/FilterUtil";
+import {MarketFilterService} from "@service/filter/market-filter.service";
 
 @Component({
   selector: 'app-filter',
@@ -27,7 +28,11 @@ export class FilterComponent implements OnInit, OnDestroy {
     usePrice: true,
   };
 
+  @Input() isMarketFilter: boolean = false;
+
   @Output() filterChanged = new EventEmitter<MaterialFilter>();
+
+  materialName: string = '';
 
   private filter: MaterialFilter = defaultFilter();
 
@@ -36,6 +41,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly filterController: FilterController,
+    private readonly marketFilterService: MarketFilterService,
   ) {
   }
 
@@ -48,6 +54,8 @@ export class FilterComponent implements OnInit, OnDestroy {
       debounceTime(400),
       distinctUntilChanged()
     ).subscribe(res => this.filterChanged.next(res));
+
+    this.handleMarketFilter();
   }
 
   ngOnDestroy() {
@@ -80,6 +88,19 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   onAvailableChange(available: NumberRange): void {
     this.filterChangeSubject.next({...this.filter, available: available});
+  }
+
+  private handleMarketFilter() {
+    const materialName = this.marketFilterService.materialName;
+
+    if (!materialName) {
+      return;
+    }
+
+    this.marketFilterService.materialName = '';
+
+    this.materialName = materialName;
+    this.onMaterialNameChange(materialName);
   }
 
 }
