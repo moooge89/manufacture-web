@@ -1,6 +1,6 @@
 @import "variables";
 
-input {
+.mat-input {
 
   background-color: inherit;
   color: $main-text-color;
@@ -12,4 +12,30 @@ input {
 
     border-color: $input-border-color;
   }
+}
+
+.not-mat-input {
+
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
+  height: 36px;
+  line-height: 20px;
+  letter-spacing: 0.03rem;
+
+  background-color: inherit;
+  border: 1px solid $input-bg-color;
+  color: $main-text-color;
+
+  transition: border-color $animation-time;
+
+  &:focus {
+    outline: none;
+
+    border-color: $input-border-color;
+  }
+}
+
+.red-border {
+  border-color: red;
 }

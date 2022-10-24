@@ -23,6 +23,7 @@ export class InputComponent implements OnInit, OnDestroy {
     @Input() type: string = 'text';
     @Input() hasError: boolean = false;
     @Input() withDebounce: boolean = false;
+    @Input() useMatInput: boolean = true;
 
     @Output() valueChanged = new EventEmitter<string>();
     @Output() focused = new EventEmitter<void>();

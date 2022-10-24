@@ -9,6 +9,7 @@
     <app-input
       placeholder="Search..."
       [withDebounce]="true"
+      [useMatInput]="false"
       (valueChanged)="onSearchChange($event)"
     ></app-input>
 
@@ -18,6 +19,9 @@
     >
       No element can be found
     </div>
+
+    <!-- this mat option is to make mat select visible, when there is no shown elements -->
+    <mat-option class="non-visible"></mat-option>
 
     <mat-option
       *ngFor="let element of shownElements"

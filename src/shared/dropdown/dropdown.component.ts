@@ -32,7 +32,7 @@ export class DropdownComponent<T> {
 
     this.shownElements.length = 0;
 
-    this.shownElements = this.allElements.filter(x => this.getName(x).indexOf(name) > -1);
+    this.shownElements = this.allElements.filter(x => this.getName(x).toLowerCase().indexOf(name.toLowerCase()) > -1);
   }
 
   onValueChange(ids: string[]) {

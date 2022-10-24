@@ -1,9 +1,9 @@
 @import "correct-mat-input";
 
-app-input ::ng-deep input {
-  width: 100%;
-}
-
 .no-element {
   padding: 0.5rem;
+}
+
+.non-visible {
+  display: none;
 }

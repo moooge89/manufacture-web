@@ -1,14 +1,28 @@
-
 <!-- todo era handle error -->
-<mat-form-field appearance="fill">
+<mat-form-field
+  *ngIf="useMatInput"
+  appearance="fill"
+>
   <mat-label>{{placeholder}}</mat-label>
   <input
     matInput
+    class="mat-input"
     [(ngModel)]="value"
     [ngModelOptions]="{standalone: true}"
-    [placeholder]="placeholder"
     [type]="type"
     (ngModelChange)="onValueChange(value)"
     (focus)="focused.emit()"
   >
 </mat-form-field>
+
+<input
+  #inputElement
+  *ngIf="!useMatInput"
+  class="not-mat-input"
+  [placeholder]="placeholder"
+  [type]="type"
+  [class.red-border]="hasError"
+  (input)="onValueChange(inputElement.value)"
+  (focus)="focused.emit()"
+>
+
