@@ -7,7 +7,7 @@ import {NotificationType} from "@model/bottom-notification/NotificationType";
 @Injectable({providedIn: 'root'})
 export class BottomNotificationService {
 
-  config: any = {
+  private config: any = {
     toastComponent: BottomNotificationComponent,
     positionClass: 'toast-bottom-right',
     toastClass: 'toast',

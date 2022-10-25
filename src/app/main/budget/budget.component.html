@@ -1,0 +1,33 @@
+<section class="block current-balance">
+
+  <div>Current balance is
+    <span class="money">{{balance}}$</span>
+  </div>
+
+</section>
+
+<section class="block form-holder">
+
+  <h3>Budget request</h3>
+
+  <app-input
+    placeholder="How much?"
+    type="number"
+    [clearOn]="clearEmitter"
+    (valueChanged)="onBudgetRequestChange($event)"
+  ></app-input>
+
+  <label for="textarea">Explain why your department needs extra budget</label>
+  <textarea
+    #textarea
+    id="textarea"
+    placeholder="Write down your answer here"
+    [value]="explanation"
+  ></textarea>
+
+  <app-button
+    text="Submit"
+    (clicked)="submit()"
+  ></app-button>
+
+</section>

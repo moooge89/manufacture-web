@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {Unsub} from "@util/Unsub";
@@ -13,11 +13,15 @@ import {InputError} from "@model/web/InputError";
 })
 export class InputComponent implements OnInit, OnDestroy {
 
+  @ViewChild('inputElement') private input: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('inputMatElement') private matInput: ElementRef<HTMLInputElement> | undefined;
+
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
-  @Input() withDebounce: boolean = false;
+  @Input() withDebounce: boolean = true;
   @Input() useMatInput: boolean = true;
   @Input() value: string = '';
+  @Input() clearOn = new EventEmitter<void>();
 
   @Input() inputError: InputError = {hasError: false, errorText: ''};
 
@@ -42,6 +46,8 @@ export class InputComponent implements OnInit, OnDestroy {
         return self.inputError.hasError;
       }
     };
+
+    this.clearOn.subscribe(() => this.clearValues());
   }
 
   ngOnDestroy() {
@@ -55,6 +61,18 @@ export class InputComponent implements OnInit, OnDestroy {
       this.valueChanged.next(text);
     }
 
+  }
+
+  private clearValues(): void {
+    if (this.input?.nativeElement) {
+      this.input.nativeElement.value = '';
+    }
+
+    if (this.matInput?.nativeElement) {
+      this.matInput.nativeElement.value = '';
+    }
+
+    this.onValueChange('');
   }
 
 }

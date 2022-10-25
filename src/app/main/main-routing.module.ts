@@ -22,7 +22,11 @@ const routes: Routes = [
       {
         path: 'market',
         loadChildren: () => import('./market/market.module').then(x => x.MarketModule),
-      }
+      },
+      {
+        path: 'budget',
+        loadChildren: () => import('./budget/budget.module').then(x => x.BudgetModule),
+      },
     ],
   },
 ];
