@@ -29,9 +29,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     const token = localStorage.getItem(TOKEN);
 
-    // todo era resolve this
     if (token) {
-      await this.router.navigate(['/main']);
+      await this.router.navigate(['/main/factory']);
     }
   }
 
@@ -64,7 +63,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(token => {
       localStorage.setItem(TOKEN, token);
-      this.router.navigate(['/main']).then();
+      this.router.navigate(['/main/factory']).then();
     });
   }
 

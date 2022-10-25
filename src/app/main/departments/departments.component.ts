@@ -1,16 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Department} from "@model/api/Department";
 import {Person} from "@model/api/Person";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {PersonDialogComponent} from "@shared/person-dialog/person-dialog.component";
 
 @Component({
   selector: 'app-departments',
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.scss']
 })
-export class DepartmentsComponent implements OnInit {
+export class DepartmentsComponent implements OnInit, OnDestroy {
 
   departments: Department[] = [];
+
+  draggableMode: boolean = true;
+
+  private dialogRef: MatDialogRef<PersonDialogComponent> | undefined;
+
+  constructor(private readonly dialog: MatDialog,) {
+  }
 
   ngOnInit() {
     for (let i = 0; i < 5; ++i) {
@@ -22,6 +31,10 @@ export class DepartmentsComponent implements OnInit {
 
       this.departments.push(department);
     }
+  }
+
+  ngOnDestroy() {
+    this.dialogRef?.close();
   }
 
   rndDepartment = (id: number): Department => {
@@ -44,12 +57,22 @@ export class DepartmentsComponent implements OnInit {
     department.persons.push(person);
   }
 
-  drop(item: CdkDragDrop<any, any>) {
+  drop(item: CdkDragDrop<any, any>): void {
     if (item.container.id === item.previousContainer.id) {
       DepartmentsComponent.handleIndexChange(item);
     } else {
-        this.handleContainerChange(item);
+      DepartmentsComponent.handleContainerChange(item);
     }
+  }
+
+  openPersonDialog(person: Person) {
+    this.dialogRef?.close();
+
+    this.dialogRef = this.dialog.open(PersonDialogComponent, {
+      width: '720px',
+      height: '320px',
+      data: {material: person},
+    });
   }
 
   private static handleIndexChange(item: CdkDragDrop<any, any>): void {
@@ -66,7 +89,7 @@ export class DepartmentsComponent implements OnInit {
     persons.splice(item.currentIndex, 0, personToBeMoved);
   }
 
-  private handleContainerChange(item: CdkDragDrop<any, any>) {
+  private static handleContainerChange(item: CdkDragDrop<any, any>): void {
     const personToBeMoved: Person = item.previousContainer.data[item.previousIndex];
 
     // noinspection JSMismatchedCollectionQueryUpdate
@@ -80,5 +103,8 @@ export class DepartmentsComponent implements OnInit {
     // todo era make request to change department of person here
   }
 
+  get isDraggingDisabled(): boolean {
+    return !this.draggableMode;
+  }
 
 }

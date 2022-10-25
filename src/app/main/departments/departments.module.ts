@@ -4,6 +4,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {DepartmentsComponent} from "./departments.component";
 import {DepartmentsRoutingModule} from "./departments-routing.module";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [DepartmentsComponent],
@@ -12,6 +13,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     DepartmentsRoutingModule,
     MatIconModule,
     DragDropModule,
+    MatSlideToggleModule,
   ],
   bootstrap: [DepartmentsComponent]
 })
