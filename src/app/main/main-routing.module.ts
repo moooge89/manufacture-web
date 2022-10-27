@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'budget',
         loadChildren: () => import('./budget/budget.module').then(x => x.BudgetModule),
       },
+      {
+        path: 'production',
+        loadChildren: () => import('./production/production.module').then(x => x.ProductionModule),
+      },
     ],
   },
 ];

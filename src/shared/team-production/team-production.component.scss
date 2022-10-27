@@ -1,0 +1,54 @@
+@import "variables";
+
+:host {
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.percentage {
+  width: 100%;
+  height: 50px;
+
+  border-radius: 5px;
+  background-color: $light-sky-blue;
+  position: relative;
+
+  cursor: pointer;
+}
+
+.percentage-animation {
+  border-radius: 5px;
+  content: '\A';
+  position: absolute;
+  background: $grass-green;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  -webkit-animation: filler 1s ease-in-out;
+  -moz-animation: filler 1s ease-in-out;
+  animation: filler 1s ease-in-out;
+
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes filler {
+  0% {
+    width: 0;
+  }
+}
+
+@-moz-keyframes filler {
+  0% {
+    width: 0;
+  }
+}
+
+@keyframes filler {
+  0% {
+    width: 0;
+  }
+}

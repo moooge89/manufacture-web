@@ -7,6 +7,7 @@ const finalItems: MenuItem[] = [
   {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
   {label: 'Market', route: ['/main/market'], icon: 'market'},
   {label: 'Budget', route: ['/main/budget'], icon: 'money'},
+  {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
 ];
 
 @Component({

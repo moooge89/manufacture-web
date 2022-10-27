@@ -1,0 +1,20 @@
+<section class="block">
+
+  <span class="big-bold">Market</span>
+
+  <div class="scale-container">
+
+    <div class="general-production-info">
+      <!-- todo era make dropdown and arrow to left and right -->
+      <span>Factory: Some factory [it will be dropdown]</span>
+      <span>Department: Some factory</span>
+    </div>
+
+    <app-team-production
+      *ngFor="let prodInfo of productionInfo"
+      [productionInfo]="prodInfo"
+    >
+    </app-team-production>
+  </div>
+
+</section>
