@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {TeamProductionInfo} from "@model/api/production/TeamProductionInfo";
-import {TeamProductionFilter} from "@model/api/production/TeamProductionFilter";
+import {ProductionInfo} from "@model/api/production/ProductionInfo";
+import {ProductionFilter} from "@model/api/production/ProductionFilter";
 import {ProductionFactoryFilterDescription} from "@model/api/production/ProductionFactoryFilterDescription";
 
 @Injectable({providedIn: 'root'})
@@ -12,11 +12,11 @@ export class ProductionController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/production');
+    this.http = http.setControllerPrefix('/production-process');
   }
 
-  loadTeamProductionInfo(productionFilter: TeamProductionFilter): Observable<TeamProductionInfo[]> {
-    const productionInfo: TeamProductionInfo[] = [
+  loadProductionInfo(productionFilter: ProductionFilter): Observable<ProductionInfo[]> {
+    const productionInfo: ProductionInfo[] = [
       {
         factoryId: '1',
         departmentId: '1',
@@ -45,7 +45,7 @@ export class ProductionController {
     return of(productionInfo);
   }
 
-  loadTeamProductionFilterDescription(): Observable<ProductionFactoryFilterDescription[]> {
+  loadProductionFilterDescription(): Observable<ProductionFactoryFilterDescription[]> {
     const filterDescription: ProductionFactoryFilterDescription[] = [
       {
         filterElement: {

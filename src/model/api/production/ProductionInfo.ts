@@ -1,4 +1,4 @@
-export interface TeamProductionInfo {
+export interface ProductionInfo {
   factoryId: string;
   departmentId: string;
   teamId: string;

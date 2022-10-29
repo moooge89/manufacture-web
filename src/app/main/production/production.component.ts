@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {TeamProductionInfo} from "@model/api/production/TeamProductionInfo";
+import {ProductionInfo} from "@model/api/production/ProductionInfo";
 import {Unsub} from "@util/Unsub";
 import {ProductionController} from "@controller/ProductionController";
-import {TeamProductionFilter} from "@model/api/production/TeamProductionFilter";
+import {ProductionFilter} from "@model/api/production/ProductionFilter";
 import {FilterElement} from "@model/filter/FilterElement";
 import {Subject} from "rxjs";
 import {switchMap} from "rxjs/operators";
@@ -15,7 +15,7 @@ import {ProductionFactoryFilterDescription} from "@model/api/production/Producti
 })
 export class ProductionComponent implements OnInit, OnDestroy {
 
-  productionInfo: TeamProductionInfo[] = [];
+  productionInfo: ProductionInfo[] = [];
 
   factoriesToShow: FilterElement[] = [];
   departmentsToShow: FilterElement[] = [];
@@ -31,17 +31,17 @@ export class ProductionComponent implements OnInit, OnDestroy {
   private lastDepartmentIndex: number = 0;
 
   private readonly unsub = new Unsub();
-  private readonly filterChangedSubject = new Subject<TeamProductionFilter>();
+  private readonly filterChangedSubject = new Subject<ProductionFilter>();
 
   constructor(private readonly productionController: ProductionController) {
   }
 
   ngOnInit() {
     this.unsub.sub = this.filterChangedSubject.pipe(
-      switchMap(filter => this.productionController.loadTeamProductionInfo(filter))
+      switchMap(filter => this.productionController.loadProductionInfo(filter))
     ).subscribe(productionInfo => this.productionInfo = productionInfo);
 
-    this.unsub.sub = this.productionController.loadTeamProductionFilterDescription().subscribe(
+    this.unsub.sub = this.productionController.loadProductionFilterDescription().subscribe(
       filterDescription => this.initFirstFilter(filterDescription)
     );
   }

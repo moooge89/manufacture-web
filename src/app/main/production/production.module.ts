@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {ProductionComponent} from "./production.component";
 import {ProductionRoutingModule} from "./production-routing.module";
-import {TeamProductionModule} from "@shared/team-production/team-production.module";
+import {ProductionProcessModule} from "@shared/production-process/production-process.module";
 import {DropdownModule} from "@shared/dropdown/dropdown.module";
 import {MatIconModule} from "@angular/material/icon";
 
@@ -11,7 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
   imports: [
     CommonModule,
     ProductionRoutingModule,
-    TeamProductionModule,
+    ProductionProcessModule,
     DropdownModule,
     MatIconModule,
   ],
