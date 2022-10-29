@@ -3,7 +3,8 @@
   <mat-label>{{label}}</mat-label>
 
   <mat-select
-    multiple
+    [multiple]="isMultiple"
+    [(value)]="selectedElementId"
     (valueChange)="onValueChange($event)"
   >
     <app-input

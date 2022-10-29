@@ -33,6 +33,15 @@ span {
   overflow-y: auto;
 }
 
+.general-production-info {
+
+  margin-bottom: 2rem;
+
+  app-dropdown:first-child {
+    margin-right: 1rem;
+  }
+}
+
 app-team-production {
   margin-bottom: 3rem;
 }

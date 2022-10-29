@@ -4,10 +4,30 @@
 
   <div class="scale-container">
 
-    <div class="general-production-info">
+    <div
+      class="general-production-info">
       <!-- todo era make dropdown and arrow to left and right -->
-      <span>Factory: Some factory [it will be dropdown]</span>
-      <span>Department: Some factory</span>
+
+      <app-dropdown
+        label="Factory"
+        [isMultiple]="false"
+        [getId]="getId"
+        [getName]="getName"
+        [elements]="factoriesToShow"
+        [selectedElementId]="selectedFactoryIdToChild"
+        (valueChanged)="onFactoryChange($event)"
+      ></app-dropdown>
+
+      <app-dropdown
+        label="Department"
+        [isMultiple]="false"
+        [getId]="getId"
+        [getName]="getName"
+        [elements]="departmentsToShow"
+        [selectedElementId]="selectedDepartmentIdToChild"
+        (valueChanged)="onDepartmentChange($event)"
+      ></app-dropdown>
+
     </div>
 
     <app-team-production
