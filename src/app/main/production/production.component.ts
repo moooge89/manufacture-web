@@ -20,12 +20,15 @@ export class ProductionComponent implements OnInit, OnDestroy {
   factoriesToShow: FilterElement[] = [];
   departmentsToShow: FilterElement[] = [];
 
-  selectedFactoryIdToChild: string | undefined;
-  selectedDepartmentIdToChild: string | undefined;
+  currentFactoryId: string = '';
+  currentDepartmentId: string = '';
 
   private currentFactoryIndex: number = 0;
   private currentDepartmentIndex: number = 0;
   private filterDesc: ProductionFactoryFilterDescription[] = [];
+
+  private lastFactoryIndex: number = 0;
+  private lastDepartmentIndex: number = 0;
 
   private readonly unsub = new Unsub();
   private readonly filterChangedSubject = new Subject<TeamProductionFilter>();
@@ -66,15 +69,12 @@ export class ProductionComponent implements OnInit, OnDestroy {
     }
 
     this.currentFactoryIndex = index;
+    this.updateCurrentFactoryId();
+
     this.currentDepartmentIndex = 0;
+    this.updateCurrentDepartmentId();
 
-    this.departmentsToShow = this.filterDesc[index].departments;
-    this.selectedDepartmentIdToChild = this.departmentsToShow[0].id;
-
-    this.filterChangedSubject.next({
-      factoryId: this.factoriesToShow[this.currentFactoryIndex].id,
-      departmentId: this.departmentsToShow[this.currentDepartmentIndex].id,
-    });
+    this.emitValuesToFilter();
   }
 
   onDepartmentChange(elementIds: string[]): void {
@@ -88,36 +88,90 @@ export class ProductionComponent implements OnInit, OnDestroy {
     }
 
     this.currentDepartmentIndex = index;
+    this.updateCurrentDepartmentId();
 
-    this.filterChangedSubject.next({
-      factoryId: this.factoriesToShow[this.currentFactoryIndex].id,
-      departmentId: this.departmentsToShow[this.currentDepartmentIndex].id,
-    });
+    this.emitValuesToFilter();
+  }
+
+  onPrevClick(): void {
+    if (!this.isPrevClickable) return;
+
+    if (this.currentDepartmentIndex === 0) {
+      this.currentFactoryIndex--;
+      this.updateCurrentFactoryId();
+
+      this.currentDepartmentIndex = this.departmentsToShow.length - 1;
+    } else {
+      this.currentDepartmentIndex--;
+    }
+
+    this.updateCurrentDepartmentId();
+    this.emitValuesToFilter();
+  }
+
+  onNextClick(): void {
+    if (!this.isNextClickable) return;
+
+    if (this.isCurrentDepartmentIsLastInFactory) {
+      this.currentFactoryIndex++;
+      this.updateCurrentFactoryId();
+
+      this.currentDepartmentIndex = 0;
+    } else {
+      this.currentDepartmentIndex++;
+    }
+
+    this.updateCurrentDepartmentId();
+    this.emitValuesToFilter();
   }
 
   private initFirstFilter(filterDescriptions: ProductionFactoryFilterDescription[]): void {
-
-    if (!filterDescriptions || filterDescriptions.length === 0) {
-      throw new Error('Cannot found any factory');
+    if (!filterDescriptions || filterDescriptions.length === 0 || filterDescriptions[0].departments.length === 0) {
+      throw new Error('Cannot found any factory or department');
     }
 
-    const firstFactory = filterDescriptions[0];
-
-    if (!firstFactory?.departments || firstFactory.departments.length === 0) {
-      throw new Error('Cannot found any department');
-    }
-
-    this.factoriesToShow = filterDescriptions.map(x => x.filterElement);
-    this.departmentsToShow = firstFactory.departments;
     this.filterDesc = filterDescriptions;
+    this.factoriesToShow = filterDescriptions.map(x => x.filterElement);
 
-    this.selectedFactoryIdToChild = firstFactory.filterElement.id;
-    this.selectedDepartmentIdToChild = firstFactory.departments[0].id;
+    this.updateCurrentFactoryId();
+    this.updateCurrentDepartmentId();
 
+    const lastFactory = filterDescriptions[filterDescriptions.length - 1];
+
+    this.lastFactoryIndex = filterDescriptions.length - 1;
+    this.lastDepartmentIndex = lastFactory.departments.length - 1;
+
+    this.emitValuesToFilter();
+  }
+
+  private emitValuesToFilter(): void {
     this.filterChangedSubject.next({
-      factoryId: this.selectedFactoryIdToChild,
-      departmentId: this.selectedDepartmentIdToChild,
+      factoryId: this.currentFactoryId,
+      departmentId: this.currentDepartmentId,
     });
+  }
+
+  private updateCurrentFactoryId(): void {
+    const factory = this.filterDesc[this.currentFactoryIndex];
+    this.currentFactoryId = factory.filterElement.id;
+    this.departmentsToShow = factory.departments;
+  }
+
+  private updateCurrentDepartmentId(): void {
+    this.currentDepartmentId = this.departmentsToShow[this.currentDepartmentIndex].id;
+  }
+
+  get isPrevClickable(): boolean {
+    return this.currentFactoryIndex !== 0 || (this.currentFactoryIndex === 0 && this.currentDepartmentIndex !== 0);
+  }
+
+  get isNextClickable(): boolean {
+    return this.currentFactoryIndex !== this.lastFactoryIndex ||
+      (this.currentFactoryIndex === this.lastFactoryIndex && this.currentDepartmentIndex !== this.lastDepartmentIndex);
+  }
+
+  get isCurrentDepartmentIsLastInFactory(): boolean {
+    return this.departmentsToShow.length === this.currentDepartmentIndex + 1;
   }
 
 }

@@ -1,12 +1,27 @@
 <section class="block">
 
+  <mat-icon
+    svgIcon="no-color-right"
+    class="left-icon"
+    title="Previous"
+    [class.disabled]="!isPrevClickable"
+    (click)="onPrevClick()"
+  ></mat-icon>
+
+  <mat-icon
+    svgIcon="no-color-right"
+    class="right-icon"
+    title="Next"
+    [class.disabled]="!isNextClickable"
+    (click)="onNextClick()"
+  ></mat-icon>
+
   <span class="big-bold">Market</span>
 
   <div class="scale-container">
 
     <div
       class="general-production-info">
-      <!-- todo era make dropdown and arrow to left and right -->
 
       <app-dropdown
         label="Factory"
@@ -14,7 +29,7 @@
         [getId]="getId"
         [getName]="getName"
         [elements]="factoriesToShow"
-        [selectedElementId]="selectedFactoryIdToChild"
+        [selectedElementId]="currentFactoryId"
         (valueChanged)="onFactoryChange($event)"
       ></app-dropdown>
 
@@ -24,7 +39,7 @@
         [getId]="getId"
         [getName]="getName"
         [elements]="departmentsToShow"
-        [selectedElementId]="selectedDepartmentIdToChild"
+        [selectedElementId]="currentDepartmentId"
         (valueChanged)="onDepartmentChange($event)"
       ></app-dropdown>
 
