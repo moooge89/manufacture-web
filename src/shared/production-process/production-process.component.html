@@ -1,7 +1,12 @@
-<div class="title">{{productionInfo.titleToShow}}</div>
+<div
+  class="title"
+  (click)="openDialog()"
+>{{productionInfo.titleToShow}}</div>
 
 <div
-  class="percentage">
+  class="percentage"
+  (click)="openDialog()"
+>
   <div #scaleBar
        class="percentage-animation">
   </div>

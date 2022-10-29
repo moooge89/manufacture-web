@@ -24,6 +24,11 @@ export class ProductionController {
         currentPercentage: 0,
         millisecondsToOneIteration: 5000,
         titleToShow: 'First team',
+        workersCount: 3,
+        todayManufactured: 1,
+        yesterdayManufactured: 2,
+        lastWeekManufactured: 3,
+        lastMonthManufactured: 4,
       },
       {
         factoryId: '1',
@@ -32,6 +37,11 @@ export class ProductionController {
         currentPercentage: 40,
         millisecondsToOneIteration: 7000,
         titleToShow: 'Second team',
+        workersCount: 4,
+        todayManufactured: 2,
+        yesterdayManufactured: 3,
+        lastWeekManufactured: 5,
+        lastMonthManufactured: 7,
       },
       {
         factoryId: '1',
@@ -40,6 +50,11 @@ export class ProductionController {
         currentPercentage: 70,
         millisecondsToOneIteration: 3000,
         titleToShow: 'Third team',
+        workersCount: 3,
+        todayManufactured: 1,
+        yesterdayManufactured: 2,
+        lastWeekManufactured: 3,
+        lastMonthManufactured: 4,
       },
     ];
     return of(productionInfo);

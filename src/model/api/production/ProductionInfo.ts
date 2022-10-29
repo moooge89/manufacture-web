@@ -5,4 +5,10 @@ export interface ProductionInfo {
   titleToShow: string;
   currentPercentage: number;
   millisecondsToOneIteration: number;
+
+  workersCount: number;
+  todayManufactured: number;
+  yesterdayManufactured: number;
+  lastWeekManufactured: number;
+  lastMonthManufactured: number;
 }

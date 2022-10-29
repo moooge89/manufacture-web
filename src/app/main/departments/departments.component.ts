@@ -18,7 +18,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
   private dialogRef: MatDialogRef<PersonDialogComponent> | undefined;
 
-  constructor(private readonly dialog: MatDialog,) {
+  constructor(private readonly dialog: MatDialog) {
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ProductionInfo} from "@model/api/production/ProductionInfo";
-import {Subject} from "rxjs";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ProductionDialogComponent} from "@shared/production-dialog/production-dialog.component";
 
 @Component({
   selector: 'app-production-process',
@@ -18,12 +19,20 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
     factoryId: "",
     millisecondsToOneIteration: 5000,
     teamId: "",
-    titleToShow: 'title'
+    titleToShow: 'title',
+    workersCount: 0,
+    todayManufactured: 0,
+    yesterdayManufactured: 0,
+    lastWeekManufactured: 0,
+    lastMonthManufactured: 0,
   };
 
   iterationListener: () => void = () => undefined;
 
-  private increaseSubject = new Subject<void>();
+  private dialogRef: MatDialogRef<ProductionDialogComponent> | undefined;
+
+  constructor(private readonly dialog: MatDialog) {
+  }
 
   ngAfterViewInit() {
     if (!this.scaleBar) {
@@ -36,7 +45,7 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
 
     const self = this;
 
-    this.iterationListener = () => self.increaseSubject.next();
+    this.iterationListener = () => self.productionInfo.todayManufactured++;
 
     this.scaleBar.nativeElement.addEventListener('animationiteration', this.iterationListener);
   }
@@ -45,6 +54,17 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
     if (this.scaleBar && this.iterationListener) {
       this.scaleBar.nativeElement.removeEventListener('animationiteration', this.iterationListener);
     }
+
+    this.dialogRef?.close();
+  }
+
+  openDialog(): void {
+    this.dialogRef?.close();
+    this.dialogRef = this.dialog.open(ProductionDialogComponent, {
+      width: '720px',
+      height: '320px',
+      data: {productionInfo: this.productionInfo},
+    });
   }
 
   private setIterationTime(iterationMilliseconds: number, startMilliseconds: number): void {
