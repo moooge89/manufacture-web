@@ -1,0 +1,63 @@
+@import "global";
+@import "variables";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  padding: 2rem;
+  background-color: $main-bg-color;
+}
+
+.block {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.big-bold {
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filter-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dropdowns-container {
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    margin-bottom: 2rem;
+  }
+
+  span {
+    margin-right: 1rem;
+  }
+
+  app-dropdown {
+    margin-right: 1rem;
+  }
+}
+
+#chart {
+  width: 100%;
+}

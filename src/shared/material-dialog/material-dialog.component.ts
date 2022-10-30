@@ -1,20 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
-import {
-  ApexNonAxisChartSeries,
-  ApexResponsive,
-  ApexChart
-} from "ng-apexcharts";
 import {Router} from "@angular/router";
 import {MarketFilterService} from "@service/filter/market-filter.service";
-
-export type ChartOptions = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  responsive: ApexResponsive[];
-  labels: any;
-};
+import {DiagramChartOptions} from "@model/chart/DiagramChartOptions";
 
 @Component({
   selector: 'app-material-dialog',
@@ -25,7 +14,7 @@ export class MaterialDialogComponent {
 
   material: WarehouseMaterial;
 
-  public chartOptions: Partial<ChartOptions>;
+  public chartOptions: Partial<DiagramChartOptions>;
 
   constructor(
     private dialogRef: MatDialogRef<MaterialDialogComponent>,
