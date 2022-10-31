@@ -50,13 +50,9 @@ export class ProductionComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  getId = (element: FilterElement) => {
-    return element.id;
-  }
+  getId = (element: FilterElement) => element.id;
 
-  getName = (element: FilterElement) => {
-    return element.name;
-  }
+  getName = (element: FilterElement) => element.name;
 
   onFactoryChange(elementIds: string[]): void {
     if (elementIds?.length === 0) return;

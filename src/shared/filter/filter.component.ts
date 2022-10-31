@@ -62,13 +62,9 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  getId = (element: FilterElement) => {
-    return element.id;
-  }
+  getId = (element: FilterElement) => element.id;
 
-  getName = (element: FilterElement) => {
-    return element.name;
-  }
+  getName = (element: FilterElement) => element.name;
 
   onMaterialNameChange(materialName: string): void {
     this.filterChangeSubject.next({...this.filter, materialName: materialName});

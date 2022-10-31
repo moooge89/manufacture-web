@@ -8,16 +8,76 @@
 
       <div class="dropdowns-container">
         <span>1 team:</span>
-        <app-dropdown></app-dropdown>
-        <app-dropdown></app-dropdown>
-        <app-dropdown></app-dropdown>
+
+        <app-dropdown
+          label="Factory"
+          [isMultiple]="false"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="factoriesToShow"
+          [selectedElementId]="firstFactoryId"
+          (valueChanged)="onFirstFactoryChange($event)"
+        ></app-dropdown>
+
+        <app-dropdown
+          label="Department"
+          [isMultiple]="false"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="firstDepartmentsToShow"
+          [selectedElementId]="firstDepartmentId"
+          [emptyMessage]="emptyMessageForFirstDepartment"
+          (valueChanged)="onFirstDepartmentChange($event)"
+        ></app-dropdown>
+
+        <app-dropdown
+          label="Team"
+          [isMultiple]="false"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="firstTeamsToShow"
+          [selectedElementId]="firstTeamId"
+          [emptyMessage]="emptyMessageForFirstTeam"
+          (valueChanged)="onFirstTeamChange($event)"
+        ></app-dropdown>
+
       </div>
 
       <div class="dropdowns-container">
         <span>2 team:</span>
-        <app-dropdown></app-dropdown>
-        <app-dropdown></app-dropdown>
-        <app-dropdown></app-dropdown>
+
+        <app-dropdown
+          label="Factory"
+          [isMultiple]="false"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="factoriesToShow"
+          [selectedElementId]="secondFactoryId"
+          (valueChanged)="onSecondFactoryChange($event)"
+        ></app-dropdown>
+
+        <app-dropdown
+          label="Department"
+          [isMultiple]="false"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="secondDepartmentsToShow"
+          [selectedElementId]="secondDepartmentId"
+          [emptyMessage]="emptyMessageForSecondDepartment"
+          (valueChanged)="onSecondDepartmentChange($event)"
+        ></app-dropdown>
+
+        <app-dropdown
+          label="Team"
+          [isMultiple]="false"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="secondTeamsToShow"
+          [selectedElementId]="secondTeamId"
+          [emptyMessage]="emptyMessageForSecondTeam"
+          (valueChanged)="onSecondTeamChange($event)"
+        ></app-dropdown>
+
       </div>
 
     </div>
@@ -38,8 +98,6 @@
     </div>
 
   </div>
-
-
 
 
 </section>

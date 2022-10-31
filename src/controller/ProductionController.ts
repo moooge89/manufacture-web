@@ -12,7 +12,7 @@ export class ProductionController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/production-process');
+    this.http = http.setControllerPrefix('/production');
   }
 
   loadProductionInfo(productionFilter: ProductionFilter): Observable<ProductionInfo[]> {

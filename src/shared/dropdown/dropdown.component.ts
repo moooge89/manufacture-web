@@ -41,6 +41,11 @@ export class DropdownComponent<T> {
   @Input() selectedElementId: string | undefined;
 
   /**
+   * message, that will be shown, when no elements can be found
+   */
+  @Input() emptyMessage: string = 'No element can be found';
+
+  /**
    * on value change it emits it
    */
   @Output() valueChanged = new EventEmitter<string[]>();
