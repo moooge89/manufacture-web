@@ -17,4 +17,9 @@ button {
   &:hover {
     background-color: $button-hover;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    background-color: $disabled-button-bg;
+  }
 }

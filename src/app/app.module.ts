@@ -12,6 +12,7 @@ import {MaterialDialogModule} from "@shared/material-dialog/material-dialog.modu
 import {MarketMaterialDialogModule} from "@shared/market-material-dialog/market-material-dialog.module";
 import {BottomNotificationModule} from "@shared/bottom-notification/bottom-notification.module";
 import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
+import {ReportDialogModule} from "@shared/report-dialog/report-dialog.module";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
     BottomNotificationModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),
+    ReportDialogModule,
   ],
   providers: [
     IsLoggedInGuard,

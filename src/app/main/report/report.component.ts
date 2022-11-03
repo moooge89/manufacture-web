@@ -1,12 +1,11 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ChartComponent} from "ng-apexcharts";
-import {ColumnChartOptions} from "@model/chart/ColumnChartOptions";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FilterElement} from "@model/filter/FilterElement";
 import {Unsub} from "@util/Unsub";
 import {ReportController} from "@controller/ReportController";
 import {ReportFactoryFilterDescription} from "@model/api/report/ReportFactoryFilterDescription";
-import {Subject} from "rxjs";
-import {ReportFilter} from "@model/api/report/ReportFilter";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ReportDialogComponent} from "@shared/report-dialog/report-dialog.component";
+import {ReportDescription} from "@model/report/ReportDescription";
 
 @Component({
   selector: 'app-report',
@@ -14,10 +13,6 @@ import {ReportFilter} from "@model/api/report/ReportFilter";
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit, OnDestroy {
-
-  @ViewChild("chart") chart: ChartComponent | undefined;
-
-  chartOptions: Partial<ColumnChartOptions>;
 
   factoriesToShow: FilterElement[] = [];
   firstDepartmentsToShow: FilterElement[] = [];
@@ -38,84 +33,25 @@ export class ReportComponent implements OnInit, OnDestroy {
   firstFactoryIndex: number = 0;
   secondFactoryIndex: number = 0;
 
+  isReportBeingGenerated: boolean = false;
+
+  private dialogRef: MatDialogRef<ReportDialogComponent> | undefined;
   private filterDescriptions: ReportFactoryFilterDescription[] = [];
-  private readonly filterChangedSubject = new Subject<{ first: ReportFilter, second: ReportFilter }>();
+  private reportDescription: ReportDescription | undefined;
   private readonly unsub = new Unsub();
 
-  constructor(private readonly reportController: ReportController) {
-    this.chartOptions = {
-      series: [
-        {
-          name: "Net Profit",
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-        },
-        {
-          name: "Revenue",
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        },
-        {
-          name: "Free Cash Flow",
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: window.innerHeight * 0.50
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: "55%",
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        show: true,
-        width: 2,
-        colors: ["transparent"]
-      },
-      xaxis: {
-        categories: [
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct"
-        ]
-      },
-      yaxis: {
-        title: {
-          text: "$ (thousands)"
-        }
-      },
-      fill: {
-        opacity: 1
-      },
-      tooltip: {
-        y: {
-          formatter: function (val) {
-            return "$ " + val + " thousands";
-          }
-        }
-      }
-    };
+  constructor(private readonly dialog: MatDialog,
+              private readonly reportController: ReportController) {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.filterChangedSubject.asObservable().subscribe(x => console.log(x));
-
-    this.unsub.sub = this.reportController.loadProductionFilterDescription().subscribe(
+    this.unsub.sub = this.reportController.loadReportFilterDescription().subscribe(
       filterDescriptions => this.initFilterDescription(filterDescriptions)
     );
   }
 
   ngOnDestroy() {
+    this.dialogRef?.close();
     this.unsub.unsubscribe();
   }
 
@@ -163,7 +99,6 @@ export class ReportComponent implements OnInit, OnDestroy {
     if (elementIds?.length === 0) return;
 
     this.firstTeamId = elementIds[0];
-    this.emitFilterIfNeeded();
   }
 
   onSecondFactoryChange(elementIds: string[]): void {
@@ -206,38 +141,29 @@ export class ReportComponent implements OnInit, OnDestroy {
     if (elementIds?.length === 0) return;
 
     this.secondTeamId = elementIds[0];
-    this.emitFilterIfNeeded();
+  }
+
+  generateReport(): void {
+    this.unsub.sub = this.reportController.loadReportDescription().subscribe(description => {
+        this.reportDescription = description;
+        this.openDialog();
+      }
+    );
+  }
+
+  private openDialog(): void {
+    this.dialogRef?.close();
+
+    this.dialogRef = this.dialog.open(ReportDialogComponent, {
+      width: '1080px',
+      height: '500px',
+      data: {reportDescription: this.reportDescription},
+    });
   }
 
   private initFilterDescription(filterDescriptions: ReportFactoryFilterDescription[]): void {
     this.filterDescriptions = filterDescriptions;
     this.factoriesToShow = filterDescriptions.map(x => x.filterElement);
-  }
-
-  private emitFilterIfNeeded(): void {
-
-    if (!this.firstFactoryId || !this.firstDepartmentId || !this.firstTeamId) {
-      return;
-    }
-
-    if (!this.secondFactoryId || !this.secondDepartmentId || !this.secondTeamId) {
-      return;
-    }
-
-    if (this.firstTeamId && this.secondTeamId) {
-      this.filterChangedSubject.next({
-        first: {
-          factoryId: this.firstFactoryId,
-          departmentId: this.firstDepartmentId,
-          teamId: this.firstTeamId,
-        },
-        second: {
-          factoryId: this.secondFactoryId,
-          departmentId: this.secondDepartmentId,
-          teamId: this.secondTeamId,
-        }
-      })
-    }
   }
 
   get emptyMessageForFirstDepartment(): string {
@@ -266,6 +192,20 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   get choseDepartmentText(): string {
     return 'Choose department first';
+  }
+
+  get disabledButtonMsg(): string {
+    if (this.isReportBeingGenerated) return 'Report is being generated...';
+
+    if (!this.firstFactoryId) return 'Choose first factory';
+
+    if (!this.secondFactoryId) return 'Choose second factory';
+
+    return '';
+  }
+
+  get isButtonDisabled(): boolean {
+    return this.isReportBeingGenerated || !this.firstFactoryId || !this.secondFactoryId;
   }
 
 }

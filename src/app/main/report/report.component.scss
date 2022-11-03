@@ -35,29 +35,42 @@
 
 .filter-container {
   width: 100%;
+  flex: 1;
 
   display: flex;
+}
+
+.dropdowns-container-with-title {
+  width: 50%;
+  display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font-size: 18px;
+    font-weight: bold;
+  }
 }
 
 .dropdowns-container {
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+}
 
-  &:first-child {
-    margin-bottom: 2rem;
-  }
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
-  span {
-    margin-right: 1rem;
-  }
-
-  app-dropdown {
+  app-button:first-child {
     margin-right: 1rem;
   }
 }
 
-#chart {
-  width: 100%;
+app-button {
+  width: 200px;
 }

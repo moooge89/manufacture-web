@@ -3,6 +3,7 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {ReportFactoryFilterDescription} from "@model/api/report/ReportFactoryFilterDescription";
+import {ReportDescription} from "@model/report/ReportDescription";
 
 @Injectable({providedIn: 'root'})
 export class ReportController {
@@ -13,7 +14,7 @@ export class ReportController {
     this.http = http.setControllerPrefix('/report');
   }
 
-  loadProductionFilterDescription(): Observable<ReportFactoryFilterDescription[]> {
+  loadReportFilterDescription(): Observable<ReportFactoryFilterDescription[]> {
     const filterDescription: ReportFactoryFilterDescription[] = [
       {
         filterElement: {
@@ -106,6 +107,31 @@ export class ReportController {
     ];
 
     return of(filterDescription);
+  }
+
+  loadReportDescription(): Observable<ReportDescription> {
+    const reportDescription = {
+      categories: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
+      firstCountScale: [12, 12, 12, 44, 55, 57, 56, 61, 58, 63, 60, 66],
+      secondCountScale: [12, 12, 12, 76, 85, 101, 98, 87, 105, 91, 114, 94],
+      firstCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
+      secondCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
+    };
+
+    return of(reportDescription);
   }
 
 }

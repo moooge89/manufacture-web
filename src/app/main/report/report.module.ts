@@ -3,8 +3,8 @@ import {CommonModule} from "@angular/common";
 import {ReportComponent} from "./report.component";
 import {ReportRoutingModule} from "./report-routing.module";
 import {DropdownModule} from "@shared/dropdown/dropdown.module";
-import {MatExpansionModule} from "@angular/material/expansion";
 import {NgApexchartsModule} from "ng-apexcharts";
+import {ButtonModule} from "@shared/button/button.module";
 
 @NgModule({
   declarations: [ReportComponent],
@@ -12,8 +12,8 @@ import {NgApexchartsModule} from "ng-apexcharts";
     CommonModule,
     ReportRoutingModule,
     DropdownModule,
-    MatExpansionModule,
     NgApexchartsModule,
+    ButtonModule,
   ],
   bootstrap: [ReportComponent]
 })

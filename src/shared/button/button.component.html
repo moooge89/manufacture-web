@@ -1,1 +1,9 @@
-<button (click)="clicked.emit()">{{text}}</button>
+<button
+  mat-raised-button
+  [matTooltip]="disabledMessage"
+  [matTooltipDisabled]="!isDisabled"
+  [class.disabled]="isDisabled"
+  (click)="onClick()"
+>
+  {{text}}
+</button>
