@@ -34,22 +34,34 @@ export class FilterController {
       countries: [
         {
           id: '1',
-          name: 'First country',
+          name: 'Kazakhstan',
         },
 
         {
           id: '2',
-          name: 'Second country',
+          name: 'USA',
         },
 
         {
           id: '3',
-          name: 'Third country',
+          name: 'Russia',
         },
       ],
     };
 
     return of(filterDescription);
+  }
+
+  // todo era make one request from them
+  loadCountries(): Observable<string[]> {
+    const countries: string[] = ['Kazakhstan', 'USA', 'Russia'];
+    return of(countries);
+  }
+
+  // todo era make one request from them
+  loadIcons(): Observable<string[]> {
+    const icons: string[] = ['sand'];
+    return of(icons);
   }
 
 }

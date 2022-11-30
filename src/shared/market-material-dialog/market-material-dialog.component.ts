@@ -8,7 +8,7 @@ import {BottomNotificationService} from "@service/bottom-notification/bottom-not
   templateUrl: './market-material-dialog.component.html',
   styleUrls: ['./market-material-dialog.component.scss'],
 })
-export class MarketMarketDialogComponent {
+export class MarketMaterialDialogComponent {
 
   material: MarketMaterial;
 
@@ -16,7 +16,7 @@ export class MarketMarketDialogComponent {
   price = 0
 
   constructor(
-    private dialogRef: MatDialogRef<MarketMarketDialogComponent>,
+    private dialogRef: MatDialogRef<MarketMaterialDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: MarketMaterial },
     private readonly notificationService: BottomNotificationService,
   ) {

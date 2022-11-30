@@ -8,18 +8,29 @@ button {
   padding: 5px;
 
   font-size: inherit;
-  background-color: $button-bg;
   color: $white;
 
   transition: background-color $animation-time;
   cursor: pointer;
 
-  &:hover {
-    background-color: $button-hover;
-  }
-
   &.disabled {
     cursor: not-allowed;
     background-color: $disabled-button-bg;
+  }
+}
+
+.approve-button {
+  background-color: $button-bg;
+
+  &:hover {
+    background-color: $button-hover;
+  }
+}
+
+.cancel-button {
+  background-color: $button-cancel-bg;
+
+  &:hover {
+    background-color: $button-cancel-hover;
   }
 }

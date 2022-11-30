@@ -1,0 +1,17 @@
+<div>{{message}}</div>
+
+<div class="buttons-container">
+
+  <app-button
+    [isCancelButton]="true"
+    text="No"
+    (clicked)="no()"
+  ></app-button>
+
+  <app-button
+    text="Yes"
+    (clicked)="yes()"
+  ></app-button>
+
+</div>
+

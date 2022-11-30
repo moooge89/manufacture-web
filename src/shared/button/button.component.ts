@@ -13,6 +13,8 @@ export class ButtonComponent {
 
   @Input() disabledMessage: string = '';
 
+  @Input() isCancelButton: boolean = false;
+
   @Output() clicked = new EventEmitter<void>();
 
   onClick(): void {

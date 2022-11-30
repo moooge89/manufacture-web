@@ -10,9 +10,14 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    loadChildren: () => import('./main/main.module').then(m => m.MainModule),
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canLoad: [IsLoggedInGuard],
   },
+  // {
+  //   path: 'main',
+  //   loadChildren: () => import('./main/main.module').then(m => m.MainModule),
+  //   canLoad: [IsLoggedInGuard],
+  // },
   {
     path: '',
     redirectTo: 'auth',

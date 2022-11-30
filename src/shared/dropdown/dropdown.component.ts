@@ -1,11 +1,14 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {InputError} from "@model/web/InputError";
+import {ErrorStateMatcher} from "@angular/material/core";
+import {FormControl, FormGroupDirective, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent<T> {
+export class DropdownComponent<T> implements OnInit {
 
   /**
    * function is used to extract ID from element
@@ -45,6 +48,8 @@ export class DropdownComponent<T> {
    */
   @Input() emptyMessage: string = 'No element can be found';
 
+  @Input() inputError: InputError = {hasError: false, errorText: ''};
+
   /**
    * on value change it emits it
    */
@@ -52,7 +57,21 @@ export class DropdownComponent<T> {
 
   shownElements: T[] = [];
 
+  errorStateMatcher: ErrorStateMatcher | undefined;
+
   private allElements: T[] = [];
+
+  ngOnInit() {
+
+    const self = this;
+
+    this.errorStateMatcher = new class extends ErrorStateMatcher {
+      isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        return self.inputError.hasError;
+      }
+    };
+
+  }
 
   onSearchChange(name: string): void {
 

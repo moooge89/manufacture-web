@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
-import {MarketMarketDialogComponent} from "@shared/market-material-dialog/market-material-dialog.component";
+import {MarketMaterialDialogComponent} from "@shared/market-material-dialog/market-material-dialog.component";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
 import {defaultFilter} from "@util/FilterUtil";
@@ -26,7 +26,7 @@ export class MarketComponent implements OnDestroy {
     usePrice: true,
   };
 
-  private dialogRef: MatDialogRef<MarketMarketDialogComponent> | undefined;
+  private dialogRef: MatDialogRef<MarketMaterialDialogComponent> | undefined;
 
   constructor(private readonly dialog: MatDialog,
               private readonly marketController: MarketController) {
@@ -47,7 +47,7 @@ export class MarketComponent implements OnDestroy {
   onRowClick(material: MarketMaterial): void {
     this.dialogRef?.close();
 
-    this.dialogRef = this.dialog.open(MarketMarketDialogComponent, {
+    this.dialogRef = this.dialog.open(MarketMaterialDialogComponent, {
       width: '720px',
       height: '320px',
       data: {material: material},

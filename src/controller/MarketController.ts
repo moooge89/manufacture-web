@@ -17,6 +17,7 @@ export class MarketController {
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
     const materials: MarketMaterial[] = [
       {
+        id: '1',
         icon: 'sand',
         name: 'Sand',
         country: 'Kazakhstan',

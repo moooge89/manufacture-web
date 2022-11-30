@@ -13,6 +13,9 @@ import {MarketMaterialDialogModule} from "@shared/market-material-dialog/market-
 import {BottomNotificationModule} from "@shared/bottom-notification/bottom-notification.module";
 import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
 import {ReportDialogModule} from "@shared/report-dialog/report-dialog.module";
+import {CrudMarketMaterialDialogModule} from "./dialogue/crud-market-material/crud-market-material-dialog.module";
+import {ConfirmationModule} from "./dialogue/confirmation/confirmation.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -25,12 +28,15 @@ import {ReportDialogModule} from "@shared/report-dialog/report-dialog.module";
     HttpClientModule,
     HttpServiceModule.forRoot(environment.urlPrefix),
     BrowserAnimationsModule,
+    MatDialogModule,
     MaterialDialogModule,
     MarketMaterialDialogModule,
     BottomNotificationModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),
     ReportDialogModule,
+    CrudMarketMaterialDialogModule,
+    ConfirmationModule,
   ],
   providers: [
     IsLoggedInGuard,

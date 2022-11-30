@@ -5,6 +5,7 @@ import {InputModule} from "@shared/input/input.module";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [DropdownComponent],
@@ -14,6 +15,7 @@ import {MatOptionModule} from "@angular/material/core";
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
+    FormsModule,
   ],
   exports: [
     DropdownComponent,

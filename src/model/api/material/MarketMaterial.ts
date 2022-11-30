@@ -1,6 +1,7 @@
 export interface MarketMaterial {
-  icon: string;
+  id: string;
   name: string;
-  country: string;
   price: number;
+  icon: string;
+  country: string;
 }

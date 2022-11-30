@@ -6,6 +6,7 @@
     <app-input
       placeholder="Enter username"
       [inputError]="usernameError"
+      [withDebounce]="false"
       (valueChanged)="username = $event"
       (focused)="usernameFocused()"
     ></app-input>
@@ -14,6 +15,7 @@
       placeholder="Enter password"
       type="password"
       [inputError]="passwordError"
+      [withDebounce]="false"
       (valueChanged)="password = $event"
       (focused)="passwordFocused()"
     ></app-input>

@@ -70,3 +70,31 @@ tr td {
   }
 
 }
+
+.checkbox-container {
+  padding-left: 2rem;
+
+  display: flex;
+}
+
+.add-icon:hover {
+  color: #2db64b;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
+.icons-container {
+
+  border-bottom: 1px solid #f1f1f4;
+
+  mat-icon {
+    transition: color $animation-time;
+    cursor: pointer;
+
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+  }
+
+}

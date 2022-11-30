@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     const token = localStorage.getItem(TOKEN);
 
     if (token) {
-      await this.router.navigate(['/main/factory']);
+      await this.router.navigate(['/main']);
     }
   }
 

@@ -3,6 +3,8 @@
   [matTooltip]="disabledMessage"
   [matTooltipDisabled]="!isDisabled"
   [class.disabled]="isDisabled"
+  [class.approve-button]="!isCancelButton"
+  [class.cancel-button]="isCancelButton"
   (click)="onClick()"
 >
   {{text}}

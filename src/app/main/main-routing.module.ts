@@ -35,6 +35,10 @@ const routes: Routes = [
         path: 'report',
         loadChildren: () => import('./report/report.module').then(x => x.ReportModule),
       },
+      {
+        path: '**',
+        redirectTo: 'factory',
+      }
     ],
   },
 ];

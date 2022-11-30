@@ -22,7 +22,6 @@ export class NumberRangeComponent {
   isFocused = false;
 
   onMinChange(): void {
-    // this.min = minValue;
     this.valueChanged.next({
       min: this.min,
       max: this.max,
@@ -30,7 +29,6 @@ export class NumberRangeComponent {
   }
 
   onMaxChange(): void {
-    // this.max = maxValue;
     this.valueChanged.next({
       min: this.min,
       max: this.max,

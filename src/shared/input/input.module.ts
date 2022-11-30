@@ -6,11 +6,11 @@ import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [InputComponent],
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatInputModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatInputModule,
+  ],
   exports: [
     InputComponent
   ]

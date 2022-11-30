@@ -1,10 +1,33 @@
+<div
+  *ngIf="isAdminTable"
+  class="icons-container"
+>
+
+  <mat-icon
+    class="add-icon"
+    svgIcon="add"
+    (click)="addRow()"
+  ></mat-icon>
+
+  <mat-icon
+    class="delete-icon"
+    svgIcon="trash"
+    (click)="deleteRows()"
+  ></mat-icon>
+
+</div>
+
 <table>
 
   <thead>
   <tr>
+
+    <th *ngIf="isAdminTable"></th>
+
     <th *ngFor="let header of headers">
       <span>{{header}}</span>
     </th>
+
   </tr>
   </thead>
 
@@ -13,6 +36,15 @@
     *ngFor="let row of rows"
     (click)="onRowClick(row)"
   >
+    <td
+      *ngIf="isAdminTable"
+      class=""
+    >
+      <mat-checkbox
+        (change)="checkId($event.checked, row)"
+        (click)="$event.stopImmediatePropagation()"></mat-checkbox>
+    </td>
+
     <td *ngFor="let column of columnNames; let i = index;">
       <mat-icon
         *ngIf="isMatIcon(i); else commonColumn"
@@ -28,52 +60,17 @@
   </tbody>
 
   <tbody *ngIf="isLoading">
-  <tr
-    *ngFor="let row of [].constructor(7)"
-  >
-    <td
-      *ngFor="let column of columnNames"
-    >
+
+  <tr *ngFor="let row of [].constructor(7)">
+
+    <td *ngFor="let column of columnNames">
 
       <div class="loading-column"></div>
 
     </td>
+
   </tr>
+
   </tbody>
 
 </table>
-
-
-<!--<div class="container">-->
-<!--  <div class="post">-->
-<!--    <div class="avatar"></div>-->
-<!--    <div class="line"></div>-->
-<!--    <div class="line"></div>-->
-<!--  </div>-->
-
-<!--  <div class="post">-->
-<!--    <div class="avatar"></div>-->
-<!--    <div class="line"></div>-->
-<!--    <div class="line"></div>-->
-<!--  </div>-->
-
-<!--  <div class="post">-->
-<!--    <div class="avatar"></div>-->
-<!--    <div class="line"></div>-->
-<!--    <div class="line"></div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="table-loading-container">-->
-
-<!--  <div-->
-<!--    *ngFor="let row of [].constructor(10)"-->
-<!--    class="loading-row"-->
-<!--  >-->
-<!--    <div class="loading-column"></div>-->
-<!--    <div class="loading-column"></div>-->
-<!--    <div class="loading-column"></div>-->
-<!--    <div class="loading-column"></div>-->
-<!--  </div>-->
-
-<!--</div>-->

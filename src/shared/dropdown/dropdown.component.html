@@ -3,8 +3,10 @@
   <mat-label>{{label}}</mat-label>
 
   <mat-select
+    [(ngModel)]="selectedElementId"
+    [ngModelOptions]="{standalone: true}"
     [multiple]="isMultiple"
-    [(value)]="selectedElementId"
+    [errorStateMatcher]="errorStateMatcher"
     (valueChange)="onValueChange($event)"
   >
     <app-input
@@ -30,5 +32,9 @@
       {{getName(element)}}
     </mat-option>
   </mat-select>
+
+  <mat-error>
+    {{inputError.errorText}}
+  </mat-error>
 
 </mat-form-field>
