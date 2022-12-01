@@ -60,7 +60,7 @@ export class FilterController {
 
   // todo era make one request from them
   loadIcons(): Observable<string[]> {
-    const icons: string[] = ['sand'];
+    const icons: string[] = ['aluminum', 'bronze', 'gold', 'iron', 'steel', 'sand'];
     return of(icons);
   }
 
