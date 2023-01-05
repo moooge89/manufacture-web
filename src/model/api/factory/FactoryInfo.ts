@@ -1,6 +1,7 @@
 import {GeoPoint} from "./GeoPoint";
 
 export interface FactoryInfo {
+  id: string;
   name: string;
   geoPoint: GeoPoint;
   workerCount: number;

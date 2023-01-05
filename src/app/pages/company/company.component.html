@@ -1,0 +1,31 @@
+<section class="block top">
+
+  <div>
+    <span class="big-bold">Kazakhstan Transport Company</span>
+  </div>
+
+  <div class="company-body">
+    <span>Director:</span>
+    <span>{{'Yeletay Yerassyl'}}</span>
+
+    <span>Workers:</span>
+    <span>{{'123'}}</span>
+
+    <span>Factories:</span>
+    <span>{{'3'}}</span>
+
+  </div>
+
+</section>
+
+<section class="block bottom">
+  <span class="big-bold">Factories</span>
+
+  <app-table
+    [headers]="['Name', 'Director', 'Workers']"
+    [rows$]="factories$"
+    [columnNames]="['name', 'director', 'workerCount']"
+    (rowClicked)="handleFactoryClick($event)"
+  ></app-table>
+
+</section>

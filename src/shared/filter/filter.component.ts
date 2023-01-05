@@ -9,7 +9,7 @@ import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {NumberRange} from "@model/filter/NumberRange";
 import {defaultFilter} from "@util/FilterUtil";
-import {MarketFilterService} from "@service/filter/market-filter.service";
+import {PathContextService} from "@service/context/path-context.service";
 
 @Component({
   selector: 'app-filter',
@@ -41,7 +41,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly filterController: FilterController,
-    private readonly marketFilterService: MarketFilterService,
+    private readonly pathContextService: PathContextService,
   ) {
   }
 
@@ -87,13 +87,11 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   private handleMarketFilter() {
-    const materialName = this.marketFilterService.materialName;
+    const materialName = this.pathContextService.materialName;
 
     if (!materialName) {
       return;
     }
-
-    this.marketFilterService.materialName = '';
 
     this.materialName = materialName;
     this.onMaterialNameChange(materialName);

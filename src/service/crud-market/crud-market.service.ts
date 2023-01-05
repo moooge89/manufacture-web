@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {CrudMarketMaterialDialogComponent} from "../../app/dialogue/crud-market-material/crud-market-material-dialog.component";
+import {
+  CrudMarketMaterialDialogComponent
+} from "../../app/dialogue/crud-market-material/crud-market-material-dialog.component";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 

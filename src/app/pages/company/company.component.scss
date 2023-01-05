@@ -1,0 +1,50 @@
+@import "variables";
+@import "global";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 2rem;
+  background-color: $main-bg-color;
+}
+
+section {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1.5rem;
+}
+
+.top {
+  height: fit-content;
+}
+
+.company-body {
+  margin-left: 10%;
+  margin-top: 2rem;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  span {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+}
+
+.bottom {
+  margin-top: 2rem;
+  height: 100%;
+  overflow: auto;
+}
+
+app-table {
+  margin-top: 2rem;
+}

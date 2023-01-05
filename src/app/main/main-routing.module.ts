@@ -8,6 +8,10 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
+        path: 'company',
+        loadChildren: () => import('../pages/company/company.module').then(x => x.CompanyModule),
+      },
+      {
         path: 'factory',
         loadChildren: () => import('./factory/factory.module').then(x => x.FactoryModule),
       },

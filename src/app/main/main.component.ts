@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MenuItem} from "@model/web/MenuItem";
 
 const finalItems: MenuItem[] = [
+  {label: 'Company', route: ['/main/company'], icon: 'company'},
   {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
   {label: 'Departments', route: ['/main/departments'], icon: 'team'},
   {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
