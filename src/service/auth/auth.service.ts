@@ -40,6 +40,10 @@ export class AuthService {
     })
   }
 
+  isTokenProvided(): boolean {
+    return !!localStorage.getItem(TOKEN);
+  }
+
   private async loadAndSetUserInfo() {
     this._userInfo = await this.authController.userInfo().toPromise();
   }

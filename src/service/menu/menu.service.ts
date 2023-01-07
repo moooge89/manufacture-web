@@ -3,11 +3,13 @@ import {AuthService} from "@service/auth/auth.service";
 import {MenuItem} from "@model/web/MenuItem";
 import {UserRole} from "@model/auth/UserRole";
 import {of} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class MenuService {
 
   constructor(
+    private readonly router: Router,
     private readonly authService: AuthService,
   ) {
   }
@@ -41,7 +43,7 @@ export class MenuService {
     return of(menuItems).toPromise();
   }
 
-  async firstPage(): Promise<string> {
+  async defaultPage(): Promise<string> {
     const user = await this.authService.userInfo();
 
     let path: string;
@@ -68,6 +70,12 @@ export class MenuService {
     }
 
     return of(path).toPromise();
+  }
+
+  async redirectToDefaultPageIfNeeded() {
+    if (this.router.url === '/main') {
+      await this.router.navigate([await this.defaultPage()]);
+    }
   }
 
   private menuItemsForCompanyDirector(): MenuItem[] {

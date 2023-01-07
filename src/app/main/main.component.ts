@@ -13,13 +13,15 @@ export class MainComponent implements OnInit {
   menuItems: MenuItem[] = [];
 
   constructor(private readonly authService: AuthService,
-              private readonly menuService: MenuService) {
+              private readonly menuService: MenuService,) {
   }
 
   async ngOnInit() {
     await this.authService.init();
 
     this.menuItems = await this.menuService.menuItems();
+
+    await this.menuService.redirectToDefaultPageIfNeeded();
   }
 
 }
