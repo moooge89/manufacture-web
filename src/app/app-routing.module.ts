@@ -8,11 +8,6 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
-  // {
-  //   path: 'main',
-  //   loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-  //   canLoad: [IsLoggedInGuard],
-  // },
   {
     path: 'main',
     loadChildren: () => import('./main/main.module').then(m => m.MainModule),

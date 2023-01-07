@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./market/market.module').then(x => x.MarketModule),
       },
       {
+        path: 'crud-market',
+        loadChildren: () => import('../pages/create-market/create-market.module').then(x => x.CreateMarketModule),
+      },
+      {
         path: 'budget',
         loadChildren: () => import('./budget/budget.module').then(x => x.BudgetModule),
       },

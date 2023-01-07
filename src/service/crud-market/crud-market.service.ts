@@ -30,6 +30,7 @@ export class CrudMarketService {
         noNeedToConfirm: true,
         isSave: true,
       },
+      disableClose: true,
     });
 
     return dialogRef.afterClosed().toPromise();
@@ -45,6 +46,7 @@ export class CrudMarketService {
         noNeedToConfirm: false,
         isSave: false,
       },
+      disableClose: true,
     });
 
     return dialogRef.afterClosed().toPromise();

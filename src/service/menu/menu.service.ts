@@ -30,11 +30,44 @@ export class MenuService {
         menuItems.push(...this.menuItemsForDepartmentDirector());
         break;
 
+      case UserRole.SYSTEM_ADMIN:
+        menuItems.push(...this.menuItemsForSystemAdmin());
+        break;
+
       default:
-        throw new Error('18xn6L9PE1 :: YOu have no right access to view menu items');
+        throw new Error('18xn6L9PE1 :: You have no right access to view menu items');
     }
 
     return of(menuItems).toPromise();
+  }
+
+  async firstPage(): Promise<string> {
+    const user = await this.authService.userInfo();
+
+    let path: string;
+
+    switch (user.role) {
+      case UserRole.COMPANY_DIRECTOR:
+        path = '/main/company';
+        break;
+
+      case UserRole.FACTORY_DIRECTOR:
+        path = '/main/factory';
+        break;
+
+      case UserRole.DEPARTMENT_DIRECTOR:
+        path = '/main/departments';
+        break;
+
+      case UserRole.SYSTEM_ADMIN:
+        path = '/main/crud-market';
+        break;
+
+      default:
+        throw new Error('8m2393CE94 :: You have no right access to view menu items');
+    }
+
+    return of(path).toPromise();
   }
 
   private menuItemsForCompanyDirector(): MenuItem[] {
@@ -67,6 +100,12 @@ export class MenuService {
       {label: 'Budget', route: ['/main/budget'], icon: 'money'},
       {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
       {label: 'Report', route: ['/main/report'], icon: 'report'},
+    ];
+  }
+
+  private menuItemsForSystemAdmin(): MenuItem[] {
+    return [
+      {label: 'Market', route: ['/main/crud-market'], icon: 'market'},
     ];
   }
 

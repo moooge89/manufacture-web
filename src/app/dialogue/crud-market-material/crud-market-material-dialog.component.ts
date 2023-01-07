@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {FilterController} from "@controller/FilterController";
@@ -48,10 +48,16 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     this.unsub.sub = this.filterController.loadIcons().subscribe(icons => this.icons = icons);
 
     this.unsub.sub = this.filterController.loadCountries().subscribe(countries => this.countries = countries);
+
+    this.dialogRef.backdropClick().subscribe(() => this.cancel());
   }
 
   ngOnDestroy() {
     this.unsub.unsubscribe();
+  }
+
+  @HostListener('window:keyup.esc') onKeyUp() {
+    this.cancel().then();
   }
 
   getId = (element: string) => element;
@@ -110,7 +116,6 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     if (!res) {
       return;
     }
-
 
     {
       // todo era make request to server here

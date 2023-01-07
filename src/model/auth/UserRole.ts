@@ -6,6 +6,8 @@ export enum UserRole {
 
   DEPARTMENT_DIRECTOR = 'DEPARTMENT_DIRECTOR',
 
+  SYSTEM_ADMIN = 'SYSTEM_ADMIN',
+
   UNKNOWN = 'UNKNOWN',
 
 }

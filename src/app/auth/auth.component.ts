@@ -6,6 +6,7 @@ import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {Router} from "@angular/router";
 import {TOKEN} from "@const/LocalStorageConst";
 import {InputError} from "@model/web/InputError";
+import {MenuService} from "@service/menu/menu.service";
 
 @Component({
   selector: 'app-auth',
@@ -23,6 +24,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   private unsub = new Unsub();
 
   constructor(private readonly router: Router,
+              private readonly menuService: MenuService,
               private readonly authController: AuthController) {
   }
 
@@ -38,7 +40,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  login(): void {
+  async login() {
     if (!this.username) {
       this.usernameError.hasError = true;
       this.usernameError.errorText = 'Username is blank';
@@ -61,9 +63,10 @@ export class AuthComponent implements OnInit, OnDestroy {
       password: encodedPassword,
     }
 
-    this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(token => {
+    this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(async token => {
       localStorage.setItem(TOKEN, token);
-      this.router.navigate(['/main/factory']).then();
+      const path = await this.menuService.firstPage();
+      await this.router.navigate([path]);
     });
   }
 
