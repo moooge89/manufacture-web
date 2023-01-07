@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PersonDialogComponent} from "@shared/person-dialog/person-dialog.component";
 import {DepartmentController} from "@controller/DepartmentController";
 import {parseDepartmentId} from "@util/RegexUtil";
+import {Unsub} from "@util/Unsub";
 
 @Component({
   selector: 'app-departments',
@@ -20,45 +21,19 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
   private dialogRef: MatDialogRef<PersonDialogComponent> | undefined;
 
+  private readonly unsub = new Unsub();
+
   constructor(private readonly dialog: MatDialog,
               private readonly departmentController: DepartmentController) {
   }
 
   ngOnInit() {
-    // todo era get departments from controller
-    for (let i = 0; i < 5; ++i) {
-      const department = this.rndDepartment(i + 1);
-
-      for (let i = 0; i < 3; ++i) {
-        this.addRndPerson(department, i + 1);
-      }
-
-      this.departments.push(department);
-    }
+    this.unsub.sub = this.departmentController.loadDepartments().subscribe(deps => this.departments = deps);
   }
 
   ngOnDestroy() {
     this.dialogRef?.close();
-  }
-
-  rndDepartment = (id: number): Department => {
-    return {
-      id: id + '',
-      name: 'Department ' + id,
-      persons: [],
-      teamCount: 0,
-      workerCount: 0,
-    };
-  }
-
-  addRndPerson = (department: Department, index: number) => {
-    const person: Person = {
-      departmentId: department.id,
-      id: '',
-      name: 'Person ' + department.id + index,
-    };
-
-    department.persons.push(person);
+    this.unsub.unsubscribe();
   }
 
   drop(item: CdkDragDrop<any, any>): void {
