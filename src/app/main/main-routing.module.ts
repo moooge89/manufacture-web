@@ -21,22 +21,22 @@ const routes: Routes = [
       },
       {
         path: 'factory',
-        loadChildren: () => import('./factory/factory.module').then(x => x.FactoryModule),
+        loadChildren: () => import('../pages/factory/factory.module').then(x => x.FactoryModule),
         canLoad: [CompanyFactoryGuard],
       },
       {
         path: 'departments',
-        loadChildren: () => import('./departments/departments.module').then(x => x.DepartmentsModule),
+        loadChildren: () => import('../pages/departments/departments.module').then(x => x.DepartmentsModule),
         canLoad: [FactoryDepartmentGuard],
       },
       {
         path: 'warehouse',
-        loadChildren: () => import('./warehouse/warehouse.module').then(x => x.WarehouseModule),
+        loadChildren: () => import('../pages/warehouse/warehouse.module').then(x => x.WarehouseModule),
         canLoad: [CommonPageGuard],
       },
       {
         path: 'market',
-        loadChildren: () => import('./market/market.module').then(x => x.MarketModule),
+        loadChildren: () => import('../pages/market/market.module').then(x => x.MarketModule),
         canLoad: [CommonPageGuard],
       },
       {
@@ -46,17 +46,17 @@ const routes: Routes = [
       },
       {
         path: 'budget',
-        loadChildren: () => import('./budget/budget.module').then(x => x.BudgetModule),
+        loadChildren: () => import('../pages/budget/budget.module').then(x => x.BudgetModule),
         canLoad: [DepartmentGuard],
       },
       {
         path: 'production',
-        loadChildren: () => import('./production/production.module').then(x => x.ProductionModule),
+        loadChildren: () => import('../pages/production/production.module').then(x => x.ProductionModule),
         canLoad: [CommonPageGuard],
       },
       {
         path: 'report',
-        loadChildren: () => import('./report/report.module').then(x => x.ReportModule),
+        loadChildren: () => import('../pages/report/report.module').then(x => x.ReportModule),
         canLoad: [CommonPageGuard],
       },
       {
