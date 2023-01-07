@@ -3,6 +3,8 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {of} from "rxjs";
+import {UserInfo} from "@model/auth/UserInfo";
+import {UserRole} from "@model/auth/UserRole";
 
 @Injectable({providedIn: 'root'})
 export class AuthController {
@@ -18,6 +20,20 @@ export class AuthController {
       return of('123');
     }
     return this.http.postBodyString('/login', loginInfo);
+  }
+
+  userInfo(): Observable<UserInfo> {
+    const userInfo: UserInfo = {
+      id: '1',
+      role: UserRole.COMPANY_DIRECTOR,
+      name: 'Yerassyl'
+    };
+
+    return of(userInfo);
+  }
+
+  logout(): Observable<void> {
+    return of(undefined);
   }
 
 }

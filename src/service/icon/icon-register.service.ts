@@ -4,9 +4,10 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 @Injectable({providedIn: 'root'})
 export class IconRegisterService {
+
   constructor(
-    private readonly matIconRegistry: MatIconRegistry,
     private readonly domSanitizer: DomSanitizer,
+    private readonly matIconRegistry: MatIconRegistry,
   ) {
   }
 
@@ -16,4 +17,5 @@ export class IconRegisterService {
       return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
     });
   }
+
 }

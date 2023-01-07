@@ -1,21 +1,23 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import * as L from "leaflet";
 import {Browser, LeafletMouseEvent, map, tileLayer} from "leaflet";
-import {PopUpService} from "@service/map-popup/PopUpService";
+import {PopUpService} from "@service/map-popup/pop-up.service";
 import {calculateFactoryRadius} from "@util/CalculateUtil";
 import {LEAFLET_API_TOKEN, LEAFLET_BASE_URL, LEAFLET_RETINA_URL} from "@const/LeafletConst";
 import {FactoryController} from "@controller/FactoryController";
 import {FactoryInfo} from "@model/api/factory/FactoryInfo";
 import {GeoPoint} from "@model/api/factory/GeoPoint";
 import {Router} from "@angular/router";
-import {PathContextService} from "@service/context/path-context.service";
+import {PathContextService} from "@service/path-context/path-context.service";
+import {AuthService} from "@service/auth/auth.service";
+import {UserRole} from "@model/auth/UserRole";
 
 @Component({
   selector: 'app-factory',
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.scss']
 })
-export class FactoryComponent implements AfterViewInit {
+export class FactoryComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('map')
   private mapContainer: ElementRef<HTMLElement> | undefined;
@@ -24,6 +26,7 @@ export class FactoryComponent implements AfterViewInit {
 
   constructor(
     private readonly router: Router,
+    private readonly authService: AuthService,
     private readonly popupService: PopUpService,
     private readonly factoryController: FactoryController,
     private readonly pathContextService: PathContextService,
@@ -33,20 +36,25 @@ export class FactoryComponent implements AfterViewInit {
   async ngAfterViewInit() {
     // initMap() depends on factoryInfo, so getting factory info here, not in ngOnInit()
 
-    // todo era get user role and call appropriate method
+    const userInfo = await this.authService.userInfo();
 
-    // check, if user is company director
-    if (1 == 1) {
+    if (userInfo.role == UserRole.COMPANY_DIRECTOR) {
       await this.initForCompanyDirector();
-    }
-    // check, if user is factory director
-    else if (2 == 2) {
+    } else if (userInfo.role == UserRole.FACTORY_DIRECTOR) {
       await this.initForFactoryDirector();
     } else {
-      throw new Error('7462DvfJwd :: Expected Company Director or Factory Director');
+      throw new Error('7462DvfJwd :: Expected Company Director or Factory Director, got ' + userInfo.role);
     }
 
     this.initMap();
+  }
+
+  async ngOnDestroy() {
+    const userInfo = await this.authService.userInfo();
+
+    if (userInfo.role == UserRole.COMPANY_DIRECTOR) {
+      this.pathContextService.clearLastFactoryId();
+    }
   }
 
   async goToDepartments() {
@@ -93,4 +101,5 @@ export class FactoryComponent implements AfterViewInit {
       console.log(event.latlng);
     });
   }
+
 }

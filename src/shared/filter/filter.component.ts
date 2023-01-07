@@ -9,7 +9,7 @@ import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {NumberRange} from "@model/filter/NumberRange";
 import {defaultFilter} from "@util/FilterUtil";
-import {PathContextService} from "@service/context/path-context.service";
+import {PathContextService} from "@service/path-context/path-context.service";
 
 @Component({
   selector: 'app-filter',

@@ -1,24 +1,25 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "@model/web/MenuItem";
-
-const finalItems: MenuItem[] = [
-  {label: 'Company', route: ['/main/company'], icon: 'company'},
-  {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
-  {label: 'Departments', route: ['/main/departments'], icon: 'team'},
-  {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-  {label: 'Market', route: ['/main/market'], icon: 'market'},
-  {label: 'Budget', route: ['/main/budget'], icon: 'money'},
-  {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-  {label: 'Report', route: ['/main/report'], icon: 'report'},
-];
+import {AuthService} from "@service/auth/auth.service";
+import {MenuService} from "@service/menu/menu.service";
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
 
-  readonly items = finalItems;
+  menuItems: MenuItem[] = [];
+
+  constructor(private readonly authService: AuthService,
+              private readonly menuService: MenuService) {
+  }
+
+  async ngOnInit() {
+    await this.authService.init();
+
+    this.menuItems = await this.menuService.menuItems();
+  }
 
 }

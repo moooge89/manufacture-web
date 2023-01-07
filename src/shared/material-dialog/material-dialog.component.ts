@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {Router} from "@angular/router";
 import {DiagramChartOptions} from "@model/chart/DiagramChartOptions";
-import {PathContextService} from "@service/context/path-context.service";
+import {PathContextService} from "@service/path-context/path-context.service";
 
 @Component({
   selector: 'app-material-dialog',

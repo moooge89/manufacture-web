@@ -1,20 +1,21 @@
 import {Injectable} from "@angular/core";
+import {FACTORY_PATH_CONTEXT} from "@const/LocalStorageConst";
 
 @Injectable({providedIn: 'root'})
 export class PathContextService {
 
   // region lastFactoryId
 
-  private _lastFactoryId: string = '';
-
   set lastFactoryId(lastFactoryId: string) {
-    this._lastFactoryId = lastFactoryId;
+    localStorage.setItem(FACTORY_PATH_CONTEXT, lastFactoryId);
   }
 
   get lastFactoryId() {
-    const ret = this._lastFactoryId;
-    this._lastFactoryId = '';
-    return ret;
+    return localStorage.getItem(FACTORY_PATH_CONTEXT) || '';
+  }
+
+  clearLastFactoryId(): void {
+    localStorage.setItem(FACTORY_PATH_CONTEXT, '');
   }
 
   // endregion lastFactoryId
