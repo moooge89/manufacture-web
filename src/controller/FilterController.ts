@@ -3,6 +3,7 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {MaterialFilterDescription} from "@model/filter/MaterialFilterDescription";
+import {StaticFilterData} from "@model/filter/StaticFilterData";
 
 @Injectable({providedIn: 'root'})
 export class FilterController {
@@ -52,16 +53,13 @@ export class FilterController {
     return of(filterDescription);
   }
 
-  // todo era make one request from them
-  loadCountries(): Observable<string[]> {
-    const countries: string[] = ['Kazakhstan', 'USA', 'Russia'];
-    return of(countries);
-  }
+  loadStaticFilterData(): Observable<StaticFilterData> {
+    const filterData: StaticFilterData = {
+      countries: ['Kazakhstan', 'USA', 'Russia'],
+      icons: ['aluminum', 'bronze', 'gold', 'iron', 'steel', 'sand'],
+    };
 
-  // todo era make one request from them
-  loadIcons(): Observable<string[]> {
-    const icons: string[] = ['aluminum', 'bronze', 'gold', 'iron', 'steel', 'sand'];
-    return of(icons);
+    return of(filterData);
   }
 
 }

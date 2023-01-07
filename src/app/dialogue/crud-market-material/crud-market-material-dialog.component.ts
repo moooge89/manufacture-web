@@ -47,9 +47,10 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.unsub.sub = this.filterController.loadIcons().subscribe(icons => this.icons = icons);
-
-    this.unsub.sub = this.filterController.loadCountries().subscribe(countries => this.countries = countries);
+    this.unsub.sub = this.filterController.loadStaticFilterData().subscribe(filterData => {
+      this.icons = filterData.icons;
+      this.countries = filterData.countries;
+    });
 
     this.unsub.sub = this.dialogRef.backdropClick().subscribe(() => this.cancel());
   }
