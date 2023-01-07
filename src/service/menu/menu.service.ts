@@ -43,7 +43,55 @@ export class MenuService {
     return of(menuItems).toPromise();
   }
 
-  async defaultPage(): Promise<string> {
+  async redirectToDefaultPage() {
+    await this.router.navigate([await this.defaultPage()]);
+  }
+
+  async redirectToDefaultPageIfNeeded() {
+    if (this.router.url === '/main') {
+      await this.redirectToDefaultPage();
+    }
+  }
+
+  private menuItemsForCompanyDirector(): MenuItem[] {
+    return [
+      {label: 'Company', route: ['/main/company'], icon: 'company'},
+      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
+      {label: 'Market', route: ['/main/market'], icon: 'market'},
+      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
+      {label: 'Report', route: ['/main/report'], icon: 'report'},
+    ];
+  }
+
+  private menuItemsForFactoryDirector(): MenuItem[] {
+    return [
+      {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
+      {label: 'Departments', route: ['/main/departments'], icon: 'team'},
+      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
+      {label: 'Market', route: ['/main/market'], icon: 'market'},
+      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
+      {label: 'Report', route: ['/main/report'], icon: 'report'},
+    ];
+  }
+
+  private menuItemsForDepartmentDirector(): MenuItem[] {
+    return [
+      {label: 'Departments', route: ['/main/departments'], icon: 'team'},
+      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
+      {label: 'Market', route: ['/main/market'], icon: 'market'},
+      {label: 'Budget', route: ['/main/budget'], icon: 'money'},
+      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
+      {label: 'Report', route: ['/main/report'], icon: 'report'},
+    ];
+  }
+
+  private menuItemsForSystemAdmin(): MenuItem[] {
+    return [
+      {label: 'Market', route: ['/main/crud-market'], icon: 'market'},
+    ];
+  }
+
+  private async defaultPage(): Promise<string> {
     const user = await this.authService.userInfo();
 
     let path: string;
@@ -70,51 +118,6 @@ export class MenuService {
     }
 
     return of(path).toPromise();
-  }
-
-  async redirectToDefaultPageIfNeeded() {
-    if (this.router.url === '/main') {
-      await this.router.navigate([await this.defaultPage()]);
-    }
-  }
-
-  private menuItemsForCompanyDirector(): MenuItem[] {
-    return [
-      {label: 'Company', route: ['/main/company'], icon: 'company'},
-      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-      {label: 'Market', route: ['/main/market'], icon: 'market'},
-      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-      {label: 'Report', route: ['/main/report'], icon: 'report'},
-    ];
-  }
-
-  private menuItemsForFactoryDirector(): MenuItem[] {
-    return [
-      {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
-      {label: 'Departments', route: ['/main/departments'], icon: 'team'},
-      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-      {label: 'Market', route: ['/main/market'], icon: 'market'},
-      {label: 'Budget', route: ['/main/budget'], icon: 'money'},
-      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-      {label: 'Report', route: ['/main/report'], icon: 'report'},
-    ];
-  }
-
-  private menuItemsForDepartmentDirector(): MenuItem[] {
-    return [
-      {label: 'Departments', route: ['/main/departments'], icon: 'team'},
-      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-      {label: 'Market', route: ['/main/market'], icon: 'market'},
-      {label: 'Budget', route: ['/main/budget'], icon: 'money'},
-      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-      {label: 'Report', route: ['/main/report'], icon: 'report'},
-    ];
-  }
-
-  private menuItemsForSystemAdmin(): MenuItem[] {
-    return [
-      {label: 'Market', route: ['/main/crud-market'], icon: 'market'},
-    ];
   }
 
 }

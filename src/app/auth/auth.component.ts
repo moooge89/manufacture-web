@@ -65,8 +65,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(async token => {
       localStorage.setItem(TOKEN, token);
-      const path = await this.menuService.defaultPage();
-      await this.router.navigate([path]);
+      await this.menuService.redirectToDefaultPage();
     });
   }
 
