@@ -1,11 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
 import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MaterialDialogComponent} from "@shared/material-dialog/material-dialog.component";
 import {WarehouseController} from "@controller/WarehouseController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
 import {defaultFilter} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
+import {MaterialDialogComponent} from "../../dialogue/material/material-dialog.component";
 
 @Component({
   selector: 'app-warehouse',

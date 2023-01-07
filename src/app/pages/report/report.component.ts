@@ -4,8 +4,8 @@ import {Unsub} from "@util/Unsub";
 import {ReportController} from "@controller/ReportController";
 import {ReportFactoryFilterDescription} from "@model/api/report/ReportFactoryFilterDescription";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ReportDialogComponent} from "@shared/report-dialog/report-dialog.component";
 import {ReportDescription} from "@model/report/ReportDescription";
+import {ReportDialogComponent} from "../../dialogue/report/report-dialog.component";
 
 @Component({
   selector: 'app-report',

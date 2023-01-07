@@ -1,11 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
-import {MarketMaterialDialogComponent} from "@shared/market-material-dialog/market-material-dialog.component";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
 import {defaultFilter} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
+import {MarketMaterialDialogComponent} from "../../dialogue/market-material/market-material-dialog.component";
 
 @Component({
   selector: 'app-market',

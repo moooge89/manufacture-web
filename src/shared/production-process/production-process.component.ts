@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ProductionInfo} from "@model/api/production/ProductionInfo";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ProductionDialogComponent} from "@shared/production-dialog/production-dialog.component";
+import {ProductionDialogComponent} from "../../app/dialogue/production/production-dialog.component";
 
 @Component({
   selector: 'app-production-process',

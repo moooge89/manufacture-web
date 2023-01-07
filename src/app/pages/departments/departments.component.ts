@@ -3,10 +3,10 @@ import {Department} from "@model/api/Department";
 import {Person} from "@model/api/Person";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {PersonDialogComponent} from "@shared/person-dialog/person-dialog.component";
 import {DepartmentController} from "@controller/DepartmentController";
 import {parseDepartmentId} from "@util/RegexUtil";
 import {Unsub} from "@util/Unsub";
+import {PersonDialogComponent} from "../../dialogue/person/person-dialog.component";
 
 @Component({
   selector: 'app-departments',

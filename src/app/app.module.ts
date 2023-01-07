@@ -8,14 +8,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MaterialDialogModule} from "@shared/material-dialog/material-dialog.module";
-import {MarketMaterialDialogModule} from "@shared/market-material-dialog/market-material-dialog.module";
 import {BottomNotificationModule} from "@shared/bottom-notification/bottom-notification.module";
 import {ToastNoAnimationModule, ToastrModule} from "ngx-toastr";
-import {ReportDialogModule} from "@shared/report-dialog/report-dialog.module";
 import {CrudMarketMaterialDialogModule} from "./dialogue/crud-market-material/crud-market-material-dialog.module";
 import {ConfirmationModule} from "./dialogue/confirmation/confirmation.module";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ReportDialogModule} from "./dialogue/report/report-dialog.module";
+import {MaterialDialogModule} from "./dialogue/material/material-dialog.module";
+import {MarketMaterialDialogModule} from "./dialogue/market-material/market-material-dialog.module";
 
 @NgModule({
   declarations: [

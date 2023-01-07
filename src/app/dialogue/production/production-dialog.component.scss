@@ -1,4 +1,4 @@
-@import "global";
+@import "src/assets/global";
 
 :host {
   width: 100%;
@@ -19,8 +19,6 @@
 img {
   width: 200px;
   height: 200px;
-
-  border-radius: 50%;
 }
 
 .right {
