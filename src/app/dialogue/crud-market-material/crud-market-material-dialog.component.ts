@@ -6,6 +6,7 @@ import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {InputError} from "@model/web/InputError";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
+import {MarketController} from "@controller/MarketController";
 
 @Component({
   selector: 'app-crud-market-material-dialog',
@@ -34,6 +35,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<CrudMarketMaterialDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: MarketMaterial, noNeedToConfirm: boolean, isSave: boolean },
     private readonly filterController: FilterController,
+    private readonly marketController: MarketController,
     private readonly confirmationService: ConfirmationService,
   ) {
     this.material = data.material;
@@ -49,7 +51,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
     this.unsub.sub = this.filterController.loadCountries().subscribe(countries => this.countries = countries);
 
-    this.dialogRef.backdropClick().subscribe(() => this.cancel());
+    this.unsub.sub = this.dialogRef.backdropClick().subscribe(() => this.cancel());
   }
 
   ngOnDestroy() {
@@ -117,11 +119,8 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
       return;
     }
 
-    {
-      // todo era make request to server here
-      if (this.isSave) {
-        this.copyMaterial.id = '2';
-      }
+    if (this.isSave) {
+      this.copyMaterial.id = await this.marketController.createMarketMaterial(this.copyMaterial).toPromise();
     }
 
     this.closeDialog({needToSave: true, material: this.copyMaterial});

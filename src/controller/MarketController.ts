@@ -27,6 +27,10 @@ export class MarketController {
     return of(materials);
   }
 
+  createMarketMaterial(material: MarketMaterial): Observable<string> {
+    return of('2');
+  }
+
   deleteMarketMaterials(ids: Set<String>): Observable<void> {
     return of(undefined);
   }
