@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Observable} from "rxjs/internal/Observable";
 import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
+import {MarketController} from "@controller/MarketController";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-table',
@@ -39,7 +41,8 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   private unsub = new Unsub();
 
-  constructor(private readonly confirmService: ConfirmationService) {
+  constructor(private readonly marketController: MarketController,
+              private readonly confirmService: ConfirmationService,) {
   }
 
   ngOnInit() {
@@ -79,12 +82,13 @@ export class TableComponent<T> implements OnInit, OnDestroy {
       return;
     }
 
-    // todo era do delete (make request to server)
-    // await this.controller.delete([]);
+    this.marketController.deleteMarketMaterials(this.checkedIds).pipe(
+      take(1),
+    ).subscribe(() => {
+      this.rows = this.rows.filter(row => !this.checkedIds.has(this.getId(row)));
+      this.checkedIds.clear();
+    });
 
-    this.rows = this.rows.filter(row => !this.checkedIds.has(this.getId(row)));
-
-    this.checkedIds.clear();
   }
 
   private loadContent(rows$: Observable<T[]>): void {

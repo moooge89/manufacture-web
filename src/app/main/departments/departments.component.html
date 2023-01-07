@@ -23,6 +23,7 @@
       cdkDropList
       *ngFor="let department of departments; let i = index"
       class="department-container"
+      [id]="'department-cdk-drop-' + department.id"
       [cdkDropListData]="department.persons"
       (cdkDropListDropped)="drop($event)"
       [cdkDropListDisabled]="isDraggingDisabled"

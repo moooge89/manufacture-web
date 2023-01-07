@@ -4,6 +4,8 @@ import {Person} from "@model/api/Person";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PersonDialogComponent} from "@shared/person-dialog/person-dialog.component";
+import {DepartmentController} from "@controller/DepartmentController";
+import {parseDepartmentId} from "@util/RegexUtil";
 
 @Component({
   selector: 'app-departments',
@@ -18,10 +20,12 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
   private dialogRef: MatDialogRef<PersonDialogComponent> | undefined;
 
-  constructor(private readonly dialog: MatDialog) {
+  constructor(private readonly dialog: MatDialog,
+              private readonly departmentController: DepartmentController) {
   }
 
   ngOnInit() {
+    // todo era get departments from controller
     for (let i = 0; i < 5; ++i) {
       const department = this.rndDepartment(i + 1);
 
@@ -59,9 +63,9 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
   drop(item: CdkDragDrop<any, any>): void {
     if (item.container.id === item.previousContainer.id) {
-      DepartmentsComponent.handleIndexChange(item);
+      this.handleIndexChange(item);
     } else {
-      DepartmentsComponent.handleContainerChange(item);
+      this.handleContainerChange(item);
     }
   }
 
@@ -75,7 +79,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private static handleIndexChange(item: CdkDragDrop<any, any>): void {
+  private handleIndexChange(item: CdkDragDrop<any, any>): void {
     if (item.currentIndex === item.previousIndex) {
       return;
     }
@@ -89,7 +93,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     persons.splice(item.currentIndex, 0, personToBeMoved);
   }
 
-  private static handleContainerChange(item: CdkDragDrop<any, any>): void {
+  private handleContainerChange(item: CdkDragDrop<any, any>): void {
     const personToBeMoved: Person = item.previousContainer.data[item.previousIndex];
 
     // noinspection JSMismatchedCollectionQueryUpdate
@@ -100,7 +104,9 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     oldPersons.splice(item.previousIndex, 1);
     newPersons.splice(item.currentIndex, 0, personToBeMoved);
 
-    // todo era make request to change department of person here
+    const departmentId = parseDepartmentId(item.container.id);
+
+    this.departmentController.changePersonDepartment(personToBeMoved.id, departmentId);
   }
 
   get isDraggingDisabled(): boolean {
