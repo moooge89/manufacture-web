@@ -41,7 +41,7 @@ const routes: Routes = [
       },
       {
         path: 'crud-market',
-        loadChildren: () => import('../pages/create-market/create-market.module').then(x => x.CreateMarketModule),
+        loadChildren: () => import('../pages/crud-market/crud-market.module').then(x => x.CrudMarketModule),
         canLoad: [AdminGuard],
       },
       {

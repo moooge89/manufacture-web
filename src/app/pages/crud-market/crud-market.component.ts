@@ -13,11 +13,11 @@ import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {CrudMarketService} from "@service/crud-market/crud-market.service";
 
 @Component({
-  selector: 'app-create-market',
-  templateUrl: './create-market.component.html',
-  styleUrls: ['./create-market.component.scss']
+  selector: 'app-crud-market',
+  templateUrl: './crud-market.component.html',
+  styleUrls: ['./crud-market.component.scss']
 })
-export class CreateMarketComponent implements OnDestroy {
+export class CrudMarketComponent implements OnDestroy {
 
   materials$ = this.marketController.loadMarketMaterials(defaultFilter());
 
