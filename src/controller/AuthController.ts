@@ -19,13 +19,14 @@ export class AuthController {
     if (1 == 1) {
       return of('123');
     }
+
     return this.http.postBodyString('/login', loginInfo);
   }
 
   userInfo(): Observable<UserInfo> {
     const userInfo: UserInfo = {
       id: '1',
-      role: UserRole.FACTORY_DIRECTOR,
+      role: UserRole.SYSTEM_ADMIN,
       name: 'Yerassyl'
     };
 

@@ -14,6 +14,14 @@ export class MarketController {
     this.http = http.setControllerPrefix('/market');
   }
 
+  createMarketMaterial(material: MarketMaterial): Observable<string> {
+    return of('2');
+  }
+
+  updateMarketMaterial(material: MarketMaterial): Observable<void> {
+    return of(undefined);
+  }
+
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
     const materials: MarketMaterial[] = [
       {
@@ -25,10 +33,6 @@ export class MarketController {
       },
     ];
     return of(materials);
-  }
-
-  createMarketMaterial(material: MarketMaterial): Observable<string> {
-    return of('2');
   }
 
   deleteMarketMaterials(ids: Set<String>): Observable<void> {

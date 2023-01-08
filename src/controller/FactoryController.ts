@@ -19,19 +19,19 @@ export class FactoryController {
       {
         id: '1',
         name: 'Almaty Car Factory',
-        director: 'Yeletay Yerassyl',
+        directorName: 'Yeletay Yerassyl',
         workerCount: 50
       },
       {
         id: '2',
         name: 'Semey Car Factory',
-        director: 'Yeletay Yerassyl',
+        directorName: 'Yeletay Yerassyl',
         workerCount: 30
       },
       {
         id: '3',
         name: 'Shymkent Car Factory',
-        director: 'Yeletay Yerassyl',
+        directorName: 'Yeletay Yerassyl',
         workerCount: 60
       },
     ];

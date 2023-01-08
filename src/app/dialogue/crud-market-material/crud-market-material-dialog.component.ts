@@ -46,7 +46,6 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.unsub.sub = this.filterController.loadStaticFilterData().subscribe(filterData => {
       this.icons = filterData.icons;
       this.countries = filterData.countries;
@@ -59,8 +58,9 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  @HostListener('window:keyup.esc') onKeyUp() {
-    this.cancel().then();
+  @HostListener('window:keyup.esc')
+  async onKeyUp() {
+    await this.cancel();
   }
 
   getId = (element: string) => element;
@@ -122,6 +122,9 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
     if (this.isSave) {
       this.copyMaterial.id = await this.marketController.createMarketMaterial(this.copyMaterial).toPromise();
+    } else {
+      // todo era pass material id
+      await this.marketController.updateMarketMaterial(this.copyMaterial).toPromise();
     }
 
     this.closeDialog({needToSave: true, material: this.copyMaterial});

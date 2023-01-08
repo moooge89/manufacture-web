@@ -1,0 +1,33 @@
+<section class="block table-section">
+
+  <span class="big-bold">Person</span>
+
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon svgIcon="filter"></mat-icon>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <!--    todo era filter -->
+    <!--    <app-filter-->
+    <!--      [filterMetaInfo]="filterMetaInfo"-->
+    <!--      (filterChanged)="onFilterChange($event)"-->
+    <!--    ></app-filter>-->
+  </mat-expansion-panel>
+
+  <app-table
+    [headers]="headers"
+    [rows$]="persons$"
+    [columnNames]="columnNames"
+    [isAdminTable]="true"
+    [getId]="getId"
+    [rowUpsert]="personUpsert"
+    [deleteRows$]="deletePersons$"
+    (addClicked)="onRowAddClick()"
+    (rowClicked)="onRowClick($event)"
+  ></app-table>
+
+</section>

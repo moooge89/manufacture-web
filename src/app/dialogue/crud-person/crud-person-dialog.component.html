@@ -1,0 +1,58 @@
+<div class="form">
+
+  <div class="form-cell-title">Name</div>
+  <div class="form-cell-value">
+    <app-input
+      [value]="copyPerson.name"
+      [withDebounce]="false"
+      [inputError]="nameError"
+      (valueChanged)="onNameChange($event)"
+    ></app-input>
+  </div>
+
+  <div class="form-cell-title">Factory</div>
+
+  <div class="form-cell-value">
+    <app-dropdown
+      label="Factory"
+      [getId]="getId"
+      [getName]="getName"
+      [elements]="factoriesToShow"
+      [isMultiple]="false"
+      [selectedElementId]="copyPerson.factoryId"
+      [inputError]="factoryError"
+      (valueChanged)="onFactoryChange($event)"
+    ></app-dropdown>
+  </div>
+
+  <div class="form-cell-title">Country</div>
+  <div class="form-cell-value">
+    <app-dropdown
+      label="Country"
+      [getId]="getId"
+      [getName]="getName"
+      [elements]="departmentsToShow"
+      [isMultiple]="false"
+      [selectedElementId]="copyPerson.departmentId"
+      [inputError]="departmentError"
+      (valueChanged)="onDepartmentChange($event)"
+    ></app-dropdown>
+  </div>
+
+</div>
+
+<div class="buttons-container">
+
+  <app-button
+    text="Cancel"
+    [isCancelButton]="true"
+    (clicked)="cancel()"
+  >
+  </app-button>
+
+  <app-button
+    text="Save"
+    (clicked)="save()"
+  ></app-button>
+
+</div>

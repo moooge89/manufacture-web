@@ -6,7 +6,8 @@ import {ProductionFilter} from "@model/api/production/ProductionFilter";
 import {FilterElement} from "@model/filter/FilterElement";
 import {Subject} from "rxjs";
 import {switchMap} from "rxjs/operators";
-import {ProductionFactoryFilterDescription} from "@model/api/production/ProductionFactoryFilterDescription";
+import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
+import {FilterController} from "@controller/FilterController";
 
 @Component({
   selector: 'app-production',
@@ -25,7 +26,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
 
   private currentFactoryIndex: number = 0;
   private currentDepartmentIndex: number = 0;
-  private filterDesc: ProductionFactoryFilterDescription[] = [];
+  private filterDesc: FactoryFilterDescription[] = [];
 
   private lastFactoryIndex: number = 0;
   private lastDepartmentIndex: number = 0;
@@ -33,7 +34,8 @@ export class ProductionComponent implements OnInit, OnDestroy {
   private readonly unsub = new Unsub();
   private readonly filterChangedSubject = new Subject<ProductionFilter>();
 
-  constructor(private readonly productionController: ProductionController) {
+  constructor(private readonly filterController: FilterController,
+              private readonly productionController: ProductionController,) {
   }
 
   ngOnInit() {
@@ -41,7 +43,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
       switchMap(filter => this.productionController.loadProductionInfo(filter))
     ).subscribe(productionInfo => this.productionInfo = productionInfo);
 
-    this.unsub.sub = this.productionController.loadProductionFilterDescription().subscribe(
+    this.unsub.sub = this.filterController.loadFactoryFilterDescription().subscribe(
       filterDescription => this.initFirstFilter(filterDescription)
     );
   }
@@ -121,7 +123,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
     this.emitValuesToFilter();
   }
 
-  private initFirstFilter(filterDescriptions: ProductionFactoryFilterDescription[]): void {
+  private initFirstFilter(filterDescriptions: FactoryFilterDescription[]): void {
     if (!filterDescriptions || filterDescriptions.length === 0 || filterDescriptions[0].departments.length === 0) {
       throw new Error('Cannot found any factory or department');
     }

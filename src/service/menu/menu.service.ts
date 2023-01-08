@@ -90,6 +90,7 @@ export class MenuService {
   private menuItemsForSystemAdmin(): MenuItem[] {
     return [
       {label: 'Market', route: ['/main/crud-market'], icon: 'market'},
+      {label: 'Person', route: ['/main/crud-user'], icon: 'team'},
     ];
   }
 

@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {emptyUserFilter} from "@util/FilterUtil";
+import {emptyPersonFilter} from "@util/FilterUtil";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PersonController} from "@controller/PersonController";
 import {Person} from "@model/person/Person";
@@ -12,7 +12,7 @@ import {PersonDialogComponent} from "../../dialogue/person/person-dialog.compone
 })
 export class PersonComponent implements OnDestroy {
 
-  persons$ = this.personController.loadPersons(emptyUserFilter());
+  persons$ = this.personController.loadPersons(emptyPersonFilter());
 
   panelOpenState = false;
 

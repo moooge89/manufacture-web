@@ -65,6 +65,11 @@ const routes: Routes = [
         canLoad: [CommonPageGuard],
       },
       {
+        path: 'crud-user',
+        loadChildren: () => import('../pages/crud-person/crud-person.module').then(x => x.CrudPersonModule),
+        canLoad: [AdminGuard],
+      },
+      {
         path: '**',
         redirectTo: '',
         canLoad: [IsLoggedInGuard],

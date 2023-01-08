@@ -14,6 +14,14 @@ export class PersonController {
     this.http = http.setControllerPrefix('/person');
   }
 
+  createPerson(person: Person): Observable<string> {
+    return of('2');
+  }
+
+  updatePerson(person: Person): Observable<void> {
+    return of(undefined);
+  }
+
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
     const persons: Person[] = [
       {
@@ -51,6 +59,10 @@ export class PersonController {
     ];
 
     return of(persons);
+  }
+
+  deletePersons(ids: Set<string>): Observable<void> {
+    return of(undefined);
   }
 
 }

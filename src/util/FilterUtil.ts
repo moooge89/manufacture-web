@@ -1,6 +1,7 @@
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {PersonFilter} from "@model/person/PersonFilter";
 
+// todo era rename
 export function defaultFilter(): MaterialFilter {
   return {
     available: {
@@ -17,7 +18,7 @@ export function defaultFilter(): MaterialFilter {
   };
 }
 
-export function emptyUserFilter(): PersonFilter {
+export function emptyPersonFilter(): PersonFilter {
   return {
     personName: '',
     factoryIds: [],

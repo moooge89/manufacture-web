@@ -16,6 +16,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ReportDialogModule} from "./dialogue/report/report-dialog.module";
 import {MaterialDialogModule} from "./dialogue/material/material-dialog.module";
 import {MarketMaterialDialogModule} from "./dialogue/market-material/market-material-dialog.module";
+import {CrudPersonDialogModule} from "./dialogue/crud-person/crud-person-dialog.module";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MarketMaterialDialogModule} from "./dialogue/market-material/market-mate
     ToastNoAnimationModule.forRoot(),
     ReportDialogModule,
     CrudMarketMaterialDialogModule,
+    CrudPersonDialogModule,
     ConfirmationModule,
   ],
   providers: [
