@@ -5,7 +5,9 @@ import {MarketController} from "@controller/MarketController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
 import {defaultFilter} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
-import {CrudMarketMaterialDialogComponent} from "../../dialogue/crud-market-material/crud-market-material-dialog.component";
+import {
+  CrudMarketMaterialDialogComponent
+} from "../../dialogue/crud-market-material/crud-market-material-dialog.component";
 import {FilterElement} from "@model/filter/FilterElement";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {CrudMarketService} from "@service/crud-market/crud-market.service";
@@ -47,6 +49,8 @@ export class CreateMarketComponent implements OnDestroy {
 
   isMoney = (index: number) => index === 3;
 
+  deleteMaterials$ = (ids: Set<string>) => this.marketController.deleteMarketMaterials(ids);
+
   async onRowAddClick(): Promise<void> {
     const resp: MarketMaterialResp = await this.crudMarketService.openDialogForCreate();
 
@@ -70,6 +74,14 @@ export class CreateMarketComponent implements OnDestroy {
 
   onFilterChange(filter: MaterialFilter): void {
     this.materials$ = this.marketController.loadMarketMaterials(filter);
+  }
+
+  get headers(): string[] {
+    return ['Icon', 'Material name', 'Country', 'Price'];
+  }
+
+  get columnNames(): string[] {
+    return ['icon', 'name', 'country', 'price'];
   }
 
 }

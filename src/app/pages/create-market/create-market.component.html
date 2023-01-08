@@ -18,14 +18,15 @@
   </mat-expansion-panel>
 
   <app-table
-    [headers]="['Icon', 'Material name', 'Country', 'Price']"
+    [headers]="headers"
     [rows$]="materials$"
-    [columnNames]="['icon', 'name', 'country', 'price']"
+    [columnNames]="columnNames"
     [isMatIcon]="isMatIcon"
     [isMoney]="isMoney"
     [isAdminTable]="true"
     [getId]="getId"
     [rowUpsert]="materialUpsert"
+    [deleteRows$]="deleteMaterials$"
     (addClicked)="onRowAddClick()"
     (rowClicked)="onRowClick($event)"
   ></app-table>
