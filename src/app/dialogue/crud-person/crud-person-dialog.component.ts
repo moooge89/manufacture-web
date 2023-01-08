@@ -96,9 +96,10 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
 
     this.currentDepartmentIndex = -1;
     this.updateCurrentDepartmentId();
+    this.copyPerson.departmentId = '';
 
-    // todo era change name of factory also
     this.copyPerson.factoryId = selectedFactoryId;
+    this.copyPerson.factoryName = this.factoriesToShow[this.currentFactoryIndex].name;
     this.factoryError.hasError = false;
   }
 
@@ -115,8 +116,8 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     this.currentDepartmentIndex = index;
     this.updateCurrentDepartmentId();
 
-    // todo era change name of department also
     this.copyPerson.departmentId = selectedDepartmentId;
+    this.copyPerson.departmentName = this.departmentsToShow[this.currentDepartmentIndex].name;
     this.departmentError.hasError = false;
   }
 
