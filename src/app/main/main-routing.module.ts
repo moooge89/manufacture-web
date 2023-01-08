@@ -4,10 +4,10 @@ import {MainComponent} from "./main.component";
 import {CompanyGuard} from "../guard/company.guard";
 import {AdminGuard} from "../guard/admin.guard";
 import {CompanyFactoryGuard} from "../guard/company-factory.guard";
-import {FactoryDepartmentGuard} from "../guard/factory-department.guard";
 import {CommonPageGuard} from "../guard/common-page.guard";
 import {DepartmentGuard} from "../guard/department.guard";
 import {IsLoggedInGuard} from "../guard/is-loggen-in.guard";
+import {FactoryGuard} from "../guard/factory.guard";
 
 const routes: Routes = [
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
       {
         path: 'departments',
         loadChildren: () => import('../pages/departments/departments.module').then(x => x.DepartmentsModule),
-        canLoad: [FactoryDepartmentGuard],
+        canLoad: [FactoryGuard],
       },
       {
         path: 'warehouse',
@@ -57,6 +57,11 @@ const routes: Routes = [
       {
         path: 'report',
         loadChildren: () => import('../pages/report/report.module').then(x => x.ReportModule),
+        canLoad: [CommonPageGuard],
+      },
+      {
+        path: 'user',
+        loadChildren: () => import('../pages/person/person.module').then(x => x.PersonModule),
         canLoad: [CommonPageGuard],
       },
       {

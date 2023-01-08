@@ -56,6 +56,7 @@ export class MenuService {
   private menuItemsForCompanyDirector(): MenuItem[] {
     return [
       {label: 'Company', route: ['/main/company'], icon: 'company'},
+      {label: 'Users', route: ['/main/user'], icon: 'report'},
       {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
       {label: 'Market', route: ['/main/market'], icon: 'market'},
       {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
@@ -67,6 +68,7 @@ export class MenuService {
     return [
       {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
       {label: 'Departments', route: ['/main/departments'], icon: 'team'},
+      {label: 'Users', route: ['/main/user'], icon: 'report'},
       {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
       {label: 'Market', route: ['/main/market'], icon: 'market'},
       {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
@@ -76,7 +78,7 @@ export class MenuService {
 
   private menuItemsForDepartmentDirector(): MenuItem[] {
     return [
-      {label: 'Departments', route: ['/main/departments'], icon: 'team'},
+      {label: 'Users', route: ['/main/user'], icon: 'report'},
       {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
       {label: 'Market', route: ['/main/market'], icon: 'market'},
       {label: 'Budget', route: ['/main/budget'], icon: 'money'},

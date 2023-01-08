@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Department} from "@model/api/Department";
-import {Person} from "@model/api/Person";
+import {Person} from "@model/person/Person";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {DepartmentController} from "@controller/DepartmentController";

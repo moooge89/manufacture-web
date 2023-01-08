@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Person} from "@model/api/Person";
+import {Person} from "@model/person/Person";
 
 @Component({
   selector: 'app-person-dialog',

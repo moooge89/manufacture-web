@@ -1,4 +1,5 @@
 import {MaterialFilter} from "@model/filter/MaterialFilter";
+import {PersonFilter} from "@model/person/PersonFilter";
 
 export function defaultFilter(): MaterialFilter {
   return {
@@ -13,5 +14,13 @@ export function defaultFilter(): MaterialFilter {
       min: undefined,
       max: undefined,
     }
+  };
+}
+
+export function emptyUserFilter(): PersonFilter {
+  return {
+    personName: '',
+    factoryIds: [],
+    departmentIds: [],
   };
 }

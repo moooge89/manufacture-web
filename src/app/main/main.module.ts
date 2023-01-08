@@ -10,6 +10,7 @@ import {CompanyGuard} from "../guard/company.guard";
 import {CompanyFactoryGuard} from "../guard/company-factory.guard";
 import {FactoryDepartmentGuard} from "../guard/factory-department.guard";
 import {DepartmentGuard} from "../guard/department.guard";
+import {FactoryGuard} from "../guard/factory.guard";
 
 @NgModule({
   declarations: [MainComponent],
@@ -26,6 +27,7 @@ import {DepartmentGuard} from "../guard/department.guard";
     CompanyFactoryGuard,
     DepartmentGuard,
     FactoryDepartmentGuard,
+    FactoryGuard,
   ],
   bootstrap: [MainComponent]
 })
