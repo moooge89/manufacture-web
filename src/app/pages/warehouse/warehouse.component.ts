@@ -3,7 +3,7 @@ import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {WarehouseController} from "@controller/WarehouseController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
-import {defaultFilter} from "@util/FilterUtil";
+import {emptyMaterialFilter} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {MaterialDialogComponent} from "../../dialogue/material/material-dialog.component";
 
@@ -14,7 +14,7 @@ import {MaterialDialogComponent} from "../../dialogue/material/material-dialog.c
 })
 export class WarehouseComponent implements OnDestroy {
 
-  materials$ = this.warehouseController.loadWarehouseMaterials(defaultFilter());
+  materials$ = this.warehouseController.loadWarehouseMaterials(emptyMaterialFilter());
 
   panelOpenState = false;
 

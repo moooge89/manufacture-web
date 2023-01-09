@@ -1,8 +1,7 @@
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {PersonFilter} from "@model/person/PersonFilter";
 
-// todo era rename
-export function defaultFilter(): MaterialFilter {
+export function emptyMaterialFilter(): MaterialFilter {
   return {
     available: {
       min: undefined,

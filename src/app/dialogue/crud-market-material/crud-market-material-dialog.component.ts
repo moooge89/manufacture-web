@@ -123,7 +123,6 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     if (this.isSave) {
       this.copyMaterial.id = await this.marketController.createMarketMaterial(this.copyMaterial).toPromise();
     } else {
-      // todo era pass material id
       await this.marketController.updateMarketMaterial(this.copyMaterial).toPromise();
     }
 

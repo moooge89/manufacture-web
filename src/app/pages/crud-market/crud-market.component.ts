@@ -3,7 +3,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
-import {defaultFilter} from "@util/FilterUtil";
+import {emptyMaterialFilter} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {
   CrudMarketMaterialDialogComponent
@@ -19,7 +19,7 @@ import {CrudMarketService} from "@service/crud-market/crud-market.service";
 })
 export class CrudMarketComponent implements OnDestroy {
 
-  materials$ = this.marketController.loadMarketMaterials(defaultFilter());
+  materials$ = this.marketController.loadMarketMaterials(emptyMaterialFilter());
 
   panelOpenState = false;
 
