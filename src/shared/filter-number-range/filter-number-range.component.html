@@ -1,0 +1,5 @@
+<app-number-range
+  *ngIf="numberRangeDescription"
+  [title]="numberRangeDescription.title"
+  (valueChanged)="onValueChange($event)"
+></app-number-range>

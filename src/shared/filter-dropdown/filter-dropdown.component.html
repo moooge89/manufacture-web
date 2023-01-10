@@ -1,0 +1,8 @@
+<app-dropdown
+  *ngIf="dropdownDescription"
+  [label]="dropdownDescription.label"
+  [getId]="dropdownDescription.getId"
+  [getName]="dropdownDescription.getName"
+  [elements]="elements"
+  (valueChanged)="onValueChange($event)"
+></app-dropdown>
