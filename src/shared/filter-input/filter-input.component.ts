@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MaterialFilter} from "@model/filter/MaterialFilter";
+import {Component, Input} from '@angular/core';
 import {FilterInputDescription} from "@model/filter/FilterInputDescription";
 import {FilterDescription} from "@model/filter/FilterDescription";
 
@@ -13,8 +12,6 @@ export class FilterInputComponent {
   @Input() set description(desc: FilterDescription) {
     this.inputDescription = <FilterInputDescription>desc;
   }
-
-  @Output() filterChanged = new EventEmitter<MaterialFilter>();
 
   inputDescription: FilterInputDescription | undefined;
 

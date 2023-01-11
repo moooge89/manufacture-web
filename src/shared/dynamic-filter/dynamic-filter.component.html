@@ -1,0 +1,21 @@
+<div
+  *ngFor="let desc of descriptions"
+  class="filter-element"
+>
+
+  <app-filter-input
+    *ngIf="isInput(desc)"
+    [description]="desc"
+  ></app-filter-input>
+
+  <app-filter-dropdown
+    *ngIf="isDropdown(desc)"
+    [description]="desc"
+  ></app-filter-dropdown>
+
+  <app-filter-number-range
+    *ngIf="isNumberRange(desc)"
+    [description]="desc"
+  ></app-filter-number-range>
+
+</div>

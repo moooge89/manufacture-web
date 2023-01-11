@@ -72,8 +72,10 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     await this.cancel();
   }
 
+  // todo era write once use everywhere
   getId = (element: FilterElement) => element.id;
 
+  // todo era write once use everywhere
   getName = (element: FilterElement) => element.name;
 
   onNameChange(name: string): void {

@@ -3,11 +3,11 @@ import {CommonModule} from "@angular/common";
 import {TableModule} from "@shared/table/table.module";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatIconModule} from "@angular/material/icon";
-import {FilterModule} from "@shared/filter/filter.module";
-import {CrudMarketMaterialDialogModule} from "../../dialogue/crud-market-material/crud-market-material-dialog.module";
 import {CrudPersonComponent} from "./crud-person.component";
 import {CrudPersonRoutingModule} from "./crud-person-routing.module";
+import {DynamicFilterModule} from "@shared/dynamic-filter/dynamic-filter.module";
 
+// todo era remove all unused modules from all component modules
 @NgModule({
   declarations: [CrudPersonComponent],
   imports: [
@@ -16,8 +16,7 @@ import {CrudPersonRoutingModule} from "./crud-person-routing.module";
     TableModule,
     MatExpansionModule,
     MatIconModule,
-    FilterModule,
-    CrudMarketMaterialDialogModule,
+    DynamicFilterModule,
   ],
   bootstrap: [CrudPersonComponent]
 })

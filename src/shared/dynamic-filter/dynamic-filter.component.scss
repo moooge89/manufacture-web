@@ -1,0 +1,16 @@
+@import "correct-mat-input";
+
+:host {
+  width: 100%;
+  height: fit-content;
+
+  // todo era maybe grid
+  display: flex;
+  align-items: center;
+
+  padding: 1.5rem 0;
+}
+
+.filter-element:not(:first-child) {
+  margin-left: 1.5rem;
+}

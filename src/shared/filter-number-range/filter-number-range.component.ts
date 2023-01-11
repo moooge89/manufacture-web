@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MaterialFilter} from "@model/filter/MaterialFilter";
+import {Component, Input} from '@angular/core';
 import {FilterDescription} from "@model/filter/FilterDescription";
 import {FilterNumberRangeDescription} from "@model/filter/FilterNumberRangeDescription";
 import {NumberRange} from "@model/filter/NumberRange";
@@ -14,8 +13,6 @@ export class FilterNumberRangeComponent {
   @Input() set description(desc: FilterDescription) {
     this.numberRangeDescription = <FilterNumberRangeDescription>desc;
   }
-
-  @Output() filterChanged = new EventEmitter<MaterialFilter>();
 
   numberRangeDescription: FilterNumberRangeDescription | undefined;
 

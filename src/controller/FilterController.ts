@@ -7,6 +7,7 @@ import {StaticFilterData} from "@model/filter/StaticFilterData";
 import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
 
 @Injectable({providedIn: 'root'})
+// todo era decompose
 export class FilterController {
 
   private readonly http: HttpService;
