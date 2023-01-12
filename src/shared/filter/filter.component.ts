@@ -2,13 +2,12 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Unsub} from "@util/Unsub";
 import {FilterController} from "@controller/FilterController";
 import {MaterialFilterDescription} from "@model/filter/MaterialFilterDescription";
-import {FilterElement} from "@model/filter/FilterElement";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {NumberRange} from "@model/filter/NumberRange";
-import {emptyMaterialFilter} from "@util/FilterUtil";
+import {emptyMaterialFilter, getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {PathContextService} from "@service/path-context/path-context.service";
 
 @Component({
@@ -62,9 +61,9 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  getId = (element: FilterElement) => element.id;
+  getId = getIdFromFe;
 
-  getName = (element: FilterElement) => element.name;
+  getName = getNameFromFe;
 
   onMaterialNameChange(materialName: string): void {
     this.filterChangeSubject.next({...this.filter, materialName: materialName});

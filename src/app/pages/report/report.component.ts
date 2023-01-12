@@ -6,6 +6,7 @@ import {ReportFactoryFilterDescription} from "@model/api/report/ReportFactoryFil
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ReportDescription} from "@model/report/ReportDescription";
 import {ReportDialogComponent} from "../../dialogue/report/report-dialog.component";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 
 @Component({
   selector: 'app-report',
@@ -55,9 +56,9 @@ export class ReportComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  getId = (element: FilterElement) => element.id;
+  getId = getIdFromFe;
 
-  getName = (element: FilterElement) => element.name;
+  getName = getNameFromFe;
 
   onFirstFactoryChange(elementIds: string[]): void {
     if (elementIds?.length === 0) return;

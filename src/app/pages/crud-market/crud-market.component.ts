@@ -3,12 +3,11 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
-import {emptyMaterialFilter} from "@util/FilterUtil";
+import {emptyMaterialFilter, getIdFromFe} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {
   CrudMarketMaterialDialogComponent
 } from "../../dialogue/crud-market-material/crud-market-material-dialog.component";
-import {FilterElement} from "@model/filter/FilterElement";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {CrudMarketService} from "@service/crud-market/crud-market.service";
 
@@ -43,7 +42,7 @@ export class CrudMarketComponent implements OnDestroy {
     this.dialogRef?.close();
   }
 
-  getId = (element: FilterElement) => element.id;
+  getId = getIdFromFe;
 
   isMatIcon = (index: number) => index === 0;
 

@@ -10,6 +10,7 @@ import {FilterElement} from "@model/filter/FilterElement";
 import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
 import {PersonDialogResp} from "@model/dialog/PersonDialogResp";
 import {PersonController} from "@controller/PersonController";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 
 @Component({
   selector: 'app-crud-person-dialog',
@@ -72,11 +73,9 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     await this.cancel();
   }
 
-  // todo era write once use everywhere
-  getId = (element: FilterElement) => element.id;
+  getId = getIdFromFe;
 
-  // todo era write once use everywhere
-  getName = (element: FilterElement) => element.name;
+  getName = getNameFromFe;
 
   onNameChange(name: string): void {
     this.copyPerson.name = name;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {emptyPersonFilter} from "@util/FilterUtil";
+import {emptyPersonFilter, getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {FilterElement} from "@model/filter/FilterElement";
 import {PersonController} from "@controller/PersonController";
 import {Person} from "@model/person/Person";
@@ -84,9 +84,9 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     this.dialogRef?.close();
   }
 
-  getId = (element: FilterElement) => element.id;
+  getId = getIdFromFe;
 
-  getName = (element: FilterElement) => element.name;
+  getName = getNameFromFe;
 
   deletePersons$ = (ids: Set<string>) => this.personController.deletePersons(ids);
 

@@ -1,5 +1,6 @@
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {PersonFilter} from "@model/person/PersonFilter";
+import {FilterElement} from "@model/filter/FilterElement";
 
 export function emptyMaterialFilter(): MaterialFilter {
   return {
@@ -24,3 +25,7 @@ export function emptyPersonFilter(): PersonFilter {
     departmentIds: [],
   };
 }
+
+export const getIdFromFe = (element: FilterElement) => element.id;
+
+export const getNameFromFe = (element: FilterElement) => element.name;

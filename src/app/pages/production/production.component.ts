@@ -8,6 +8,7 @@ import {Subject} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
 import {FilterController} from "@controller/FilterController";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 
 @Component({
   selector: 'app-production',
@@ -52,9 +53,9 @@ export class ProductionComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  getId = (element: FilterElement) => element.id;
+  getId = getIdFromFe;
 
-  getName = (element: FilterElement) => element.name;
+  getName = getNameFromFe;
 
   onFactoryChange(elementIds: string[]): void {
     if (elementIds?.length === 0) return;
