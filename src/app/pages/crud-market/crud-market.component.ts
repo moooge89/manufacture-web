@@ -1,41 +1,64 @@
-import {Component, EventEmitter, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
-import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
-import {emptyMaterialFilter, getIdFromFe} from "@util/FilterUtil";
+import {emptyMaterialFilter, getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {
   CrudMarketMaterialDialogComponent
 } from "../../dialogue/crud-market-material/crud-market-material-dialog.component";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {CrudMarketService} from "@service/crud-market/crud-market.service";
+import {Subject} from "rxjs";
+import {MaterialFilterHelper} from "@model/filter/MaterialFilterHelper";
+import {FilterElement} from "@model/filter/FilterElement";
+import {FilterInputDescription} from "@model/filter/FilterInputDescription";
+import {FilterFieldType} from "@model/filter/FilterFieldType";
+import {FilterDescription} from "@model/filter/FilterDescription";
+import {Unsub} from "@util/Unsub";
+import {FilterController} from "@controller/FilterController";
+import {debounceTime, filter} from "rxjs/operators";
+import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription";
+import {FilterNumberRangeDescription} from "@model/filter/FilterNumberRangeDescription";
 
 @Component({
   selector: 'app-crud-market',
   templateUrl: './crud-market.component.html',
   styleUrls: ['./crud-market.component.scss']
 })
-export class CrudMarketComponent implements OnDestroy {
+export class CrudMarketComponent implements OnInit, OnDestroy {
 
   materials$ = this.marketController.loadMarketMaterials(emptyMaterialFilter());
 
   panelOpenState = false;
 
-  filterMetaInfo: MaterialFilterMetaInfo = {
-    useAvailable: false,
-    useCountries: true,
-    useDepartments: false,
-    useMaterialName: true,
-    usePrice: true,
-  };
-
+  // todo era use Subject instead of EventEmitter on all places
   materialUpsert = new EventEmitter<MarketMaterial>();
+
+  descriptions: FilterDescription[] = [];
+
+  private readonly filterChangedSubject = new Subject<MaterialFilter>();
+  private readonly filterHelper = new MaterialFilterHelper(this.filterChangedSubject);
 
   private dialogRef: MatDialogRef<CrudMarketMaterialDialogComponent> | undefined;
 
+  private readonly unsub = new Unsub();
+
   constructor(private readonly marketController: MarketController,
+              private readonly filterController: FilterController,
               private readonly crudMarketService: CrudMarketService,) {
+  }
+
+  ngOnInit() {
+    this.unsub.sub = this.filterController.loadCountryFilterElements().subscribe(
+      countries => this.initDescriptions(countries),
+    );
+
+    this.unsub.sub = this.filterChangedSubject.pipe(
+      filter(x => !!x),
+      debounceTime(300),
+    ).subscribe(filter => this.materials$ = this.marketController.loadMarketMaterials(filter));
+
   }
 
   ngOnDestroy(): void {
@@ -43,6 +66,8 @@ export class CrudMarketComponent implements OnDestroy {
   }
 
   getId = getIdFromFe;
+
+  getName = getNameFromFe;
 
   isMatIcon = (index: number) => index === 0;
 
@@ -71,8 +96,29 @@ export class CrudMarketComponent implements OnDestroy {
     this.materialUpsert.next(resp.material);
   }
 
-  onFilterChange(filter: MaterialFilter): void {
-    this.materials$ = this.marketController.loadMarketMaterials(filter);
+  private initDescriptions(countries: FilterElement[]): void {
+    const nameDesc: FilterInputDescription = {
+      fieldType: FilterFieldType.INPUT,
+      placeholder: 'Name...',
+      onValueChange: this.filterHelper.onNameChange,
+    };
+
+    const countryDesc: FilterDropdownDescription<FilterElement> = {
+      elements: countries,
+      fieldType: FilterFieldType.DROPDOWN,
+      getId: this.getId,
+      getName: this.getName,
+      label: 'Country...',
+      onValueChange: this.filterHelper.onCountriesChange,
+    };
+
+    const priceDesc: FilterNumberRangeDescription = {
+      fieldType: FilterFieldType.NUMBER_RANGE,
+      title: 'Price',
+      onValueChange: this.filterHelper.onPriceChange,
+    };
+
+    this.descriptions.push(nameDesc, countryDesc, priceDesc);
   }
 
   get headers(): string[] {

@@ -11,7 +11,6 @@ import {FilterDescription} from "@model/filter/FilterDescription";
 import {FilterInputDescription} from "@model/filter/FilterInputDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription";
-import {FilterController} from "@controller/FilterController";
 import {Unsub} from "@util/Unsub";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
@@ -43,7 +42,6 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
   private readonly unsub = new Unsub();
 
   constructor(private readonly personController: PersonController,
-              private readonly filterController: FilterController,
               private readonly factoryController: FactoryController,
               private readonly crudPersonService: CrudPersonService,
               private readonly departmentController: DepartmentController,) {
@@ -69,14 +67,14 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
       })),
     );
 
-    this.unsub.sub = forkJoin([factories$, departments$]).subscribe(([factories, departments]) => {
-      this.initDescriptions(factories, departments);
-    });
+    this.unsub.sub = forkJoin([factories$, departments$]).subscribe(
+      ([factories, departments]) => this.initDescriptions(factories, departments)
+    );
 
-    this.filterChangedSubject.pipe(
+    this.unsub.sub = this.filterChangedSubject.pipe(
       filter(x => !!x),
       debounceTime(300),
-    ).subscribe(filter => this.persons$ = this.personController.loadPersons(filter))
+    ).subscribe(filter => this.persons$ = this.personController.loadPersons(filter));
 
   }
 
@@ -139,6 +137,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     this.descriptions.push(nameDesc, factoryDesc, departmentDesc);
   }
 
+  // todo era use filter helper
   private onNameChange = (value: string): void => {
     this.filter.personName = value;
     this.filterChangedSubject.next(this.filter);

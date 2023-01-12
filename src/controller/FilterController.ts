@@ -5,6 +5,7 @@ import {of} from "rxjs";
 import {MaterialFilterDescription} from "@model/filter/MaterialFilterDescription";
 import {StaticFilterData} from "@model/filter/StaticFilterData";
 import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
+import {FilterElement} from "@model/filter/FilterElement";
 
 @Injectable({providedIn: 'root'})
 // todo era decompose
@@ -53,6 +54,27 @@ export class FilterController {
     };
 
     return of(filterDescription);
+  }
+
+  loadCountryFilterElements(): Observable<FilterElement[]> {
+    const countries: FilterElement[] = [
+      {
+        id: '1',
+        name: 'Kazakhstan',
+      },
+
+      {
+        id: '2',
+        name: 'USA',
+      },
+
+      {
+        id: '3',
+        name: 'Russia',
+      },
+    ];
+
+    return of(countries);
   }
 
   loadStaticFilterData(): Observable<StaticFilterData> {

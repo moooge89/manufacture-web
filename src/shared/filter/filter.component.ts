@@ -15,6 +15,7 @@ import {PathContextService} from "@service/path-context/path-context.service";
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
+// todo era delete component
 export class FilterComponent implements OnInit, OnDestroy {
 
   filterDescription: MaterialFilterDescription | undefined;
