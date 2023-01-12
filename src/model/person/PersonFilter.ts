@@ -1,5 +1,5 @@
 export interface PersonFilter {
   personName: string;
-  factoryIds: [];
-  departmentIds: [];
+  factoryIds: string[];
+  departmentIds: string[];
 }

@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
 import {emptyPersonFilter} from "@util/FilterUtil";
 import {FilterElement} from "@model/filter/FilterElement";
 import {PersonController} from "@controller/PersonController";
@@ -16,9 +15,9 @@ import {FilterController} from "@controller/FilterController";
 import {Unsub} from "@util/Unsub";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
-import {map} from "rxjs/operators";
+import {debounceTime, filter, map} from "rxjs/operators";
 import {Observable} from "rxjs/internal/Observable";
-import {forkJoin} from "rxjs";
+import {forkJoin, Subject} from "rxjs";
 
 @Component({
   selector: 'app-crud-person',
@@ -31,17 +30,11 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
   panelOpenState = false;
 
-  filterMetaInfo: MaterialFilterMetaInfo = {
-    useAvailable: false,
-    useCountries: true,
-    useDepartments: false,
-    useMaterialName: true,
-    usePrice: true,
-  };
-
   personUpsert = new EventEmitter<Person>();
 
   descriptions: FilterDescription[] = [];
+
+  private filterChangedSubject = new Subject<PersonFilter>();
 
   private filter: PersonFilter = emptyPersonFilter();
 
@@ -79,6 +72,11 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     this.unsub.sub = forkJoin([factories$, departments$]).subscribe(([factories, departments]) => {
       this.initDescriptions(factories, departments);
     });
+
+    this.filterChangedSubject.pipe(
+      filter(x => !!x),
+      debounceTime(300),
+    ).subscribe(filter => this.persons$ = this.personController.loadPersons(filter))
 
   }
 
@@ -141,16 +139,19 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     this.descriptions.push(nameDesc, factoryDesc, departmentDesc);
   }
 
-  private onNameChange(value: string): void {
-    console.log('name changed to', value);
+  private onNameChange = (value: string): void => {
+    this.filter.personName = value;
+    this.filterChangedSubject.next(this.filter);
+  };
+
+  private onFactoryChange = (selectedIds: string[]): void => {
+    this.filter.factoryIds = selectedIds;
+    this.filterChangedSubject.next(this.filter);
   }
 
-  private onFactoryChange(selectedIds: string[]): void {
-    console.log('factory changed to', selectedIds)
-  }
-
-  private onDepartmentChange(selectedIds: string[]): void {
-    console.log('department changed to', selectedIds)
+  private onDepartmentChange = (selectedIds: string[]): void => {
+    this.filter.departmentIds = selectedIds;
+    this.filterChangedSubject.next(this.filter);
   }
 
   get headers(): string[] {
