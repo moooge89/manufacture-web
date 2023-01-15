@@ -6,7 +6,7 @@ import {Person} from "@model/person/Person";
 import {CrudPersonService} from "@service/person/crud-person.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {CrudPersonDialogComponent} from "../../dialogue/crud-person/crud-person-dialog.component";
-import {PersonFilter} from "@model/person/PersonFilter";
+import {PersonFilter} from "@model/filter/PersonFilter";
 import {FilterDescription} from "@model/filter/FilterDescription";
 import {FilterInputDescription} from "@model/filter/FilterInputDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
@@ -17,6 +17,7 @@ import {DepartmentController} from "@controller/DepartmentController";
 import {debounceTime, filter, map} from "rxjs/operators";
 import {Observable} from "rxjs/internal/Observable";
 import {forkJoin, Subject} from "rxjs";
+import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
 
 @Component({
   selector: 'app-crud-person',
@@ -33,9 +34,8 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
   descriptions: FilterDescription[] = [];
 
-  private filterChangedSubject = new Subject<PersonFilter>();
-
-  private filter: PersonFilter = emptyPersonFilter();
+  private readonly filterChangedSubject = new Subject<PersonFilter>();
+  private readonly filterReactor = new PersonFilterReactor(this.filterChangedSubject);
 
   private dialogRef: MatDialogRef<CrudPersonDialogComponent> | undefined;
 
@@ -113,7 +113,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
-      onValueChange: this.onNameChange,
+      onValueChange: this.filterReactor.onNameChange,
     };
 
     const factoryDesc: FilterDropdownDescription<FilterElement> = {
@@ -122,7 +122,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
       getId: this.getId,
       getName: this.getName,
       label: 'Factory...',
-      onValueChange: this.onFactoryChange,
+      onValueChange: this.filterReactor.onFactoriesChange,
     };
 
     const departmentDesc: FilterDropdownDescription<FilterElement> = {
@@ -131,26 +131,10 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
       getId: this.getId,
       getName: this.getName,
       label: 'Department...',
-      onValueChange: this.onDepartmentChange,
+      onValueChange: this.filterReactor.onDepartmentsChange,
     };
 
     this.descriptions.push(nameDesc, factoryDesc, departmentDesc);
-  }
-
-  // todo era use filter helper
-  private onNameChange = (value: string): void => {
-    this.filter.personName = value;
-    this.filterChangedSubject.next(this.filter);
-  };
-
-  private onFactoryChange = (selectedIds: string[]): void => {
-    this.filter.factoryIds = selectedIds;
-    this.filterChangedSubject.next(this.filter);
-  }
-
-  private onDepartmentChange = (selectedIds: string[]): void => {
-    this.filter.departmentIds = selectedIds;
-    this.filterChangedSubject.next(this.filter);
   }
 
   get headers(): string[] {

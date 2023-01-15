@@ -10,7 +10,7 @@ import {
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {CrudMarketService} from "@service/crud-market/crud-market.service";
 import {Subject} from "rxjs";
-import {MaterialFilterHelper} from "@model/filter/MaterialFilterHelper";
+import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor";
 import {FilterElement} from "@model/filter/FilterElement";
 import {FilterInputDescription} from "@model/filter/FilterInputDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
@@ -38,7 +38,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
   descriptions: FilterDescription[] = [];
 
   private readonly filterChangedSubject = new Subject<MaterialFilter>();
-  private readonly filterHelper = new MaterialFilterHelper(this.filterChangedSubject);
+  private readonly filterReactor = new MaterialFilterReactor(this.filterChangedSubject);
 
   private dialogRef: MatDialogRef<CrudMarketMaterialDialogComponent> | undefined;
 
@@ -100,7 +100,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
-      onValueChange: this.filterHelper.onNameChange,
+      onValueChange: this.filterReactor.onNameChange,
     };
 
     const countryDesc: FilterDropdownDescription<FilterElement> = {
@@ -109,13 +109,13 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
       getId: this.getId,
       getName: this.getName,
       label: 'Country...',
-      onValueChange: this.filterHelper.onCountriesChange,
+      onValueChange: this.filterReactor.onCountriesChange,
     };
 
     const priceDesc: FilterNumberRangeDescription = {
       fieldType: FilterFieldType.NUMBER_RANGE,
       title: 'Price',
-      onValueChange: this.filterHelper.onPriceChange,
+      onValueChange: this.filterReactor.onPriceChange,
     };
 
     this.descriptions.push(nameDesc, countryDesc, priceDesc);

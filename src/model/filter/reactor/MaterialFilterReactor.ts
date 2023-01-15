@@ -1,14 +1,16 @@
 import {MaterialFilter} from "@model/filter/MaterialFilter";
-import {emptyMaterialFilter} from "@util/FilterUtil";
 import {NumberRange} from "@model/filter/NumberRange";
 import {Subject} from "rxjs";
+import {FilterReactor} from "@model/filter/reactor/FilterReactor";
 
-// todo era rename to FilterChangeReactor or smth like this
-export class MaterialFilterHelper {
+export class MaterialFilterReactor extends FilterReactor<MaterialFilter> {
 
-  private readonly filter: MaterialFilter = emptyMaterialFilter();
+  constructor(filterChangeSubject: Subject<MaterialFilter>) {
+    super(filterChangeSubject);
+  }
 
-  constructor(private readonly filterChangeSubject: Subject<MaterialFilter>) {
+  initFilter(): MaterialFilter {
+    return new MaterialFilter();
   }
 
   onNameChange = (name: string): void => {
@@ -34,10 +36,6 @@ export class MaterialFilterHelper {
   onAvailableChange = (available: NumberRange): void => {
     this.filter.available = available;
     this.emit();
-  }
-
-  private emit(): void {
-    this.filterChangeSubject.next(this.filter);
   }
 
 }

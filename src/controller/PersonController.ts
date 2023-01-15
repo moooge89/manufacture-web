@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {PersonFilter} from "@model/person/PersonFilter";
+import {PersonFilter} from "@model/filter/PersonFilter";
 import {Person} from "@model/person/Person";
 
 @Injectable({providedIn: 'root'})
