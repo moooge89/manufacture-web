@@ -50,6 +50,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.initDescriptions();
 
     this.unsub.sub = this.filterChangedSubject.pipe(

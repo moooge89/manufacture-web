@@ -1,3 +1,4 @@
+// todo era remove
 export interface MaterialFilterMetaInfo {
   useMaterialName: boolean;
   useAvailable: boolean;

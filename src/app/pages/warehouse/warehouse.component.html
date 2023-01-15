@@ -11,16 +11,17 @@
         <mat-icon svgIcon="filter"></mat-icon>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <app-filter
-      [filterMetaInfo]="filterMetaInfo"
-      (filterChanged)="onFilterChange($event)"
-    ></app-filter>
+
+    <app-dynamic-filter
+      [descriptions]="descriptions"
+    ></app-dynamic-filter>
+
   </mat-expansion-panel>
 
   <app-table
-    [headers]="['Icon', 'Material name', 'Available (kg)', 'Used in']"
+    [headers]="headers"
+    [columnNames]="columnNames"
     [rows$]="materials$"
-    [columnNames]="['icon', 'name', 'available', 'usedIn']"
     [isMatIcon]="isMatIcon"
     (rowClicked)="onRowClick($event)"
   ></app-table>

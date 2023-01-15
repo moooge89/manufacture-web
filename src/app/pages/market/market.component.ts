@@ -3,7 +3,6 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilterMetaInfo} from "@model/filter/MaterialFilterMetaInfo";
-import {emptyMaterialFilter} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {MarketMaterialDialogComponent} from "../../dialogue/market-material/market-material-dialog.component";
 
@@ -14,7 +13,7 @@ import {MarketMaterialDialogComponent} from "../../dialogue/market-material/mark
 })
 export class MarketComponent implements OnDestroy {
 
-  materials$ = this.marketController.loadMarketMaterials(emptyMaterialFilter());
+  materials$ = this.marketController.loadMarketMaterials(new MaterialFilter());
 
   panelOpenState = false;
 

@@ -7,7 +7,7 @@ import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {NumberRange} from "@model/filter/NumberRange";
-import {emptyMaterialFilter, getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {PathContextService} from "@service/path-context/path-context.service";
 
 @Component({
@@ -34,7 +34,7 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   materialName: string = '';
 
-  private filter: MaterialFilter = emptyMaterialFilter();
+  private filter: MaterialFilter = new MaterialFilter();
 
   private readonly filterChangeSubject = new Subject<MaterialFilter>();
   private readonly unsub = new Unsub();
