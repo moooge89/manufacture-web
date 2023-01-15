@@ -17,11 +17,16 @@ export class InputComponent implements OnInit, OnDestroy {
   @ViewChild('inputMatElement') private matInput: ElementRef<HTMLInputElement> | undefined;
 
   @Input() placeholder: string = '';
+
   @Input() type: string = 'text';
+
   @Input() withDebounce: boolean = true;
+
   @Input() useMatInput: boolean = true;
+
   @Input() value: string = '';
-  @Input() clearOn = new EventEmitter<void>();
+
+  @Input() clearOn = new Subject<void>();
 
   @Input() inputError: InputError = {hasError: false, errorText: ''};
 

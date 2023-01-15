@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {FilterElement} from "@model/filter/FilterElement";
 import {PersonController} from "@controller/PersonController";
@@ -29,7 +29,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
   panelOpenState = false;
 
-  personUpsert = new EventEmitter<Person>();
+  personUpsert = new Subject<Person>();
 
   descriptions: FilterDescription[] = [];
 

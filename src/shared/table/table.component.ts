@@ -3,7 +3,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {take} from "rxjs/operators";
-import {of} from "rxjs";
+import {of, Subject} from "rxjs";
 
 @Component({
   selector: 'app-table',
@@ -28,7 +28,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() getId: (element: T) => string = () => '';
 
-  @Input() rowUpsert = new EventEmitter<T>();
+  @Input() rowUpsert = new Subject<T>();
 
   @Input() deleteRows$: (ids: Set<string>) => Observable<void> = () => of(undefined);
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
@@ -32,8 +32,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
 
   panelOpenState = false;
 
-  // todo era use Subject instead of EventEmitter on all places
-  materialUpsert = new EventEmitter<MarketMaterial>();
+  materialUpsert = new Subject<MarketMaterial>();
 
   descriptions: FilterDescription[] = [];
 

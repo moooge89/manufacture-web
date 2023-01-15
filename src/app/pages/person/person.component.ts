@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PersonController} from "@controller/PersonController";
 import {Person} from "@model/person/Person";
@@ -39,7 +39,7 @@ export class PersonComponent implements OnInit, OnDestroy {
   headers: string[] = [];
   columnNames: string[] = [];
 
-  personUpsert = new EventEmitter<Person>();
+  personUpsert = new Subject<Person>();
 
   private readonly filterChangedSubject = new Subject<PersonFilter>();
   private readonly filterReactor = new PersonFilterReactor(this.filterChangedSubject);

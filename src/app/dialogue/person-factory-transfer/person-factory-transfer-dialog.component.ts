@@ -69,6 +69,10 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
     this.copyPerson.factoryName = factory.name;
   }
 
+  onMadeFactoryDirectorClicked(): void {
+    this.isMadeFactoryDirectorClicked = true;
+  }
+
   async cancel() {
 
     if (!this.hasChanged) {
@@ -100,7 +104,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
 
     // todo era проставлять дефолтный департамент
     this.copyPerson.departmentId = '0';
-    this.copyPerson.departmentName = 'Департамент по умолчанию';
+    this.copyPerson.departmentName = 'Default department';
     await this.personController.updatePerson(this.copyPerson).toPromise();
 
     if (this.isMadeFactoryDirectorClicked) {

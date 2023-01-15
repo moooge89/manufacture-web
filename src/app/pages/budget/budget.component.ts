@@ -1,5 +1,6 @@
-import {Component, ElementRef, EventEmitter, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {BottomNotificationService} from "@service/bottom-notification/bottom-notification.service";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-budget',
@@ -16,7 +17,7 @@ export class BudgetComponent {
 
   explanation: string = '';
 
-  clearEmitter = new EventEmitter<void>();
+  clearEmitter = new Subject<void>();
 
   constructor(private readonly bottomNotification: BottomNotificationService) {
   }
