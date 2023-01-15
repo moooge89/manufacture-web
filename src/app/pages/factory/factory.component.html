@@ -21,9 +21,17 @@
     </div>
 
     <span
+      *ngIf="canShowDepartmentsLink"
       class="link"
       (click)="goToDepartments()"
-    >See all departments</span>
+    >
+      See all departments
+    </span>
+
+    <!-- empty span as grid element -->
+    <span *ngIf="!canShowDepartmentsLink">
+    </span>
+
   </div>
 
   <div class="block image-holder">

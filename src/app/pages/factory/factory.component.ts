@@ -24,6 +24,8 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
 
   factoryInfo: FactoryInfo | undefined = undefined;
 
+  canShowDepartmentsLink: boolean = false;
+
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
@@ -41,6 +43,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
     if (userInfo.role == UserRole.COMPANY_DIRECTOR) {
       await this.initForCompanyDirector();
     } else if (userInfo.role == UserRole.FACTORY_DIRECTOR) {
+      this.canShowDepartmentsLink = true;
       await this.initForFactoryDirector();
     } else {
       throw new Error('7462DvfJwd :: Expected Company Director or Factory Director, got ' + userInfo.role);
@@ -59,6 +62,14 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
 
   async goToDepartments() {
     await this.router.navigate(['/main/departments']);
+  }
+
+  async needToShowDepartmentsLink(): Promise<boolean> {
+    const userInfo = await this.authService.userInfo();
+
+    console.log(userInfo);
+
+    return userInfo.role === UserRole.FACTORY_DIRECTOR;
   }
 
   private async initForCompanyDirector() {
