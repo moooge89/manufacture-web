@@ -1,4 +1,4 @@
-import {FilterDescription} from "@model/filter/FilterDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
 
 export interface FilterInputDescription extends FilterDescription {
 

@@ -1,4 +1,4 @@
-import {FilterDescription} from "@model/filter/FilterDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {Observable} from "rxjs/internal/Observable";
 
 export interface FilterDropdownDescription<T> extends FilterDescription {

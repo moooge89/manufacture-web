@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy} from '@angular/core';
-import {FilterDescription} from "@model/filter/FilterDescription";
-import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
+import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {Unsub} from "@util/Unsub";
 
 @Component({

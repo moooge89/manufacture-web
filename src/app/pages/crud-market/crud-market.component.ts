@@ -12,14 +12,14 @@ import {CrudMarketService} from "@service/crud-market/crud-market.service";
 import {Subject} from "rxjs";
 import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor";
 import {FilterElement} from "@model/filter/FilterElement";
-import {FilterInputDescription} from "@model/filter/FilterInputDescription";
+import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
-import {FilterDescription} from "@model/filter/FilterDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {Unsub} from "@util/Unsub";
 import {FilterController} from "@controller/FilterController";
 import {debounceTime, filter} from "rxjs/operators";
-import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription";
-import {FilterNumberRangeDescription} from "@model/filter/FilterNumberRangeDescription";
+import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
+import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 
 @Component({
   selector: 'app-crud-market',

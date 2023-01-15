@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {FilterInputDescription} from "@model/filter/FilterInputDescription";
-import {FilterDescription} from "@model/filter/FilterDescription";
+import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
 
 @Component({
   selector: 'app-filter-input',

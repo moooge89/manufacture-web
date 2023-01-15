@@ -7,12 +7,12 @@ import {MaterialDialogComponent} from "../../dialogue/material/material-dialog.c
 import {Subject} from "rxjs";
 import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor";
 import {Unsub} from "@util/Unsub";
-import {FilterDescription} from "@model/filter/FilterDescription";
-import {FilterInputDescription} from "@model/filter/FilterInputDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
+import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
-import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription";
+import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterElement} from "@model/filter/FilterElement";
-import {FilterNumberRangeDescription} from "@model/filter/FilterNumberRangeDescription";
+import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {DepartmentController} from "@controller/DepartmentController";
 import {debounceTime, filter} from "rxjs/operators";

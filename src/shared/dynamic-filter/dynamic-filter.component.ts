@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FilterDescription} from "@model/filter/FilterDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
 
 @Component({

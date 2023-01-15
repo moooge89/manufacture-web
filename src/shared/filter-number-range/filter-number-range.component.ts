@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {FilterDescription} from "@model/filter/FilterDescription";
-import {FilterNumberRangeDescription} from "@model/filter/FilterNumberRangeDescription";
+import {FilterDescription} from "@model/filter/description/FilterDescription";
+import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 import {NumberRange} from "@model/filter/NumberRange";
 
 @Component({

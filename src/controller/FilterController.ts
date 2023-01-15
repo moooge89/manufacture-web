@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {MaterialFilterDescription} from "@model/filter/MaterialFilterDescription";
 import {StaticFilterData} from "@model/filter/StaticFilterData";
 import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
 import {FilterElement} from "@model/filter/FilterElement";
@@ -15,45 +14,6 @@ export class FilterController {
 
   constructor(http: HttpService) {
     this.http = http.setControllerPrefix('/filter');
-  }
-
-  loadFilterDescription(): Observable<MaterialFilterDescription> {
-    const filterDescription: MaterialFilterDescription = {
-      departments: [
-        {
-          id: '1',
-          name: 'First department',
-        },
-
-        {
-          id: '2',
-          name: 'Second department',
-        },
-
-        {
-          id: '3',
-          name: 'Third department',
-        },
-      ],
-      countries: [
-        {
-          id: '1',
-          name: 'Kazakhstan',
-        },
-
-        {
-          id: '2',
-          name: 'USA',
-        },
-
-        {
-          id: '3',
-          name: 'Russia',
-        },
-      ],
-    };
-
-    return of(filterDescription);
   }
 
   loadCountryFilterElements(): Observable<FilterElement[]> {
@@ -77,6 +37,7 @@ export class FilterController {
     return of(countries);
   }
 
+  // todo era decompose
   loadStaticFilterData(): Observable<StaticFilterData> {
     const filterData: StaticFilterData = {
       countries: ['Kazakhstan', 'USA', 'Russia'],
