@@ -16,6 +16,9 @@ import {Unsub} from "@util/Unsub";
 import {debounceTime, filter} from "rxjs/operators";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
+import {AuthService} from "@service/auth/auth.service";
+import {UserInfo} from "@model/auth/UserInfo";
+import {UserRole} from "@model/auth/UserRole";
 
 @Component({
   selector: 'app-user',
@@ -30,6 +33,9 @@ export class PersonComponent implements OnInit, OnDestroy {
 
   descriptions: FilterDescription[] = [];
 
+  headers: string[] = [];
+  columnNames: string[] = [];
+
   private readonly filterChangedSubject = new Subject<PersonFilter>();
   private readonly filterReactor = new PersonFilterReactor(this.filterChangedSubject);
 
@@ -38,14 +44,15 @@ export class PersonComponent implements OnInit, OnDestroy {
   private readonly unsub = new Unsub();
 
   constructor(private readonly dialog: MatDialog,
+              private readonly authService: AuthService,
               private readonly personController: PersonController,
               private readonly factoryController: FactoryController,
               private readonly departmentController: DepartmentController,) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.initDescriptions();
+    await this.initDescriptions();
 
     this.unsub.sub = this.filterChangedSubject.pipe(
       filter(x => !!x),
@@ -69,42 +76,58 @@ export class PersonComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initDescriptions(): void {
+  private async initDescriptions() {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
       onValueChange: this.filterReactor.onNameChange,
     };
 
-    const factoryDesc: FilterDropdownDescription<FilterElement> = {
-      elements$: this.factoryController.loadFactoriesAsFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
-      getId: getIdFromFe,
-      getName: getNameFromFe,
-      label: 'Factory...',
-      onValueChange: this.filterReactor.onFactoriesChange,
-    };
+    this.headers.push('Name');
+    this.columnNames.push('name');
+    this.descriptions.push(nameDesc);
 
-    const departmentDesc: FilterDropdownDescription<FilterElement> = {
-      elements$: this.departmentController.loadDepartmentsAsFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
-      getId: getIdFromFe,
-      getName: getNameFromFe,
-      label: 'Department...',
-      onValueChange: this.filterReactor.onDepartmentsChange,
-    };
+    const userInfo = await this.authService.userInfo();
 
-    this.descriptions.push(nameDesc, factoryDesc, departmentDesc);
+    if (this.canViewFactory(userInfo)) {
+      const factoryDesc: FilterDropdownDescription<FilterElement> = {
+        elements$: this.factoryController.loadFactoriesAsFilterElements(),
+        fieldType: FilterFieldType.DROPDOWN,
+        getId: getIdFromFe,
+        getName: getNameFromFe,
+        label: 'Factory...',
+        onValueChange: this.filterReactor.onFactoriesChange,
+      };
+
+      this.headers.push('Factory');
+      this.columnNames.push('factoryName');
+      this.descriptions.push(factoryDesc);
+    }
+
+    if (this.canViewDepartment(userInfo)) {
+      const departmentDesc: FilterDropdownDescription<FilterElement> = {
+        elements$: this.departmentController.loadDepartmentsAsFilterElements(),
+        fieldType: FilterFieldType.DROPDOWN,
+        getId: getIdFromFe,
+        getName: getNameFromFe,
+        label: 'Department...',
+        onValueChange: this.filterReactor.onDepartmentsChange,
+      };
+
+      this.headers.push('Department');
+      this.columnNames.push('departmentName');
+      this.descriptions.push(departmentDesc);
+    }
+
   }
 
-  // todo era hide factory and department if needed
-  get headers(): string[] {
-    return ['Name', 'Factory', 'Department'];
+  private canViewFactory(userInfo: UserInfo): boolean {
+    return userInfo.role === UserRole.COMPANY_DIRECTOR;
   }
 
-  // todo era hide factory and department if needed
-  get columnNames(): string[] {
-    return ['name', 'factoryName', 'departmentName'];
+  private canViewDepartment(userInfo: UserInfo): boolean {
+    return userInfo.role === UserRole.COMPANY_DIRECTOR
+      || userInfo.role === UserRole.FACTORY_DIRECTOR;
   }
 
 }
