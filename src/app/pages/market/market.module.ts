@@ -5,7 +5,7 @@ import {MarketRoutingModule} from "./market-routing.module";
 import {TableModule} from "@shared/table/table.module";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatIconModule} from "@angular/material/icon";
-import {FilterModule} from "@shared/filter/filter.module";
+import {DynamicFilterModule} from "@shared/dynamic-filter/dynamic-filter.module";
 
 @NgModule({
   declarations: [MarketComponent],
@@ -15,7 +15,7 @@ import {FilterModule} from "@shared/filter/filter.module";
     TableModule,
     MatExpansionModule,
     MatIconModule,
-    FilterModule,
+    DynamicFilterModule,
   ],
   bootstrap: [MarketComponent]
 })

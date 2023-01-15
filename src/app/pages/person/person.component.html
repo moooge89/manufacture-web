@@ -20,8 +20,8 @@
 
   <app-table
     [headers]="headers"
-    [rows$]="persons$"
     [columnNames]="columnNames"
+    [rows$]="persons$"
     (rowClicked)="handlePersonClick($event)"
   ></app-table>
 

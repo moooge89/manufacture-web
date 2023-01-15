@@ -22,9 +22,9 @@
   <span class="big-bold">Factories</span>
 
   <app-table
-    [headers]="['Name', 'Director', 'Workers']"
+    [headers]="headers"
+    [columnNames]="columnNames"
     [rows$]="factories$"
-    [columnNames]="['name', 'director', 'workerCount']"
     (rowClicked)="handleFactoryClick($event)"
   ></app-table>
 

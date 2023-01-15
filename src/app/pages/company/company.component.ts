@@ -24,4 +24,12 @@ export class CompanyComponent {
     await this.router.navigate(['/main/factory']);
   }
 
+  get headers(): string[] {
+    return ['Name', 'Director', 'Workers'];
+  }
+
+  get columnNames(): string[] {
+    return ['name', 'director', 'workerCount'];
+  }
+
 }
