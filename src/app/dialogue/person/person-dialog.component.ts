@@ -13,9 +13,9 @@ export class PersonDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<PersonDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { material: Person },
+    @Inject(MAT_DIALOG_DATA) data: { person: Person },
   ) {
-    this.person = data.material;
+    this.person = data.person;
   }
 
 }

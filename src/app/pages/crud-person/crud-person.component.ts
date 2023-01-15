@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {emptyPersonFilter, getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {FilterElement} from "@model/filter/FilterElement";
 import {PersonController} from "@controller/PersonController";
 import {Person} from "@model/person/Person";
@@ -26,7 +26,7 @@ import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
 })
 export class CrudPersonComponent implements OnInit, OnDestroy {
 
-  persons$ = this.personController.loadPersons(emptyPersonFilter());
+  persons$ = this.personController.loadPersons(new PersonFilter());
 
   panelOpenState = false;
 
@@ -80,6 +80,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.dialogRef?.close();
+    this.unsub.unsubscribe();
   }
 
   getId = getIdFromFe;

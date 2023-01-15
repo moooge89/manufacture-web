@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
-import {emptyMaterialFilter, getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {
   CrudMarketMaterialDialogComponent
@@ -28,7 +28,7 @@ import {FilterNumberRangeDescription} from "@model/filter/FilterNumberRangeDescr
 })
 export class CrudMarketComponent implements OnInit, OnDestroy {
 
-  materials$ = this.marketController.loadMarketMaterials(emptyMaterialFilter());
+  materials$ = this.marketController.loadMarketMaterials(new MaterialFilter());
 
   panelOpenState = false;
 
