@@ -9,12 +9,11 @@ import {FilterElement} from "@model/filter/FilterElement";
 import {FilterInputDescription} from "@model/filter/FilterInputDescription";
 import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription";
-import {forkJoin, Subject} from "rxjs";
+import {Subject} from "rxjs";
 import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {Unsub} from "@util/Unsub";
-import {Observable} from "rxjs/internal/Observable";
-import {debounceTime, filter, map} from "rxjs/operators";
+import {debounceTime, filter} from "rxjs/operators";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
 
@@ -46,27 +45,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const factories$: Observable<FilterElement[]> = this.factoryController.loadFactories().pipe(
-      map(factories => factories.map(factory => {
-        return {
-          id: factory.id,
-          name: factory.name
-        } as FilterElement
-      })),
-    );
-
-    const departments$: Observable<FilterElement[]> = this.departmentController.loadDepartments().pipe(
-      map(departments => departments.map(department => {
-        return {
-          id: department.id,
-          name: department.name
-        } as FilterElement
-      })),
-    );
-
-    this.unsub.sub = forkJoin([factories$, departments$]).subscribe(
-      ([factories, departments]) => this.initDescriptions(factories, departments)
-    );
+    this.initDescriptions();
 
     this.unsub.sub = this.filterChangedSubject.pipe(
       filter(x => !!x),
@@ -90,7 +69,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initDescriptions(factories: FilterElement[], departments: FilterElement[]): void {
+  private initDescriptions(): void {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
@@ -98,7 +77,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     };
 
     const factoryDesc: FilterDropdownDescription<FilterElement> = {
-      elements: factories,
+      elements$: this.factoryController.loadFactoriesAsFilterElements(),
       fieldType: FilterFieldType.DROPDOWN,
       getId: getIdFromFe,
       getName: getNameFromFe,
@@ -107,7 +86,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     };
 
     const departmentDesc: FilterDropdownDescription<FilterElement> = {
-      elements: departments,
+      elements$: this.departmentController.loadDepartmentsAsFilterElements(),
       fieldType: FilterFieldType.DROPDOWN,
       getId: getIdFromFe,
       getName: getNameFromFe,

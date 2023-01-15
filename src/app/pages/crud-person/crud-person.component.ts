@@ -14,9 +14,8 @@ import {FilterDropdownDescription} from "@model/filter/FilterDropdownDescription
 import {Unsub} from "@util/Unsub";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
-import {debounceTime, filter, map} from "rxjs/operators";
-import {Observable} from "rxjs/internal/Observable";
-import {forkJoin, Subject} from "rxjs";
+import {debounceTime, filter} from "rxjs/operators";
+import {Subject} from "rxjs";
 import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
 
 @Component({
@@ -49,27 +48,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    const factories$: Observable<FilterElement[]> = this.factoryController.loadFactories().pipe(
-      map(factories => factories.map(factory => {
-        return {
-          id: factory.id,
-          name: factory.name
-        } as FilterElement
-      })),
-    );
-
-    const departments$: Observable<FilterElement[]> = this.departmentController.loadDepartments().pipe(
-      map(departments => departments.map(department => {
-        return {
-          id: department.id,
-          name: department.name
-        } as FilterElement
-      })),
-    );
-
-    this.unsub.sub = forkJoin([factories$, departments$]).subscribe(
-      ([factories, departments]) => this.initDescriptions(factories, departments)
-    );
+    this.initDescriptions();
 
     this.unsub.sub = this.filterChangedSubject.pipe(
       filter(x => !!x),
@@ -110,7 +89,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     this.personUpsert.next(resp.person);
   }
 
-  private initDescriptions(factories: FilterElement[], departments: FilterElement[]): void {
+  private initDescriptions(): void {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
@@ -118,7 +97,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     };
 
     const factoryDesc: FilterDropdownDescription<FilterElement> = {
-      elements: factories,
+      elements$: this.factoryController.loadFactoriesAsFilterElements(),
       fieldType: FilterFieldType.DROPDOWN,
       getId: this.getId,
       getName: this.getName,
@@ -127,7 +106,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     };
 
     const departmentDesc: FilterDropdownDescription<FilterElement> = {
-      elements: departments,
+      elements$: this.departmentController.loadDepartmentsAsFilterElements(),
       fieldType: FilterFieldType.DROPDOWN,
       getId: this.getId,
       getName: this.getName,

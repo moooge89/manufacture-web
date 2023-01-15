@@ -4,6 +4,8 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {FactoryInfo} from "@model/api/factory/FactoryInfo";
 import {LightFactoryInfo} from "@model/api/factory/LightFactoryInfo";
+import {FilterElement} from "@model/filter/FilterElement";
+import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 export class FactoryController {
@@ -37,6 +39,17 @@ export class FactoryController {
     ];
 
     return of(factories);
+  }
+
+  loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
+    return this.loadFactories().pipe(
+      map(factories => factories.map(factory => {
+        return {
+          id: factory.id,
+          name: factory.name
+        } as FilterElement
+      })),
+    );
   }
 
   loadFactoryInfo(): Observable<FactoryInfo> {

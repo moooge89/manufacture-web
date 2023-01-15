@@ -3,6 +3,8 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {Department} from "@model/api/Department";
+import {FilterElement} from "@model/filter/FilterElement";
+import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 export class DepartmentController {
@@ -182,6 +184,17 @@ export class DepartmentController {
     ];
 
     return of(departments);
+  }
+
+  loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
+    return this.loadDepartments().pipe(
+      map(departments => departments.map(department => {
+        return {
+          id: department.id,
+          name: department.name
+        } as FilterElement
+      })),
+    );
   }
 
   changePersonDepartment(personId: string, departmentId: string): Observable<void> {

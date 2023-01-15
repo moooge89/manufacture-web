@@ -50,9 +50,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.filterController.loadCountryFilterElements().subscribe(
-      countries => this.initDescriptions(countries),
-    );
+    this.initDescriptions();
 
     this.unsub.sub = this.filterChangedSubject.pipe(
       filter(x => !!x),
@@ -63,6 +61,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.dialogRef?.close();
+    this.unsub.unsubscribe();
   }
 
   getId = getIdFromFe;
@@ -96,7 +95,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
     this.materialUpsert.next(resp.material);
   }
 
-  private initDescriptions(countries: FilterElement[]): void {
+  private initDescriptions(): void {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
@@ -104,7 +103,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
     };
 
     const countryDesc: FilterDropdownDescription<FilterElement> = {
-      elements: countries,
+      elements$: this.filterController.loadCountryFilterElements(),
       fieldType: FilterFieldType.DROPDOWN,
       getId: this.getId,
       getName: this.getName,

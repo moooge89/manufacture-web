@@ -1,4 +1,5 @@
 import {FilterDescription} from "@model/filter/FilterDescription";
+import {Observable} from "rxjs/internal/Observable";
 
 export interface FilterDropdownDescription<T> extends FilterDescription {
 
@@ -8,7 +9,7 @@ export interface FilterDropdownDescription<T> extends FilterDescription {
 
   getName: (element: T) => string;
 
-  elements: T[];
+  elements$: Observable<T[]>;
 
   onValueChange: (selectedIds: string[]) => void;
 
