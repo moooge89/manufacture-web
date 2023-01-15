@@ -16,6 +16,8 @@ import {FilterElement} from "@model/filter/FilterElement";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {FilterController} from "@controller/FilterController";
 import {debounceTime, filter} from "rxjs/operators";
+import {PathContextService} from "@service/path-context/path-context.service";
+import {Observable} from "rxjs/internal/Observable";
 
 @Component({
   selector: 'app-market',
@@ -24,11 +26,13 @@ import {debounceTime, filter} from "rxjs/operators";
 })
 export class MarketComponent implements OnInit, OnDestroy {
 
-  materials$ = this.marketController.loadMarketMaterials(new MaterialFilter());
+  materials$: Observable<MarketMaterial[]>;
 
   panelOpenState = false;
 
   descriptions: FilterDescription[] = [];
+
+  private readonly selectedMaterialName: string = '';
 
   private readonly filterChangedSubject = new Subject<MaterialFilter>();
   private readonly filterReactor = new MaterialFilterReactor(this.filterChangedSubject);
@@ -39,7 +43,15 @@ export class MarketComponent implements OnInit, OnDestroy {
 
   constructor(private readonly dialog: MatDialog,
               private readonly marketController: MarketController,
-              private readonly filterController: FilterController,) {
+              private readonly filterController: FilterController,
+              private readonly pathContextService: PathContextService,) {
+    const materialName = this.pathContextService.materialName || '';
+    const materialFilter = new MaterialFilter();
+    materialFilter.materialName = materialName;
+
+    this.selectedMaterialName = materialName;
+
+    this.materials$ = this.marketController.loadMarketMaterials(materialFilter);
   }
 
   ngOnInit() {
@@ -80,6 +92,7 @@ export class MarketComponent implements OnInit, OnDestroy {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
+      defaultValue: this.selectedMaterialName,
       onValueChange: this.filterReactor.onNameChange,
     };
 
@@ -89,6 +102,7 @@ export class MarketComponent implements OnInit, OnDestroy {
       getId: getIdFromFe,
       getName: getNameFromFe,
       label: 'Country...',
+      defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onCountriesChange,
     };
 

@@ -16,8 +16,11 @@ export class FilterDropdownComponent<T> implements OnDestroy {
     this.unsub.sub = dropdownDesc.elements$.subscribe(elements => {
       this.dropdownDescription = dropdownDesc;
       this.elements = elements;
+      this.findAndSetDefaultIdByDisplayValue(dropdownDesc.defaultSelectedDisplayValue);
     });
   }
+
+  selectedElementId: string | undefined;
 
   elements: T[] = [];
 
@@ -31,6 +34,21 @@ export class FilterDropdownComponent<T> implements OnDestroy {
 
   onValueChange(selectedIds: string[]): void {
     this.dropdownDescription?.onValueChange(selectedIds);
+  }
+
+  private findAndSetDefaultIdByDisplayValue(displayValue: string): void {
+    if (!this.dropdownDescription || !displayValue) {
+      return;
+    }
+
+    const index = this.elements.findIndex(element => this.dropdownDescription?.getName(element) === displayValue);
+
+    if (index < 0) {
+      return;
+    }
+
+    this.selectedElementId = this.dropdownDescription.getId(this.elements[index]);
+
   }
 
 }

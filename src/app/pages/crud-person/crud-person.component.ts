@@ -93,6 +93,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
+      defaultValue: '',
       onValueChange: this.filterReactor.onNameChange,
     };
 
@@ -102,6 +103,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
       getId: this.getId,
       getName: this.getName,
       label: 'Factory...',
+      defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onFactoriesChange,
     };
 
@@ -111,6 +113,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
       getId: this.getId,
       getName: this.getName,
       label: 'Department...',
+      defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onDepartmentsChange,
     };
 

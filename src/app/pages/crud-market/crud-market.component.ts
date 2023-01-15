@@ -100,6 +100,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
+      defaultValue: '',
       onValueChange: this.filterReactor.onNameChange,
     };
 
@@ -109,6 +110,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
       getId: this.getId,
       getName: this.getName,
       label: 'Country...',
+      defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onCountriesChange,
     };
 

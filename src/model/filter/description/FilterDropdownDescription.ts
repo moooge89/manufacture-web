@@ -9,6 +9,8 @@ export interface FilterDropdownDescription<T> extends FilterDescription {
 
   getName: (element: T) => string;
 
+  defaultSelectedDisplayValue: string;
+
   elements$: Observable<T[]>;
 
   onValueChange: (selectedIds: string[]) => void;

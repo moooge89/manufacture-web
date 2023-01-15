@@ -1,5 +1,6 @@
 <app-input
   *ngIf="inputDescription"
   [placeholder]="inputDescription.placeholder"
+  [value]="inputDescription.defaultValue"
   (valueChanged)="onValueChange($event)"
 ></app-input>

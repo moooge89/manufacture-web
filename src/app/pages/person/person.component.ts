@@ -104,6 +104,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     const nameDesc: FilterInputDescription = {
       fieldType: FilterFieldType.INPUT,
       placeholder: 'Name...',
+      defaultValue: '',
       onValueChange: this.filterReactor.onNameChange,
     };
 
@@ -120,6 +121,7 @@ export class PersonComponent implements OnInit, OnDestroy {
         getId: getIdFromFe,
         getName: getNameFromFe,
         label: 'Factory...',
+        defaultSelectedDisplayValue: '',
         onValueChange: this.filterReactor.onFactoriesChange,
       };
 
@@ -135,6 +137,7 @@ export class PersonComponent implements OnInit, OnDestroy {
         getId: getIdFromFe,
         getName: getNameFromFe,
         label: 'Department...',
+        defaultSelectedDisplayValue: '',
         onValueChange: this.filterReactor.onDepartmentsChange,
       };
 

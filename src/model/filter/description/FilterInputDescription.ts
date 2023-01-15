@@ -4,6 +4,8 @@ export interface FilterInputDescription extends FilterDescription {
 
   placeholder: string;
 
+  defaultValue: string;
+
   onValueChange: (value: string) => void;
 
 }

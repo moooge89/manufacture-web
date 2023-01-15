@@ -47,7 +47,6 @@ export class MaterialDialogComponent {
     };
   }
 
-  // todo era fix (does not work after dynamic filter)
   async goToMarket(): Promise<void> {
     this.pathContextService.materialName = this.material.name;
     await this.router.navigate(['/main/market']);
