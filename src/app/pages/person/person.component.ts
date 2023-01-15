@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PersonController} from "@controller/PersonController";
 import {Person} from "@model/person/Person";
-import {PersonDialogComponent} from "../../dialogue/person/person-dialog.component";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {FilterElement} from "@model/filter/FilterElement";
@@ -13,12 +12,16 @@ import {Subject} from "rxjs";
 import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {Unsub} from "@util/Unsub";
-import {debounceTime, filter} from "rxjs/operators";
+import {debounceTime, filter, map} from "rxjs/operators";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
 import {AuthService} from "@service/auth/auth.service";
 import {UserInfo} from "@model/auth/UserInfo";
 import {UserRole} from "@model/auth/UserRole";
+import {
+  PersonFactoryTransferDialogComponent
+} from "../../dialogue/person-factory-transfer/person-factory-transfer-dialog.component";
+import {PersonDialogComponent} from "../../dialogue/person/person-dialog.component";
 
 @Component({
   selector: 'app-user',
@@ -36,10 +39,12 @@ export class PersonComponent implements OnInit, OnDestroy {
   headers: string[] = [];
   columnNames: string[] = [];
 
+  personUpsert = new EventEmitter<Person>();
+
   private readonly filterChangedSubject = new Subject<PersonFilter>();
   private readonly filterReactor = new PersonFilterReactor(this.filterChangedSubject);
 
-  private dialogRef: MatDialogRef<PersonDialogComponent> | undefined;
+  private dialogRef: MatDialogRef<any> | undefined;
 
   private readonly unsub = new Unsub();
 
@@ -49,6 +54,8 @@ export class PersonComponent implements OnInit, OnDestroy {
               private readonly factoryController: FactoryController,
               private readonly departmentController: DepartmentController,) {
   }
+
+  getId = getIdFromFe;
 
   async ngOnInit() {
 
@@ -66,14 +73,31 @@ export class PersonComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  handlePersonClick(person: Person): void {
+  async handlePersonClick(person: Person) {
     this.dialogRef?.close();
 
-    this.dialogRef = this.dialog.open(PersonDialogComponent, {
-      width: '720px',
-      height: '320px',
-      data: {person: person},
-    });
+    const userInfo = await this.authService.userInfo();
+
+    if (userInfo.role === UserRole.COMPANY_DIRECTOR) {
+      this.dialogRef = this.dialog.open(PersonFactoryTransferDialogComponent, {
+        width: '800px',
+        height: '400px',
+        data: {person: person},
+      });
+
+      this.unsub.sub = this.dialogRef.afterClosed().pipe(
+        filter(x => !!x && x.needToSave),
+        map(x => x.person)
+      ).subscribe(person => this.personUpsert.next(person));
+
+    } else {
+      this.dialogRef = this.dialog.open(PersonDialogComponent, {
+        width: '720px',
+        height: '320px',
+        data: {person: person},
+      });
+    }
+
   }
 
   private async initDescriptions() {

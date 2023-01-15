@@ -1,0 +1,49 @@
+<div class="form">
+  <section class="left">
+
+    <img src="../../../assets/img/avatar.jpg" alt="avatar">
+
+    <app-button
+      text="Make director of factory"
+    ></app-button>
+
+  </section>
+
+  <section class="right block">
+
+    <span>Name: {{person.name}}</span>
+    <div class="row-wrapper">
+      <span>Factory:</span>
+      <div class="form-cell-value">
+        <app-dropdown
+          label="Factory"
+          [getId]="getId"
+          [getName]="getName"
+          [elements]="factories"
+          [isMultiple]="false"
+          [selectedElementId]="person.factoryId"
+          (valueChanged)="onFactoryChange($event)"
+        ></app-dropdown>
+      </div>
+    </div>
+    <span>Department: {{person.departmentName}}</span>
+
+  </section>
+
+</div>
+
+<div class="buttons-container">
+
+  <app-button
+    text="Cancel"
+    [isCancelButton]="true"
+    (clicked)="cancel()"
+  >
+  </app-button>
+
+  <app-button
+    text="Save"
+    (clicked)="save()"
+  ></app-button>
+
+</div>

@@ -4,7 +4,6 @@ import {FilterController} from "@controller/FilterController";
 import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {InputError} from "@model/web/InputError";
-import {MarketController} from "@controller/MarketController";
 import {Person} from "@model/person/Person";
 import {FilterElement} from "@model/filter/FilterElement";
 import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
@@ -45,7 +44,6 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<CrudPersonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { person: Person, noNeedToConfirm: boolean, isSave: boolean },
     private readonly filterController: FilterController,
-    private readonly marketController: MarketController,
     private readonly personController: PersonController,
     private readonly confirmationService: ConfirmationService,
   ) {

@@ -64,14 +64,6 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
     await this.router.navigate(['/main/departments']);
   }
 
-  async needToShowDepartmentsLink(): Promise<boolean> {
-    const userInfo = await this.authService.userInfo();
-
-    console.log(userInfo);
-
-    return userInfo.role === UserRole.FACTORY_DIRECTOR;
-  }
-
   private async initForCompanyDirector() {
     const factoryId = this.pathContextService.lastFactoryId;
 

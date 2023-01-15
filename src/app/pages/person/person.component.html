@@ -22,6 +22,8 @@
     [headers]="headers"
     [columnNames]="columnNames"
     [rows$]="persons$"
+    [rowUpsert]="personUpsert"
+    [getId]="getId"
     (rowClicked)="handlePersonClick($event)"
   ></app-table>
 

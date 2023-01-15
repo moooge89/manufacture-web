@@ -84,4 +84,8 @@ export class FactoryController {
     return of(factoryInfo);
   }
 
+  makeUserDirector(userId: string): Observable<void> {
+    return of(undefined);
+  }
+
 }

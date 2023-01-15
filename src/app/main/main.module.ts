@@ -11,6 +11,9 @@ import {CompanyFactoryGuard} from "../guard/company-factory.guard";
 import {FactoryDepartmentGuard} from "../guard/factory-department.guard";
 import {DepartmentGuard} from "../guard/department.guard";
 import {FactoryGuard} from "../guard/factory.guard";
+import {
+  PersonFactoryTransferDialogModule
+} from "../dialogue/person-factory-transfer/person-factory-transfer-dialog.module";
 
 @NgModule({
   declarations: [MainComponent],
@@ -28,6 +31,7 @@ import {FactoryGuard} from "../guard/factory.guard";
     DepartmentGuard,
     FactoryDepartmentGuard,
     FactoryGuard,
+    PersonFactoryTransferDialogModule,
   ],
   bootstrap: [MainComponent]
 })
