@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MaterialDialogComponent} from "../../dialogue/material/material-dialog.component";
 import {Subject} from "rxjs";
 import {Unsub} from "@util/Unsub";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
@@ -14,6 +13,7 @@ import {ManufactureLight} from "@model/manufacture/ManufactureLight";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterElement} from "@model/filter/FilterElement";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {ManufactureDialogComponent} from "../../dialogue/manufacture/manufacture-dialog.component";
 
 @Component({
   selector: 'app-manufacture',
@@ -31,7 +31,7 @@ export class ManufactureComponent implements OnInit, OnDestroy {
   private readonly filterChangedSubject = new Subject<ManufactureFilter>();
   private readonly filterReactor = new ManufactureFilterReactor(this.filterChangedSubject);
 
-  private dialogRef: MatDialogRef<MaterialDialogComponent> | undefined;
+  private dialogRef: MatDialogRef<ManufactureDialogComponent> | undefined;
 
   private readonly unsub = new Unsub();
 
@@ -56,12 +56,12 @@ export class ManufactureComponent implements OnInit, OnDestroy {
   }
 
   onRowClick(manufacture: ManufactureLight): void {
-    // this.dialogRef?.close();
-    // this.dialogRef = this.dialog.open(MaterialDialogComponent, {
-    //   width: '720px',
-    //   height: '320px',
-    //   data: {material: material},
-    // });
+    this.dialogRef?.close();
+    this.dialogRef = this.dialog.open(ManufactureDialogComponent, {
+      width: '720px',
+      height: '320px',
+      data: {manufacture: manufacture},
+    });
   }
 
   private initDescriptions(): void {

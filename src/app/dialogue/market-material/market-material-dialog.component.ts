@@ -8,6 +8,7 @@ import {BottomNotificationService} from "@service/bottom-notification/bottom-not
   templateUrl: './market-material-dialog.component.html',
   styleUrls: ['./market-material-dialog.component.scss'],
 })
+// todo era rename (MarketDialogComponent)
 export class MarketMaterialDialogComponent {
 
   material: MarketMaterial;

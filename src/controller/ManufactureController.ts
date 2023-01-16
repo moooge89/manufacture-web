@@ -5,6 +5,7 @@ import {of} from "rxjs";
 import {ManufactureLight} from "@model/manufacture/ManufactureLight";
 import {ManufactureFilter} from "@model/filter/ManufactureFilter";
 import {FilterElement} from "@model/filter/FilterElement";
+import {ManufactureElement} from "@model/manufacture/ManufactureElement";
 
 @Injectable({providedIn: 'root'})
 export class ManufactureController {
@@ -57,6 +58,25 @@ export class ManufactureController {
     ];
 
     return of(filterElements);
+  }
+
+  loadManufactureElements(manufactureType: string): Observable<ManufactureElement[]> {
+    const manufactureElements: ManufactureElement[] = [
+      {
+        label: 'First team',
+        manufactured: 123,
+      },
+      {
+        label: 'Second team',
+        manufactured: 213,
+      },
+      {
+        label: 'Third team',
+        manufactured: 102,
+      },
+    ];
+
+    return of(manufactureElements);
   }
 
 }
