@@ -12,6 +12,9 @@ import {of, Subject} from "rxjs";
 })
 export class TableComponent<T> implements OnInit, OnDestroy {
 
+  // 1) todo era make table with descriptions like dynamic filters
+  // 2) todo era add sorting
+
   @Input() headers: string[] = [];
 
   @Input() set rows$(rows$: Observable<T[]>) {

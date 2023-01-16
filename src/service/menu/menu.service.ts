@@ -59,6 +59,7 @@ export class MenuService {
       {label: 'Users', route: ['/main/user'], icon: 'report'},
       {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
       {label: 'Market', route: ['/main/market'], icon: 'market'},
+      {label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'},
       {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
       {label: 'Report', route: ['/main/report'], icon: 'report'},
     ];
@@ -71,6 +72,7 @@ export class MenuService {
       {label: 'Users', route: ['/main/user'], icon: 'report'},
       {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
       {label: 'Market', route: ['/main/market'], icon: 'market'},
+      {label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'},
       {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
       {label: 'Report', route: ['/main/report'], icon: 'report'},
     ];
@@ -81,6 +83,7 @@ export class MenuService {
       {label: 'Users', route: ['/main/user'], icon: 'report'},
       {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
       {label: 'Market', route: ['/main/market'], icon: 'market'},
+      {label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'},
       {label: 'Budget', route: ['/main/budget'], icon: 'money'},
       {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
       {label: 'Report', route: ['/main/report'], icon: 'report'},

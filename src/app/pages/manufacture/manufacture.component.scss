@@ -1,0 +1,14 @@
+@import "src/assets/global";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  padding: 2rem;
+  background-color: $main-bg-color;
+}
+
+span {
+  margin-top: 1.5rem;
+}

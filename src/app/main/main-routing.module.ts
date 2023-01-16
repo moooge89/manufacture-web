@@ -70,6 +70,11 @@ const routes: Routes = [
         canLoad: [AdminGuard],
       },
       {
+        path: 'manufacture',
+        loadChildren: () => import('../pages/manufacture/manufacture.module').then(x => x.ManufactureModule),
+        canLoad: [CommonPageGuard],
+      },
+      {
         path: '**',
         redirectTo: '',
         canLoad: [IsLoggedInGuard],

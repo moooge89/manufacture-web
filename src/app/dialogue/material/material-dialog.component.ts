@@ -10,6 +10,7 @@ import {PathContextService} from "@service/path-context/path-context.service";
   templateUrl: './material-dialog.component.html',
   styleUrls: ['./material-dialog.component.scss'],
 })
+// todo era rename to WarehouseMaterialDialogComponent
 export class MaterialDialogComponent {
 
   material: WarehouseMaterial;
@@ -24,6 +25,7 @@ export class MaterialDialogComponent {
   ) {
     this.material = data.material;
 
+    // todo era get info from controller to make it easier in future to swap to server
     this.chartOptions = {
       series: [102, 44, 55],
       chart: {
