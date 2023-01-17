@@ -3,16 +3,20 @@
 <section>
 
   <apx-chart
+    *ngIf="chartOptions"
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [labels]="chartOptions.labels"
     [responsive]="chartOptions.responsive"
   ></apx-chart>
 
-  <div class="right-section">
-    <span>Min cost in market (kg): 12$</span>
-    <span>Max cost in market (kg): 24$</span>
-    <span>Avg cost in market (kg): 18$</span>
+  <div
+    *ngIf="priceInfo"
+    class="right-section"
+  >
+    <span>Min cost in market (kg): {{this.priceInfo.min}}$</span>
+    <span>Max cost in market (kg): {{this.priceInfo.max}}$</span>
+    <span>Avg cost in market (kg): {{this.priceInfo.avg}}$</span>
     <app-button
       text="Go to market"
       (clicked)="goToMarket()"

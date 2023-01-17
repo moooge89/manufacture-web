@@ -2,6 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {BottomNotificationService} from "@service/bottom-notification/bottom-notification.service";
+import {MarketController} from "@controller/MarketController";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-market-dialog',
@@ -18,6 +20,7 @@ export class MarketDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<MarketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: MarketMaterial },
+    private readonly marketController: MarketController,
     private readonly notificationService: BottomNotificationService,
   ) {
     this.material = data.material;
@@ -33,9 +36,13 @@ export class MarketDialogComponent {
     }
   }
 
-  buyMaterial(): void {
-    this.notificationService.showInfo('You successfully bought an material!');
-    this.dialogRef.close();
+  buyMaterial() {
+    this.marketController.buyMaterial(this.material.id, this.kgToBuy).pipe(
+      take(1)
+    ).subscribe(() => {
+      this.notificationService.showInfo('You successfully bought an material!');
+      this.dialogRef.close();
+    });
   }
 
 }

@@ -19,6 +19,7 @@ export class ReportDialogComponent {
 
     const description = data.reportDescription;
 
+    // todo era get info from controller
     this.chartOptions = {
       series: [
         {

@@ -4,6 +4,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
+import {ManufactureElement} from "@model/manufacture/ManufactureElement";
 
 @Injectable({providedIn: 'root'})
 export class WarehouseController {
@@ -25,6 +26,25 @@ export class WarehouseController {
     ];
 
     return of(materials);
+  }
+
+  loadWarehouseStoredInfo(manufactureType: string): Observable<ManufactureElement[]> {
+    const manufactureElements: ManufactureElement[] = [
+      {
+        label: 'All',
+        manufactured: 102,
+      },
+      {
+        label: 'Department 1',
+        manufactured: 44,
+      },
+      {
+        label: 'Department 2',
+        manufactured: 55,
+      },
+    ];
+
+    return of(manufactureElements);
   }
 
 }
