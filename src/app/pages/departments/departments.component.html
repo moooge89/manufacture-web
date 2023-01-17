@@ -4,7 +4,14 @@
 
   <div class="switch-container">
 
-    <!-- todo era add confirm mode -->
+    <mat-slide-toggle
+      color="secondary"
+      class="confirm-switch"
+      [checked]="confirmMode"
+      (change)="confirmMode = $event.checked"
+    >
+      Confirm mode
+    </mat-slide-toggle>
 
     <mat-slide-toggle
       color="primary"
@@ -27,7 +34,7 @@
       class="department-container"
       [id]="'department-cdk-drop-' + department.id"
       [cdkDropListData]="department.persons"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="onDrop($event)"
       [cdkDropListDisabled]="isDraggingDisabled"
     >
 

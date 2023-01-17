@@ -7,6 +7,10 @@ import {DepartmentController} from "@controller/DepartmentController";
 import {parseDepartmentId} from "@util/RegexUtil";
 import {Unsub} from "@util/Unsub";
 import {PersonDialogComponent} from "../../dialogue/person/person-dialog.component";
+import {ConfirmationService} from "@service/confirmation/confirmation.service";
+import {Observable} from "rxjs/internal/Observable";
+import {forkJoin} from "rxjs";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-departments',
@@ -18,13 +22,15 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
   departments: Department[] = [];
 
   draggableMode: boolean = true;
+  confirmMode: boolean = false;
 
   private dialogRef: MatDialogRef<PersonDialogComponent> | undefined;
 
   private readonly unsub = new Unsub();
 
   constructor(private readonly dialog: MatDialog,
-              private readonly departmentController: DepartmentController) {
+              private readonly confirmationService: ConfirmationService,
+              private readonly departmentController: DepartmentController,) {
   }
 
   ngOnInit() {
@@ -36,12 +42,36 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  drop(item: CdkDragDrop<any, any>): void {
-    if (item.container.id === item.previousContainer.id) {
-      this.handleIndexChange(item);
-    } else {
-      this.handleContainerChange(item);
+  async onDrop(item: CdkDragDrop<any, any>): Promise<void> {
+
+    const updates$ = this.drop(item);
+
+    if (!this.confirmMode) {
+      this.commitUpdates(updates$);
+      return;
     }
+
+    const confirmed = await this.confirmationService.confirm();
+
+    if (confirmed) {
+      this.commitUpdates(updates$);
+      return;
+    }
+
+    // if user canceled updates, then rollback
+
+    const copyItem: CdkDragDrop<any, any> = {
+      item: item.item,
+      currentIndex: item.previousIndex,
+      previousIndex: item.currentIndex,
+      container: item.previousContainer,
+      previousContainer: item.container,
+      dropPoint: item.dropPoint,
+      distance: item.distance,
+      isPointerOverContainer: item.isPointerOverContainer,
+    };
+
+    this.drop(copyItem);
   }
 
   openPersonDialog(person: Person) {
@@ -54,9 +84,17 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private handleIndexChange(item: CdkDragDrop<any, any>): void {
+  private drop(item: CdkDragDrop<any, any>): Observable<void>[] {
+    if (item.container.id === item.previousContainer.id) {
+      return this.handleIndexChange(item);
+    } else {
+      return this.handleContainerChange(item);
+    }
+  }
+
+  private handleIndexChange(item: CdkDragDrop<any, any>): Observable<void>[] {
     if (item.currentIndex === item.previousIndex) {
-      return;
+      return [];
     }
 
     const personToBeMoved: Person = item.container.data[item.previousIndex];
@@ -66,9 +104,12 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
     persons.splice(item.previousIndex, 1);
     persons.splice(item.currentIndex, 0, personToBeMoved);
+
+    // todo era change person index in department
+    return [];
   }
 
-  private handleContainerChange(item: CdkDragDrop<any, any>): void {
+  private handleContainerChange(item: CdkDragDrop<any, any>): Observable<void>[] {
     const personToBeMoved: Person = item.previousContainer.data[item.previousIndex];
 
     // noinspection JSMismatchedCollectionQueryUpdate
@@ -81,7 +122,15 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
     const departmentId = parseDepartmentId(item.container.id);
 
-    this.departmentController.changePersonDepartment(personToBeMoved.id, departmentId);
+    return [this.departmentController.changePersonDepartment(personToBeMoved.id, departmentId)];
+  }
+
+  private commitUpdates(updates$: Observable<void>[]): void {
+    if (updates$.length === 0) {
+      return;
+    }
+
+    forkJoin(updates$).pipe(take(1)).subscribe();
   }
 
   get isDraggingDisabled(): boolean {
