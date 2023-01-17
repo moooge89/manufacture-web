@@ -14,10 +14,10 @@ import {CrudMarketMaterialDialogModule} from "./dialogue/crud-market-material/cr
 import {ConfirmationModule} from "./dialogue/confirmation/confirmation.module";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ReportDialogModule} from "./dialogue/report/report-dialog.module";
-import {MaterialDialogModule} from "./dialogue/material/material-dialog.module";
-import {MarketMaterialDialogModule} from "./dialogue/market-material/market-material-dialog.module";
 import {CrudPersonDialogModule} from "./dialogue/crud-person/crud-person-dialog.module";
 import {ManufactureDialogModule} from "./dialogue/manufacture/manufacture-dialog.module";
+import {WarehouseDialogModule} from "./dialogue/warehouse/warehouse-dialog.module";
+import {MarketDialogModule} from "./dialogue/market/market-dialog.module";
 
 @NgModule({
   declarations: [
@@ -31,8 +31,8 @@ import {ManufactureDialogModule} from "./dialogue/manufacture/manufacture-dialog
     HttpServiceModule.forRoot(environment.urlPrefix),
     BrowserAnimationsModule,
     MatDialogModule,
-    MaterialDialogModule,
-    MarketMaterialDialogModule,
+    WarehouseDialogModule,
+    MarketDialogModule,
     BottomNotificationModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),

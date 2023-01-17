@@ -6,19 +6,18 @@ import {DiagramChartOptions} from "@model/chart/DiagramChartOptions";
 import {PathContextService} from "@service/path-context/path-context.service";
 
 @Component({
-  selector: 'app-material-dialog',
-  templateUrl: './material-dialog.component.html',
-  styleUrls: ['./material-dialog.component.scss'],
+  selector: 'app-warehouse-dialog',
+  templateUrl: './warehouse-dialog.component.html',
+  styleUrls: ['./warehouse-dialog.component.scss'],
 })
-// todo era rename to WarehouseMaterialDialogComponent
-export class MaterialDialogComponent {
+export class WarehouseDialogComponent {
 
   material: WarehouseMaterial;
 
   public chartOptions: Partial<DiagramChartOptions>;
 
   constructor(
-    private dialogRef: MatDialogRef<MaterialDialogComponent>,
+    private dialogRef: MatDialogRef<WarehouseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: WarehouseMaterial },
     private readonly router: Router,
     private readonly pathContextService: PathContextService,

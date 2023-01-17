@@ -3,7 +3,6 @@ import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {WarehouseController} from "@controller/WarehouseController";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
-import {MaterialDialogComponent} from "../../dialogue/material/material-dialog.component";
 import {Subject} from "rxjs";
 import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor";
 import {Unsub} from "@util/Unsub";
@@ -16,6 +15,7 @@ import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumb
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {DepartmentController} from "@controller/DepartmentController";
 import {debounceTime, filter} from "rxjs/operators";
+import {WarehouseDialogComponent} from "../../dialogue/warehouse/warehouse-dialog.component";
 
 @Component({
   selector: 'app-warehouse',
@@ -33,7 +33,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   private readonly filterChangedSubject = new Subject<MaterialFilter>();
   private readonly filterReactor = new MaterialFilterReactor(this.filterChangedSubject);
 
-  private dialogRef: MatDialogRef<MaterialDialogComponent> | undefined;
+  private dialogRef: MatDialogRef<WarehouseDialogComponent> | undefined;
 
   private readonly unsub = new Unsub();
 
@@ -62,7 +62,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
 
   onRowClick(material: WarehouseMaterial): void {
     this.dialogRef?.close();
-    this.dialogRef = this.dialog.open(MaterialDialogComponent, {
+    this.dialogRef = this.dialog.open(WarehouseDialogComponent, {
       width: '720px',
       height: '320px',
       data: {material: material},

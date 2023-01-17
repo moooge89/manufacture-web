@@ -3,7 +3,6 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
-import {MarketMaterialDialogComponent} from "../../dialogue/market-material/market-material-dialog.component";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {Subject} from "rxjs";
 import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor";
@@ -18,6 +17,7 @@ import {FilterController} from "@controller/FilterController";
 import {debounceTime, filter} from "rxjs/operators";
 import {PathContextService} from "@service/path-context/path-context.service";
 import {Observable} from "rxjs/internal/Observable";
+import {MarketDialogComponent} from "../../dialogue/market/market-dialog.component";
 
 @Component({
   selector: 'app-market',
@@ -37,7 +37,7 @@ export class MarketComponent implements OnInit, OnDestroy {
   private readonly filterChangedSubject = new Subject<MaterialFilter>();
   private readonly filterReactor = new MaterialFilterReactor(this.filterChangedSubject);
 
-  private dialogRef: MatDialogRef<MarketMaterialDialogComponent> | undefined;
+  private dialogRef: MatDialogRef<MarketDialogComponent> | undefined;
 
   private readonly unsub = new Unsub();
 
@@ -81,7 +81,7 @@ export class MarketComponent implements OnInit, OnDestroy {
   onRowClick(material: MarketMaterial): void {
     this.dialogRef?.close();
 
-    this.dialogRef = this.dialog.open(MarketMaterialDialogComponent, {
+    this.dialogRef = this.dialog.open(MarketDialogComponent, {
       width: '720px',
       height: '320px',
       data: {material: material},

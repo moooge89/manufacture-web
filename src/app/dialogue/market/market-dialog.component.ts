@@ -4,12 +4,11 @@ import {MarketMaterial} from "@model/api/material/MarketMaterial";
 import {BottomNotificationService} from "@service/bottom-notification/bottom-notification.service";
 
 @Component({
-  selector: 'app-market-material-dialog',
-  templateUrl: './market-material-dialog.component.html',
-  styleUrls: ['./market-material-dialog.component.scss'],
+  selector: 'app-market-dialog',
+  templateUrl: './market-dialog.component.html',
+  styleUrls: ['./market-dialog.component.scss'],
 })
-// todo era rename (MarketDialogComponent)
-export class MarketMaterialDialogComponent {
+export class MarketDialogComponent {
 
   material: MarketMaterial;
 
@@ -17,7 +16,7 @@ export class MarketMaterialDialogComponent {
   price = 0
 
   constructor(
-    private dialogRef: MatDialogRef<MarketMaterialDialogComponent>,
+    private dialogRef: MatDialogRef<MarketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: MarketMaterial },
     private readonly notificationService: BottomNotificationService,
   ) {
