@@ -110,7 +110,7 @@ export class ReportController {
   }
 
   loadReportDescription(): Observable<ReportDescription> {
-    const reportDescription = {
+    const reportDescription: ReportDescription = {
       categories: [
         'Jan',
         'Feb',
@@ -125,9 +125,13 @@ export class ReportController {
         'Nov',
         'Dec',
       ],
+      firstCountLabel: 'Manufactured parts (first)',
       firstCountScale: [12, 12, 12, 44, 55, 57, 56, 61, 58, 63, 60, 66],
+      secondCountLabel: 'Manufactured parts (second)',
       secondCountScale: [12, 12, 12, 76, 85, 101, 98, 87, 105, 91, 114, 94],
+      firstCoefLabel: 'Manufacture coefficient (first)',
       firstCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
+      secondCoefLabel: 'Manufacture coefficient (second)',
       secondCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
     };
 

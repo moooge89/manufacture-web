@@ -19,23 +19,22 @@ export class ReportDialogComponent {
 
     const description = data.reportDescription;
 
-    // todo era get info from controller
     this.chartOptions = {
       series: [
         {
-          name: 'Manufactured parts (first)',
+          name: description.firstCountLabel,
           data: description.firstCountScale,
         },
         {
-          name: 'Manufactured parts (second)',
+          name: description.secondCountLabel,
           data: description.secondCountScale,
         },
         {
-          name: 'Manufacture coefficient (first)',
+          name: description.firstCoefLabel,
           data: description.firstCoefScale,
         },
         {
-          name: 'Manufacture coefficient (second)',
+          name: description.secondCoefLabel,
           data: description.secondCoefScale,
         }
       ],
