@@ -18,7 +18,7 @@
             [getName]="getName"
             [elements]="factoriesToShow"
             [selectedElementId]="firstFactoryId"
-            (valueChanged)="onFirstFactoryChange($event)"
+            (idChanged)="onFirstFactoryChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -29,7 +29,7 @@
             [elements]="firstDepartmentsToShow"
             [selectedElementId]="firstDepartmentId"
             [emptyMessage]="emptyMessageForFirstDepartment"
-            (valueChanged)="onFirstDepartmentChange($event)"
+            (idChanged)="onFirstDepartmentChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -40,7 +40,7 @@
             [elements]="firstTeamsToShow"
             [selectedElementId]="firstTeamId"
             [emptyMessage]="emptyMessageForFirstTeam"
-            (valueChanged)="onFirstTeamChange($event)"
+            (idChanged)="onFirstTeamChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -51,7 +51,7 @@
             [elements]="firstTeamsToShow"
             [selectedElementId]="firstTeamId"
             [emptyMessage]="emptyMessageForFirstTeam"
-            (valueChanged)="onFirstTeamChange($event)"
+            (idChanged)="onFirstTeamChange($event)"
           ></app-dropdown>
 
         </div>
@@ -70,7 +70,7 @@
             [getName]="getName"
             [elements]="factoriesToShow"
             [selectedElementId]="secondFactoryId"
-            (valueChanged)="onSecondFactoryChange($event)"
+            (idChanged)="onSecondFactoryChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -81,7 +81,7 @@
             [elements]="secondDepartmentsToShow"
             [selectedElementId]="secondDepartmentId"
             [emptyMessage]="emptyMessageForSecondDepartment"
-            (valueChanged)="onSecondDepartmentChange($event)"
+            (idChanged)="onSecondDepartmentChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -92,7 +92,7 @@
             [elements]="secondTeamsToShow"
             [selectedElementId]="secondTeamId"
             [emptyMessage]="emptyMessageForSecondTeam"
-            (valueChanged)="onSecondTeamChange($event)"
+            (idChanged)="onSecondTeamChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -103,7 +103,7 @@
             [elements]="secondTeamsToShow"
             [selectedElementId]="secondTeamId"
             [emptyMessage]="emptyMessageForSecondTeam"
-            (valueChanged)="onSecondTeamChange($event)"
+            (idChanged)="onSecondTeamChange($event)"
           ></app-dropdown>
 
         </div>

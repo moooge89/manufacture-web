@@ -15,6 +15,28 @@ export class DepartmentController {
     this.http = http.setControllerPrefix('/department');
   }
 
+  loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
+    const departments: FilterElement[] = [
+      {
+        id: '1',
+        name: 'First department',
+      },
+
+      {
+        id: '2',
+        name: 'Second department',
+      },
+
+      {
+        id: '3',
+        name: 'Third department',
+      },
+    ];
+
+    return of(departments);
+  }
+
+  // todo era normalize (вынести persons)
   loadDepartments(): Observable<Department[]> {
     const departments: Department[] = [
       {

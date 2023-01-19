@@ -6,9 +6,10 @@ import {ProductionFilter} from "@model/api/production/ProductionFilter";
 import {FilterElement} from "@model/filter/FilterElement";
 import {Subject} from "rxjs";
 import {switchMap} from "rxjs/operators";
-import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
-import {FilterController} from "@controller/FilterController";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {Cache} from "@util/Cache";
+import {FactoryController} from "@controller/FactoryController";
+import {DepartmentController} from "@controller/DepartmentController";
 
 @Component({
   selector: 'app-production',
@@ -19,34 +20,37 @@ export class ProductionComponent implements OnInit, OnDestroy {
 
   productionInfo: ProductionInfo[] = [];
 
-  factoriesToShow: FilterElement[] = [];
-  departmentsToShow: FilterElement[] = [];
+  factories: FilterElement[] = [];
+  departments: FilterElement[] = [];
 
-  currentFactoryId: string = '';
-  currentDepartmentId: string = '';
+  filter: ProductionFilter = {
+    factoryId: '',
+    departmentId: '',
+  };
 
   private currentFactoryIndex: number = 0;
   private currentDepartmentIndex: number = 0;
-  private filterDesc: FactoryFilterDescription[] = [];
 
   private lastFactoryIndex: number = 0;
   private lastDepartmentIndex: number = 0;
 
+  private readonly cache = new Cache<FilterElement[]>();
   private readonly unsub = new Unsub();
   private readonly filterChangedSubject = new Subject<ProductionFilter>();
 
-  constructor(private readonly filterController: FilterController,
-              private readonly productionController: ProductionController,) {
+  constructor(private readonly factoryController: FactoryController,
+              private readonly productionController: ProductionController,
+              private readonly departmentController: DepartmentController,) {
   }
 
   ngOnInit() {
+    this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(async factories => {
+      await this.initFirstFilter(factories)
+    });
+
     this.unsub.sub = this.filterChangedSubject.pipe(
       switchMap(filter => this.productionController.loadProductionInfo(filter))
     ).subscribe(productionInfo => this.productionInfo = productionInfo);
-
-    this.unsub.sub = this.filterController.loadFactoryFilterDescription().subscribe(
-      filterDescription => this.initFirstFilter(filterDescription)
-    );
   }
 
   ngOnDestroy() {
@@ -57,63 +61,54 @@ export class ProductionComponent implements OnInit, OnDestroy {
 
   getName = getNameFromFe;
 
-  onFactoryChange(elementIds: string[]): void {
+  async onFactoryChange(elementIds: string[]): Promise<void> {
     if (elementIds?.length === 0) return;
 
     const selectedFactoryId = elementIds[0];
-    const index = this.factoriesToShow.findIndex(x => x.id === selectedFactoryId);
+    const index = this.factories.findIndex(x => x.id === selectedFactoryId);
 
     if (index < 0) {
       throw new Error(`Cannot find factory with ID ${selectedFactoryId}`);
     }
 
-    this.currentFactoryIndex = index;
-    this.updateCurrentFactoryId();
+    this.lastFactoryIndex = index;
 
-    this.currentDepartmentIndex = 0;
+    await this.updateCurrentFactoryId();
     this.updateCurrentDepartmentId();
 
-    this.emitValuesToFilter();
+    this.emitFilter();
   }
 
-  onDepartmentChange(elementIds: string[]): void {
+  async onDepartmentChange(elementIds: string[]): Promise<void> {
     if (elementIds?.length === 0) return;
 
-    const selectedDepartmentId = elementIds[0];
-    const index = this.departmentsToShow.findIndex(x => x.id === selectedDepartmentId);
+    this.filter.departmentId = elementIds[0];
 
-    if (index < 0) {
-      throw new Error(`Cannot find department with ID ${selectedDepartmentId}`);
-    }
-
-    this.currentDepartmentIndex = index;
-    this.updateCurrentDepartmentId();
-
-    this.emitValuesToFilter();
+    this.emitFilter();
   }
 
-  onPrevClick(): void {
+  async onPrevClick(): Promise<void> {
     if (!this.isPrevClickable) return;
 
     if (this.currentDepartmentIndex === 0) {
       this.currentFactoryIndex--;
-      this.updateCurrentFactoryId();
+      await this.updateCurrentFactoryId();
 
-      this.currentDepartmentIndex = this.departmentsToShow.length - 1;
+      this.currentDepartmentIndex = this.factories.length - 1;
     } else {
       this.currentDepartmentIndex--;
     }
 
     this.updateCurrentDepartmentId();
-    this.emitValuesToFilter();
+    this.emitFilter();
   }
 
-  onNextClick(): void {
+  async onNextClick(): Promise<void> {
     if (!this.isNextClickable) return;
 
     if (this.isCurrentDepartmentIsLastInFactory) {
       this.currentFactoryIndex++;
-      this.updateCurrentFactoryId();
+      await this.updateCurrentFactoryId();
 
       this.currentDepartmentIndex = 0;
     } else {
@@ -121,43 +116,44 @@ export class ProductionComponent implements OnInit, OnDestroy {
     }
 
     this.updateCurrentDepartmentId();
-    this.emitValuesToFilter();
+    this.emitFilter();
   }
 
-  private initFirstFilter(filterDescriptions: FactoryFilterDescription[]): void {
-    if (!filterDescriptions || filterDescriptions.length === 0 || filterDescriptions[0].departments.length === 0) {
-      throw new Error('Cannot found any factory or department');
+  private async initFirstFilter(factories: FilterElement[]): Promise<void> {
+    if (factories.length === 0) {
+      throw new Error('Cannot find any factory');
     }
 
-    this.filterDesc = filterDescriptions;
-    this.factoriesToShow = filterDescriptions.map(x => x.filterElement);
+    this.factories = factories;
+    this.lastFactoryIndex = this.factories.length - 1;
 
-    this.updateCurrentFactoryId();
+    await this.updateCurrentFactoryId();
     this.updateCurrentDepartmentId();
 
-    const lastFactory = filterDescriptions[filterDescriptions.length - 1];
-
-    this.lastFactoryIndex = filterDescriptions.length - 1;
-    this.lastDepartmentIndex = lastFactory.departments.length - 1;
-
-    this.emitValuesToFilter();
+    this.emitFilter();
   }
 
-  private emitValuesToFilter(): void {
-    this.filterChangedSubject.next({
-      factoryId: this.currentFactoryId,
-      departmentId: this.currentDepartmentId,
-    });
+  private emitFilter(): void {
+    this.filterChangedSubject.next(this.filter);
   }
 
-  private updateCurrentFactoryId(): void {
-    const factory = this.filterDesc[this.currentFactoryIndex];
-    this.currentFactoryId = factory.filterElement.id;
-    this.departmentsToShow = factory.departments;
+  private async updateCurrentFactoryId(): Promise<void> {
+    const factory = this.factories[this.currentFactoryIndex];
+    this.filter.factoryId = factory.id;
+
+    this.departments = await this.cache.computeIfAbsent(factory.id, this.departmentsPromise(factory.id));
+
+    this.currentDepartmentIndex = 0;
+    this.lastDepartmentIndex = this.departments.length - 1;
+
   }
 
   private updateCurrentDepartmentId(): void {
-    this.currentDepartmentId = this.departmentsToShow[this.currentDepartmentIndex].id;
+    this.filter.departmentId = this.departments[this.currentDepartmentIndex].id;
+  }
+
+  private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
+    return this.departmentController.loadDepartmentsOfFactoryAsFilterElements(factoryId).toPromise();
   }
 
   get isPrevClickable(): boolean {
@@ -170,7 +166,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
   }
 
   get isCurrentDepartmentIsLastInFactory(): boolean {
-    return this.departmentsToShow.length === this.currentDepartmentIndex + 1;
+    return this.departments.length === this.currentDepartmentIndex + 1;
   }
 
 }

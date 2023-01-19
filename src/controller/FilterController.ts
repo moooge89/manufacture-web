@@ -2,12 +2,9 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {StaticFilterData} from "@model/filter/StaticFilterData";
-import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
 import {FilterElement} from "@model/filter/FilterElement";
 
 @Injectable({providedIn: 'root'})
-// todo era decompose
 export class FilterController {
 
   private readonly http: HttpService;
@@ -37,65 +34,41 @@ export class FilterController {
     return of(countries);
   }
 
-  // todo era decompose
-  loadStaticFilterData(): Observable<StaticFilterData> {
-    const filterData: StaticFilterData = {
-      countries: ['Kazakhstan', 'USA', 'Russia'],
-      icons: ['aluminum', 'bronze', 'gold', 'iron', 'steel', 'sand'],
-    };
-
-    return of(filterData);
-  }
-
-  loadFactoryFilterDescription(): Observable<FactoryFilterDescription[]> {
-    const filterDescription: FactoryFilterDescription[] = [
+  loadIconFilterElements(): Observable<FilterElement[]> {
+    const icons: FilterElement[] = [
       {
-        filterElement: {
-          id: '1',
-          name: 'First factory',
-        },
-        departments: [
-          {
-            id: '1',
-            name: 'First department',
-          },
-
-          {
-            id: '2',
-            name: 'Second department',
-          },
-
-          {
-            id: '3',
-            name: 'Third department',
-          },
-        ],
+        id: '1',
+        name: 'aluminum',
       },
+
       {
-        filterElement: {
-          id: '2',
-          name: 'Second factory',
-        },
-        departments: [
-          {
-            id: '4',
-            name: 'Fourth department',
-          },
+        id: '2',
+        name: 'bronze',
+      },
 
-          {
-            id: '5',
-            name: 'Fifth department',
-          },
+      {
+        id: '3',
+        name: 'gold',
+      },
 
-          {
-            id: '6',
-            name: 'Sixth department',
-          },
-        ],
-      }
+      {
+        id: '4',
+        name: 'iron',
+      },
+
+      {
+        id: '5',
+        name: 'steel',
+      },
+
+      {
+        id: '6',
+        name: 'sand',
+      },
+
     ];
 
-    return of(filterDescription);
+    return of(icons);
   }
 
 }

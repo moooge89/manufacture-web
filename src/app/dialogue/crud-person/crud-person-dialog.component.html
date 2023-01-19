@@ -18,25 +18,27 @@
       label="Factory"
       [getId]="getId"
       [getName]="getName"
-      [elements]="factoriesToShow"
+      [elements]="factories"
       [isMultiple]="false"
       [selectedElementId]="copyPerson.factoryId"
       [inputError]="factoryError"
-      (valueChanged)="onFactoryChange($event)"
+      [useElementEmitting]="true"
+      (elementChanged)="onFactoryChange($event)"
     ></app-dropdown>
   </div>
 
-  <div class="form-cell-title">Country</div>
+  <div class="form-cell-title">Department</div>
   <div class="form-cell-value">
     <app-dropdown
-      label="Country"
+      label="Department"
       [getId]="getId"
       [getName]="getName"
-      [elements]="departmentsToShow"
+      [elements]="departments"
       [isMultiple]="false"
       [selectedElementId]="copyPerson.departmentId"
       [inputError]="departmentError"
-      (valueChanged)="onDepartmentChange($event)"
+      [useElementEmitting]="true"
+      (elementChanged)="onDepartmentChange($event)"
     ></app-dropdown>
   </div>
 

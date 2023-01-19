@@ -1,15 +1,16 @@
 import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FilterController} from "@controller/FilterController";
 import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {InputError} from "@model/web/InputError";
 import {Person} from "@model/person/Person";
 import {FilterElement} from "@model/filter/FilterElement";
-import {FactoryFilterDescription} from "@model/api/production/FactoryFilterDescription";
 import {PersonDialogResp} from "@model/dialog/PersonDialogResp";
 import {PersonController} from "@controller/PersonController";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {Cache} from "@util/Cache";
+import {FactoryController} from "@controller/FactoryController";
+import {DepartmentController} from "@controller/DepartmentController";
 
 @Component({
   selector: 'app-crud-person-dialog',
@@ -25,27 +26,22 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
   factoryError: InputError = {hasError: false, errorText: ''};
   departmentError: InputError = {hasError: false, errorText: ''};
 
-  factoriesToShow: FilterElement[] = [];
-  departmentsToShow: FilterElement[] = [];
-
-  currentFactoryId: string = '';
-  currentDepartmentId: string = '';
-
-  private currentFactoryIndex: number = 0;
-  private currentDepartmentIndex: number = 0;
-  private filterDesc: FactoryFilterDescription[] = [];
+  factories: FilterElement[] = [];
+  departments: FilterElement[] = [];
 
   private readonly needToConfirm: boolean;
   private readonly isSave: boolean;
 
+  private readonly cache = new Cache<FilterElement[]>();
   private readonly unsub = new Unsub();
 
   constructor(
     private dialogRef: MatDialogRef<CrudPersonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { person: Person, noNeedToConfirm: boolean, isSave: boolean },
-    private readonly filterController: FilterController,
     private readonly personController: PersonController,
+    private readonly factoryController: FactoryController,
     private readonly confirmationService: ConfirmationService,
+    private readonly departmentController: DepartmentController,
   ) {
     this.person = data.person;
     this.copyPerson = {...data.person};
@@ -55,9 +51,13 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.filterController.loadFactoryFilterDescription().subscribe(
-      filterDescription => this.initFirstFilter(filterDescription)
-    );
+    this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
+
+    const factoryId = this.copyPerson.factoryId;
+
+    if (factoryId) {
+      this.cache.computeIfAbsent(factoryId, this.departmentsPromise(factoryId)).then(departments => this.departments = departments);
+    }
 
     this.unsub.sub = this.dialogRef.backdropClick().subscribe(() => this.cancel());
   }
@@ -80,43 +80,30 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     this.nameError.hasError = false;
   }
 
-  onFactoryChange(elementIds: string[]): void {
-    if (elementIds?.length === 0) return;
+  async onFactoryChange(elements: FilterElement[]): Promise<void> {
+    if (elements?.length === 0) return;
 
-    const selectedFactoryId = elementIds[0];
-    const index = this.factoriesToShow.findIndex(x => x.id === selectedFactoryId);
+    const selectedFactory = elements[0];
 
-    if (index < 0) {
-      throw new Error(`Cannot find factory with ID ${selectedFactoryId}`);
-    }
+    this.copyPerson.factoryId = selectedFactory.id;
+    this.copyPerson.factoryName = selectedFactory.name;
 
-    this.currentFactoryIndex = index;
-    this.updateCurrentFactoryId();
+    this.departments = await this.cache.computeIfAbsent(selectedFactory.id, this.departmentsPromise(selectedFactory.id));
 
-    this.currentDepartmentIndex = -1;
-    this.updateCurrentDepartmentId();
     this.copyPerson.departmentId = '';
+    this.copyPerson.departmentName = '';
 
-    this.copyPerson.factoryId = selectedFactoryId;
-    this.copyPerson.factoryName = this.factoriesToShow[this.currentFactoryIndex].name;
     this.factoryError.hasError = false;
   }
 
-  onDepartmentChange(elementIds: string[]): void {
-    if (elementIds?.length === 0) return;
+  onDepartmentChange(elements: FilterElement[]): void {
+    if (elements?.length === 0) return;
 
-    const selectedDepartmentId = elementIds[0];
-    const index = this.departmentsToShow.findIndex(x => x.id === selectedDepartmentId);
+    const selectedDepartment = elements[0];
 
-    if (index < 0) {
-      throw new Error(`Cannot find department with ID ${selectedDepartmentId}`);
-    }
+    this.copyPerson.departmentId = selectedDepartment.id;
+    this.copyPerson.departmentName = selectedDepartment.name;
 
-    this.currentDepartmentIndex = index;
-    this.updateCurrentDepartmentId();
-
-    this.copyPerson.departmentId = selectedDepartmentId;
-    this.copyPerson.departmentName = this.departmentsToShow[this.currentDepartmentIndex].name;
     this.departmentError.hasError = false;
   }
 
@@ -195,26 +182,8 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     return isValid;
   }
 
-  private updateCurrentFactoryId(): void {
-    const factory = this.filterDesc[this.currentFactoryIndex];
-    this.currentFactoryId = factory.filterElement.id;
-    this.departmentsToShow = factory.departments;
-  }
-
-  private updateCurrentDepartmentId(): void {
-    this.currentDepartmentId = this.departmentsToShow[this.currentDepartmentIndex]?.id || '';
-  }
-
-  private initFirstFilter(filterDescriptions: FactoryFilterDescription[]): void {
-    if (!filterDescriptions || filterDescriptions.length === 0 || filterDescriptions[0].departments.length === 0) {
-      throw new Error('Cannot found any factory or department');
-    }
-
-    this.filterDesc = filterDescriptions;
-    this.factoriesToShow = filterDescriptions.map(x => x.filterElement);
-
-    this.updateCurrentFactoryId();
-    this.updateCurrentDepartmentId();
+  private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
+    return this.departmentController.loadDepartmentsOfFactoryAsFilterElements(factoryId).toPromise();
   }
 
   private closeDialog(dialogRes: PersonDialogResp): void {

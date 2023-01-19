@@ -28,9 +28,9 @@
         [isMultiple]="false"
         [getId]="getId"
         [getName]="getName"
-        [elements]="factoriesToShow"
-        [selectedElementId]="currentFactoryId"
-        (valueChanged)="onFactoryChange($event)"
+        [elements]="factories"
+        [selectedElementId]="filter.factoryId"
+        (idChanged)="onFactoryChange($event)"
       ></app-dropdown>
 
       <app-dropdown
@@ -38,9 +38,9 @@
         [isMultiple]="false"
         [getId]="getId"
         [getName]="getName"
-        [elements]="departmentsToShow"
-        [selectedElementId]="currentDepartmentId"
-        (valueChanged)="onDepartmentChange($event)"
+        [elements]="departments"
+        [selectedElementId]="filter.departmentId"
+        (idChanged)="onDepartmentChange($event)"
       ></app-dropdown>
 
     </div>

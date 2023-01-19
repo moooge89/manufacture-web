@@ -51,9 +51,22 @@ export class DropdownComponent<T> implements OnInit {
   @Input() inputError: InputError = {hasError: false, errorText: ''};
 
   /**
-   * on value change it emits it
+   * If true, component emits full T element
+   * <br>
+   * Otherwise emits only id of the element
    */
-  @Output() valueChanged = new EventEmitter<string[]>();
+  @Input() useElementEmitting: boolean = false;
+
+  /**
+   * on id change it emits new set id
+   */
+  @Output() idChanged = new EventEmitter<string[]>();
+
+  /**
+   * on element change it emits new set element
+   */
+    // todo era use elementChanged where needed
+  @Output() elementChanged = new EventEmitter<T[]>();
 
   shownElements: T[] = [];
 
@@ -83,8 +96,28 @@ export class DropdownComponent<T> implements OnInit {
     this.shownElements = this.allElements.filter(x => this.getName(x).toLowerCase().indexOf(name.toLowerCase()) > -1);
   }
 
-  onValueChange(ids: string[]) {
-    this.valueChanged.next(ids);
+  onValueChange(ids: string[]): void {
+    if (!this.useElementEmitting) {
+      this.onIdChange(ids);
+    } else {
+      this.onElementChange(ids);
+    }
+  }
+
+  private onIdChange(ids: string[]): void {
+    this.idChanged.next(ids);
+  }
+
+  private onElementChange(ids: string[]): void {
+    const set = new Set<string>();
+
+    for (const id of ids) {
+      set.add(id);
+    }
+
+    const selectedElements: T[] = this.allElements.filter(el => set.has(this.getId(el)));
+
+    this.elementChanged.emit(selectedElements);
   }
 
 }

@@ -7,6 +7,8 @@ import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {InputError} from "@model/web/InputError";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {MarketController} from "@controller/MarketController";
+import {FilterElement} from "@model/filter/FilterElement";
+import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 
 @Component({
   selector: 'app-crud-market-material-dialog',
@@ -18,8 +20,8 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
   material: MarketMaterial;
   copyMaterial: MarketMaterial;
 
-  icons: string[] = [];
-  countries: string[] = [];
+  icons: FilterElement[] = [];
+  countries: FilterElement[] = [];
 
   iconError: InputError = {hasError: false, errorText: ''};
   nameError: InputError = {hasError: false, errorText: ''};
@@ -46,10 +48,10 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.filterController.loadStaticFilterData().subscribe(filterData => {
-      this.icons = filterData.icons;
-      this.countries = filterData.countries;
-    });
+
+    this.unsub.sub = this.filterController.loadCountryFilterElements().subscribe(countries => this.countries = countries);
+
+    this.unsub.sub = this.filterController.loadIconFilterElements().subscribe(icons => this.icons = icons);
 
     this.unsub.sub = this.dialogRef.backdropClick().subscribe(() => this.cancel());
   }
@@ -63,9 +65,9 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     await this.cancel();
   }
 
-  getId = (element: string) => element;
+  getId = getIdFromFe;
 
-  getName = (element: string) => element;
+  getName = getNameFromFe;
 
   onIconChange(icon: any): void {
     this.copyMaterial.icon = icon;
