@@ -14,11 +14,16 @@ export class PersonController {
     this.http = http.setControllerPrefix('/person');
   }
 
-  createPerson(person: Person): Observable<string> {
-    return of('2');
+  createPerson(person: Person): Observable<Person> {
+    person.id = '2';
+    return of(person);
   }
 
-  updatePerson(person: Person): Observable<void> {
+  updatePerson(person: Person): Observable<Person> {
+    return of(person);
+  }
+
+  updatePersonIndex(personId: string, index: number): Observable<void> {
     return of(undefined);
   }
 
@@ -31,6 +36,7 @@ export class PersonController {
         factoryName: 'Factory 1',
         departmentId: '1',
         departmentName: 'Department 1',
+        index: 1,
       },
       {
         id: '2',
@@ -39,6 +45,7 @@ export class PersonController {
         factoryName: 'Factory 1',
         departmentId: '2',
         departmentName: 'Department 2',
+        index: 2,
       },
       {
         id: '3',
@@ -47,6 +54,7 @@ export class PersonController {
         factoryName: 'Factory 2',
         departmentId: '1',
         departmentName: 'Department 1',
+        index: 3,
       },
       {
         id: '4',
@@ -55,6 +63,7 @@ export class PersonController {
         factoryName: 'Factory 2',
         departmentId: '2',
         departmentName: 'Department 2',
+        index: 4,
       },
     ];
 

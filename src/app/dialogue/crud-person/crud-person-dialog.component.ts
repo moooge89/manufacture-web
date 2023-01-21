@@ -141,7 +141,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     }
 
     if (this.isSave) {
-      this.copyPerson.id = await this.personController.createPerson(this.copyPerson).toPromise();
+      this.copyPerson = await this.personController.createPerson(this.copyPerson).toPromise();
     } else {
       await this.personController.updatePerson(this.copyPerson).toPromise();
     }

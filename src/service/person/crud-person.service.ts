@@ -21,6 +21,7 @@ export class CrudPersonService {
       factoryName: '',
       departmentId: '',
       departmentName: '',
+      index: -1,
     };
 
     const dialogRef = this.dialog.open(CrudPersonDialogComponent, {

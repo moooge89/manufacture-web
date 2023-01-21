@@ -8,4 +8,6 @@ export interface Person {
   departmentId: string;
   departmentName: string;
 
+  index: number;
+
 }

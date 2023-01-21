@@ -108,8 +108,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     persons.splice(item.previousIndex, 1);
     persons.splice(item.currentIndex, 0, personToBeMoved);
 
-    // todo era change person index in department
-    return [];
+    return [this.personController.updatePersonIndex(personToBeMoved.id, item.currentIndex)];
   }
 
   private handleContainerChange(item: CdkDragDrop<any, any>): Observable<void>[] {
