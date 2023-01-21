@@ -11,6 +11,8 @@ import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {Observable} from "rxjs/internal/Observable";
 import {forkJoin} from "rxjs";
 import {take} from "rxjs/operators";
+import {PersonController} from "@controller/PersonController";
+import {PersonFilter} from "@model/filter/PersonFilter";
 
 @Component({
   selector: 'app-departments',
@@ -29,12 +31,13 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
   private readonly unsub = new Unsub();
 
   constructor(private readonly dialog: MatDialog,
+              private readonly personController: PersonController,
               private readonly confirmationService: ConfirmationService,
               private readonly departmentController: DepartmentController,) {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.departmentController.loadDepartments().subscribe(deps => this.departments = deps);
+    this.unsub.sub = this.departmentController.loadDepartments().subscribe(deps => this.initDepartments(deps));
   }
 
   ngOnDestroy() {
@@ -131,6 +134,21 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     }
 
     forkJoin(updates$).pipe(take(1)).subscribe();
+  }
+
+  private initDepartments(departments: Department[]): void {
+    this.departments = departments;
+
+    for (let i = 0; i < departments.length; ++i) {
+      const personFilter: PersonFilter = {
+        departmentIds: [departments[i].id],
+        personName: '',
+        factoryIds: [],
+      };
+
+      this.unsub.sub = this.personController.loadPersons(personFilter).subscribe(persons => this.departments[i].persons = persons);
+    }
+
   }
 
   get isDraggingDisabled(): boolean {

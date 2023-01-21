@@ -1,4 +1,4 @@
-import {Person} from "../person/Person";
+import {Person} from "@model/person/Person";
 
 export interface Department {
   id: string;
