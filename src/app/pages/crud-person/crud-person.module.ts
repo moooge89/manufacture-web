@@ -7,7 +7,6 @@ import {CrudPersonComponent} from "./crud-person.component";
 import {CrudPersonRoutingModule} from "./crud-person-routing.module";
 import {DynamicFilterModule} from "@shared/dynamic-filter/dynamic-filter.module";
 
-// todo era remove all unused modules from all component modules
 @NgModule({
   declarations: [CrudPersonComponent],
   imports: [

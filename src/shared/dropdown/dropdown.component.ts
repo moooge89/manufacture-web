@@ -65,7 +65,6 @@ export class DropdownComponent<T> implements OnInit {
   /**
    * on element change it emits new set element
    */
-    // todo era use elementChanged where needed
   @Output() elementChanged = new EventEmitter<T[]>();
 
   shownElements: T[] = [];

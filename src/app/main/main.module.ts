@@ -3,7 +3,6 @@ import {MainComponent} from "./main.component";
 import {MainRoutingModule} from "./main-routing.module";
 import {CommonModule} from "@angular/common";
 import {MenuModule} from "@shared/menu/menu.module";
-import {MatDialogModule} from "@angular/material/dialog";
 import {AdminGuard} from "../guard/admin.guard";
 import {CommonPageGuard} from "../guard/common-page.guard";
 import {CompanyGuard} from "../guard/company.guard";
@@ -21,7 +20,6 @@ import {
     CommonModule,
     MainRoutingModule,
     MenuModule,
-    MatDialogModule,
   ],
   providers: [
     AdminGuard,
