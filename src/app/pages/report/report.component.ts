@@ -2,11 +2,15 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FilterElement} from "@model/filter/FilterElement";
 import {Unsub} from "@util/Unsub";
 import {ReportController} from "@controller/ReportController";
-import {ReportFactoryFilterDescription} from "@model/api/report/ReportFactoryFilterDescription";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ReportDescription} from "@model/report/ReportDescription";
 import {ReportDialogComponent} from "../../dialogue/report/report-dialog.component";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {Cache} from "@util/Cache";
+import {DepartmentController} from "@controller/DepartmentController";
+import {TeamController} from "@controller/TeamController";
+import {FactoryController} from "@controller/FactoryController";
+import {ReportFilter} from "@model/report/ReportFilter";
 
 @Component({
   selector: 'app-report',
@@ -15,40 +19,36 @@ import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 })
 export class ReportComponent implements OnInit, OnDestroy {
 
-  factoriesToShow: FilterElement[] = [];
-  firstDepartmentsToShow: FilterElement[] = [];
-  firstTeamsToShow: FilterElement[] = [];
+  factories: FilterElement[] = [];
 
-  secondFactoriesToShow: FilterElement[] = [];
-  secondDepartmentsToShow: FilterElement[] = [];
-  secondTeamsToShow: FilterElement[] = [];
+  firstDepartments: FilterElement[] = [];
+  firstTeams: FilterElement[] = [];
 
-  firstFactoryId: string | undefined;
-  firstDepartmentId: string | undefined;
-  firstTeamId: string | undefined;
+  secondDepartments: FilterElement[] = [];
+  secondTeams: FilterElement[] = [];
 
-  secondFactoryId: string | undefined;
-  secondDepartmentId: string | undefined;
-  secondTeamId: string | undefined;
-
-  firstFactoryIndex: number = 0;
-  secondFactoryIndex: number = 0;
+  reportFilter = new ReportFilter();
 
   isReportBeingGenerated: boolean = false;
+  isReportGenerated: boolean = false;
+
+  private departmentCache = new Cache<FilterElement[]>();
+  private teamCache = new Cache<FilterElement[]>();
+
+  private reportDescription: ReportDescription | undefined;
 
   private dialogRef: MatDialogRef<ReportDialogComponent> | undefined;
-  private filterDescriptions: ReportFactoryFilterDescription[] = [];
-  private reportDescription: ReportDescription | undefined;
   private readonly unsub = new Unsub();
 
   constructor(private readonly dialog: MatDialog,
-              private readonly reportController: ReportController) {
+              private readonly teamController: TeamController,
+              private readonly reportController: ReportController,
+              private readonly factoryController: FactoryController,
+              private readonly departmentController: DepartmentController,) {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.reportController.loadReportFilterDescription().subscribe(
-      filterDescriptions => this.initFilterDescription(filterDescriptions)
-    );
+    this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
   }
 
   ngOnDestroy() {
@@ -60,127 +60,112 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   getName = getNameFromFe;
 
-  onFirstFactoryChange(elementIds: string[]): void {
-    if (elementIds?.length === 0) return;
+  async onFirstFactoryChange(elements: FilterElement[]): Promise<void> {
+    if (elements.length === 0) return;
 
-    const selectedFactoryId = elementIds[0];
-    const index = this.factoriesToShow.findIndex(x => x.id === selectedFactoryId);
+    const selectedFactoryId = elements[0].id;
 
-    if (index < 0) {
-      throw new Error(`Cannot find factory with ID ${selectedFactoryId}`);
-    }
+    this.reportFilter.firstFactoryId = selectedFactoryId;
+    this.reportFilter.clearFirstDepartment();
+    this.reportFilter.clearFirstTeam();
 
-    this.firstFactoryId = selectedFactoryId;
-    this.firstDepartmentId = undefined;
-    this.firstTeamId = undefined;
-
-    this.firstFactoryIndex = index;
-
-    this.firstDepartmentsToShow = this.filterDescriptions[index].departments.map(x => x.filterElement);
-    this.firstTeamsToShow = [];
+    this.firstDepartments = await this.departmentCache.computeIfAbsent(selectedFactoryId, this.departmentsPromise(selectedFactoryId));
+    this.firstTeams = [];
   }
 
-  onFirstDepartmentChange(elementIds: string[]): void {
-    if (elementIds?.length === 0) return;
+  async onFirstDepartmentChange(elements: FilterElement[]): Promise<void> {
+    if (elements.length === 0) return;
 
-    const selectedDepartmentId = elementIds[0];
-    const index = this.firstDepartmentsToShow.findIndex(x => x.id === selectedDepartmentId);
+    const selectedDepartmentId = elements[0].id;
+    this.reportFilter.firstDepartmentId = selectedDepartmentId;
+    this.reportFilter.clearFirstTeam();
 
-    if (index < 0) {
-      throw new Error(`Cannot find department with ID ${selectedDepartmentId}`);
-    }
-
-    this.firstDepartmentId = selectedDepartmentId;
-    this.firstTeamId = undefined;
-
-    this.firstTeamsToShow = this.filterDescriptions[this.firstFactoryIndex].departments[index].teams;
+    this.firstTeams = await this.teamCache.computeIfAbsent(selectedDepartmentId, this.teamsToPromise(selectedDepartmentId));
   }
 
   onFirstTeamChange(elementIds: string[]): void {
     if (elementIds?.length === 0) return;
 
-    this.firstTeamId = elementIds[0];
+    this.reportFilter.firstTeamId = elementIds[0];
   }
 
-  onSecondFactoryChange(elementIds: string[]): void {
-    if (elementIds?.length === 0) return;
+  async onSecondFactoryChange(elements: FilterElement[]): Promise<void> {
+    if (elements.length === 0) return;
 
-    const selectedFactoryId = elementIds[0];
-    const index = this.factoriesToShow.findIndex(x => x.id === selectedFactoryId);
+    const selectedFactoryId = elements[0].id;
 
-    if (index < 0) {
-      throw new Error(`Cannot find factory with ID ${selectedFactoryId}`);
-    }
+    this.reportFilter.secondFactoryId = selectedFactoryId;
+    this.reportFilter.clearSecondDepartment();
+    this.reportFilter.clearSecondTeam();
 
-    this.secondFactoryId = selectedFactoryId;
-    this.secondDepartmentId = undefined;
-    this.secondTeamId = undefined;
-
-    this.secondFactoryIndex = index;
-
-    this.secondDepartmentsToShow = this.filterDescriptions[index].departments.map(x => x.filterElement);
-    this.secondTeamsToShow = [];
+    this.secondDepartments = await this.departmentCache.computeIfAbsent(selectedFactoryId, this.departmentsPromise(selectedFactoryId));
+    this.secondTeams = [];
   }
 
-  onSecondDepartmentChange(elementIds: string[]): void {
-    if (elementIds?.length === 0) return;
+  async onSecondDepartmentChange(elements: FilterElement[]): Promise<void> {
+    if (elements.length === 0) return;
 
-    const selectedDepartmentId = elementIds[0];
-    const index = this.secondDepartmentsToShow.findIndex(x => x.id === selectedDepartmentId);
+    const selectedDepartmentId = elements[0].id;
+    this.reportFilter.secondDepartmentId = selectedDepartmentId;
+    this.reportFilter.clearSecondTeam();
 
-    if (index < 0) {
-      throw new Error(`Cannot find department with ID ${selectedDepartmentId}`);
-    }
-
-    this.secondDepartmentId = selectedDepartmentId;
-    this.secondTeamId = undefined;
-
-    this.secondTeamsToShow = this.filterDescriptions[this.secondFactoryIndex].departments[index].teams;
+    this.secondTeams = await this.teamCache.computeIfAbsent(selectedDepartmentId, this.teamsToPromise(selectedDepartmentId));
   }
 
   onSecondTeamChange(elementIds: string[]): void {
     if (elementIds?.length === 0) return;
 
-    this.secondTeamId = elementIds[0];
+    this.reportFilter.secondTeamId = elementIds[0];
   }
 
   generateReport(): void {
-    this.unsub.sub = this.reportController.loadReportDescription().subscribe(description => {
-        this.reportDescription = description;
-        this.openDialog();
-      }
-    );
+    this.isReportBeingGenerated = true;
+    this.unsub.sub = this.reportController.loadReportDescription(this.reportFilter).subscribe(description => {
+      this.isReportBeingGenerated = false;
+      this.isReportGenerated = true;
+      this.reportDescription = description;
+      this.openDialog(description);
+    });
   }
 
-  private openDialog(): void {
+  seeGeneratedReport(): void {
+    if (!this.reportDescription) return;
+
+    this.openDialog(this.reportDescription);
+  }
+
+  private openDialog(reportDescription: ReportDescription): void {
     this.dialogRef?.close();
 
     this.dialogRef = this.dialog.open(ReportDialogComponent, {
       width: '1080px',
       height: '500px',
-      data: {reportDescription: this.reportDescription},
+      data: {reportDescription: reportDescription},
     });
   }
 
-  private initFilterDescription(filterDescriptions: ReportFactoryFilterDescription[]): void {
-    this.filterDescriptions = filterDescriptions;
-    this.factoriesToShow = filterDescriptions.map(x => x.filterElement);
+  private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
+    return this.departmentController.loadDepartmentsOfFactoryAsFilterElements(factoryId).toPromise();
+  }
+
+  private teamsToPromise(departmentId: string): Promise<FilterElement[]> {
+    return this.teamController.loadTeamsOfDepartmentAsFilterElements(departmentId).toPromise();
   }
 
   get emptyMessageForFirstDepartment(): string {
-    return this.firstFactoryId ? this.defaultEmptyMessage : this.choseFactoryText;
+    return this.reportFilter.hasFirstFactory() ? this.defaultEmptyMessage : this.choseFactoryText;
   }
 
   get emptyMessageForFirstTeam(): string {
-    return this.firstDepartmentId ? this.defaultEmptyMessage : this.choseDepartmentText;
+    return this.reportFilter.hasFirstDepartment() ? this.defaultEmptyMessage : this.choseDepartmentText;
   }
 
   get emptyMessageForSecondDepartment(): string {
-    return this.secondFactoryId ? this.defaultEmptyMessage : this.choseFactoryText;
+    return this.reportFilter.hasSecondFactory() ? this.defaultEmptyMessage : this.choseFactoryText;
   }
 
   get emptyMessageForSecondTeam(): string {
-    return this.secondDepartmentId ? this.defaultEmptyMessage : this.choseDepartmentText;
+    return this.reportFilter.hasSecondDepartment() ? this.defaultEmptyMessage : this.choseDepartmentText;
   }
 
   get defaultEmptyMessage(): string {
@@ -195,18 +180,26 @@ export class ReportComponent implements OnInit, OnDestroy {
     return 'Choose department first';
   }
 
-  get disabledButtonMsg(): string {
+  get isGenerateButtonDisabled(): boolean {
+    return this.isReportBeingGenerated || !this.reportFilter.hasFirstFactory() || !this.reportFilter.hasSecondFactory();
+  }
+
+  get generateButtonDisableMsg(): string {
     if (this.isReportBeingGenerated) return 'Report is being generated...';
 
-    if (!this.firstFactoryId) return 'Choose first factory';
+    if (!this.reportFilter.hasFirstFactory()) return 'Choose first factory';
 
-    if (!this.secondFactoryId) return 'Choose second factory';
+    if (!this.reportFilter.hasSecondFactory()) return 'Choose second factory';
 
     return '';
   }
 
-  get isButtonDisabled(): boolean {
-    return this.isReportBeingGenerated || !this.firstFactoryId || !this.secondFactoryId;
+  get isSeeButtonDisabled(): boolean {
+    return this.isReportBeingGenerated || !this.isReportGenerated;
+  }
+
+  get seeButtonDisabledMsg(): string {
+    return 'Generate report first';
   }
 
 }

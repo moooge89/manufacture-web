@@ -21,7 +21,9 @@ export class CrudMarketService {
       price: 0,
       id: '',
       country: '',
+      countryId: '',
       icon: '',
+      iconId: '',
     };
 
     const dialogRef = this.dialog.open(CrudMarketMaterialDialogComponent, {

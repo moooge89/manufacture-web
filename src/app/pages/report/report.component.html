@@ -16,9 +16,10 @@
             [isMultiple]="false"
             [getId]="getId"
             [getName]="getName"
-            [elements]="factoriesToShow"
-            [selectedElementId]="firstFactoryId"
-            (idChanged)="onFirstFactoryChange($event)"
+            [elements]="factories"
+            [selectedElementId]="reportFilter.firstFactoryId"
+            [useElementEmitting]="true"
+            (elementChanged)="onFirstFactoryChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -26,10 +27,11 @@
             [isMultiple]="false"
             [getId]="getId"
             [getName]="getName"
-            [elements]="firstDepartmentsToShow"
-            [selectedElementId]="firstDepartmentId"
+            [elements]="firstDepartments"
+            [selectedElementId]="reportFilter.firstDepartmentId"
             [emptyMessage]="emptyMessageForFirstDepartment"
-            (idChanged)="onFirstDepartmentChange($event)"
+            [useElementEmitting]="true"
+            (elementChanged)="onFirstDepartmentChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -37,19 +39,8 @@
             [isMultiple]="false"
             [getId]="getId"
             [getName]="getName"
-            [elements]="firstTeamsToShow"
-            [selectedElementId]="firstTeamId"
-            [emptyMessage]="emptyMessageForFirstTeam"
-            (idChanged)="onFirstTeamChange($event)"
-          ></app-dropdown>
-
-          <app-dropdown
-            label="Team"
-            [isMultiple]="false"
-            [getId]="getId"
-            [getName]="getName"
-            [elements]="firstTeamsToShow"
-            [selectedElementId]="firstTeamId"
+            [elements]="firstTeams"
+            [selectedElementId]="reportFilter.firstTeamId"
             [emptyMessage]="emptyMessageForFirstTeam"
             (idChanged)="onFirstTeamChange($event)"
           ></app-dropdown>
@@ -68,9 +59,10 @@
             [isMultiple]="false"
             [getId]="getId"
             [getName]="getName"
-            [elements]="factoriesToShow"
-            [selectedElementId]="secondFactoryId"
-            (idChanged)="onSecondFactoryChange($event)"
+            [elements]="factories"
+            [selectedElementId]="reportFilter.secondFactoryId"
+            [useElementEmitting]="true"
+            (elementChanged)="onSecondFactoryChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -78,10 +70,11 @@
             [isMultiple]="false"
             [getId]="getId"
             [getName]="getName"
-            [elements]="secondDepartmentsToShow"
-            [selectedElementId]="secondDepartmentId"
+            [elements]="secondDepartments"
+            [selectedElementId]="reportFilter.secondDepartmentId"
             [emptyMessage]="emptyMessageForSecondDepartment"
-            (idChanged)="onSecondDepartmentChange($event)"
+            [useElementEmitting]="true"
+            (elementChanged)="onSecondDepartmentChange($event)"
           ></app-dropdown>
 
           <app-dropdown
@@ -89,19 +82,8 @@
             [isMultiple]="false"
             [getId]="getId"
             [getName]="getName"
-            [elements]="secondTeamsToShow"
-            [selectedElementId]="secondTeamId"
-            [emptyMessage]="emptyMessageForSecondTeam"
-            (idChanged)="onSecondTeamChange($event)"
-          ></app-dropdown>
-
-          <app-dropdown
-            label="Team"
-            [isMultiple]="false"
-            [getId]="getId"
-            [getName]="getName"
-            [elements]="secondTeamsToShow"
-            [selectedElementId]="secondTeamId"
+            [elements]="secondTeams"
+            [selectedElementId]="reportFilter.secondTeamId"
             [emptyMessage]="emptyMessageForSecondTeam"
             (idChanged)="onSecondTeamChange($event)"
           ></app-dropdown>
@@ -116,15 +98,16 @@
 
       <app-button
         text="Generate"
-        [isDisabled]="isButtonDisabled"
-        [disabledMessage]="disabledButtonMsg"
+        [isDisabled]="isGenerateButtonDisabled"
+        [disabledMessage]="generateButtonDisableMsg"
         (clicked)="generateReport()"
       ></app-button>
 
       <app-button
         text="See report"
-        disabledMessage="Generate report first"
-        [isDisabled]="true"
+        [isDisabled]="isSeeButtonDisabled"
+        [disabledMessage]="seeButtonDisabledMsg"
+        (clicked)="seeGeneratedReport()"
       ></app-button>
 
     </div>

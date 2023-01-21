@@ -30,8 +30,10 @@ export class MarketController {
       {
         id: '1',
         icon: 'sand',
+        iconId: '6',
         name: 'Sand',
         country: 'Kazakhstan',
+        countryId: '1',
         price: 16,
       },
     ];
