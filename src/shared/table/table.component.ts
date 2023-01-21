@@ -4,6 +4,8 @@ import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {take} from "rxjs/operators";
 import {of, Subject} from "rxjs";
+import {Sorting} from "@model/web/Sorting";
+import {SortType} from "@model/web/SortType";
 
 @Component({
   selector: 'app-table',
@@ -11,9 +13,6 @@ import {of, Subject} from "rxjs";
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent<T> implements OnInit, OnDestroy {
-
-  // 1) todo era make table with descriptions like dynamic filters
-  // 2) todo era add sorting
 
   @Input() headers: string[] = [];
 
@@ -25,9 +24,9 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() isMatIcon: (index: number) => boolean = () => false;
 
-  @Input() isAdminTable: boolean = false;
-
   @Input() isMoney: (index: number) => boolean = () => false;
+
+  @Input() isAdminTable: boolean = false;
 
   @Input() getId: (element: T) => string = () => '';
 
@@ -39,8 +38,15 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Output() rowClicked = new EventEmitter<T>();
 
+  @Output() sortClicked = new EventEmitter<Sorting>();
+
   rows: T[] = [];
   isLoading: boolean = true;
+
+  sorting: Sorting = {
+    sortType: SortType.DESC,
+    fieldName: '',
+  };
 
   private checkedIds = new Set<string>();
 
@@ -93,6 +99,32 @@ export class TableComponent<T> implements OnInit, OnDestroy {
       this.checkedIds.clear();
     });
 
+  }
+
+  sortIcon(fieldName: string): string {
+    if (this.sorting.fieldName !== fieldName) {
+      return 'sort-disabled';
+    }
+
+    if (this.sorting.sortType === SortType.ASC) {
+      return 'sort-asc';
+    } else {
+      return 'sort-desc';
+    }
+
+  }
+
+  handleSortClick(fieldName: string): void {
+    if (this.sorting.fieldName !== fieldName) {
+      this.sorting.sortType = SortType.ASC;
+      this.sorting.fieldName = fieldName;
+    } else if (this.sorting.sortType === SortType.ASC) {
+      this.sorting.sortType = SortType.DESC;
+    } else if (this.sorting.sortType === SortType.DESC) {
+      this.sorting.sortType = SortType.ASC;
+    }
+
+    this.sortClicked.emit(this.sorting);
   }
 
   private loadContent(rows$: Observable<T[]>): void {

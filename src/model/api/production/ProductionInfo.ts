@@ -1,4 +1,3 @@
-// todo era make it class???
 export interface ProductionInfo {
   factoryId: string;
   departmentId: string;

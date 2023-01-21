@@ -17,6 +17,7 @@ import {DepartmentController} from "@controller/DepartmentController";
 import {debounceTime, filter} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-crud-person',
@@ -87,6 +88,10 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
     }
 
     this.personUpsert.next(resp.person);
+  }
+
+  onSortClicked(sorting: Sorting): void {
+    this.filterReactor.onSortChange(sorting);
   }
 
   private initDescriptions(): void {

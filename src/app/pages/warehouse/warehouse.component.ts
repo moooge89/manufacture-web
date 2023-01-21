@@ -16,6 +16,7 @@ import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {DepartmentController} from "@controller/DepartmentController";
 import {debounceTime, filter} from "rxjs/operators";
 import {WarehouseDialogComponent} from "../../dialogue/warehouse/warehouse-dialog.component";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-warehouse',
@@ -67,6 +68,10 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       height: '320px',
       data: {material: material},
     });
+  }
+
+  onSortClicked(sorting: Sorting): void {
+    this.filterReactor.onSortChange(sorting);
   }
 
   private initDescriptions(): void {

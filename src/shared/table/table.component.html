@@ -25,7 +25,21 @@
     <th *ngIf="isAdminTable"></th>
 
     <th *ngFor="let header of headers">
-      <span>{{header}}</span>
+
+      <!-- todo era pass column name instead of display name -->
+
+      <div
+        class="table-header"
+        (click)="handleSortClick(header)"
+      >
+
+        <span>{{header}}</span>
+
+        <mat-icon
+          [svgIcon]="sortIcon(header)"
+        ></mat-icon>
+
+      </div>
     </th>
 
   </tr>
@@ -61,7 +75,7 @@
 
   <tbody *ngIf="isLoading">
 
-  <tr *ngFor="let row of [].constructor(7)">
+  <tr *ngFor="let _ of [].constructor(7)">
 
     <td *ngFor="let column of columnNames">
 

@@ -1,7 +1,8 @@
 import {Subject} from "rxjs";
-import {Filter} from "@model/filter/Filter";
+import {TableFilter} from "@model/filter/TableFilter";
+import {Sorting} from "@model/web/Sorting";
 
-export abstract class FilterReactor<T extends Filter> {
+export abstract class FilterReactor<T extends TableFilter> {
 
   protected readonly filter: T;
 
@@ -10,6 +11,11 @@ export abstract class FilterReactor<T extends Filter> {
   }
 
   abstract initFilter(): T;
+
+  onSortChange(sorting: Sorting): void {
+    this.filter.sorting = sorting;
+    this.emit();
+  }
 
   protected emit(): void {
     this.filterChangeSubject.next(this.filter);

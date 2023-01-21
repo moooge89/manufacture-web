@@ -14,6 +14,13 @@ th, td {
   padding: 0.5rem 0.5rem 0.5rem 2rem;
 }
 
+.table-header {
+  display: flex;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
 th span {
   display: flex;
   width: 100%;

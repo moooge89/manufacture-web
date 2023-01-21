@@ -22,6 +22,7 @@ import {
   PersonFactoryTransferDialogComponent
 } from "../../dialogue/person-factory-transfer/person-factory-transfer-dialog.component";
 import {PersonDialogComponent} from "../../dialogue/person/person-dialog.component";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-user',
@@ -98,6 +99,10 @@ export class PersonComponent implements OnInit, OnDestroy {
       });
     }
 
+  }
+
+  onSortClicked(sorting: Sorting): void {
+    this.filterReactor.onSortChange(sorting);
   }
 
   private async initDescriptions() {

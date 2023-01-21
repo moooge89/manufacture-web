@@ -18,6 +18,7 @@ import {debounceTime, filter} from "rxjs/operators";
 import {PathContextService} from "@service/path-context/path-context.service";
 import {Observable} from "rxjs/internal/Observable";
 import {MarketDialogComponent} from "../../dialogue/market/market-dialog.component";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-market',
@@ -86,6 +87,10 @@ export class MarketComponent implements OnInit, OnDestroy {
       height: '320px',
       data: {material: material},
     });
+  }
+
+  onSortClicked(sorting: Sorting): void {
+    this.filterReactor.onSortChange(sorting);
   }
 
   private initDescriptions(): void {

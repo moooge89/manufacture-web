@@ -20,6 +20,7 @@ import {FilterController} from "@controller/FilterController";
 import {debounceTime, filter} from "rxjs/operators";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-crud-market',
@@ -93,6 +94,10 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
     }
 
     this.materialUpsert.next(resp.material);
+  }
+
+  onSortClicked(sorting: Sorting): void {
+    this.filterReactor.onSortChange(sorting);
   }
 
   private initDescriptions(): void {

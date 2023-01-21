@@ -14,6 +14,7 @@ import {FilterDropdownDescription} from "@model/filter/description/FilterDropdow
 import {FilterElement} from "@model/filter/FilterElement";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {ManufactureDialogComponent} from "../../dialogue/manufacture/manufacture-dialog.component";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-manufacture',
@@ -62,6 +63,10 @@ export class ManufactureComponent implements OnInit, OnDestroy {
       height: '320px',
       data: {manufacture: manufacture},
     });
+  }
+
+  onSortClicked(sorting: Sorting): void {
+    this.filterReactor.onSortChange(sorting);
   }
 
   private initDescriptions(): void {
