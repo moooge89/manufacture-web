@@ -110,7 +110,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
   async cancel() {
 
     if (!this.hasChanged) {
-      this.closeDialog({needToSave: false, person: undefined});
+      this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
 
@@ -120,7 +120,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.closeDialog({needToSave: false, person: undefined});
+    this.closeDialog(PersonDialogResp.noNeedToSave());
   }
 
   async save() {
@@ -130,7 +130,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     }
 
     if (!this.hasChanged) {
-      this.closeDialog({needToSave: false, person: undefined});
+      this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
 
@@ -146,7 +146,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
       await this.personController.updatePerson(this.copyPerson).toPromise();
     }
 
-    this.closeDialog({needToSave: true, person: this.copyPerson});
+    this.closeDialog(PersonDialogResp.save(this.copyPerson));
   }
 
   private async getConfirmation() {

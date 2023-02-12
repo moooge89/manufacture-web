@@ -3,7 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {
   CrudMarketMaterialDialogComponent
 } from "../../app/dialogue/crud-market-material/crud-market-material-dialog.component";
-import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 
 @Injectable({providedIn: 'root'})

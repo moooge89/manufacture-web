@@ -76,7 +76,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
   async cancel() {
 
     if (!this.hasChanged) {
-      this.closeDialog({needToSave: false, person: undefined});
+      this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
 
@@ -86,13 +86,13 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.closeDialog({needToSave: false, person: undefined});
+    this.closeDialog(PersonDialogResp.noNeedToSave());
   }
 
   async save() {
 
     if (!this.hasChanged) {
-      this.closeDialog({needToSave: false, person: undefined});
+      this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
 
@@ -113,7 +113,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
       await this.factoryController.makeUserDirector(this.copyPerson.id).toPromise();
     }
 
-    this.closeDialog({needToSave: true, person: this.copyPerson});
+    this.closeDialog(PersonDialogResp.save(this.copyPerson));
 
   }
 

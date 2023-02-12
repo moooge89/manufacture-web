@@ -9,5 +9,4 @@ export interface Person {
   departmentName: string;
 
   index: number;
-
 }

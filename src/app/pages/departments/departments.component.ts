@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Department} from "@model/api/Department";
 import {Person} from "@model/person/Person";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -14,6 +13,7 @@ import {take} from "rxjs/operators";
 import {PersonController} from "@controller/PersonController";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {SortType} from "@model/web/SortType";
+import {Department} from "@model/department/Department";
 
 @Component({
   selector: 'app-departments',

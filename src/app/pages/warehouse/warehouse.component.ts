@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
+import {WarehouseMaterial} from "@model/material/WarehouseMaterial";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {WarehouseController} from "@controller/WarehouseController";
 import {MaterialFilter} from "@model/filter/MaterialFilter";

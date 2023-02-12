@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Unsub} from "@util/Unsub";
 import {AuthController} from "@controller/AuthController";
-import {encode} from "@util/Encoder";
 import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {Router} from "@angular/router";
 import {TOKEN} from "@const/LocalStorageConst";
@@ -40,7 +39,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  async login() {
+  async login(): Promise<void> {
     if (!this.username) {
       this.usernameError.hasError = true;
       this.usernameError.errorText = 'Username is blank';
@@ -55,13 +54,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const encodedUsername = encode(this.username);
-    const encodedPassword = encode(this.password);
-
-    const securedLoginRequest: SecuredLoginRequest = {
-      username: encodedUsername,
-      password: encodedPassword,
-    }
+    const securedLoginRequest = new SecuredLoginRequest(this.username, this.password);
 
     this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(async token => {
       localStorage.setItem(TOKEN, token);
@@ -83,6 +76,14 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     this.passwordError.hasError = false;
+  }
+
+  async handleEnterClick(keyboardEvent: KeyboardEvent): Promise<void> {
+    if (keyboardEvent.code !== 'Enter') {
+      return;
+    }
+
+    await this.login();
   }
 
   get hasAnyError(): boolean {

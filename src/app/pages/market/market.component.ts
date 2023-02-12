@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {FilterDescription} from "@model/filter/description/FilterDescription";

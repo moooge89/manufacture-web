@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MarketController} from "@controller/MarketController";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
@@ -78,7 +78,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
   async onRowAddClick(): Promise<void> {
     const resp: MarketMaterialResp = await this.crudMarketService.openDialogForCreate();
 
-    if (!resp.needToSave) {
+    if (resp.doesNotNeedToSave()) {
       return;
     }
 
@@ -89,7 +89,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
 
     const resp: MarketMaterialResp = await this.crudMarketService.openDialogForEdit(material);
 
-    if (!resp.needToSave) {
+    if (resp.doesNotNeedToSave()) {
       return;
     }
 

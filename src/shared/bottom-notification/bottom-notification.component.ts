@@ -9,7 +9,7 @@ import {NotificationType} from "@model/bottom-notification/NotificationType";
 })
 export class BottomNotificationComponent extends Toast {
 
-  @Input() data: NotificationData | undefined;
+  @Input() data: NotificationData = new NotificationData();
 
   constructor(
     protected toast: ToastrService,
@@ -23,11 +23,11 @@ export class BottomNotificationComponent extends Toast {
   }
 
   get isInfo(): boolean {
-    return this.data?.type === NotificationType.INFO;
+    return this.data.type === NotificationType.INFO;
   }
 
   get isError(): boolean {
-    return this.data?.type === NotificationType.ERROR;
+    return this.data.type === NotificationType.ERROR;
   }
 
 }

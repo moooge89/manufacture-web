@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {FactoryInfo} from "@model/api/factory/FactoryInfo";
-import {LightFactoryInfo} from "@model/api/factory/LightFactoryInfo";
+import {FactoryInfo} from "@model/factory/FactoryInfo";
+import {LightFactoryInfo} from "@model/factory/LightFactoryInfo";
 import {FilterElement} from "@model/filter/FilterElement";
 import {map} from "rxjs/operators";
 
@@ -56,7 +56,7 @@ export class FactoryController {
     const factoryInfo: FactoryInfo = {
       id: '1',
       name: 'Almaty Car Factory',
-      director: 'Yeletay Yerassyl',
+      directorName: 'Yeletay Yerassyl',
       workerCount: 50,
       geoPoint: {
         latitude: 43.26501881519278,
@@ -72,7 +72,7 @@ export class FactoryController {
     const factoryInfo: FactoryInfo = {
       id: '1',
       name: 'Almaty Car Factory',
-      director: 'Yeletay Yerassyl',
+      directorName: 'Yeletay Yerassyl',
       workerCount: 50,
       geoPoint: {
         latitude: 43.26501881519278,

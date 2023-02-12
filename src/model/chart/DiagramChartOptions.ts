@@ -1,8 +1,13 @@
 import {ApexChart, ApexNonAxisChartSeries, ApexResponsive} from "ng-apexcharts";
 
-export interface DiagramChartOptions {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  responsive: ApexResponsive[];
-  labels: any;
+export class DiagramChartOptions {
+  public series: ApexNonAxisChartSeries | undefined;
+  public chart: ApexChart | undefined;
+  public responsive: ApexResponsive[] | undefined;
+  public labels: any;
+
+  public constructor(init?: Partial<DiagramChartOptions>) {
+    Object.assign(this, init);
+  }
+
 }

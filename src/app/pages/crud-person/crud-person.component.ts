@@ -72,7 +72,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
   async onRowAddClick(): Promise<void> {
     const resp = await this.crudPersonService.openDialogForCreate();
 
-    if (!resp.needToSave) {
+    if (resp.doesNotNeedToSave()) {
       return;
     }
 
@@ -83,7 +83,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
     const resp = await this.crudPersonService.openDialogForEdit(person);
 
-    if (!resp.needToSave) {
+    if (resp.doesNotNeedToSave()) {
       return;
     }
 

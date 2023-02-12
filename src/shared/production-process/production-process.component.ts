@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
-import {ProductionInfo} from "@model/api/production/ProductionInfo";
+import {ProductionInfo} from "@model/production/ProductionInfo";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ProductionDialogComponent} from "../../app/dialogue/production/production-dialog.component";
 

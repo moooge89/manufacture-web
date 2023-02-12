@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MarketMaterial} from "@model/material/MarketMaterial";
 import {BottomNotificationService} from "@service/bottom-notification/bottom-notification.service";
 import {MarketController} from "@controller/MarketController";
 import {take} from "rxjs/operators";

@@ -1,6 +1,13 @@
-export interface SecuredLoginRequest {
+import {encode} from "@util/Encoder";
 
-  username: number[];
-  password: number[];
+export class SecuredLoginRequest {
+
+  readonly username: number[];
+  readonly password: number[];
+
+  public constructor(_username: string, _password: string) {
+    this.username = encode(_username);
+    this.password = encode(_password);
+  }
 
 }

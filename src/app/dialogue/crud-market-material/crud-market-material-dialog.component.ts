@@ -1,6 +1,6 @@
 import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MarketMaterial} from "@model/material/MarketMaterial";
 import {FilterController} from "@controller/FilterController";
 import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
@@ -92,7 +92,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
   async cancel() {
 
     if (!this.hasChanged) {
-      this.closeDialog({needToSave: false, material: undefined});
+      this.closeDialog(MarketMaterialResp.noNeedToSave());
       return;
     }
 
@@ -102,7 +102,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.closeDialog({needToSave: false, material: undefined});
+    this.closeDialog(MarketMaterialResp.noNeedToSave());
   }
 
   async save() {
@@ -112,7 +112,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     }
 
     if (!this.hasChanged) {
-      this.closeDialog({needToSave: false, material: undefined});
+      this.closeDialog(MarketMaterialResp.noNeedToSave());
       return;
     }
 
@@ -128,7 +128,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
       await this.marketController.updateMarketMaterial(this.copyMaterial).toPromise();
     }
 
-    this.closeDialog({needToSave: true, material: this.copyMaterial});
+    this.closeDialog(MarketMaterialResp.save(this.copyMaterial));
   }
 
   private async getConfirmation() {

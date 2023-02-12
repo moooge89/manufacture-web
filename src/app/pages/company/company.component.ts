@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FactoryController} from "@controller/FactoryController";
-import {LightFactoryInfo} from "@model/api/factory/LightFactoryInfo";
+import {LightFactoryInfo} from "@model/factory/LightFactoryInfo";
 import {Observable} from "rxjs/internal/Observable";
 import {Router} from "@angular/router";
 import {PathContextService} from "@service/path-context/path-context.service";

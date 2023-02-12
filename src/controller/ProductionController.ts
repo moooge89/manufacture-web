@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {ProductionInfo} from "@model/api/production/ProductionInfo";
-import {ProductionFilter} from "@model/api/production/ProductionFilter";
+import {ProductionInfo} from "@model/production/ProductionInfo";
+import {ProductionFilter} from "@model/production/ProductionFilter";
 
 @Injectable({providedIn: 'root'})
 export class ProductionController {

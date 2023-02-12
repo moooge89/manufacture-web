@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {MarketMaterial} from "@model/api/material/MarketMaterial";
+import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {MaterialPriceInfo} from "@model/market/MaterialPriceInfo";
 

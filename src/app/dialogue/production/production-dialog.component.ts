@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ProductionInfo} from "@model/api/production/ProductionInfo";
+import {ProductionInfo} from "@model/production/ProductionInfo";
 
 @Component({
   selector: 'app-production-dialog',

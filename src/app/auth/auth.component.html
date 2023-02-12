@@ -9,6 +9,7 @@
       [withDebounce]="false"
       (valueChanged)="username = $event"
       (focused)="usernameFocused()"
+      (keydown)="handleEnterClick($event)"
     ></app-input>
 
     <app-input
@@ -18,6 +19,7 @@
       [withDebounce]="false"
       (valueChanged)="password = $event"
       (focused)="passwordFocused()"
+      (keydown)="handleEnterClick($event)"
     ></app-input>
   </div>
 

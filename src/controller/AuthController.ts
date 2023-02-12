@@ -15,20 +15,20 @@ export class AuthController {
     this.http = http.setControllerPrefix('/auth');
   }
 
-  login(loginInfo: SecuredLoginRequest): Observable<string> {
+  login(loginRequest: SecuredLoginRequest): Observable<string> {
     if (1 == 1) {
       return of('123');
     }
 
-    return this.http.postBodyString('/login', loginInfo);
+    return this.http.postBodyString('/login', loginRequest);
   }
 
   userInfo(): Observable<UserInfo> {
-    const userInfo: UserInfo = {
+    const userInfo = new UserInfo({
       id: '1',
-      role: UserRole.FACTORY_DIRECTOR,
+      role: UserRole.SYSTEM_ADMIN,
       name: 'Yerassyl'
-    };
+    });
 
     return of(userInfo);
   }

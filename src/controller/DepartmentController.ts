@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {Department} from "@model/api/Department";
 import {FilterElement} from "@model/filter/FilterElement";
 import {map} from "rxjs/operators";
+import {Department} from "@model/department/Department";
 
 @Injectable({providedIn: 'root'})
 export class DepartmentController {

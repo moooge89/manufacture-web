@@ -16,7 +16,6 @@ import {debounceTime, filter, map} from "rxjs/operators";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
 import {AuthService} from "@service/auth/auth.service";
-import {UserInfo} from "@model/auth/UserInfo";
 import {UserRole} from "@model/auth/UserRole";
 import {
   PersonFactoryTransferDialogComponent
@@ -119,7 +118,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (this.canViewFactory(userInfo)) {
+    if (userInfo.canViewFactory()) {
       const factoryDesc: FilterDropdownDescription<FilterElement> = {
         elements$: this.factoryController.loadFactoriesAsFilterElements(),
         fieldType: FilterFieldType.DROPDOWN,
@@ -135,7 +134,7 @@ export class PersonComponent implements OnInit, OnDestroy {
       this.descriptions.push(factoryDesc);
     }
 
-    if (this.canViewDepartment(userInfo)) {
+    if (userInfo.canViewDepartment()) {
       const departmentDesc: FilterDropdownDescription<FilterElement> = {
         elements$: this.departmentController.loadDepartmentsAsFilterElements(),
         fieldType: FilterFieldType.DROPDOWN,
@@ -151,15 +150,6 @@ export class PersonComponent implements OnInit, OnDestroy {
       this.descriptions.push(departmentDesc);
     }
 
-  }
-
-  private canViewFactory(userInfo: UserInfo): boolean {
-    return userInfo.role === UserRole.COMPANY_DIRECTOR;
-  }
-
-  private canViewDepartment(userInfo: UserInfo): boolean {
-    return userInfo.role === UserRole.COMPANY_DIRECTOR
-      || userInfo.role === UserRole.FACTORY_DIRECTOR;
   }
 
 }

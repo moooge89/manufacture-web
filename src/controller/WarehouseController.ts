@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {WarehouseMaterial} from "@model/api/material/WarehouseMaterial";
+import {WarehouseMaterial} from "@model/material/WarehouseMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {ManufactureElement} from "@model/manufacture/ManufactureElement";
 
@@ -18,6 +18,7 @@ export class WarehouseController {
   loadWarehouseMaterials(materialFilter: MaterialFilter): Observable<WarehouseMaterial[]> {
     const materials: WarehouseMaterial[] = [
       {
+        id: '1',
         icon: 'sand',
         name: 'Sand',
         available: 1000.2,

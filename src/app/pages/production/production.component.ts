@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ProductionInfo} from "@model/api/production/ProductionInfo";
+import {ProductionInfo} from "@model/production/ProductionInfo";
 import {Unsub} from "@util/Unsub";
 import {ProductionController} from "@controller/ProductionController";
-import {ProductionFilter} from "@model/api/production/ProductionFilter";
+import {ProductionFilter} from "@model/production/ProductionFilter";
 import {FilterElement} from "@model/filter/FilterElement";
 import {Subject} from "rxjs";
 import {switchMap} from "rxjs/operators";
