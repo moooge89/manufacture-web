@@ -15,8 +15,8 @@ export class ProductionController {
   }
 
   loadProductionInfo(productionFilter: ProductionFilter): Observable<ProductionInfo[]> {
-    const productionInfo: ProductionInfo[] = [
-      {
+    const productionInfo = [
+      new ProductionInfo({
         factoryId: '1',
         departmentId: '1',
         teamId: '1',
@@ -28,8 +28,9 @@ export class ProductionController {
         yesterdayManufactured: 2,
         lastWeekManufactured: 3,
         lastMonthManufactured: 4,
-      },
-      {
+      }),
+
+      new ProductionInfo({
         factoryId: '1',
         departmentId: '1',
         teamId: '1',
@@ -41,8 +42,9 @@ export class ProductionController {
         yesterdayManufactured: 3,
         lastWeekManufactured: 5,
         lastMonthManufactured: 7,
-      },
-      {
+      }),
+
+      new ProductionInfo({
         factoryId: '1',
         departmentId: '1',
         teamId: '1',
@@ -54,8 +56,9 @@ export class ProductionController {
         yesterdayManufactured: 2,
         lastWeekManufactured: 3,
         lastMonthManufactured: 4,
-      },
+      }),
     ];
+
     return of(productionInfo);
   }
 

@@ -17,8 +17,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   username: string = '';
   password: string = '';
 
-  usernameError: InputError = {hasError: false, errorText: ''};
-  passwordError: InputError = {hasError: false, errorText: ''};
+  usernameError = new InputError();
+  passwordError = new InputError();
 
   private unsub = new Unsub();
 

@@ -17,25 +17,25 @@ export class FactoryController {
   }
 
   loadFactories(): Observable<LightFactoryInfo[]> {
-    const factories: LightFactoryInfo[] = [
-      {
+    const factories = [
+      new LightFactoryInfo({
         id: '1',
         name: 'Almaty Car Factory',
         directorName: 'Yeletay Yerassyl',
         workerCount: 50
-      },
-      {
+      }),
+      new LightFactoryInfo({
         id: '2',
         name: 'Semey Car Factory',
         directorName: 'Yeletay Yerassyl',
         workerCount: 30
-      },
-      {
+      }),
+      new LightFactoryInfo({
         id: '3',
         name: 'Shymkent Car Factory',
         directorName: 'Yeletay Yerassyl',
         workerCount: 60
-      },
+      }),
     ];
 
     return of(factories);
@@ -44,16 +44,16 @@ export class FactoryController {
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
     return this.loadFactories().pipe(
       map(factories => factories.map(factory => {
-        return {
+        return new FilterElement({
           id: factory.id,
           name: factory.name
-        } as FilterElement
+        })
       })),
     );
   }
 
   loadFactoryInfo(): Observable<FactoryInfo> {
-    const factoryInfo: FactoryInfo = {
+    const factoryInfo = new FactoryInfo({
       id: '1',
       name: 'Almaty Car Factory',
       directorName: 'Yeletay Yerassyl',
@@ -64,12 +64,12 @@ export class FactoryController {
       },
       departmentCount: 3,
       year: 2022,
-    };
+    });
     return of(factoryInfo);
   }
 
   loadFactoryInfoById(factoryId: string): Observable<FactoryInfo> {
-    const factoryInfo: FactoryInfo = {
+    const factoryInfo = new FactoryInfo({
       id: '1',
       name: 'Almaty Car Factory',
       directorName: 'Yeletay Yerassyl',
@@ -80,7 +80,7 @@ export class FactoryController {
       },
       departmentCount: 3,
       year: 2022,
-    };
+    });
     return of(factoryInfo);
   }
 

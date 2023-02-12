@@ -70,13 +70,9 @@ export class MarketComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  isMatIcon = (index: number) => {
-    return index === 0;
-  }
+  isMatIcon = (index: number) => index === 0;
 
-  isMoney = (index: number) => {
-    return index === 3;
-  }
+  isMoney = (index: number) => index === 3;
 
   onRowClick(material: MarketMaterial): void {
     this.dialogRef?.close();

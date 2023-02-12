@@ -28,8 +28,8 @@ export class PersonController {
   }
 
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
-    const persons: Person[] = [
-      {
+    const persons = [
+      new Person({
         id: '1',
         name: 'User 1',
         factoryId: '1',
@@ -37,8 +37,9 @@ export class PersonController {
         departmentId: '1',
         departmentName: 'Department 1',
         index: 1,
-      },
-      {
+      }),
+
+      new Person({
         id: '2',
         name: 'User 2',
         factoryId: '1',
@@ -46,8 +47,9 @@ export class PersonController {
         departmentId: '2',
         departmentName: 'Department 2',
         index: 2,
-      },
-      {
+      }),
+
+      new Person({
         id: '3',
         name: 'User 3',
         factoryId: '2',
@@ -55,8 +57,9 @@ export class PersonController {
         departmentId: '1',
         departmentName: 'Department 1',
         index: 3,
-      },
-      {
+      }),
+
+      new Person({
         id: '4',
         name: 'User 4',
         factoryId: '2',
@@ -64,7 +67,7 @@ export class PersonController {
         departmentId: '2',
         departmentName: 'Department 2',
         index: 4,
-      },
+      }),
     ];
 
     return of(persons);

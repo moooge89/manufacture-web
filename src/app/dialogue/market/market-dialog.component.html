@@ -1,24 +1,24 @@
 <span class="dialog-title">{{material.name}}</span>
 
 <section>
-  <span>Available budget: 100$</span>
-  <span>Price for kg: 16$</span>
+  <span>Available budget: {{availableBudget}}$</span>
+  <span>Price for kg:{{material.price}}$</span>
 
   <div>
     <mat-slider
       thumbLabel
       min="1"
-      max="100"
       step="1"
       aria-label="units"
       tickInterval="1000"
       [(value)]="kgToBuy"
+      [max]="material.available"
       (valueChange)="calculatePrice()"
     ></mat-slider>
 
     <div class="min-max-bar">
       <span>1</span>
-      <span>100</span>
+      <span>{{material.available}}</span>
     </div>
   </div>
 

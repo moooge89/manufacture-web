@@ -26,8 +26,8 @@ export class MarketController {
   }
 
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
-    const materials: MarketMaterial[] = [
-      {
+    const materials = [
+      new MarketMaterial({
         id: '1',
         icon: 'sand',
         iconId: '6',
@@ -35,7 +35,8 @@ export class MarketController {
         country: 'Kazakhstan',
         countryId: '1',
         price: 16,
-      },
+        available: 150,
+      }),
     ];
     return of(materials);
   }
@@ -49,11 +50,11 @@ export class MarketController {
   }
 
   loadMaterialPriceInfo(id: string): Observable<MaterialPriceInfo> {
-    const materialPriceInfo: MaterialPriceInfo = {
+    const materialPriceInfo = new MaterialPriceInfo({
       min: 12,
       max: 24,
       avg: 18,
-    };
+    });
 
     return of(materialPriceInfo);
   }

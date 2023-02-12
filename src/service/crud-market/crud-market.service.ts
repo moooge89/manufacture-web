@@ -16,21 +16,11 @@ export class CrudMarketService {
 
   openDialogForCreate(): Promise<MarketMaterialResp> {
 
-    const materialToCreate: MarketMaterial = {
-      name: '',
-      price: 0,
-      id: '',
-      country: '',
-      countryId: '',
-      icon: '',
-      iconId: '',
-    };
-
     const dialogRef = this.dialog.open(CrudMarketMaterialDialogComponent, {
       width: '800px',
       height: '400px',
       data: {
-        material: materialToCreate,
+        material: new MarketMaterial(),
         noNeedToConfirm: true,
         isSave: true,
       },

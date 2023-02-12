@@ -9,6 +9,8 @@ export class MarketMaterial {
   country: string = '';
   countryId: string = '';
 
+  available: number = 0;
+
   constructor(init?: Partial<MarketMaterial>) {
     Object.assign(this, init);
   }

@@ -10,7 +10,6 @@ import {GeoPoint} from "@model/factory/GeoPoint";
 import {Router} from "@angular/router";
 import {PathContextService} from "@service/path-context/path-context.service";
 import {AuthService} from "@service/auth/auth.service";
-import {UserRole} from "@model/auth/UserRole";
 
 @Component({
   selector: 'app-factory',

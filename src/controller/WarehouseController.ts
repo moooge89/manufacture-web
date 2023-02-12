@@ -16,33 +16,35 @@ export class WarehouseController {
   }
 
   loadWarehouseMaterials(materialFilter: MaterialFilter): Observable<WarehouseMaterial[]> {
-    const materials: WarehouseMaterial[] = [
-      {
+    const materials = [
+      new WarehouseMaterial({
         id: '1',
         icon: 'sand',
         name: 'Sand',
         available: 1000.2,
         usedIn: 'window, and in other staffs'
-      },
+      }),
     ];
 
     return of(materials);
   }
 
   loadWarehouseStoredInfo(manufactureType: string): Observable<ManufactureElement[]> {
-    const manufactureElements: ManufactureElement[] = [
-      {
+    const manufactureElements = [
+      new ManufactureElement({
         label: 'All',
         manufactured: 102,
-      },
-      {
+      }),
+
+      new ManufactureElement({
         label: 'Department 1',
         manufactured: 44,
-      },
-      {
+      }),
+
+      new ManufactureElement({
         label: 'Department 2',
         manufactured: 55,
-      },
+      }),
     ];
 
     return of(manufactureElements);

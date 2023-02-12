@@ -15,7 +15,7 @@ export class ReportController {
   }
 
   loadReportDescription(reportFilter: ReportFilter): Observable<ReportDescription> {
-    const reportDescription: ReportDescription = {
+    const reportDescription = new ReportDescription({
       categories: [
         'Jan',
         'Feb',
@@ -38,7 +38,7 @@ export class ReportController {
       firstCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
       secondCoefLabel: 'Manufacture coefficient (second)',
       secondCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
-    };
+    });
 
     return of(reportDescription);
   }

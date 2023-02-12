@@ -16,67 +16,67 @@ export class DepartmentController {
   }
 
   loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
-    const departments: FilterElement[] = [
-      {
+    const departments = [
+      new FilterElement({
         id: '1',
         name: 'First department',
-      },
+      }),
 
-      {
+      new FilterElement({
         id: '2',
         name: 'Second department',
-      },
+      }),
 
-      {
+      new FilterElement({
         id: '3',
         name: 'Third department',
-      },
+      }),
     ];
 
     return of(departments);
   }
 
   loadDepartments(): Observable<Department[]> {
-    const departments: Department[] = [
-      {
+    const departments = [
+      new Department({
         id: '1',
         name: 'Department 1',
         teamCount: 1,
         workerCount: 3,
         persons: [],
-      },
+      }),
 
-      {
+      new Department({
         id: '2',
         name: 'Department 2',
         teamCount: 1,
         workerCount: 3,
         persons: [],
-      },
+      }),
 
-      {
+      new Department({
         id: '3',
         name: 'Department 3',
         teamCount: 1,
         workerCount: 3,
         persons: [],
-      },
+      }),
 
-      {
+      new Department({
         id: '4',
         name: 'Department 4',
         teamCount: 1,
         workerCount: 3,
         persons: [],
-      },
+      }),
 
-      {
+      new Department({
         id: '5',
         name: 'Department 5',
         teamCount: 1,
         workerCount: 3,
         persons: [],
-      },
+      }),
     ];
 
     return of(departments);
@@ -85,10 +85,10 @@ export class DepartmentController {
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
     return this.loadDepartments().pipe(
       map(departments => departments.map(department => {
-        return {
+        return new FilterElement({
           id: department.id,
           name: department.name
-        } as FilterElement
+        })
       })),
     );
   }
