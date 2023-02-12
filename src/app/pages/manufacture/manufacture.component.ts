@@ -3,7 +3,6 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Subject} from "rxjs";
 import {Unsub} from "@util/Unsub";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
-import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 import {debounceTime, filter} from "rxjs/operators";
 import {ManufactureController} from "@controller/ManufactureController";
@@ -70,27 +69,24 @@ export class ManufactureComponent implements OnInit, OnDestroy {
   }
 
   private initDescriptions(): void {
-    const manufactureTypesDesc: FilterDropdownDescription<FilterElement> = {
+    const manufactureTypesDesc = new FilterDropdownDescription<FilterElement>({
       elements$: this.manufactureController.loadManufactureTypesAsFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
       getId: getIdFromFe,
       getName: getNameFromFe,
       label: 'Manufacture type...',
       defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onTypesChange,
-    };
+    });
 
-    const countDesc: FilterNumberRangeDescription = {
-      fieldType: FilterFieldType.NUMBER_RANGE,
+    const countDesc = new FilterNumberRangeDescription({
       title: 'Manufactured count',
       onValueChange: this.filterReactor.onCountChange,
-    };
+    });
 
-    const hrInvolvedDesc: FilterNumberRangeDescription = {
-      fieldType: FilterFieldType.NUMBER_RANGE,
+    const hrInvolvedDesc = new FilterNumberRangeDescription({
       title: 'HR involved',
       onValueChange: this.filterReactor.onHrInvolvedChange,
-    };
+    });
 
     this.descriptions.push(manufactureTypesDesc, countDesc, hrInvolvedDesc);
   }

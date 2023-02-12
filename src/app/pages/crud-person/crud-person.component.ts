@@ -9,7 +9,6 @@ import {CrudPersonDialogComponent} from "../../dialogue/crud-person/crud-person-
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
-import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {Unsub} from "@util/Unsub";
 import {FactoryController} from "@controller/FactoryController";
@@ -95,32 +94,29 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
   }
 
   private initDescriptions(): void {
-    const nameDesc: FilterInputDescription = {
-      fieldType: FilterFieldType.INPUT,
+    const nameDesc = new FilterInputDescription({
       placeholder: 'Name...',
       defaultValue: '',
       onValueChange: this.filterReactor.onNameChange,
-    };
+    });
 
-    const factoryDesc: FilterDropdownDescription<FilterElement> = {
+    const factoryDesc = new FilterDropdownDescription<FilterElement>({
       elements$: this.factoryController.loadFactoriesAsFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
       getId: this.getId,
       getName: this.getName,
       label: 'Factory...',
       defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onFactoriesChange,
-    };
+    });
 
-    const departmentDesc: FilterDropdownDescription<FilterElement> = {
+    const departmentDesc = new FilterDropdownDescription<FilterElement>({
       elements$: this.departmentController.loadDepartmentsAsFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
       getId: this.getId,
       getName: this.getName,
       label: 'Department...',
       defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onDepartmentsChange,
-    };
+    });
 
     this.descriptions.push(nameDesc, factoryDesc, departmentDesc);
   }

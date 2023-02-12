@@ -8,7 +8,6 @@ import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor
 import {Unsub} from "@util/Unsub";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
-import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterElement} from "@model/filter/FilterElement";
 import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
@@ -75,28 +74,25 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   private initDescriptions(): void {
-    const nameDesc: FilterInputDescription = {
-      fieldType: FilterFieldType.INPUT,
+    const nameDesc = new FilterInputDescription({
       placeholder: 'Name...',
       defaultValue: '',
       onValueChange: this.filterReactor.onNameChange,
-    };
+    });
 
-    const availableDesc: FilterNumberRangeDescription = {
-      fieldType: FilterFieldType.NUMBER_RANGE,
+    const availableDesc = new FilterNumberRangeDescription({
       title: 'Available',
       onValueChange: this.filterReactor.onAvailableChange,
-    };
+    });
 
-    const departmentDesc: FilterDropdownDescription<FilterElement> = {
+    const departmentDesc = new FilterDropdownDescription<FilterElement>({
       elements$: this.departmentController.loadDepartmentsAsFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
       getId: getIdFromFe,
       getName: getNameFromFe,
       label: 'Department...',
       defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onDepartmentsChange,
-    };
+    });
 
     this.descriptions.push(nameDesc, availableDesc, departmentDesc);
   }

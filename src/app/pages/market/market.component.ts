@@ -8,7 +8,6 @@ import {Subject} from "rxjs";
 import {MaterialFilterReactor} from "@model/filter/reactor/MaterialFilterReactor";
 import {Unsub} from "@util/Unsub";
 import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
-import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterElement} from "@model/filter/FilterElement";
@@ -94,28 +93,25 @@ export class MarketComponent implements OnInit, OnDestroy {
   }
 
   private initDescriptions(): void {
-    const nameDesc: FilterInputDescription = {
-      fieldType: FilterFieldType.INPUT,
+    const nameDesc = new FilterInputDescription({
       placeholder: 'Name...',
       defaultValue: this.selectedMaterialName,
       onValueChange: this.filterReactor.onNameChange,
-    };
+    });
 
-    const countryDesc: FilterDropdownDescription<FilterElement> = {
+    const countryDesc = new FilterDropdownDescription<FilterElement>({
       elements$: this.filterController.loadCountryFilterElements(),
-      fieldType: FilterFieldType.DROPDOWN,
       getId: getIdFromFe,
       getName: getNameFromFe,
       label: 'Country...',
       defaultSelectedDisplayValue: '',
       onValueChange: this.filterReactor.onCountriesChange,
-    };
+    });
 
-    const priceDesc: FilterNumberRangeDescription = {
-      fieldType: FilterFieldType.NUMBER_RANGE,
+    const priceDesc = new FilterNumberRangeDescription({
       title: 'Price',
       onValueChange: this.filterReactor.onPriceChange,
-    };
+    });
 
     this.descriptions.push(nameDesc, countryDesc, priceDesc);
   }

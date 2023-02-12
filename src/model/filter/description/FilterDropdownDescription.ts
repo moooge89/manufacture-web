@@ -1,18 +1,23 @@
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {Observable} from "rxjs/internal/Observable";
+import {of} from "rxjs";
 
-export interface FilterDropdownDescription<T> extends FilterDescription {
+export class FilterDropdownDescription<T> implements FilterDescription {
 
-  label: string;
+  label: string = '';
 
-  getId: (element: T) => string;
+  getId: (element: T) => string = () => '';
 
-  getName: (element: T) => string;
+  getName: (element: T) => string = () => '';
 
-  defaultSelectedDisplayValue: string;
+  defaultSelectedDisplayValue: string = '';
 
-  elements$: Observable<T[]>;
+  elements$: Observable<T[]> = of([]);
 
-  onValueChange: (selectedIds: string[]) => void;
+  onValueChange: (selectedIds: string[]) => void = () => undefined;
+
+  public constructor(init?: Partial<FilterDropdownDescription<T>>) {
+    Object.assign(this, init);
+  }
 
 }

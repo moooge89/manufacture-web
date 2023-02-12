@@ -1,11 +1,15 @@
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 
-export interface FilterInputDescription extends FilterDescription {
+export class FilterInputDescription implements FilterDescription {
 
-  placeholder: string;
+  placeholder: string = '';
 
-  defaultValue: string;
+  defaultValue: string = '';
 
-  onValueChange: (value: string) => void;
+  onValueChange: (value: string) => void = () => undefined;
+
+  public constructor(init?: Partial<FilterInputDescription>) {
+    Object.assign(this, init);
+  }
 
 }

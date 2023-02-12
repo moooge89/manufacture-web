@@ -6,7 +6,6 @@ import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {FilterElement} from "@model/filter/FilterElement";
 import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
-import {FilterFieldType} from "@model/filter/FilterFieldType";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {Subject} from "rxjs";
 import {PersonFilterReactor} from "@model/filter/reactor/PersonFilterReactor";
@@ -105,12 +104,11 @@ export class PersonComponent implements OnInit, OnDestroy {
   }
 
   private async initDescriptions() {
-    const nameDesc: FilterInputDescription = {
-      fieldType: FilterFieldType.INPUT,
+    const nameDesc = new FilterInputDescription({
       placeholder: 'Name...',
       defaultValue: '',
       onValueChange: this.filterReactor.onNameChange,
-    };
+    });
 
     this.headers.push('Name');
     this.columnNames.push('name');
@@ -119,15 +117,14 @@ export class PersonComponent implements OnInit, OnDestroy {
     const userInfo = await this.authService.userInfo();
 
     if (userInfo.canViewFactory()) {
-      const factoryDesc: FilterDropdownDescription<FilterElement> = {
+      const factoryDesc = new FilterDropdownDescription<FilterElement>({
         elements$: this.factoryController.loadFactoriesAsFilterElements(),
-        fieldType: FilterFieldType.DROPDOWN,
         getId: getIdFromFe,
         getName: getNameFromFe,
         label: 'Factory...',
         defaultSelectedDisplayValue: '',
         onValueChange: this.filterReactor.onFactoriesChange,
-      };
+      });
 
       this.headers.push('Factory');
       this.columnNames.push('factoryName');
@@ -135,15 +132,14 @@ export class PersonComponent implements OnInit, OnDestroy {
     }
 
     if (userInfo.canViewDepartment()) {
-      const departmentDesc: FilterDropdownDescription<FilterElement> = {
+      const departmentDesc = new FilterDropdownDescription<FilterElement>({
         elements$: this.departmentController.loadDepartmentsAsFilterElements(),
-        fieldType: FilterFieldType.DROPDOWN,
         getId: getIdFromFe,
         getName: getNameFromFe,
         label: 'Department...',
         defaultSelectedDisplayValue: '',
         onValueChange: this.filterReactor.onDepartmentsChange,
-      };
+      });
 
       this.headers.push('Department');
       this.columnNames.push('departmentName');

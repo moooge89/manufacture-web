@@ -26,7 +26,7 @@ export class AuthController {
   userInfo(): Observable<UserInfo> {
     const userInfo = new UserInfo({
       id: '1',
-      role: UserRole.SYSTEM_ADMIN,
+      role: UserRole.FACTORY_DIRECTOR,
       name: 'Yerassyl'
     });
 

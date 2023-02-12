@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FilterDescription} from "@model/filter/description/FilterDescription";
-import {FilterFieldType} from "@model/filter/FilterFieldType";
+import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
+import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
+import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 
 @Component({
   selector: 'app-dynamic-filter',
@@ -12,15 +14,15 @@ export class DynamicFilterComponent {
   @Input() descriptions: FilterDescription[] = [];
 
   isInput(description: FilterDescription): boolean {
-    return description.fieldType === FilterFieldType.INPUT;
+    return description instanceof FilterInputDescription;
   }
 
   isDropdown(description: FilterDescription): boolean {
-    return description.fieldType === FilterFieldType.DROPDOWN;
+    return description instanceof FilterDropdownDescription;
   }
 
   isNumberRange(description: FilterDescription): boolean {
-    return description.fieldType === FilterFieldType.NUMBER_RANGE;
+    return description instanceof FilterNumberRangeDescription;
   }
 
 }
