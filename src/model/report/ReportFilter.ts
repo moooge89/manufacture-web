@@ -9,35 +9,35 @@ export class ReportFilter {
   firstTeamId: string = '';
   secondTeamId: string = '';
 
-  public clearFirstDepartment(): void {
+  clearFirstDepartment(): void {
     this.firstDepartmentId = '';
   }
 
-  public clearFirstTeam(): void {
+  clearFirstTeam(): void {
     this.firstTeamId = '';
   }
 
-  public clearSecondDepartment(): void {
+  clearSecondDepartment(): void {
     this.secondDepartmentId = '';
   }
 
-  public clearSecondTeam(): void {
+  clearSecondTeam(): void {
     this.secondTeamId = '';
   }
 
-  public hasFirstFactory(): boolean {
+  hasFirstFactory(): boolean {
     return !!this.firstFactoryId;
   }
 
-  public hasFirstDepartment(): boolean {
+  hasFirstDepartment(): boolean {
     return !!this.firstDepartmentId;
   }
 
-  public hasSecondFactory(): boolean {
+  hasSecondFactory(): boolean {
     return !!this.secondFactoryId;
   }
 
-  public hasSecondDepartment(): boolean {
+  hasSecondDepartment(): boolean {
     return !!this.secondDepartmentId;
   }
 

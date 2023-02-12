@@ -1,9 +1,7 @@
 import {TableFilter} from "@model/filter/TableFilter";
 import {NumberRange} from "@model/filter/NumberRange";
-import {Sorting} from "@model/web/Sorting";
-import {SortType} from "@model/web/SortType";
 
-export class ManufactureFilter implements TableFilter {
+export class ManufactureFilter extends TableFilter {
 
   types: string[] = [];
 
@@ -15,11 +13,6 @@ export class ManufactureFilter implements TableFilter {
   hrInvolved: NumberRange = {
     min: undefined,
     max: undefined,
-  };
-
-  sorting: Sorting = {
-    sortType: SortType.ASC,
-    fieldName: ''
   };
 
 }

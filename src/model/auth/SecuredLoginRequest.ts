@@ -5,7 +5,7 @@ export class SecuredLoginRequest {
   readonly username: number[];
   readonly password: number[];
 
-  public constructor(_username: string, _password: string) {
+  constructor(_username: string, _password: string) {
     this.username = encode(_username);
     this.password = encode(_password);
   }

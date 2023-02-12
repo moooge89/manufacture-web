@@ -7,7 +7,7 @@ export class FilterNumberRangeDescription implements FilterDescription {
 
   onValueChange: (value: NumberRange) => void = () => undefined;
 
-  public constructor(init?: Partial<FilterNumberRangeDescription>) {
+  constructor(init?: Partial<FilterNumberRangeDescription>) {
     Object.assign(this, init);
   }
 

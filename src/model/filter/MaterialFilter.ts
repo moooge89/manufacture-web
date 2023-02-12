@@ -1,9 +1,7 @@
 import {NumberRange} from "@model/filter/NumberRange";
 import {TableFilter} from "@model/filter/TableFilter";
-import {Sorting} from "@model/web/Sorting";
-import {SortType} from "@model/web/SortType";
 
-export class MaterialFilter implements TableFilter {
+export class MaterialFilter extends TableFilter {
 
   materialName: string = '';
 
@@ -20,10 +18,5 @@ export class MaterialFilter implements TableFilter {
   departments: string[] = [];
 
   countries: string[] = [];
-
-  sorting: Sorting = {
-    sortType: SortType.ASC,
-    fieldName: ''
-  };
 
 }

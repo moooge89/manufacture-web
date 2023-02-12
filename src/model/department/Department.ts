@@ -1,13 +1,13 @@
 import {Person} from "@model/person/Person";
 
 export class Department {
-  public id: string = '';
-  public name: string = '';
-  public teamCount: number = 0;
-  public workerCount: number = 0;
-  public persons: Person[] = [];
+  id: string = '';
+  name: string = '';
+  teamCount: number = 0;
+  workerCount: number = 0;
+  persons: Person[] = [];
 
-  public constructor(init?: Partial<Department>) {
+  constructor(init?: Partial<Department>) {
     Object.assign(this, init);
   }
 

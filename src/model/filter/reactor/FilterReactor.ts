@@ -12,13 +12,13 @@ export abstract class FilterReactor<T extends TableFilter> {
 
   abstract initFilter(): T;
 
+  protected emit(): void {
+    this.filterChangeSubject.next(this.filter);
+  }
+
   onSortChange(sorting: Sorting): void {
     this.filter.sorting = sorting;
     this.emit();
-  }
-
-  protected emit(): void {
-    this.filterChangeSubject.next(this.filter);
   }
 
 }

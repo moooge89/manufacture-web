@@ -11,19 +11,19 @@ class OptionsBuilder {
   private appendingHeaders: KeyValue[] = [];
   private appendingParams: KeyValue[] = [];
 
-  public appendHeader(key: string, value: string): void {
+  appendHeader(key: string, value: string): void {
     if (value !== undefined) {
       this.appendingHeaders.push({key, value});
     }
   }
 
-  public appendParam(key: string, value: string): void {
+  appendParam(key: string, value: string): void {
     if (value !== undefined) {
       this.appendingParams.push({key, value});
     }
   }
 
-  public get headers(): HttpHeaders {
+  get headers(): HttpHeaders {
     const ret: { [name: string]: string | string[] } = {};
     this.appendingHeaders.forEach(h => {
       ret[h.key] = h.value;
@@ -31,7 +31,7 @@ class OptionsBuilder {
     return new HttpHeaders(ret);
   }
 
-  public get params(): { [name: string]: string | string[]; } {
+  get params(): { [name: string]: string | string[]; } {
     const ret: { [name: string]: string | string[] } = {};
     this.appendingParams.forEach(h => {
       ret[h.key] = h.value;
@@ -39,7 +39,7 @@ class OptionsBuilder {
     return ret;
   }
 
-  public get paramsAsString(): string {
+  get paramsAsString(): string {
 
     const data = new URLSearchParams();
 
@@ -101,11 +101,11 @@ export class HttpService {
     return this.urlPrefix;
   }
 
-  public url(urlSuffix: string): string {
+  url(urlSuffix: string): string {
     return this.prefix() + urlSuffix;
   }
 
-  public setControllerPrefix(controllerPrefix: string): HttpService {
+  setControllerPrefix(controllerPrefix: string): HttpService {
     const prefixHandler = {
       get(target: any, name, receiver) {
         if (name === 'url') {
@@ -119,7 +119,7 @@ export class HttpService {
     return new Proxy(this, prefixHandler);
   }
 
-  public get<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
+  get<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
 
     const ob: OptionsBuilder = this.newOptionsBuilder();
 
@@ -135,7 +135,7 @@ export class HttpService {
 
   }
 
-  public post<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
+  post<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -151,7 +151,7 @@ export class HttpService {
 
   }
 
-  public postString(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<string> {
+  postString(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<string> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -170,7 +170,7 @@ export class HttpService {
 
   }
 
-  public postBody<T>(urlSuffix: string, body: any): Observable<T> {
+  postBody<T>(urlSuffix: string, body: any): Observable<T> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/json');
@@ -184,7 +184,7 @@ export class HttpService {
 
   }
 
-  public postBodyString<T>(urlSuffix: string, body: any): Observable<string> {
+  postBodyString<T>(urlSuffix: string, body: any): Observable<string> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/json');
@@ -201,7 +201,7 @@ export class HttpService {
 
   }
 
-  public postFile(urlSuffix: string, file: File, keyValue?: { [key: string]: any }): Observable<HttpEvent<string>> {
+  postFile(urlSuffix: string, file: File, keyValue?: { [key: string]: any }): Observable<HttpEvent<string>> {
 
     const ob = this.newOptionsBuilder();
     const formData: FormData = new FormData();
@@ -220,7 +220,7 @@ export class HttpService {
 
   }
 
-  public async downloadResource(urlSuffix: string, keyValue?: { [key: string]: any }): Promise<HttpResponse<Blob>> {
+  async downloadResource(urlSuffix: string, keyValue?: { [key: string]: any }): Promise<HttpResponse<Blob>> {
 
     const ob: OptionsBuilder = this.newOptionsBuilder();
     ob.appendParamsFromKeyValue(keyValue);

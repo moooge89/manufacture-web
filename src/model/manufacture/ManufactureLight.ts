@@ -1,11 +1,15 @@
-export interface ManufactureLight {
+export class ManufactureLight {
 
-  manufactureType: string;
+  manufactureType: string = '';
 
-  manufactureTypeLabel: string;
+  manufactureTypeLabel: string = '';
 
-  manufacturedCount: number;
+  manufacturedCount: number = 0;
 
-  hrInvolved: number;
+  hrInvolved: number = 0;
+
+  constructor(init?: Partial<ManufactureLight>) {
+    Object.assign(this, init);
+  }
 
 }

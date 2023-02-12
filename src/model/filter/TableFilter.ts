@@ -1,7 +1,7 @@
 import {Sorting} from "@model/web/Sorting";
 
-export interface TableFilter {
+export abstract class TableFilter {
 
-  sorting: Sorting;
+  sorting: Sorting = new Sorting();
 
 }

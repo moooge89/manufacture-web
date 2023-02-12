@@ -4,7 +4,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
-import {MaterialPriceInfo} from "@model/market/MaterialPriceInfo";
+import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
 
 @Injectable({providedIn: 'root'})
 export class MarketController {

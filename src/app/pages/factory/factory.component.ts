@@ -40,9 +40,9 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.role == UserRole.COMPANY_DIRECTOR) {
+    if (userInfo.isCompanyDirector()) {
       await this.initForCompanyDirector();
-    } else if (userInfo.role == UserRole.FACTORY_DIRECTOR) {
+    } else if (userInfo.isFactoryDirector()) {
       this.canShowDepartmentsLink = true;
       await this.initForFactoryDirector();
     } else {
@@ -55,7 +55,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
   async ngOnDestroy() {
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.role == UserRole.COMPANY_DIRECTOR) {
+    if (userInfo.isCompanyDirector()) {
       this.pathContextService.clearLastFactoryId();
     }
   }

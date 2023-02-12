@@ -1,8 +1,11 @@
-// todo era name it more abstract
-export interface ManufactureElement {
+export class ManufactureElement {
 
-  label: string;
+  label: string = '';
 
-  manufactured: number;
+  manufactured: number = 0;
+
+  constructor(init?: Partial<ManufactureElement>) {
+    Object.assign(this, init);
+  }
 
 }

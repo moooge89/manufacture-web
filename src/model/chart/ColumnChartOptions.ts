@@ -12,18 +12,18 @@ import {
 } from "ng-apexcharts";
 
 export class ColumnChartOptions {
-  public series: ApexAxisChartSeries | undefined;
-  public chart: ApexChart | undefined;
-  public dataLabels: ApexDataLabels | undefined;
-  public plotOptions: ApexPlotOptions | undefined;
-  public yaxis: ApexYAxis | undefined;
-  public xaxis: ApexXAxis | undefined;
-  public fill: ApexFill | undefined;
-  public tooltip: ApexTooltip | undefined;
-  public stroke: ApexStroke | undefined;
-  public legend: ApexLegend | undefined;
+  series: ApexAxisChartSeries | undefined;
+  chart: ApexChart | undefined;
+  dataLabels: ApexDataLabels | undefined;
+  plotOptions: ApexPlotOptions | undefined;
+  yaxis: ApexYAxis | undefined;
+  xaxis: ApexXAxis | undefined;
+  fill: ApexFill | undefined;
+  tooltip: ApexTooltip | undefined;
+  stroke: ApexStroke | undefined;
+  legend: ApexLegend | undefined;
 
-  public constructor(init?: Partial<ColumnChartOptions>) {
+  constructor(init?: Partial<ColumnChartOptions>) {
     Object.assign(this, init);
   }
 

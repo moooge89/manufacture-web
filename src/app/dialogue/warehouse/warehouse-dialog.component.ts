@@ -8,7 +8,7 @@ import {WarehouseController} from "@controller/WarehouseController";
 import {MarketController} from "@controller/MarketController";
 import {Unsub} from "@util/Unsub";
 import {ManufactureElement} from "@model/manufacture/ManufactureElement";
-import {MaterialPriceInfo} from "@model/market/MaterialPriceInfo";
+import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
 
 @Component({
   selector: 'app-warehouse-dialog',

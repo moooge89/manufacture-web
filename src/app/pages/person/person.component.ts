@@ -77,7 +77,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.role === UserRole.COMPANY_DIRECTOR) {
+    if (userInfo.isCompanyDirector()) {
       this.dialogRef = this.dialog.open(PersonFactoryTransferDialogComponent, {
         width: '800px',
         height: '400px',

@@ -1,8 +1,8 @@
 export class GeoPoint {
-  public longitude: number = 0;
-  public latitude: number = 0;
+  longitude: number = 0;
+  latitude: number = 0;
 
-  public constructor(init?: Partial<GeoPoint>) {
+  constructor(init?: Partial<GeoPoint>) {
     Object.assign(this, init);
   }
 

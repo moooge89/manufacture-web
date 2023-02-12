@@ -1,7 +1,12 @@
-export interface WarehouseMaterial {
-  id: string;
-  icon: string;
-  name: string;
-  available: number;
-  usedIn: string;
+export class WarehouseMaterial {
+  id: string = '';
+  icon: string = '';
+  name: string = '';
+  available: number = 0;
+  usedIn: string = '';
+
+  constructor(init?: Partial<WarehouseMaterial>) {
+    Object.assign(this, init);
+  }
+
 }

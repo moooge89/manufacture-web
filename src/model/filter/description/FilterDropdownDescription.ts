@@ -16,7 +16,7 @@ export class FilterDropdownDescription<T> implements FilterDescription {
 
   onValueChange: (selectedIds: string[]) => void = () => undefined;
 
-  public constructor(init?: Partial<FilterDropdownDescription<T>>) {
+  constructor(init?: Partial<FilterDropdownDescription<T>>) {
     Object.assign(this, init);
   }
 

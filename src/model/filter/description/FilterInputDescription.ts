@@ -8,7 +8,7 @@ export class FilterInputDescription implements FilterDescription {
 
   onValueChange: (value: string) => void = () => undefined;
 
-  public constructor(init?: Partial<FilterInputDescription>) {
+  constructor(init?: Partial<FilterInputDescription>) {
     Object.assign(this, init);
   }
 
