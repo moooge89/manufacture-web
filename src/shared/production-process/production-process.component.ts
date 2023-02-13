@@ -27,13 +27,11 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const startTime = this.productionInfo.currentPercentage * this.productionInfo.millisecondsToOneIteration / 100;
-
-    this.setIterationTime(this.productionInfo.millisecondsToOneIteration, startTime);
+    this.setIterationTime();
 
     const self = this;
 
-    this.iterationListener = () => self.productionInfo.todayManufactured++;
+    this.iterationListener = () => self.productionInfo.increaseTodayManufactured();
 
     this.scaleBar.nativeElement.addEventListener('animationiteration', this.iterationListener);
   }
@@ -55,7 +53,7 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private setIterationTime(iterationMilliseconds: number, startMilliseconds: number): void {
+  private setIterationTime(): void {
     if (!this.scaleBar) {
       return;
     }
@@ -66,8 +64,8 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    animation.playbackRate = 1000 / iterationMilliseconds;
-    animation.currentTime = startMilliseconds;
+    animation.playbackRate = this.productionInfo.playbackRate();
+    animation.currentTime = this.productionInfo.startTime();
   }
 
 }

@@ -16,4 +16,16 @@ export class ProductionInfo {
     Object.assign(this, init);
   }
 
+  startTime(): number {
+    return this.currentPercentage * this.millisecondsToOneIteration / 100;
+  }
+
+  playbackRate(): number {
+    return 1000 / this.millisecondsToOneIteration;
+  }
+
+  increaseTodayManufactured(): void {
+    this.todayManufactured++;
+  }
+
 }

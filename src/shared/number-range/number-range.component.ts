@@ -16,23 +16,16 @@ export class NumberRangeComponent {
 
   @Output() valueChanged = new EventEmitter<NumberRange>();
 
-  min: number = 0;
-  max: number = 0;
+  range = new NumberRange();
 
   isFocused = false;
 
   onMinChange(): void {
-    this.valueChanged.next({
-      min: this.min,
-      max: this.max,
-    });
+    this.valueChanged.next(this.range);
   }
 
   onMaxChange(): void {
-    this.valueChanged.next({
-      min: this.min,
-      max: this.max,
-    });
+    this.valueChanged.next(this.range);
   }
 
 }

@@ -15,7 +15,6 @@ import {debounceTime, filter, map} from "rxjs/operators";
 import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
 import {AuthService} from "@service/auth/auth.service";
-import {UserRole} from "@model/auth/UserRole";
 import {
   PersonFactoryTransferDialogComponent
 } from "../../dialogue/person-factory-transfer/person-factory-transfer-dialog.component";

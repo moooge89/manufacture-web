@@ -10,7 +10,7 @@
   <input
     matInput
     type="number"
-    [(ngModel)]="min"
+    [(ngModel)]="range.min"
     [ngModelOptions]="{standalone: true}"
     [min]="minValue"
     [max]="maxValue"
@@ -25,7 +25,7 @@
   <input
     matInput
     type="number"
-    [(ngModel)]="max"
+    [(ngModel)]="range.max"
     [ngModelOptions]="{standalone: true}"
     [min]="minValue"
     [max]="maxValue"
