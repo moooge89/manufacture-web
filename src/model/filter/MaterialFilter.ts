@@ -5,15 +5,9 @@ export class MaterialFilter extends TableFilter {
 
   materialName: string = '';
 
-  available: NumberRange = {
-    min: undefined,
-    max: undefined,
-  };
+  available: NumberRange = new NumberRange();
 
-  price: NumberRange = {
-    min: undefined,
-    max: undefined,
-  };
+  price: NumberRange = new NumberRange();
 
   departments: string[] = [];
 

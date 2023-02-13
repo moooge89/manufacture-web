@@ -12,8 +12,8 @@ import {forkJoin} from "rxjs";
 import {take} from "rxjs/operators";
 import {PersonController} from "@controller/PersonController";
 import {PersonFilter} from "@model/filter/PersonFilter";
-import {SortType} from "@model/web/SortType";
 import {Department} from "@model/department/Department";
+import {Sorting} from "@model/web/Sorting";
 
 @Component({
   selector: 'app-departments',
@@ -140,15 +140,12 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     this.departments = departments;
 
     for (let i = 0; i < departments.length; ++i) {
-      const personFilter: PersonFilter = {
+      const personFilter: PersonFilter = new PersonFilter({
         departmentIds: [departments[i].id],
         personName: '',
         factoryIds: [],
-        sorting: {
-          fieldName: '',
-          sortType: SortType.ASC,
-        }
-      };
+        sorting: Sorting.emptyAsc(),
+      });
 
       this.unsub.sub = this.personController.loadPersons(personFilter).subscribe(persons => this.departments[i].persons = persons);
     }

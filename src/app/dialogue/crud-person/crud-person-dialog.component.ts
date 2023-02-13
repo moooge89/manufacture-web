@@ -44,7 +44,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     private readonly departmentController: DepartmentController,
   ) {
     this.person = data.person;
-    this.copyPerson = {...data.person};
+    this.copyPerson = new Person({...data.person});
 
     this.needToConfirm = !data.noNeedToConfirm;
     this.isSave = data.isSave;

@@ -8,4 +8,9 @@ export class PersonFilter extends TableFilter {
 
   departmentIds: string[] = [];
 
+  constructor(init?: Partial<PersonFilter>) {
+    super();
+    Object.assign(this, init);
+  }
+
 }

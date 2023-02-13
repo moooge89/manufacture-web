@@ -13,19 +13,7 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
   @ViewChild('scaleBar')
   private scaleBar: ElementRef<HTMLDivElement> | undefined;
 
-  @Input() productionInfo: ProductionInfo = {
-    currentPercentage: 0,
-    departmentId: "",
-    factoryId: "",
-    millisecondsToOneIteration: 5000,
-    teamId: "",
-    titleToShow: 'title',
-    workersCount: 0,
-    todayManufactured: 0,
-    yesterdayManufactured: 0,
-    lastWeekManufactured: 0,
-    lastMonthManufactured: 0,
-  };
+  @Input() productionInfo: ProductionInfo = new ProductionInfo();
 
   iterationListener: () => void = () => undefined;
 

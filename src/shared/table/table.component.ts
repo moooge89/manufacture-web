@@ -43,10 +43,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   rows: T[] = [];
   isLoading: boolean = true;
 
-  sorting: Sorting = {
-    sortType: SortType.DESC,
-    fieldName: '',
-  };
+  sorting = Sorting.emptyDesc();
 
   private checkedIds = new Set<string>();
 
@@ -106,7 +103,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
       return 'sort-disabled';
     }
 
-    if (this.sorting.sortType === SortType.ASC) {
+    if (this.sorting.isAsc()) {
       return 'sort-asc';
     } else {
       return 'sort-desc';
@@ -118,9 +115,9 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     if (this.sorting.fieldName !== fieldName) {
       this.sorting.sortType = SortType.ASC;
       this.sorting.fieldName = fieldName;
-    } else if (this.sorting.sortType === SortType.ASC) {
+    } else if (this.sorting.isAsc()) {
       this.sorting.sortType = SortType.DESC;
-    } else if (this.sorting.sortType === SortType.DESC) {
+    } else if (this.sorting.isDesc()) {
       this.sorting.sortType = SortType.ASC;
     }
 

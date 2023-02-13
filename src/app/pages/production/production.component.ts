@@ -23,10 +23,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
   factories: FilterElement[] = [];
   departments: FilterElement[] = [];
 
-  filter: ProductionFilter = {
-    factoryId: '',
-    departmentId: '',
-  };
+  filter: ProductionFilter = new ProductionFilter();
 
   private currentFactoryIndex: number = 0;
   private currentDepartmentIndex: number = 0;

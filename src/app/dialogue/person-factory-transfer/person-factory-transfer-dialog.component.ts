@@ -33,7 +33,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
     private readonly confirmationService: ConfirmationService,
   ) {
     this.person = data.person;
-    this.copyPerson = {...data.person};
+    this.copyPerson = new Person({...data.person});
   }
 
   ngOnInit() {

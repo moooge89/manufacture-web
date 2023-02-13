@@ -1,6 +1,5 @@
 import {SortType} from "@model/web/SortType";
 
-// todo era add methods
 export class Sorting {
 
   fieldName: string = '';
@@ -9,6 +8,22 @@ export class Sorting {
 
   constructor(init?: Partial<Sorting>) {
     Object.assign(this, init);
+  }
+
+  static emptyAsc(): Sorting {
+    return new Sorting();
+  }
+
+  static emptyDesc(): Sorting {
+    return new Sorting({sortType: SortType.DESC});
+  }
+
+  isAsc(): boolean {
+    return this.sortType === SortType.ASC;
+  }
+
+  isDesc(): boolean {
+    return this.sortType === SortType.DESC;
   }
 
 }

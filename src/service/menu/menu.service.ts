@@ -55,45 +55,45 @@ export class MenuService {
 
   private menuItemsForCompanyDirector(): MenuItem[] {
     return [
-      {label: 'Company', route: ['/main/company'], icon: 'company'},
-      {label: 'Users', route: ['/main/user'], icon: 'report'},
-      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-      {label: 'Market', route: ['/main/market'], icon: 'market'},
-      {label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'},
-      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-      {label: 'Report', route: ['/main/report'], icon: 'report'},
+      new MenuItem({label: 'Company', route: ['/main/company'], icon: 'company'}),
+      new MenuItem({label: 'Users', route: ['/main/user'], icon: 'report'}),
+      new MenuItem({label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'}),
+      new MenuItem({label: 'Market', route: ['/main/market'], icon: 'market'}),
+      new MenuItem({label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'}),
+      new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
+      new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
     ];
   }
 
   private menuItemsForFactoryDirector(): MenuItem[] {
     return [
-      {label: 'Factory', route: ['/main/factory'], icon: 'factory'},
-      {label: 'Departments', route: ['/main/departments'], icon: 'team'},
-      {label: 'Users', route: ['/main/user'], icon: 'report'},
-      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-      {label: 'Market', route: ['/main/market'], icon: 'market'},
-      {label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'},
-      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-      {label: 'Report', route: ['/main/report'], icon: 'report'},
+      new MenuItem({label: 'Factory', route: ['/main/factory'], icon: 'factory'}),
+      new MenuItem({label: 'Departments', route: ['/main/departments'], icon: 'team'}),
+      new MenuItem({label: 'Users', route: ['/main/user'], icon: 'report'}),
+      new MenuItem({label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'}),
+      new MenuItem({label: 'Market', route: ['/main/market'], icon: 'market'}),
+      new MenuItem({label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'}),
+      new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
+      new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
     ];
   }
 
   private menuItemsForDepartmentDirector(): MenuItem[] {
     return [
-      {label: 'Users', route: ['/main/user'], icon: 'report'},
-      {label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'},
-      {label: 'Market', route: ['/main/market'], icon: 'market'},
-      {label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'},
-      {label: 'Budget', route: ['/main/budget'], icon: 'money'},
-      {label: 'Production', route: ['/main/production'], icon: 'conveyor'},
-      {label: 'Report', route: ['/main/report'], icon: 'report'},
+      new MenuItem({label: 'Users', route: ['/main/user'], icon: 'report'}),
+      new MenuItem({label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'}),
+      new MenuItem({label: 'Market', route: ['/main/market'], icon: 'market'}),
+      new MenuItem({label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'}),
+      new MenuItem({label: 'Budget', route: ['/main/budget'], icon: 'money'}),
+      new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
+      new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
     ];
   }
 
   private menuItemsForSystemAdmin(): MenuItem[] {
     return [
-      {label: 'Market', route: ['/main/crud-market'], icon: 'market'},
-      {label: 'Person', route: ['/main/crud-user'], icon: 'team'},
+      new MenuItem({label: 'Market', route: ['/main/crud-market'], icon: 'market'}),
+      new MenuItem({label: 'Person', route: ['/main/crud-user'], icon: 'team'}),
     ];
   }
 
