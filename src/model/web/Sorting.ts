@@ -1,5 +1,6 @@
 import {SortType} from "@model/web/SortType";
 
+// todo era add methods
 export class Sorting {
 
   fieldName: string = '';

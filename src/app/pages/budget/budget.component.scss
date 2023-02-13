@@ -55,3 +55,22 @@ label {
   margin-bottom: 0.5rem;
 }
 
+.do-not-show {
+  display: none;
+}
+
+.reset-mat-form-field ::ng-deep {
+  .mat-form-field-flex {
+    background-color: unset;
+    padding: unset;
+  }
+
+  .mat-form-field-infix {
+    padding: unset;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: unset;
+  }
+
+}

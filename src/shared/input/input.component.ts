@@ -28,7 +28,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @Input() clearOn = new Subject<void>();
 
-  @Input() inputError: InputError = {hasError: false, errorText: ''};
+  @Input() inputError: InputError = new InputError();
 
   @Output() valueChanged = new EventEmitter<string>();
   @Output() focused = new EventEmitter<void>();

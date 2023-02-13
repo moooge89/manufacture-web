@@ -14,6 +14,8 @@
     placeholder="How much?"
     type="number"
     [clearOn]="clearEmitter"
+    [inputError]="amountError"
+    (focused)="amountInputFocused()"
     (valueChanged)="onBudgetRequestChange($event)"
   ></app-input>
 
@@ -22,8 +24,27 @@
     #textarea
     id="textarea"
     placeholder="Write down your answer here"
-    [value]="explanation"
+    (focus)="reasonTextareaFocused()"
   ></textarea>
+
+  <mat-form-field
+    class="reset-mat-form-field"
+    appearance="fill"
+  >
+
+    <input
+      matInput
+      class="do-not-show"
+      [(ngModel)]="mock"
+      [ngModelOptions]="{standalone: true}"
+      [errorStateMatcher]="errorStateMatcher"
+    >
+
+    <mat-error>
+      {{reasonError.errorText}}
+    </mat-error>
+
+  </mat-form-field>
 
   <app-button
     text="Submit"

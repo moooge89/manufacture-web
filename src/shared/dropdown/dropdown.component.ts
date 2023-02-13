@@ -48,7 +48,10 @@ export class DropdownComponent<T> implements OnInit {
    */
   @Input() emptyMessage: string = 'No element can be found';
 
-  @Input() inputError: InputError = {hasError: false, errorText: ''};
+  /**
+   * error handler
+   */
+  @Input() inputError: InputError = new InputError();
 
   /**
    * If true, component emits full T element

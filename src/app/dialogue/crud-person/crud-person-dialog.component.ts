@@ -22,9 +22,9 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
   person: Person;
   copyPerson: Person;
 
-  nameError: InputError = {hasError: false, errorText: ''};
-  factoryError: InputError = {hasError: false, errorText: ''};
-  departmentError: InputError = {hasError: false, errorText: ''};
+  nameError: InputError = new InputError();
+  factoryError: InputError = new InputError();
+  departmentError: InputError = new InputError();
 
   factories: FilterElement[] = [];
   departments: FilterElement[] = [];
@@ -77,7 +77,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
 
   onNameChange(name: string): void {
     this.copyPerson.name = name;
-    this.nameError.hasError = false;
+    this.nameError.clearIfHasError();
   }
 
   async onFactoryChange(elements: FilterElement[]): Promise<void> {
@@ -93,7 +93,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     this.copyPerson.departmentId = '';
     this.copyPerson.departmentName = '';
 
-    this.factoryError.hasError = false;
+    this.factoryError.clearIfHasError();
   }
 
   onDepartmentChange(elements: FilterElement[]): void {
@@ -104,7 +104,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     this.copyPerson.departmentId = selectedDepartment.id;
     this.copyPerson.departmentName = selectedDepartment.name;
 
-    this.departmentError.hasError = false;
+    this.departmentError.clearIfHasError();
   }
 
   async cancel() {
@@ -162,20 +162,17 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     let isValid = true;
 
     if (!this.copyPerson.name) {
-      this.nameError.hasError = true;
-      this.nameError.errorText = 'Name is blank';
+      this.nameError.error('Name is blank');
       isValid = false;
     }
 
     if (!this.copyPerson.factoryId) {
-      this.factoryError.hasError = true;
-      this.factoryError.errorText = 'Choose factory';
+      this.factoryError.error('Choose factory');
       isValid = false;
     }
 
     if (!this.copyPerson.departmentId) {
-      this.departmentError.hasError = true;
-      this.departmentError.errorText = 'Choose department';
+      this.departmentError.error('Choose department');
       isValid = false;
     }
 

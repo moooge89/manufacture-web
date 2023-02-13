@@ -23,10 +23,10 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
   icons: FilterElement[] = [];
   countries: FilterElement[] = [];
 
-  iconError: InputError = {hasError: false, errorText: ''};
-  nameError: InputError = {hasError: false, errorText: ''};
-  countryError: InputError = {hasError: false, errorText: ''};
-  priceError: InputError = {hasError: false, errorText: ''};
+  iconError: InputError = new InputError();
+  nameError: InputError = new InputError();
+  countryError: InputError = new InputError();
+  priceError: InputError = new InputError();
 
   private readonly needToConfirm: boolean;
   private readonly isSave: boolean;
@@ -71,22 +71,22 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
   onIconChange(icon: any): void {
     this.copyMaterial.icon = icon;
-    this.iconError.hasError = false;
+    this.iconError.clearIfHasError();
   }
 
   onNameChange(name: string): void {
     this.copyMaterial.name = name;
-    this.nameError.hasError = false;
+    this.nameError.clearIfHasError();
   }
 
   onCountryChange(country: any): void {
     this.copyMaterial.country = country;
-    this.countryError.hasError = false;
+    this.countryError.clearIfHasError();
   }
 
   onPriceChange(price: string): void {
     this.copyMaterial.price = Number.parseInt(price);
-    this.priceError.hasError = false;
+    this.priceError.clearIfHasError();
   }
 
   async cancel() {
@@ -144,32 +144,27 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     let isValid = true;
 
     if (!this.copyMaterial.icon) {
-      this.iconError.hasError = true;
-      this.iconError.errorText = 'Choose icon';
+      this.iconError.error('Choose icon');
       isValid = false;
     }
 
     if (!this.copyMaterial.name) {
-      this.nameError.hasError = true;
-      this.nameError.errorText = 'Name is blank';
+      this.nameError.error('Name is blank');
       isValid = false;
     }
 
     if (!this.copyMaterial.country) {
-      this.countryError.hasError = true;
-      this.countryError.errorText = 'Choose country';
+      this.countryError.error('Choose country');
       isValid = false;
     }
 
     if (!this.copyMaterial.price) {
-      this.priceError.hasError = true;
-      this.priceError.errorText = 'Price is blank';
+      this.priceError.error('Price is blank');
       isValid = false;
     }
 
     if (this.copyMaterial.price < 1) {
-      this.priceError.hasError = true;
-      this.priceError.errorText = 'Price is invalid';
+      this.priceError.error('Price is invalid');
       isValid = false;
     }
 

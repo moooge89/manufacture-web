@@ -41,13 +41,11 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   async login(): Promise<void> {
     if (!this.username) {
-      this.usernameError.hasError = true;
-      this.usernameError.errorText = 'Username is blank';
+      this.usernameError.error('Username is blank');
     }
 
     if (!this.password) {
-      this.passwordError.hasError = true;
-      this.passwordError.errorText = 'Password is blank';
+      this.passwordError.error('Password is blank');
     }
 
     if (this.hasAnyError) {
@@ -63,19 +61,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   usernameFocused(): void {
-    if (!this.usernameError.hasError) {
-      return;
-    }
-
-    this.usernameError.hasError = false;
+    this.usernameError.clearIfHasError();
   }
 
   passwordFocused(): void {
-    if (!this.passwordError.hasError) {
-      return;
-    }
-
-    this.passwordError.hasError = false;
+    this.passwordError.clearIfHasError();
   }
 
   async handleEnterClick(keyboardEvent: KeyboardEvent): Promise<void> {
