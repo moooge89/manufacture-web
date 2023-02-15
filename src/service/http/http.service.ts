@@ -1,6 +1,5 @@
 import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
-import {map} from "rxjs/operators";
 
 interface KeyValue {
   key: string;
@@ -151,25 +150,6 @@ export class HttpService {
 
   }
 
-  postString(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<string> {
-
-    const ob = this.newOptionsBuilder();
-    ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    ob.appendParamsFromKeyValue(keyValue);
-
-    return this.http.post<string>(this.url(urlSuffix), ob.paramsAsString, {
-      observe: 'body',
-      // @ts-ignore
-      responseType: 'text',
-      headers: ob.headers,
-      withCredentials: true,
-    }).pipe(
-      map(x => x.toString())
-    );
-
-  }
-
   postBody<T>(urlSuffix: string, body: any): Observable<T> {
 
     const ob = this.newOptionsBuilder();
@@ -181,23 +161,6 @@ export class HttpService {
       headers: ob.headers,
       withCredentials: true,
     });
-
-  }
-
-  postBodyString<T>(urlSuffix: string, body: any): Observable<string> {
-
-    const ob = this.newOptionsBuilder();
-    ob.appendHeader('Content-Type', 'application/json');
-
-    return this.http.post<T>(this.url(urlSuffix), body, {
-      observe: 'body',
-      // @ts-ignore
-      responseType: 'text',
-      headers: ob.headers,
-      withCredentials: true,
-    }).pipe(
-      map(x => x.toString()),
-    );
 
   }
 
@@ -247,6 +210,72 @@ export class HttpService {
 
     window.URL.revokeObjectURL(url);
     return response;
+  }
+
+  put<T>(urlSuffix: string, id?: string, keyValue?: { [key: string]: any }): Observable<T> {
+
+    const ob = this.newOptionsBuilder();
+    ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    ob.appendParamsFromKeyValue(keyValue);
+
+    let url = this.url(urlSuffix);
+
+    if (id) {
+      url += '/' + id;
+    }
+
+    return this.http.put<T>(url, ob.paramsAsString, {
+      observe: 'body',
+      responseType: 'json',
+      headers: ob.headers,
+      withCredentials: true,
+    });
+
+  }
+
+  patch<T>(urlSuffix: string, id?: string, keyValue?: { [key: string]: any }): Observable<T> {
+
+    const ob = this.newOptionsBuilder();
+    ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    ob.appendParamsFromKeyValue(keyValue);
+
+    let url = this.url(urlSuffix);
+
+    if (id) {
+      url += '/' + id;
+    }
+
+    return this.http.patch<T>(url, ob.paramsAsString, {
+      observe: 'body',
+      responseType: 'json',
+      headers: ob.headers,
+      withCredentials: true,
+    });
+
+  }
+
+  delete<T>(urlSuffix: string, id?: string, keyValue?: { [key: string]: any }): Observable<T> {
+
+    const ob = this.newOptionsBuilder();
+    ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    ob.appendParamsFromKeyValue(keyValue);
+
+    let url = this.url(urlSuffix);
+
+    if (id) {
+      url += '/' + id;
+    }
+
+    return this.http.delete<T>(url, {
+      observe: 'body',
+      responseType: 'json',
+      headers: ob.headers,
+      withCredentials: true,
+    });
+
   }
 
   get token(): string | null {
