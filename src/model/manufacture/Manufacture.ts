@@ -1,4 +1,4 @@
-export class ManufactureLight {
+export class Manufacture {
 
   manufactureType: string = '';
 
@@ -8,7 +8,7 @@ export class ManufactureLight {
 
   hrInvolved: number = 0;
 
-  constructor(init?: Partial<ManufactureLight>) {
+  constructor(init?: Partial<Manufacture>) {
     Object.assign(this, init);
   }
 

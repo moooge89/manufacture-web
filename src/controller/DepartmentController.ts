@@ -33,7 +33,11 @@ export class DepartmentController {
       }),
     ];
 
-    return of(departments);
+    if (1 == 1) {
+      return of(departments);
+    }
+
+    return this.http.get('/factory-filter-element', {factoryId});
   }
 
   loadDepartments(): Observable<Department[]> {
@@ -79,22 +83,34 @@ export class DepartmentController {
       }),
     ];
 
-    return of(departments);
+    if (1 == 1) {
+      return of(departments);
+    }
+
+    return this.http.get('/list');
   }
 
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
-    return this.loadDepartments().pipe(
-      map(departments => departments.map(department => {
-        return new FilterElement({
-          id: department.id,
-          name: department.name
-        })
-      })),
-    );
+    if (1 == 1) {
+      return this.loadDepartments().pipe(
+        map(departments => departments.map(department => {
+          return new FilterElement({
+            id: department.id,
+            name: department.name
+          })
+        })),
+      );
+    }
+
+    return this.http.get('/filter-element');
   }
 
   changePersonDepartment(personId: string, departmentId: string): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.patch('/change-person-department/' + personId, {departmentId});
   }
 
 }

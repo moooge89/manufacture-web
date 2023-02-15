@@ -78,7 +78,7 @@ const keyValueAppender = (keyValue: { [p: string]: any } | undefined, appendFunc
     } else if (value instanceof Date) {
       appendFunc(key, '' + (value as Date).getTime());
     } else if (typeof value === 'object') {
-      appendFunc(key, JSON.stringify(value, (k, v) => v ?? null)); // do not loose undefined fields
+      appendFunc(key, JSON.stringify(value, (k, v) => v ?? null)); // do not lose undefined fields
     } else {
       throw new Error('Unknown type of parameter `' + key + '` : typeof value = `'
         + (typeof value) + '` : value = `' + value + '`');
@@ -219,13 +219,7 @@ export class HttpService {
 
     ob.appendParamsFromKeyValue(keyValue);
 
-    let url = this.url(urlSuffix);
-
-    if (id) {
-      url += '/' + id;
-    }
-
-    return this.http.put<T>(url, ob.paramsAsString, {
+    return this.http.put<T>(this.url(urlSuffix), ob.paramsAsString, {
       observe: 'body',
       responseType: 'json',
       headers: ob.headers,
@@ -234,20 +228,14 @@ export class HttpService {
 
   }
 
-  patch<T>(urlSuffix: string, id?: string, keyValue?: { [key: string]: any }): Observable<T> {
+  patch<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     ob.appendParamsFromKeyValue(keyValue);
 
-    let url = this.url(urlSuffix);
-
-    if (id) {
-      url += '/' + id;
-    }
-
-    return this.http.patch<T>(url, ob.paramsAsString, {
+    return this.http.patch<T>(this.url(urlSuffix), ob.paramsAsString, {
       observe: 'body',
       responseType: 'json',
       headers: ob.headers,
@@ -256,20 +244,14 @@ export class HttpService {
 
   }
 
-  delete<T>(urlSuffix: string, id?: string, keyValue?: { [key: string]: any }): Observable<T> {
+  delete<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     ob.appendParamsFromKeyValue(keyValue);
 
-    let url = this.url(urlSuffix);
-
-    if (id) {
-      url += '/' + id;
-    }
-
-    return this.http.delete<T>(url, {
+    return this.http.delete<T>(this.url(urlSuffix), {
       observe: 'body',
       responseType: 'json',
       headers: ob.headers,

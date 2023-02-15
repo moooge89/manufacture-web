@@ -8,7 +8,7 @@ import {debounceTime, filter} from "rxjs/operators";
 import {ManufactureController} from "@controller/ManufactureController";
 import {ManufactureFilter} from "@model/filter/ManufactureFilter";
 import {ManufactureFilterReactor} from "@model/filter/reactor/ManufactureFilterReactor";
-import {ManufactureLight} from "@model/manufacture/ManufactureLight";
+import {Manufacture} from "@model/manufacture/Manufacture";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterElement} from "@model/filter/FilterElement";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
@@ -55,7 +55,7 @@ export class ManufactureComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  onRowClick(manufacture: ManufactureLight): void {
+  onRowClick(manufacture: Manufacture): void {
     this.dialogRef?.close();
     this.dialogRef = this.dialog.open(ManufactureDialogComponent, {
       width: '720px',

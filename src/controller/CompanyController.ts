@@ -21,7 +21,11 @@ export class CompanyController {
       factoryCount: 3,
     });
 
-    return of(company);
+    if (1 == 1) {
+      return of(company);
+    }
+
+    return this.http.get('');
   }
 
 }

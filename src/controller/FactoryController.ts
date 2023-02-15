@@ -38,18 +38,26 @@ export class FactoryController {
       }),
     ];
 
-    return of(factories);
+    if (1 == 1) {
+      return of(factories);
+    }
+
+    return this.http.get('/list');
   }
 
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
-    return this.loadFactories().pipe(
-      map(factories => factories.map(factory => {
-        return new FilterElement({
-          id: factory.id,
-          name: factory.name
-        })
-      })),
-    );
+    if (1 == 1) {
+      return this.loadFactories().pipe(
+        map(factories => factories.map(factory => {
+          return new FilterElement({
+            id: factory.id,
+            name: factory.name
+          })
+        })),
+      );
+    }
+
+    return this.http.get('/filter-element');
   }
 
   loadFactoryInfo(): Observable<FactoryInfo> {
@@ -65,7 +73,12 @@ export class FactoryController {
       departmentCount: 3,
       year: 2022,
     });
-    return of(factoryInfo);
+
+    if (1 == 1) {
+      return of(factoryInfo);
+    }
+
+    return this.http.get('/info');
   }
 
   loadFactoryInfoById(factoryId: string): Observable<FactoryInfo> {
@@ -81,11 +94,20 @@ export class FactoryController {
       departmentCount: 3,
       year: 2022,
     });
-    return of(factoryInfo);
+
+    if (1 == 1) {
+      return of(factoryInfo);
+    }
+
+    return this.http.get('/info-by-id/' + factoryId);
   }
 
   makeUserDirector(userId: string): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.patch('/make-director/' + userId);
   }
 
 }

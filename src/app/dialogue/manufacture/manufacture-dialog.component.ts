@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DiagramChartOptions} from "@model/chart/DiagramChartOptions";
-import {ManufactureLight} from "@model/manufacture/ManufactureLight";
+import {Manufacture} from "@model/manufacture/Manufacture";
 import {Unsub} from "@util/Unsub";
 import {ManufactureController} from "@controller/ManufactureController";
 import {ManufactureElement} from "@model/manufacture/ManufactureElement";
@@ -13,7 +13,7 @@ import {ManufactureElement} from "@model/manufacture/ManufactureElement";
 })
 export class ManufactureDialogComponent implements OnInit, OnDestroy {
 
-  manufacture: ManufactureLight;
+  manufacture: Manufacture;
 
   chartOptions: Partial<DiagramChartOptions> | undefined;
 
@@ -23,7 +23,7 @@ export class ManufactureDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialogRef: MatDialogRef<ManufactureDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { manufacture: ManufactureLight },
+    @Inject(MAT_DIALOG_DATA) data: { manufacture: Manufacture },
     private readonly manufactureController: ManufactureController,
   ) {
     this.manufacture = data.manufacture;

@@ -3,6 +3,8 @@ import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {BudgetRequest} from "@model/budget/BudgetRequest";
+import {map} from "rxjs/operators";
+import {NumberWrapper} from "@model/wrapper/NumberWrapper";
 
 @Injectable({providedIn: 'root'})
 export class BudgetController {
@@ -14,12 +16,19 @@ export class BudgetController {
   }
 
   loadAvailableBudget(): Observable<number> {
-    return of(1000);
+    if (1 == 1) {
+      return of(1000);
+    }
+
+    return this.http.get<NumberWrapper>('').pipe(map(x => x.value));
   }
 
   makeBudgetRequest(request: BudgetRequest): Observable<void> {
-    console.log(request);
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.postBody('', request);
   }
 
 }

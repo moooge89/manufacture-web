@@ -31,7 +31,11 @@ export class FilterController {
       }),
     ];
 
-    return of(countries);
+    if (1 == 1) {
+      return of(countries);
+    }
+
+    return this.http.get('/country');
   }
 
   loadIconFilterElements(): Observable<FilterElement[]> {
@@ -68,7 +72,11 @@ export class FilterController {
 
     ];
 
-    return of(icons);
+    if (1 == 1) {
+      return of(icons);
+    }
+
+    return this.http.get('/icon');
   }
 
 }

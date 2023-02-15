@@ -6,7 +6,7 @@ import {of} from "rxjs";
 import {UserInfo} from "@model/auth/UserInfo";
 import {UserRole} from "@model/auth/UserRole";
 import {map} from "rxjs/operators";
-import {StringWrapper} from "@service/wrapper/StringWrapper";
+import {StringWrapper} from "@service/../model/wrapper/StringWrapper";
 
 @Injectable({providedIn: 'root'})
 export class AuthController {
@@ -32,11 +32,19 @@ export class AuthController {
       name: 'Yerassyl'
     });
 
-    return of(userInfo);
+    if (1 == 1) {
+      return of(userInfo);
+    }
+
+    return this.http.get('/user-info');
   }
 
   logout(): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.post('/logout');
   }
 
 }

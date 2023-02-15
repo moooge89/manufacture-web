@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
-import {ManufactureLight} from "@model/manufacture/ManufactureLight";
+import {Manufacture} from "@model/manufacture/Manufacture";
 import {ManufactureFilter} from "@model/filter/ManufactureFilter";
 import {FilterElement} from "@model/filter/FilterElement";
 import {ManufactureElement} from "@model/manufacture/ManufactureElement";
@@ -16,23 +16,23 @@ export class ManufactureController {
     this.http = http.setControllerPrefix('/manufacture');
   }
 
-  loadManufactureRows(filter: ManufactureFilter): Observable<ManufactureLight[]> {
+  loadManufactureRows(filter: ManufactureFilter): Observable<Manufacture[]> {
     const manufactures = [
-      new ManufactureLight({
+      new Manufacture({
         manufactureType: 'WINDOW',
         manufactureTypeLabel: 'Window',
         manufacturedCount: 12,
         hrInvolved: 3,
       }),
 
-      new ManufactureLight({
+      new Manufacture({
         manufactureType: 'DOOR',
         manufactureTypeLabel: 'Door',
         manufacturedCount: 6,
         hrInvolved: 2,
       }),
 
-      new ManufactureLight({
+      new Manufacture({
         manufactureType: 'ASSEMBLE',
         manufactureTypeLabel: 'Assemble',
         manufacturedCount: 2,
@@ -40,7 +40,11 @@ export class ManufactureController {
       }),
     ];
 
-    return of(manufactures);
+    if (1 == 1) {
+      return of(manufactures);
+    }
+
+    return this.http.get('/list', {filter});
   }
 
   loadManufactureTypesAsFilterElements(): Observable<FilterElement[]> {
@@ -61,7 +65,11 @@ export class ManufactureController {
       }),
     ];
 
-    return of(filterElements);
+    if (1 == 1) {
+      return of(filterElements);
+    }
+
+    return this.http.get('/filter-element');
   }
 
   loadManufactureElements(manufactureType: string): Observable<ManufactureElement[]> {
@@ -82,7 +90,11 @@ export class ManufactureController {
       }),
     ];
 
-    return of(manufactureElements);
+    if (1 == 1) {
+      return of(manufactureElements);
+    }
+
+    return this.http.get('/by-type', {manufactureType});
   }
 
 }

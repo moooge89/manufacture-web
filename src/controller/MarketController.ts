@@ -9,8 +9,6 @@ import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
 @Injectable({providedIn: 'root'})
 export class MarketController {
 
-  // todo era во всех контроллерах использовать REST (POST, PUT и тд)
-
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
