@@ -17,7 +17,6 @@ import {ReportFilter} from "@model/report/ReportFilter";
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss']
 })
-// todo era on filter change clear old report, but if the filter is the same, then do not clear
 export class ReportComponent implements OnInit, OnDestroy {
 
   factories: FilterElement[] = [];
