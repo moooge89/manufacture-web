@@ -7,7 +7,7 @@ import {PathContextService} from "@service/path-context/path-context.service";
 import {WarehouseController} from "@controller/WarehouseController";
 import {MarketController} from "@controller/MarketController";
 import {Unsub} from "@util/Unsub";
-import {ManufactureElement} from "@model/manufacture/ManufactureElement";
+import {ElementGroup} from "@model/manufacture/ElementGroup";
 import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
 
 @Component({
@@ -57,10 +57,10 @@ export class WarehouseDialogComponent implements OnInit, OnDestroy {
     await this.router.navigate(['/main/market']);
   }
 
-  private initChart(warehouseInfo: ManufactureElement[]) {
+  private initChart(warehouseInfo: ElementGroup[]) {
 
     const labels: string[] = warehouseInfo.map(el => el.label);
-    const series: number[] = warehouseInfo.map(el => el.manufactured);
+    const series: number[] = warehouseInfo.map(el => el.count);
 
     this.chartOptions = {
       series: series,

@@ -4,7 +4,7 @@ import {DiagramChartOptions} from "@model/chart/DiagramChartOptions";
 import {Manufacture} from "@model/manufacture/Manufacture";
 import {Unsub} from "@util/Unsub";
 import {ManufactureController} from "@controller/ManufactureController";
-import {ManufactureElement} from "@model/manufacture/ManufactureElement";
+import {ElementGroup} from "@model/manufacture/ElementGroup";
 
 @Component({
   selector: 'app-manufacture-dialog',
@@ -17,7 +17,7 @@ export class ManufactureDialogComponent implements OnInit, OnDestroy {
 
   chartOptions: Partial<DiagramChartOptions> | undefined;
 
-  manufactureElements: ManufactureElement[] = [];
+  manufactureElements: ElementGroup[] = [];
 
   private readonly unsub = new Unsub();
 
@@ -39,12 +39,12 @@ export class ManufactureDialogComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  private initChart(manufactureElements: ManufactureElement[]): void {
+  private initChart(manufactureElements: ElementGroup[]): void {
 
     this.manufactureElements = manufactureElements;
 
     const labels: string[] = manufactureElements.map(el => el.label);
-    const series: number[] = manufactureElements.map(el => el.manufactured);
+    const series: number[] = manufactureElements.map(el => el.count);
 
     this.chartOptions = {
       series: series,

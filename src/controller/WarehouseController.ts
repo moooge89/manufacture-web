@@ -4,7 +4,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {WarehouseMaterial} from "@model/material/WarehouseMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
-import {ManufactureElement} from "@model/manufacture/ManufactureElement";
+import {ElementGroup} from "@model/manufacture/ElementGroup";
 
 @Injectable({providedIn: 'root'})
 export class WarehouseController {
@@ -33,21 +33,21 @@ export class WarehouseController {
     return this.http.get('/warehouse-material', {materialFilter});
   }
 
-  loadWarehouseStoredInfo(manufactureType: string): Observable<ManufactureElement[]> {
+  loadWarehouseStoredInfo(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
-      new ManufactureElement({
+      new ElementGroup({
         label: 'All',
-        manufactured: 102,
+        count: 102,
       }),
 
-      new ManufactureElement({
+      new ElementGroup({
         label: 'Department 1',
-        manufactured: 44,
+        count: 44,
       }),
 
-      new ManufactureElement({
+      new ElementGroup({
         label: 'Department 2',
-        manufactured: 55,
+        count: 55,
       }),
     ];
 

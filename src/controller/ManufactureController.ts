@@ -5,7 +5,7 @@ import {of} from "rxjs";
 import {Manufacture} from "@model/manufacture/Manufacture";
 import {ManufactureFilter} from "@model/filter/ManufactureFilter";
 import {FilterElement} from "@model/filter/FilterElement";
-import {ManufactureElement} from "@model/manufacture/ManufactureElement";
+import {ElementGroup} from "@model/manufacture/ElementGroup";
 
 @Injectable({providedIn: 'root'})
 export class ManufactureController {
@@ -72,21 +72,21 @@ export class ManufactureController {
     return this.http.get('/filter-element');
   }
 
-  loadManufactureElements(manufactureType: string): Observable<ManufactureElement[]> {
+  loadManufactureElements(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
-      new ManufactureElement({
+      new ElementGroup({
         label: 'First team',
-        manufactured: 123,
+        count: 123,
       }),
 
-      new ManufactureElement({
+      new ElementGroup({
         label: 'Second team',
-        manufactured: 213,
+        count: 213,
       }),
 
-      new ManufactureElement({
+      new ElementGroup({
         label: 'Third team',
-        manufactured: 102,
+        count: 102,
       }),
     ];
 
