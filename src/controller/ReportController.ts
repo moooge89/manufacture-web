@@ -40,7 +40,11 @@ export class ReportController {
       secondCoefScale: [12, 12, 12, 35, 41, 36, 26, 45, 48, 52, 53, 41],
     });
 
-    return of(reportDescription);
+    if (1 == 1) {
+      return of(reportDescription);
+    }
+
+    return this.http.get('', {reportFilter});
   }
 
 }

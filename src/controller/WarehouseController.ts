@@ -26,7 +26,11 @@ export class WarehouseController {
       }),
     ];
 
-    return of(materials);
+    if (1 == 1) {
+      return of(materials);
+    }
+
+    return this.http.get('/warehouse-material', {materialFilter});
   }
 
   loadWarehouseStoredInfo(manufactureType: string): Observable<ManufactureElement[]> {
@@ -47,7 +51,11 @@ export class WarehouseController {
       }),
     ];
 
-    return of(manufactureElements);
+    if (1 == 1) {
+      return of(manufactureElements);
+    }
+
+    return this.http.get('/stored-info', {manufactureType});
   }
 
 }

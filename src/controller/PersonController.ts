@@ -15,16 +15,28 @@ export class PersonController {
   }
 
   createPerson(person: Person): Observable<Person> {
-    person.id = '2';
-    return of(person);
+    if (1 == 1) {
+      person.id = '2';
+      return of(person);
+    }
+
+    return this.http.postBody('', person);
   }
 
   updatePerson(person: Person): Observable<Person> {
-    return of(person);
+    if (1 == 1) {
+      return of(person);
+    }
+
+    return this.http.putBody('/' + person.id, person);
   }
 
   updatePersonIndex(personId: string, index: number): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.put('/' + personId, {index});
   }
 
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
@@ -70,11 +82,19 @@ export class PersonController {
       }),
     ];
 
-    return of(persons);
+    if (1 == 1) {
+      return of(persons);
+    }
+
+    return this.http.get('/list', {personFilter});
   }
 
   deletePersons(ids: Set<string>): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.delete('', {ids});
   }
 
 }

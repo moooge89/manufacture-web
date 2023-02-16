@@ -59,7 +59,11 @@ export class ProductionController {
       }),
     ];
 
-    return of(productionInfo);
+    if (1 == 1) {
+      return of(productionInfo);
+    }
+
+    return this.http.get('/list', {productionFilter});
   }
 
 }

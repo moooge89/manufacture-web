@@ -31,7 +31,11 @@ export class TeamController {
       }),
     ];
 
-    return of(teams);
+    if (1 == 1) {
+      return of(teams);
+    }
+
+    return this.http.get('/list/' + departmentId);
   }
 
 }

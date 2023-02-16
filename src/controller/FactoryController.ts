@@ -24,12 +24,14 @@ export class FactoryController {
         directorName: 'Yeletay Yerassyl',
         workerCount: 50
       }),
+
       new LightFactoryInfo({
         id: '2',
         name: 'Semey Car Factory',
         directorName: 'Yeletay Yerassyl',
         workerCount: 30
       }),
+
       new LightFactoryInfo({
         id: '3',
         name: 'Shymkent Car Factory',

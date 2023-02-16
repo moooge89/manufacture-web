@@ -212,7 +212,7 @@ export class HttpService {
     return response;
   }
 
-  put<T>(urlSuffix: string, id?: string, keyValue?: { [key: string]: any }): Observable<T> {
+  put<T>(urlSuffix: string, keyValue?: { [key: string]: any }): Observable<T> {
 
     const ob = this.newOptionsBuilder();
     ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -220,6 +220,20 @@ export class HttpService {
     ob.appendParamsFromKeyValue(keyValue);
 
     return this.http.put<T>(this.url(urlSuffix), ob.paramsAsString, {
+      observe: 'body',
+      responseType: 'json',
+      headers: ob.headers,
+      withCredentials: true,
+    });
+
+  }
+
+  putBody<T>(urlSuffix: string, body: any): Observable<T> {
+
+    const ob = this.newOptionsBuilder();
+    ob.appendHeader('Content-Type', 'application/json');
+
+    return this.http.put<T>(this.url(urlSuffix), body, {
       observe: 'body',
       responseType: 'json',
       headers: ob.headers,

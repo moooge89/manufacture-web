@@ -5,6 +5,8 @@ import {of} from "rxjs";
 import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
+import {StringWrapper} from "@model/wrapper/StringWrapper";
+import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 export class MarketController {
@@ -16,11 +18,19 @@ export class MarketController {
   }
 
   createMarketMaterial(material: MarketMaterial): Observable<string> {
-    return of('2');
+    if (1 == 1) {
+      return of('2');
+    }
+
+    return this.http.postBody<StringWrapper>('', material).pipe(map(x => x.value));
   }
 
   updateMarketMaterial(material: MarketMaterial): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.putBody('/' + material.id, material);
   }
 
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
@@ -36,15 +46,28 @@ export class MarketController {
         available: 150,
       }),
     ];
-    return of(materials);
+
+    if (1 == 1) {
+      return of(materials);
+    }
+
+    return this.http.get('/list', {materialFilter});
   }
 
   deleteMarketMaterials(ids: Set<String>): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.delete('', {ids});
   }
 
   buyMaterial(id: string, kgToBuy: number): Observable<void> {
-    return of(undefined);
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.patch('/' + id, {kgToBuy});
   }
 
   loadMaterialPriceInfo(id: string): Observable<MaterialPriceInfo> {
@@ -54,7 +77,11 @@ export class MarketController {
       avg: 18,
     });
 
-    return of(materialPriceInfo);
+    if (1 == 1) {
+      return of(materialPriceInfo);
+    }
+
+    return this.http.get('/price-list/' + id);
   }
 
 }
