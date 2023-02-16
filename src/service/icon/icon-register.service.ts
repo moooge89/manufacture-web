@@ -11,7 +11,7 @@ export class IconRegisterService {
   ) {
   }
 
-  init() {
+  init(): void {
     this.matIconRegistry.addSvgIconResolver(name => {
       const url = `assets/icons/${name}.svg`;
       return this.domSanitizer.bypassSecurityTrustResourceUrl(url);

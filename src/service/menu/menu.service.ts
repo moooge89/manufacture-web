@@ -43,11 +43,11 @@ export class MenuService {
     return of(menuItems).toPromise();
   }
 
-  async redirectToDefaultPage() {
+  async redirectToDefaultPage(): Promise<void> {
     await this.router.navigate([await this.defaultPage()]);
   }
 
-  async redirectToDefaultPageIfNeeded() {
+  async redirectToDefaultPageIfNeeded(): Promise<void> {
     if (this.router.url === '/main') {
       await this.redirectToDefaultPage();
     }

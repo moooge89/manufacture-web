@@ -16,7 +16,7 @@ export class AuthService {
   ) {
   }
 
-  async init() {
+  async init(): Promise<void> {
     await this.loadAndSetUserInfo();
   }
 
@@ -32,19 +32,19 @@ export class AuthService {
     return of(this._userInfo).toPromise();
   }
 
-  logout() {
+  logout(): void {
     this.authController.logout().subscribe(() => {
       localStorage.setItem(TOKEN, '');
       this._userInfo = undefined;
       this.router.navigate(['/auth']).then();
-    })
+    });
   }
 
   isTokenProvided(): boolean {
     return !!localStorage.getItem(TOKEN);
   }
 
-  private async loadAndSetUserInfo() {
+  private async loadAndSetUserInfo(): Promise<void> {
     this._userInfo = await this.authController.userInfo().toPromise();
   }
 

@@ -19,7 +19,7 @@ export class BottomNotificationService {
   constructor(@Inject(Injector) private injector: Injector) {
   }
 
-  showError(message: string) {
+  showError(message: string): void {
     const toast = this.toast.show('', '', this.config);
     toast.toastRef.componentInstance.data = {
       title: 'Error',
@@ -28,7 +28,7 @@ export class BottomNotificationService {
     };
   }
 
-  showHttpResponseErrorFor(err: Error) {
+  showHttpResponseErrorFor(err: Error): void {
     if (!(err instanceof HttpErrorResponse)) {
       throw err;
     }
@@ -43,7 +43,7 @@ export class BottomNotificationService {
     };
   }
 
-  showInfo(message: string) {
+  showInfo(message: string): void {
     const toast = this.toast.show('', '', this.config);
     toast.toastRef.componentInstance.data = {
       title: 'Info',

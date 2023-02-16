@@ -18,7 +18,7 @@ export class BottomNotificationComponent extends Toast {
     super(toast, toastPackage);
   }
 
-  close() {
+  close(): void {
     this.toast.clear(this.toastPackage.toastId);
   }
 

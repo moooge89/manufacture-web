@@ -35,7 +35,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  async handleFactoryClick(factory: LightFactoryInfo) {
+  async handleFactoryClick(factory: LightFactoryInfo): Promise<void> {
     this.pathContextService.lastFactoryId = factory.id;
     await this.router.navigate(['/main/factory']);
   }

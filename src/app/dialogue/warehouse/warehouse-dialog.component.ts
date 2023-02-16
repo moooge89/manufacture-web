@@ -37,15 +37,9 @@ export class WarehouseDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // todo pass material type or id instead of material name
-    this.unsub.sub = this.warehouseController.loadWarehouseStoredInfo(this.material.name).subscribe(
-      warehouseInfo => this.initChart(warehouseInfo)
-    );
+    this.unsub.sub = this.warehouseController.loadWarehouseStoredInfo(this.material.id).subscribe(warehouseInfo => this.initChart(warehouseInfo));
 
-    // todo pass material type or id instead of material name
-    this.unsub.sub = this.marketController.loadMaterialPriceInfo(this.material.name).subscribe(
-      priceInfo => this.priceInfo = priceInfo
-    );
+    this.unsub.sub = this.marketController.loadMaterialPriceInfo(this.material.id).subscribe(priceInfo => this.priceInfo = priceInfo);
   }
 
   ngOnDestroy() {

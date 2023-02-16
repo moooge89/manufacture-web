@@ -25,6 +25,8 @@ export class PersonController {
 
   updatePerson(person: Person): Observable<Person> {
     if (1 == 1) {
+      person.departmentId = '0';
+      person.departmentName = 'Default department';
       return of(person);
     }
 

@@ -71,7 +71,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  async handlePersonClick(person: Person) {
+  async handlePersonClick(person: Person): Promise<void> {
     this.dialogRef?.close();
 
     const userInfo = await this.authService.userInfo();
@@ -102,7 +102,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     this.filterReactor.onSortChange(sorting);
   }
 
-  private async initDescriptions() {
+  private async initDescriptions(): Promise<void> {
     const nameDesc = new FilterInputDescription({
       placeholder: 'Name...',
       defaultValue: '',

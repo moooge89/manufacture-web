@@ -59,11 +59,11 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  async goToDepartments() {
+  async goToDepartments(): Promise<void> {
     await this.router.navigate(['/main/departments']);
   }
 
-  private async initForCompanyDirector() {
+  private async initForCompanyDirector(): Promise<void> {
     const factoryId = this.pathContextService.lastFactoryId;
 
     if (!factoryId) {
@@ -73,7 +73,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
     this.factoryInfo = await this.factoryController.loadFactoryInfoById(factoryId).toPromise();
   }
 
-  private async initForFactoryDirector() {
+  private async initForFactoryDirector(): Promise<void> {
     this.factoryInfo = await this.factoryController.loadFactoryInfo().toPromise();
   }
 
@@ -100,6 +100,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
     circle.addTo(leafletMap);
 
     leafletMap.addEventListener("click", function (event: LeafletMouseEvent) {
+      // todo era handle properly
       console.log(event.latlng);
     });
   }

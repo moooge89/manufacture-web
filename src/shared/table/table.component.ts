@@ -78,7 +78,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     this.addClicked.emit();
   }
 
-  async deleteRows() {
+  async deleteRows(): Promise<void> {
     if (this.checkedIds.size === 0) {
       return;
     }

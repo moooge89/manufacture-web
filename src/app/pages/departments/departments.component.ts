@@ -78,7 +78,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     this.drop(copyItem);
   }
 
-  openPersonDialog(person: Person) {
+  openPersonDialog(person: Person): void {
     this.dialogRef?.close();
 
     this.dialogRef = this.dialog.open(PersonDialogComponent, {
