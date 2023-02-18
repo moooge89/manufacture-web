@@ -9,7 +9,7 @@ import {Person} from "@model/person/Person";
 })
 export class PersonDialogComponent {
 
-  person: Person;
+  readonly person: Person;
 
   constructor(
     private dialogRef: MatDialogRef<PersonDialogComponent>,

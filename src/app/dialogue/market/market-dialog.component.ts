@@ -13,7 +13,7 @@ import {BudgetController} from "@controller/BudgetController";
 })
 export class MarketDialogComponent implements OnInit, OnDestroy {
 
-  material: MarketMaterial;
+  readonly material: MarketMaterial;
 
   kgToBuy = 1;
   price = 0;

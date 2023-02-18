@@ -17,10 +17,10 @@ export class AuthComponent implements OnInit, OnDestroy {
   username: string = '';
   password: string = '';
 
-  usernameError = new InputError();
-  passwordError = new InputError();
+  readonly usernameError = new InputError();
+  readonly passwordError = new InputError();
 
-  private unsub = new Unsub();
+  private readonly unsub = new Unsub();
 
   constructor(private readonly router: Router,
               private readonly menuService: MenuService,
@@ -41,15 +41,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   async login(): Promise<void> {
-    if (!this.username) {
-      this.usernameError.error('Username is blank');
-    }
+    this.validate();
 
-    if (!this.password) {
-      this.passwordError.error('Password is blank');
-    }
-
-    if (this.hasAnyError) {
+    if (this.hasAnyError()) {
       return;
     }
 
@@ -77,7 +71,19 @@ export class AuthComponent implements OnInit, OnDestroy {
     await this.login();
   }
 
-  get hasAnyError(): boolean {
+  private validate(): void {
+
+    if (!this.username) {
+      this.usernameError.error('Username is blank');
+    }
+
+    if (!this.password) {
+      this.passwordError.error('Password is blank');
+    }
+
+  }
+
+  private hasAnyError(): boolean {
     return this.usernameError.hasError || this.passwordError.hasError;
   }
 

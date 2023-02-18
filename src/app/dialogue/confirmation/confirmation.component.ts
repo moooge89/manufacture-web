@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class ConfirmationComponent {
 
-  message: string;
+  readonly message: string;
 
   constructor(
     private dialogRef: MatDialogRef<ConfirmationComponent>,

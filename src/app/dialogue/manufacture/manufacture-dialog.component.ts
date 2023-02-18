@@ -13,7 +13,7 @@ import {ElementGroup} from "@model/manufacture/ElementGroup";
 })
 export class ManufactureDialogComponent implements OnInit, OnDestroy {
 
-  manufacture: Manufacture;
+  readonly manufacture: Manufacture;
 
   chartOptions: Partial<DiagramChartOptions> | undefined;
 

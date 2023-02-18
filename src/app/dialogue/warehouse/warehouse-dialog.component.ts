@@ -17,7 +17,7 @@ import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
 })
 export class WarehouseDialogComponent implements OnInit, OnDestroy {
 
-  material: WarehouseMaterial;
+  readonly material: WarehouseMaterial;
 
   priceInfo: MaterialPriceInfo | undefined;
 

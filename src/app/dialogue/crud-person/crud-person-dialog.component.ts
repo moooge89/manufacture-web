@@ -19,12 +19,12 @@ import {DepartmentController} from "@controller/DepartmentController";
 })
 export class CrudPersonDialogComponent implements OnInit, OnDestroy {
 
-  person: Person;
+  readonly person: Person;
   copyPerson: Person;
 
-  nameError: InputError = new InputError();
-  factoryError: InputError = new InputError();
-  departmentError: InputError = new InputError();
+  readonly nameError: InputError = new InputError();
+  readonly factoryError: InputError = new InputError();
+  readonly departmentError: InputError = new InputError();
 
   factories: FilterElement[] = [];
   departments: FilterElement[] = [];
@@ -109,7 +109,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
 
   async cancel() {
 
-    if (!this.hasChanged) {
+    if (!this.hasChanged()) {
       this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
@@ -125,11 +125,13 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
 
   async save() {
 
-    if (!this.validate()) {
+    this.validate();
+
+    if (this.hasAnyError()) {
       return;
     }
 
-    if (!this.hasChanged) {
+    if (!this.hasChanged()) {
       this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
@@ -157,26 +159,24 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  private validate(): boolean {
-
-    let isValid = true;
+  private validate(): void {
 
     if (!this.copyPerson.name) {
       this.nameError.error('Name is blank');
-      isValid = false;
     }
 
     if (!this.copyPerson.factoryId) {
       this.factoryError.error('Choose factory');
-      isValid = false;
     }
 
     if (!this.copyPerson.departmentId) {
       this.departmentError.error('Choose department');
-      isValid = false;
     }
 
-    return isValid;
+  }
+
+  private hasAnyError(): boolean {
+    return this.nameError.hasError || this.factoryError.hasError || this.departmentError.hasError;
   }
 
   private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
@@ -187,7 +187,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     this.dialogRef?.close(dialogRes);
   }
 
-  get hasChanged(): boolean {
+  private hasChanged(): boolean {
     return this.person.name !== this.copyPerson.name
       || this.person.factoryId !== this.copyPerson.factoryId
       || this.person.departmentId !== this.copyPerson.departmentId;

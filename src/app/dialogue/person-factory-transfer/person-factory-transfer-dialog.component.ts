@@ -16,14 +16,14 @@ import {PersonController} from "@controller/PersonController";
 })
 export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
 
-  person: Person;
+  readonly person: Person;
   copyPerson: Person;
 
   factories: FilterElement[] = [];
 
   private isMadeFactoryDirectorClicked: boolean = false;
 
-  private readonly subs = new Unsub();
+  private readonly unsub = new Unsub();
 
   constructor(
     private dialogRef: MatDialogRef<PersonFactoryTransferDialogComponent>,
@@ -37,11 +37,11 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subs.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
+    this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.unsub.unsubscribe();
   }
 
   @HostListener('window:keyup.esc')
@@ -75,7 +75,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
 
   async cancel() {
 
-    if (!this.hasChanged) {
+    if (!this.hasChanged()) {
       this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
@@ -91,7 +91,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
 
   async save() {
 
-    if (!this.hasChanged) {
+    if (!this.hasChanged()) {
       this.closeDialog(PersonDialogResp.noNeedToSave());
       return;
     }
@@ -102,7 +102,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.isPersonFactoryChanged) {
+    if (this.isPersonFactoryChanged()) {
       this.copyPerson = await this.personController.updatePerson(this.copyPerson).toPromise();
     }
 
@@ -121,11 +121,11 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
     this.dialogRef?.close(dialogRes);
   }
 
-  get hasChanged(): boolean {
-    return this.isMadeFactoryDirectorClicked || this.isPersonFactoryChanged;
+  private hasChanged(): boolean {
+    return this.isMadeFactoryDirectorClicked || this.isPersonFactoryChanged();
   }
 
-  get isPersonFactoryChanged(): boolean {
+  private isPersonFactoryChanged(): boolean {
     return this.person.factoryId !== this.copyPerson.factoryId;
   }
 

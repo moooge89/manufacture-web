@@ -17,16 +17,16 @@ import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 })
 export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
-  material: MarketMaterial;
-  copyMaterial: MarketMaterial;
+  readonly material: MarketMaterial;
+  readonly copyMaterial: MarketMaterial;
 
   icons: FilterElement[] = [];
   countries: FilterElement[] = [];
 
-  iconError: InputError = new InputError();
-  nameError: InputError = new InputError();
-  countryError: InputError = new InputError();
-  priceError: InputError = new InputError();
+  readonly iconError: InputError = new InputError();
+  readonly nameError: InputError = new InputError();
+  readonly countryError: InputError = new InputError();
+  readonly priceError: InputError = new InputError();
 
   private readonly needToConfirm: boolean;
   private readonly isSave: boolean;
@@ -91,7 +91,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
   async cancel() {
 
-    if (!this.hasChanged) {
+    if (!this.hasChanged()) {
       this.closeDialog(MarketMaterialResp.noNeedToSave());
       return;
     }
@@ -107,11 +107,13 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
 
   async save() {
 
-    if (!this.validate()) {
+    this.validate();
+
+    if (this.hasAnyError()) {
       return;
     }
 
-    if (!this.hasChanged) {
+    if (!this.hasChanged()) {
       this.closeDialog(MarketMaterialResp.noNeedToSave());
       return;
     }
@@ -139,43 +141,39 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  private validate(): boolean {
-
-    let isValid = true;
+  private validate(): void {
 
     if (!this.copyMaterial.icon) {
       this.iconError.error('Choose icon');
-      isValid = false;
     }
 
     if (!this.copyMaterial.name) {
       this.nameError.error('Name is blank');
-      isValid = false;
     }
 
     if (!this.copyMaterial.country) {
       this.countryError.error('Choose country');
-      isValid = false;
     }
 
     if (!this.copyMaterial.price) {
       this.priceError.error('Price is blank');
-      isValid = false;
     }
 
     if (this.copyMaterial.price < 1) {
       this.priceError.error('Price is invalid');
-      isValid = false;
     }
 
-    return isValid;
+  }
+
+  private hasAnyError(): boolean {
+    return this.iconError.hasError || this.nameError.hasError || this.countryError.hasError || this.priceError.hasError;
   }
 
   private closeDialog(dialogRes: MarketMaterialResp): void {
     this.dialogRef?.close(dialogRes);
   }
 
-  get hasChanged(): boolean {
+  private hasChanged(): boolean {
     return this.material.icon !== this.copyMaterial.icon
       || this.material.country !== this.copyMaterial.country
       || this.material.name !== this.copyMaterial.name

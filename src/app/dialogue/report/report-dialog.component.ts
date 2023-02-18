@@ -10,7 +10,7 @@ import {ReportDescription} from "@model/report/ReportDescription";
 })
 export class ReportDialogComponent {
 
-  chartOptions: Partial<ColumnChartOptions>;
+  readonly chartOptions: Partial<ColumnChartOptions>;
 
   constructor(
     private dialogRef: MatDialogRef<ReportDialogComponent>,

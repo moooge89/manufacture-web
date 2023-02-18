@@ -9,7 +9,7 @@ import {ProductionInfo} from "@model/production/ProductionInfo";
 })
 export class ProductionDialogComponent {
 
-  productionInfo: ProductionInfo;
+  readonly productionInfo: ProductionInfo;
 
   constructor(
     private dialogRef: MatDialogRef<ProductionDialogComponent>,
