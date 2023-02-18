@@ -7,6 +7,7 @@ import {UserInfo} from "@model/auth/UserInfo";
 import {UserRole} from "@model/auth/UserRole";
 import {map} from "rxjs/operators";
 import {StringWrapper} from "@service/../model/wrapper/StringWrapper";
+import {BooleanWrapper} from "@model/wrapper/BooleanWrapper";
 
 @Injectable({providedIn: 'root'})
 export class AuthController {
@@ -23,6 +24,14 @@ export class AuthController {
     }
 
     return this.http.postBody<StringWrapper>('/login', loginRequest).pipe(map(x => x.value));
+  }
+
+  isValidToken(): Observable<boolean> {
+    if (1 == 1) {
+      return of(true);
+    }
+
+    return this.http.post<BooleanWrapper>('/validate-token').pipe(map(x => x.value));
   }
 
   userInfo(): Observable<UserInfo> {

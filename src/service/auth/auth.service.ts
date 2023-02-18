@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {TOKEN} from "@const/LocalStorageConst";
 import {Router} from "@angular/router";
 import {UserInfo} from "@model/auth/UserInfo";
 import {AuthController} from "@controller/AuthController";
 import {of} from "rxjs";
+import {TOKEN_HEADER, TOKEN_PREFIX} from "@const/LocalStorageConst";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -20,6 +20,10 @@ export class AuthService {
     await this.loadAndSetUserInfo();
   }
 
+  async validateToken(): Promise<boolean> {
+    return await this.authController.isValidToken().toPromise();
+  }
+
   async userInfo(): Promise<UserInfo> {
     if (!this._userInfo) {
       await this.init();
@@ -32,16 +36,20 @@ export class AuthService {
     return of(this._userInfo).toPromise();
   }
 
+  setToken(token: string): void {
+    localStorage.setItem(TOKEN_HEADER, TOKEN_PREFIX + token);
+  }
+
   logout(): void {
     this.authController.logout().subscribe(() => {
-      localStorage.setItem(TOKEN, '');
+      this.setToken('');
       this._userInfo = undefined;
       this.router.navigate(['/auth']).then();
     });
   }
 
   isTokenProvided(): boolean {
-    return !!localStorage.getItem(TOKEN);
+    return !!localStorage.getItem(TOKEN_HEADER);
   }
 
   private async loadAndSetUserInfo(): Promise<void> {

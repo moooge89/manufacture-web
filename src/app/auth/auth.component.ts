@@ -3,9 +3,9 @@ import {Unsub} from "@util/Unsub";
 import {AuthController} from "@controller/AuthController";
 import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {Router} from "@angular/router";
-import {TOKEN} from "@const/LocalStorageConst";
 import {InputError} from "@model/web/InputError";
 import {MenuService} from "@service/menu/menu.service";
+import {AuthService} from "@service/auth/auth.service";
 
 @Component({
   selector: 'app-auth',
@@ -24,13 +24,14 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   constructor(private readonly router: Router,
               private readonly menuService: MenuService,
+              private readonly authService: AuthService,
               private readonly authController: AuthController) {
   }
 
   async ngOnInit() {
-    const token = localStorage.getItem(TOKEN);
+    const isTokenValid = await this.authService.validateToken();
 
-    if (token) {
+    if (isTokenValid) {
       await this.router.navigate(['/main']);
     }
   }
@@ -55,7 +56,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     const securedLoginRequest = new SecuredLoginRequest(this.username, this.password);
 
     this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(async token => {
-      localStorage.setItem(TOKEN, token);
+      this.authService.setToken(token);
       await this.menuService.redirectToDefaultPage();
     });
   }

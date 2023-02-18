@@ -1,5 +1,6 @@
 import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
+import {TOKEN_HEADER} from "@const/LocalStorageConst";
 
 interface KeyValue {
   key: string;
@@ -275,21 +276,21 @@ export class HttpService {
   }
 
   get token(): string | null {
-    return localStorage.getItem('token') || null;
+    return localStorage.getItem(TOKEN_HEADER) || null;
   }
 
   set token(value: string | null) {
     if (value) {
-      localStorage.setItem('token', value);
+      localStorage.setItem(TOKEN_HEADER, value);
     } else {
-      localStorage.removeItem('token');
+      localStorage.removeItem(TOKEN_HEADER);
     }
   }
 
   private newOptionsBuilder(): OptionsBuilder {
     const ob = new OptionsBuilder();
     if (this.token) {
-      ob.appendHeader('token', this.token);
+      ob.appendHeader(TOKEN_HEADER, this.token);
     }
     return ob;
   }
