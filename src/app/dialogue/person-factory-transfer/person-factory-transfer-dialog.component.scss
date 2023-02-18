@@ -36,21 +36,14 @@ app-button {
 }
 
 .right {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 
   padding: 2rem 1rem;
   width: 50%;
 }
 
 .right span {
-  margin-bottom: 1rem;
-}
-
-.row-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 1rem;
 }
 

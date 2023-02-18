@@ -12,22 +12,24 @@
 
   <section class="right block">
 
-    <span>Name: {{person.name}}</span>
-    <div class="row-wrapper">
-      <span>Factory:</span>
-      <div class="form-cell-value">
-        <app-dropdown
-          label="Factory"
-          [getId]="getId"
-          [getName]="getName"
-          [elements]="factories"
-          [isMultiple]="false"
-          [selectedElementId]="person.factoryId"
-          (idChanged)="onFactoryChange($event)"
-        ></app-dropdown>
-      </div>
+    <span>Name:</span>
+    <span>{{person.name}}</span>
+
+    <span>Factory:</span>
+    <div class="form-cell-value">
+      <app-dropdown
+        label="Factory"
+        [getId]="getId"
+        [getName]="getName"
+        [elements]="factories"
+        [isMultiple]="false"
+        [selectedElementId]="person.factoryId"
+        (idChanged)="onFactoryChange($event)"
+      ></app-dropdown>
     </div>
-    <span>Department: {{person.departmentName}}</span>
+
+    <span>Department:</span>
+    <span>{{person.departmentName}}</span>
 
   </section>
 
