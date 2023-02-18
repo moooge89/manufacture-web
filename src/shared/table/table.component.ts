@@ -45,9 +45,9 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   sorting = Sorting.emptyDesc();
 
-  private checkedIds = new Set<string>();
+  private readonly checkedIds = new Set<string>();
 
-  private unsub = new Unsub();
+  private readonly unsub = new Unsub();
 
   constructor(private readonly confirmService: ConfirmationService,) {
   }

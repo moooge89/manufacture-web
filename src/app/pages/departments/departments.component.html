@@ -35,7 +35,7 @@
       [id]="'department-cdk-drop-' + department.id"
       [cdkDropListData]="department.persons"
       (cdkDropListDropped)="onDrop($event)"
-      [cdkDropListDisabled]="isDraggingDisabled"
+      [cdkDropListDisabled]="!draggableMode"
     >
 
       <h2>{{department.name}}</h2>

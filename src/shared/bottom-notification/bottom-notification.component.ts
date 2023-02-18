@@ -22,11 +22,11 @@ export class BottomNotificationComponent extends Toast {
     this.toast.clear(this.toastPackage.toastId);
   }
 
-  get isInfo(): boolean {
+  isInfo(): boolean {
     return this.data.type === NotificationType.INFO;
   }
 
-  get isError(): boolean {
+  isError(): boolean {
     return this.data.type === NotificationType.ERROR;
   }
 

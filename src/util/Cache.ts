@@ -1,6 +1,6 @@
 export class Cache<T> {
 
-  private map: Map<string, T> = new Map();
+  private readonly map: Map<string, T> = new Map();
 
   async computeIfAbsent(key: string, func: Promise<T>): Promise<T> {
     const value = this.map.get(key);

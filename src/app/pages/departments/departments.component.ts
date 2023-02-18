@@ -152,8 +152,4 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
   }
 
-  get isDraggingDisabled(): boolean {
-    return !this.draggableMode;
-  }
-
 }
