@@ -111,10 +111,10 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   }
 
-  handleSortClick(fieldName: string): void {
+  handleSortClick(fieldName: string, index: number): void {
     if (this.sorting.fieldName !== fieldName) {
       this.sorting.sortType = SortType.ASC;
-      this.sorting.fieldName = fieldName;
+      this.sorting.fieldName = this.columnNames[index] || '';
     } else if (this.sorting.isAsc()) {
       this.sorting.sortType = SortType.DESC;
     } else if (this.sorting.isDesc()) {

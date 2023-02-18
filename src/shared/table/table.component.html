@@ -24,13 +24,11 @@
 
     <th *ngIf="isAdminTable"></th>
 
-    <th *ngFor="let header of headers">
-
-      <!-- todo era pass column name instead of display name -->
+    <th *ngFor="let header of headers; let i = index">
 
       <div
         class="table-header"
-        (click)="handleSortClick(header)"
+        (click)="handleSortClick(header, i)"
       >
 
         <span>{{header}}</span>
