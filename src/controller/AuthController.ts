@@ -28,7 +28,8 @@ export class AuthController {
 
   isValidToken(): Observable<boolean> {
     if (1 == 1) {
-      return of(true);
+      const token = localStorage.getItem('Authorization');
+      return of(!!token && token !== 'Bearer ');
     }
 
     return this.http.post<BooleanWrapper>('/validate-token').pipe(map(x => x.value));
@@ -37,7 +38,7 @@ export class AuthController {
   userInfo(): Observable<UserInfo> {
     const userInfo = new UserInfo({
       id: '1',
-      role: UserRole.FACTORY_DIRECTOR,
+      role: UserRole.DEPARTMENT_DIRECTOR,
       name: 'Yerassyl'
     });
 

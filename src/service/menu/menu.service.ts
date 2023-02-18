@@ -112,7 +112,7 @@ export class MenuService {
         break;
 
       case UserRole.DEPARTMENT_DIRECTOR:
-        path = '/main/departments';
+        path = '/main/user';
         break;
 
       case UserRole.SYSTEM_ADMIN:
