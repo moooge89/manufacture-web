@@ -1,9 +1,12 @@
 export class FilterElement {
-  id: string = '';
-  name: string = '';
 
-  constructor(init?: Partial<FilterElement>) {
-    Object.assign(this, init);
+  readonly id: string;
+  readonly name: string;
+
+  constructor(private _id: string,
+              private _name: string) {
+    this.id = _id;
+    this.name = _name;
   }
 
 }

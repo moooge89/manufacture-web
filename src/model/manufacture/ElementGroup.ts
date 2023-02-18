@@ -1,11 +1,11 @@
 export class ElementGroup {
+  readonly label: string = '';
+  readonly count: number = 0;
 
-  label: string = '';
-
-  count: number = 0;
-
-  constructor(init?: Partial<ElementGroup>) {
-    Object.assign(this, init);
+  constructor(private _label: string,
+              private _count: number) {
+    this.label = _label;
+    this.count = _count;
   }
 
 }

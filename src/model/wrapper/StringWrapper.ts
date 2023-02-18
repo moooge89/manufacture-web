@@ -1,3 +1,3 @@
 export interface StringWrapper {
-  value: string;
+  readonly value: string;
 }

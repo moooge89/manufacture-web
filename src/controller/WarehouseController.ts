@@ -35,20 +35,11 @@ export class WarehouseController {
 
   loadWarehouseStoredInfo(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
-      new ElementGroup({
-        label: 'All',
-        count: 102,
-      }),
+      new ElementGroup('All', 102),
 
-      new ElementGroup({
-        label: 'Department 1',
-        count: 44,
-      }),
+      new ElementGroup('Department 1', 44),
 
-      new ElementGroup({
-        label: 'Department 2',
-        count: 55,
-      }),
+      new ElementGroup('Department 2', 55),
     ];
 
     if (1 == 1) {

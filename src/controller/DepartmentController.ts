@@ -17,20 +17,11 @@ export class DepartmentController {
 
   loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
     const departments = [
-      new FilterElement({
-        id: '1',
-        name: 'First department',
-      }),
+      new FilterElement('1', 'First department'),
 
-      new FilterElement({
-        id: '2',
-        name: 'Second department',
-      }),
+      new FilterElement('2', 'Second department'),
 
-      new FilterElement({
-        id: '3',
-        name: 'Third department',
-      }),
+      new FilterElement('3', 'Third department'),
     ];
 
     if (1 == 1) {
@@ -93,12 +84,7 @@ export class DepartmentController {
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadDepartments().pipe(
-        map(departments => departments.map(department => {
-          return new FilterElement({
-            id: department.id,
-            name: department.name
-          })
-        })),
+        map(departments => departments.map(department => new FilterElement(department.id, department.name))),
       );
     }
 

@@ -1,3 +1,3 @@
 export interface NumberWrapper {
-  value: number;
+  readonly value: number;
 }

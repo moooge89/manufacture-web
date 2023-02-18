@@ -49,20 +49,11 @@ export class ManufactureController {
 
   loadManufactureTypesAsFilterElements(): Observable<FilterElement[]> {
     const filterElements = [
-      new FilterElement({
-        id: 'WINDOW',
-        name: 'Window',
-      }),
+      new FilterElement('WINDOW', 'Window'),
 
-      new FilterElement({
-        id: 'DOOR',
-        name: 'Door',
-      }),
+      new FilterElement('DOOR', 'Door'),
 
-      new FilterElement({
-        id: 'ASSEMBLE',
-        name: 'Assemble',
-      }),
+      new FilterElement('ASSEMBLE', 'Assemble'),
     ];
 
     if (1 == 1) {
@@ -74,20 +65,11 @@ export class ManufactureController {
 
   loadManufactureElements(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
-      new ElementGroup({
-        label: 'First team',
-        count: 123,
-      }),
+      new ElementGroup('First team', 123),
 
-      new ElementGroup({
-        label: 'Second team',
-        count: 213,
-      }),
+      new ElementGroup('Second team', 213),
 
-      new ElementGroup({
-        label: 'Third team',
-        count: 102,
-      }),
+      new ElementGroup('Third team', 102),
     ];
 
     if (1 == 1) {

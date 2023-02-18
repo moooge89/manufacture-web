@@ -1,3 +1,3 @@
 export interface BooleanWrapper {
-  value: boolean;
+  readonly value: boolean;
 }

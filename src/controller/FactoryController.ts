@@ -6,6 +6,7 @@ import {FactoryInfo} from "@model/factory/FactoryInfo";
 import {LightFactoryInfo} from "@model/factory/LightFactoryInfo";
 import {FilterElement} from "@model/filter/FilterElement";
 import {map} from "rxjs/operators";
+import {GeoPoint} from "@model/factory/GeoPoint";
 
 @Injectable({providedIn: 'root'})
 export class FactoryController {
@@ -50,12 +51,7 @@ export class FactoryController {
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadFactories().pipe(
-        map(factories => factories.map(factory => {
-          return new FilterElement({
-            id: factory.id,
-            name: factory.name
-          })
-        })),
+        map(factories => factories.map(factory => new FilterElement(factory.id, factory.name))),
       );
     }
 
@@ -68,10 +64,7 @@ export class FactoryController {
       name: 'Almaty Car Factory',
       directorName: 'Yeletay Yerassyl',
       workerCount: 50,
-      geoPoint: {
-        latitude: 43.26501881519278,
-        longitude: 76.97141432814534,
-      },
+      geoPoint: new GeoPoint(76.97141432814534, 43.26501881519278),
       departmentCount: 3,
       year: 2022,
     });
@@ -89,10 +82,7 @@ export class FactoryController {
       name: 'Almaty Car Factory',
       directorName: 'Yeletay Yerassyl',
       workerCount: 50,
-      geoPoint: {
-        latitude: 43.26501881519278,
-        longitude: 76.97141432814534,
-      },
+      geoPoint: new GeoPoint(76.97141432814534, 43.26501881519278),
       departmentCount: 3,
       year: 2022,
     });

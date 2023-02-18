@@ -1,19 +1,21 @@
 import {Person} from "@model/person/Person";
 
 export class PersonDialogResp {
-  needToSave: boolean = false;
-  person: Person | undefined;
+  readonly needToSave: boolean;
+  readonly person: Person | undefined;
 
-  constructor(init?: Partial<PersonDialogResp>) {
-    Object.assign(this, init);
+  constructor(private _needToSave: boolean,
+              private _person: Person | undefined) {
+    this.needToSave = _needToSave;
+    this.person = _person;
   }
 
   static noNeedToSave(): PersonDialogResp {
-    return new PersonDialogResp({needToSave: false});
+    return new PersonDialogResp(false, undefined);
   }
 
   static save(person: Person): PersonDialogResp {
-    return new PersonDialogResp({needToSave: true, person: person});
+    return new PersonDialogResp(true, person);
   }
 
   doesNotNeedToSave(): boolean {

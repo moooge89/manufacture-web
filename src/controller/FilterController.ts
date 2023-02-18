@@ -15,20 +15,11 @@ export class FilterController {
 
   loadCountryFilterElements(): Observable<FilterElement[]> {
     const countries = [
-      new FilterElement({
-        id: '1',
-        name: 'Kazakhstan',
-      }),
+      new FilterElement('1', 'Kazakhstan'),
 
-      new FilterElement({
-        id: '2',
-        name: 'USA',
-      }),
+      new FilterElement('2', 'USA'),
 
-      new FilterElement({
-        id: '3',
-        name: 'Russia',
-      }),
+      new FilterElement('3', 'Russia'),
     ];
 
     if (1 == 1) {
@@ -40,36 +31,17 @@ export class FilterController {
 
   loadIconFilterElements(): Observable<FilterElement[]> {
     const icons = [
-      new FilterElement({
-        id: '1',
-        name: 'aluminum',
-      }),
+      new FilterElement('1', 'aluminum'),
 
-      new FilterElement({
-        id: '2',
-        name: 'bronze',
-      }),
+      new FilterElement('2', 'bronze'),
 
-      new FilterElement({
-        id: '3',
-        name: 'gold',
-      }),
+      new FilterElement('3', 'gold'),
 
-      new FilterElement({
-        id: '4',
-        name: 'iron',
-      }),
+      new FilterElement('4', 'iron'),
 
-      new FilterElement({
-        id: '5',
-        name: 'steel',
-      }),
+      new FilterElement('5', 'steel'),
 
-      new FilterElement({
-        id: '6',
-        name: 'sand',
-      }),
-
+      new FilterElement('6', 'sand'),
     ];
 
     if (1 == 1) {

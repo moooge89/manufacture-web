@@ -1,19 +1,21 @@
 import {MarketMaterial} from "@model/material/MarketMaterial";
 
 export class MarketMaterialResp {
-  needToSave: boolean = false;
-  material: MarketMaterial | undefined;
+  readonly needToSave: boolean;
+  readonly material: MarketMaterial | undefined;
 
-  constructor(init?: Partial<MarketMaterialResp>) {
-    Object.assign(this, init);
+  constructor(private _needToSave: boolean,
+              private _material: MarketMaterial | undefined) {
+    this.needToSave = _needToSave;
+    this.material = _material;
   }
 
   static noNeedToSave(): MarketMaterialResp {
-    return new MarketMaterialResp({needToSave: false});
+    return new MarketMaterialResp(false, undefined);
   }
 
   static save(material: MarketMaterial): MarketMaterialResp {
-    return new MarketMaterialResp({needToSave: true, material: material});
+    return new MarketMaterialResp(true, material);
   }
 
   doesNotNeedToSave(): boolean {
