@@ -19,26 +19,17 @@ export class AuthController {
   }
 
   login(loginRequest: SecuredLoginRequest): Observable<string> {
-    if (1 == 1) {
-      return of('123');
-    }
-
     return this.http.postBody<StringWrapper>('/login', loginRequest).pipe(map(x => x.value));
   }
 
   isValidToken(): Observable<boolean> {
-    if (1 == 1) {
-      const token = localStorage.getItem('Authorization');
-      return of(!!token && token !== 'Bearer ');
-    }
-
-    return this.http.post<BooleanWrapper>('/validate-token').pipe(map(x => x.value));
+    return this.http.post<BooleanWrapper>('/validateToken').pipe(map(x => x.value));
   }
 
   userInfo(): Observable<UserInfo> {
     const userInfo = new UserInfo({
       id: '1',
-      role: UserRole.DEPARTMENT_DIRECTOR,
+      role: UserRole.FACTORY_DIRECTOR,
       name: 'Yerassyl'
     });
 
