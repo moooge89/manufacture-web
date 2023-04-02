@@ -15,11 +15,11 @@ import {FilterElement} from "@model/filter/FilterElement";
 import {FilterInputDescription} from "@model/filter/description/FilterInputDescription";
 import {FilterDescription} from "@model/filter/description/FilterDescription";
 import {Unsub} from "@util/Unsub";
-import {FilterController} from "@controller/FilterController";
 import {debounceTime, filter} from "rxjs/operators";
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumberRangeDescription";
 import {Sorting} from "@model/web/Sorting";
+import {EnumController} from "@controller/EnumController";
 
 @Component({
   selector: 'app-crud-market',
@@ -43,8 +43,8 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
 
   private readonly unsub = new Unsub();
 
-  constructor(private readonly marketController: MarketController,
-              private readonly filterController: FilterController,
+  constructor(private readonly filterController: EnumController,
+              private readonly marketController: MarketController,
               private readonly crudMarketService: CrudMarketService,) {
   }
 

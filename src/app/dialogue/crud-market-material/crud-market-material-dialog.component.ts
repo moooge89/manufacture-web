@@ -1,7 +1,6 @@
 import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MarketMaterial} from "@model/material/MarketMaterial";
-import {FilterController} from "@controller/FilterController";
 import {Unsub} from "@util/Unsub";
 import {ConfirmationService} from "@service/confirmation/confirmation.service";
 import {InputError} from "@model/web/InputError";
@@ -9,6 +8,7 @@ import {MarketMaterialResp} from "@model/dialog/MarketMaterialResp";
 import {MarketController} from "@controller/MarketController";
 import {FilterElement} from "@model/filter/FilterElement";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
+import {EnumController} from "@controller/EnumController";
 
 @Component({
   selector: 'app-crud-market-material-dialog',
@@ -36,7 +36,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
   constructor(
     private dialogRef: MatDialogRef<CrudMarketMaterialDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { material: MarketMaterial, noNeedToConfirm: boolean, isSave: boolean },
-    private readonly filterController: FilterController,
+    private readonly filterController: EnumController,
     private readonly marketController: MarketController,
     private readonly confirmationService: ConfirmationService,
   ) {

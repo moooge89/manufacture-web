@@ -51,7 +51,9 @@ export class FactoryController {
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadFactories().pipe(
-        map(factories => factories.map(factory => new FilterElement(factory.id, factory.name))),
+        map(factories => factories.map(factory => {
+          return {id: factory.id, displayValue: factory.name};
+        })),
       );
     }
 

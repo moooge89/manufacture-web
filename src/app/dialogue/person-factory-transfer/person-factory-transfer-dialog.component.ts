@@ -66,7 +66,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
     const factory = this.factories[index];
 
     this.copyPerson.factoryId = selectedFactoryId;
-    this.copyPerson.factoryName = factory.name;
+    this.copyPerson.factoryName = factory.displayValue;
   }
 
   onMadeFactoryDirectorClicked(): void {

@@ -86,7 +86,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     const selectedFactory = elements[0];
 
     this.copyPerson.factoryId = selectedFactory.id;
-    this.copyPerson.factoryName = selectedFactory.name;
+    this.copyPerson.factoryName = selectedFactory.displayValue;
 
     this.departments = await this.cache.computeIfAbsent(selectedFactory.id, this.departmentsPromise(selectedFactory.id));
 
@@ -102,7 +102,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     const selectedDepartment = elements[0];
 
     this.copyPerson.departmentId = selectedDepartment.id;
-    this.copyPerson.departmentName = selectedDepartment.name;
+    this.copyPerson.departmentName = selectedDepartment.displayValue;
 
     this.departmentError.clearIfHasError();
   }

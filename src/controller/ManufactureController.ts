@@ -49,11 +49,11 @@ export class ManufactureController {
 
   loadManufactureTypesAsFilterElements(): Observable<FilterElement[]> {
     const filterElements = [
-      new FilterElement('WINDOW', 'Window'),
+      {id: 'WINDOW', displayValue: 'Window'},
 
-      new FilterElement('DOOR', 'Door'),
+      {id: 'DOOR', displayValue: 'Door'},
 
-      new FilterElement('ASSEMBLE', 'Assemble'),
+      {id: 'ASSEMBLE', displayValue: 'Assemble'},
     ];
 
     if (1 == 1) {

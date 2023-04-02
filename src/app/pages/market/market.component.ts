@@ -12,12 +12,12 @@ import {FilterNumberRangeDescription} from "@model/filter/description/FilterNumb
 import {FilterDropdownDescription} from "@model/filter/description/FilterDropdownDescription";
 import {FilterElement} from "@model/filter/FilterElement";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
-import {FilterController} from "@controller/FilterController";
 import {debounceTime, filter} from "rxjs/operators";
 import {PathContextService} from "@service/path-context/path-context.service";
 import {Observable} from "rxjs/internal/Observable";
 import {MarketDialogComponent} from "../../dialogue/market/market-dialog.component";
 import {Sorting} from "@model/web/Sorting";
+import {EnumController} from "@controller/EnumController";
 
 @Component({
   selector: 'app-market',
@@ -43,7 +43,7 @@ export class MarketComponent implements OnInit, OnDestroy {
 
   constructor(private readonly dialog: MatDialog,
               private readonly marketController: MarketController,
-              private readonly filterController: FilterController,
+              private readonly filterController: EnumController,
               private readonly pathContextService: PathContextService,) {
     const materialName = this.pathContextService.materialName || '';
     const materialFilter = new MaterialFilter();

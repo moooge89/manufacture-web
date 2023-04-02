@@ -15,11 +15,11 @@ export class TeamController {
 
   loadTeamsOfDepartmentAsFilterElements(departmentId: string): Observable<FilterElement[]> {
     const teams = [
-      new FilterElement('1', 'First team'),
+      {id: '1', displayValue: 'First team'},
 
-      new FilterElement('2', 'Second team'),
+      {id: '2', displayValue: 'Second team'},
 
-      new FilterElement('3', 'Third team'),
+      {id: '3', displayValue: 'Third team'},
     ];
 
     if (1 == 1) {
