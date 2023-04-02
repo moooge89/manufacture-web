@@ -14,38 +14,11 @@ export class FactoryController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/factory');
+    this.http = http.setControllerPrefix('/manufacture-api/external/factory');
   }
 
   loadFactories(): Observable<LightFactoryInfo[]> {
-    const factories = [
-      new LightFactoryInfo({
-        id: '1',
-        name: 'Almaty Car Factory',
-        directorName: 'Yeletay Yerassyl',
-        workerCount: 50
-      }),
-
-      new LightFactoryInfo({
-        id: '2',
-        name: 'Semey Car Factory',
-        directorName: 'Yeletay Yerassyl',
-        workerCount: 30
-      }),
-
-      new LightFactoryInfo({
-        id: '3',
-        name: 'Shymkent Car Factory',
-        directorName: 'Yeletay Yerassyl',
-        workerCount: 60
-      }),
-    ];
-
-    if (1 == 1) {
-      return of(factories);
-    }
-
-    return this.http.get('/list');
+    return this.http.get('/light-factory');
   }
 
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
