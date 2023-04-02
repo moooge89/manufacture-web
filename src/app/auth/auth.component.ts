@@ -50,9 +50,11 @@ export class AuthComponent implements OnInit, OnDestroy {
     const securedLoginRequest = new SecuredLoginRequest(this.username, this.password);
 
     this.unsub.sub = this.authController.login(securedLoginRequest).subscribe(async token => {
-      this.authService.setToken(token);
-      await this.menuService.redirectToDefaultPage();
-    });
+        this.authService.setToken(token);
+        await this.menuService.redirectToDefaultPage();
+      },
+    );
+
   }
 
   usernameFocused(): void {

@@ -4,6 +4,7 @@ import {UserInfo} from "@model/auth/UserInfo";
 import {AuthController} from "@controller/AuthController";
 import {of} from "rxjs";
 import {TOKEN_HEADER, TOKEN_PREFIX} from "@const/LocalStorageConst";
+import {UserController} from "@controller/UserController";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -13,11 +14,12 @@ export class AuthService {
   constructor(
     private readonly router: Router,
     private readonly authController: AuthController,
+    private readonly userController: UserController,
   ) {
   }
 
   async init(): Promise<void> {
-    await this.loadAndSetUserInfo();
+    this._userInfo = await this.userController.userInfo().toPromise();
   }
 
   async validateToken(): Promise<boolean> {
@@ -41,19 +43,15 @@ export class AuthService {
   }
 
   logout(): void {
-    this.authController.logout().subscribe(() => {
+    this.authController.logout().subscribe(async () => {
       this.setToken('');
       this._userInfo = undefined;
-      this.router.navigate(['/auth']).then();
+      await this.router.navigate(['/auth']);
     });
   }
 
   isTokenProvided(): boolean {
     return !!localStorage.getItem(TOKEN_HEADER);
-  }
-
-  private async loadAndSetUserInfo(): Promise<void> {
-    this._userInfo = await this.authController.userInfo().toPromise();
   }
 
 }

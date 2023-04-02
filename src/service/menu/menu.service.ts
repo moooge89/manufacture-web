@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from "@service/auth/auth.service";
 import {MenuItem} from "@model/web/MenuItem";
-import {UserRole} from "@model/auth/UserRole";
 import {of} from "rxjs";
 import {Router} from "@angular/router";
+import {Specialization} from "@model/user/Specialization";
 
 @Injectable({providedIn: 'root'})
 export class MenuService {
@@ -19,20 +19,20 @@ export class MenuService {
 
     const menuItems: MenuItem[] = [];
 
-    switch (user.role) {
-      case UserRole.COMPANY_DIRECTOR:
+    switch (user.specialization) {
+      case Specialization.CEO:
         menuItems.push(...this.menuItemsForCompanyDirector());
         break;
 
-      case UserRole.FACTORY_DIRECTOR:
+      case Specialization.FACTORY_DIRECTOR:
         menuItems.push(...this.menuItemsForFactoryDirector());
         break;
 
-      case UserRole.DEPARTMENT_DIRECTOR:
+      case Specialization.DEPARTMENT_DIRECTOR:
         menuItems.push(...this.menuItemsForDepartmentDirector());
         break;
 
-      case UserRole.SYSTEM_ADMIN:
+      case Specialization.SYSTEM_ADMIN:
         menuItems.push(...this.menuItemsForSystemAdmin());
         break;
 
@@ -102,20 +102,20 @@ export class MenuService {
 
     let path: string;
 
-    switch (user.role) {
-      case UserRole.COMPANY_DIRECTOR:
+    switch (user.specialization) {
+      case Specialization.CEO:
         path = '/main/company';
         break;
 
-      case UserRole.FACTORY_DIRECTOR:
+      case Specialization.FACTORY_DIRECTOR:
         path = '/main/factory';
         break;
 
-      case UserRole.DEPARTMENT_DIRECTOR:
+      case Specialization.DEPARTMENT_DIRECTOR:
         path = '/main/user';
         break;
 
-      case UserRole.SYSTEM_ADMIN:
+      case Specialization.SYSTEM_ADMIN:
         path = '/main/crud-market';
         break;
 

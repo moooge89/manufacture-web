@@ -10,6 +10,7 @@ import {GeoPoint} from "@model/factory/GeoPoint";
 import {Router} from "@angular/router";
 import {PathContextService} from "@service/path-context/path-context.service";
 import {AuthService} from "@service/auth/auth.service";
+import {Specialization} from "@model/user/Specialization";
 
 @Component({
   selector: 'app-factory',
@@ -39,13 +40,13 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.isCompanyDirector()) {
+    if (userInfo.specialization === Specialization.CEO) {
       await this.initForCompanyDirector();
-    } else if (userInfo.isFactoryDirector()) {
+    } else if (userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
       this.canShowDepartmentsLink = true;
       await this.initForFactoryDirector();
     } else {
-      throw new Error('7462DvfJwd :: Expected Company Director or Factory Director, got ' + userInfo.role);
+      throw new Error('7462DvfJwd :: Expected CEO or Factory Director, got ' + userInfo.specialization);
     }
 
     this.initMap();
@@ -54,7 +55,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
   async ngOnDestroy() {
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.isCompanyDirector()) {
+    if (userInfo.specialization === Specialization.CEO) {
       this.pathContextService.clearLastFactoryId();
     }
   }

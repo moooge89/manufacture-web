@@ -5,7 +5,7 @@ import {AuthService} from "@service/auth/auth.service";
 import {from} from "rxjs";
 import {map, tap} from "rxjs/operators";
 import {MenuService} from "@service/menu/menu.service";
-import {UserRole} from "@model/auth/UserRole";
+import {Specialization} from "@model/user/Specialization";
 
 @Injectable()
 export class CompanyGuard implements CanLoad {
@@ -19,8 +19,8 @@ export class CompanyGuard implements CanLoad {
   canLoad(): Observable<boolean> {
 
     return from(this.authService.userInfo()).pipe(
-      map(userInfo => userInfo.role),
-      map(role => role === UserRole.COMPANY_DIRECTOR),
+      map(userInfo => userInfo.specialization),
+      map(spec => spec === Specialization.CEO),
       tap(async canLoad => {
         if (!canLoad) {
           await this.menuService.redirectToDefaultPage();

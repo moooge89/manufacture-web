@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "@model/web/MenuItem";
-import {AuthService} from "@service/auth/auth.service";
 import {MenuService} from "@service/menu/menu.service";
 
 @Component({
@@ -12,12 +11,10 @@ export class MainComponent implements OnInit {
 
   menuItems: MenuItem[] = [];
 
-  constructor(private readonly authService: AuthService,
-              private readonly menuService: MenuService,) {
+  constructor(private readonly menuService: MenuService) {
   }
 
   async ngOnInit() {
-    await this.authService.init();
 
     this.menuItems = await this.menuService.menuItems();
 

@@ -20,6 +20,7 @@ import {
 } from "../../dialogue/person-factory-transfer/person-factory-transfer-dialog.component";
 import {PersonDialogComponent} from "../../dialogue/person/person-dialog.component";
 import {Sorting} from "@model/web/Sorting";
+import {Specialization} from "@model/user/Specialization";
 
 @Component({
   selector: 'app-user',
@@ -76,7 +77,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.isCompanyDirector()) {
+    if (userInfo.specialization === Specialization.CEO) {
       this.dialogRef = this.dialog.open(PersonFactoryTransferDialogComponent, {
         width: '800px',
         height: '400px',
@@ -115,7 +116,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.canViewFactory()) {
+    if (userInfo.specialization === Specialization.CEO) {
       const factoryDesc = new FilterDropdownDescription<FilterElement>({
         elements$: this.factoryController.loadFactoriesAsFilterElements(),
         getId: getIdFromFe,
@@ -130,7 +131,7 @@ export class PersonComponent implements OnInit, OnDestroy {
       this.descriptions.push(factoryDesc);
     }
 
-    if (userInfo.canViewDepartment()) {
+    if (userInfo.specialization === Specialization.CEO || userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
       const departmentDesc = new FilterDropdownDescription<FilterElement>({
         elements$: this.departmentController.loadDepartmentsAsFilterElements(),
         getId: getIdFromFe,

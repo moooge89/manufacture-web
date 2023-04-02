@@ -5,7 +5,7 @@ import {AuthService} from "@service/auth/auth.service";
 import {from} from "rxjs";
 import {map, tap} from "rxjs/operators";
 import {MenuService} from "@service/menu/menu.service";
-import {UserRole} from "@model/auth/UserRole";
+import {Specialization} from "@model/user/Specialization";
 
 @Injectable()
 export class FactoryGuard implements CanLoad {
@@ -19,8 +19,8 @@ export class FactoryGuard implements CanLoad {
   canLoad(): Observable<boolean> {
 
     return from(this.authService.userInfo()).pipe(
-      map(userInfo => userInfo.role),
-      map(role => role === UserRole.FACTORY_DIRECTOR),
+      map(userInfo => userInfo.specialization),
+      map(spec => spec === Specialization.FACTORY_DIRECTOR),
       tap(async canLoad => {
         if (!canLoad) {
           await this.menuService.redirectToDefaultPage();
