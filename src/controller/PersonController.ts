@@ -50,7 +50,6 @@ export class PersonController {
         factoryName: 'Factory 1',
         departmentId: '1',
         departmentName: 'Department 1',
-        index: 1,
       }),
 
       new Person({
@@ -60,7 +59,6 @@ export class PersonController {
         factoryName: 'Factory 1',
         departmentId: '2',
         departmentName: 'Department 2',
-        index: 2,
       }),
 
       new Person({
@@ -70,7 +68,6 @@ export class PersonController {
         factoryName: 'Factory 2',
         departmentId: '1',
         departmentName: 'Department 1',
-        index: 3,
       }),
 
       new Person({
@@ -80,7 +77,6 @@ export class PersonController {
         factoryName: 'Factory 2',
         departmentId: '2',
         departmentName: 'Department 2',
-        index: 4,
       }),
     ];
 

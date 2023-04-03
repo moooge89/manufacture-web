@@ -12,7 +12,7 @@ export class DepartmentController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/department');
+    this.http = http.setControllerPrefix('/manufacture-api/external/department');
   }
 
   loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
@@ -32,53 +32,7 @@ export class DepartmentController {
   }
 
   loadDepartments(): Observable<Department[]> {
-    const departments = [
-      new Department({
-        id: '1',
-        name: 'Department 1',
-        teamCount: 1,
-        workerCount: 3,
-        persons: [],
-      }),
-
-      new Department({
-        id: '2',
-        name: 'Department 2',
-        teamCount: 1,
-        workerCount: 3,
-        persons: [],
-      }),
-
-      new Department({
-        id: '3',
-        name: 'Department 3',
-        teamCount: 1,
-        workerCount: 3,
-        persons: [],
-      }),
-
-      new Department({
-        id: '4',
-        name: 'Department 4',
-        teamCount: 1,
-        workerCount: 3,
-        persons: [],
-      }),
-
-      new Department({
-        id: '5',
-        name: 'Department 5',
-        teamCount: 1,
-        workerCount: 3,
-        persons: [],
-      }),
-    ];
-
-    if (1 == 1) {
-      return of(departments);
-    }
-
-    return this.http.get('/list');
+    return this.http.get('');
   }
 
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {

@@ -8,8 +8,6 @@ export class Person {
   departmentId: string = '';
   departmentName: string = '';
 
-  index: number = 0;
-
   constructor(init?: Partial<Person>) {
     Object.assign(this, init);
   }
