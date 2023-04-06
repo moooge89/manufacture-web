@@ -11,7 +11,7 @@ export class PersonController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/person');
+    this.http = http.setControllerPrefix('/external/person');
   }
 
   createPerson(person: Person): Observable<Person> {
@@ -81,9 +81,9 @@ export class PersonController {
       }),
     ];
 
-    if (1 == 1) {
-      return of(persons);
-    }
+    // if (1 == 1) {
+    //   return of(persons);
+    // }
 
     return this.http.get('/list', {personFilter});
   }
