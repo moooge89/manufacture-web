@@ -15,6 +15,7 @@ export class WarehouseController {
     this.http = http.setControllerPrefix('/warehouse');
   }
 
+  // todo orken integrate
   loadWarehouseMaterials(materialFilter: MaterialFilter): Observable<WarehouseMaterial[]> {
     const materials = [
       new WarehouseMaterial({
@@ -33,6 +34,7 @@ export class WarehouseController {
     return this.http.get('/warehouse-material', {materialFilter});
   }
 
+  // todo orken integrate
   loadWarehouseStoredInfo(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
       new ElementGroup('All', 102),

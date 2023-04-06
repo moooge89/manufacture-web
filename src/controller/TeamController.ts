@@ -13,6 +13,7 @@ export class TeamController {
     this.http = http.setControllerPrefix('/team');
   }
 
+  // todo orken integrate
   loadTeamsOfDepartmentAsFilterElements(departmentId: string): Observable<FilterElement[]> {
     const teams = [
       {id: '1', displayValue: 'First team'},

@@ -41,6 +41,7 @@ export class PersonController {
     return this.http.put('/' + personId, {index});
   }
 
+  // todo orken integrate
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
     const persons = [
       new Person({

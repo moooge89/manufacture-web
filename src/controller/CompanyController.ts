@@ -13,6 +13,7 @@ export class CompanyController {
     this.http = http.setControllerPrefix('/company');
   }
 
+  // todo orken integrate
   loadCompany(): Observable<Company> {
     const company = new Company({
       name: 'Kazakhstan Transport Company',

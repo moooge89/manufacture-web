@@ -15,6 +15,7 @@ export class DepartmentController {
     this.http = http.setControllerPrefix('/manufacture-api/external/department');
   }
 
+  // todo orken integrate
   loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
     const departments = [
       {id: '1', displayValue: 'First department'},
@@ -35,6 +36,7 @@ export class DepartmentController {
     return this.http.get('');
   }
 
+  // todo orken integrate
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadDepartments().pipe(

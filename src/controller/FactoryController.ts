@@ -21,6 +21,7 @@ export class FactoryController {
     return this.http.get('/light-factory');
   }
 
+  // todo orken integrate
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadFactories().pipe(
@@ -33,6 +34,7 @@ export class FactoryController {
     return this.http.get('/filter-element');
   }
 
+  // todo orken integrate
   loadFactoryInfo(): Observable<FactoryInfo> {
     const factoryInfo = new FactoryInfo({
       id: '1',
@@ -51,6 +53,7 @@ export class FactoryController {
     return this.http.get('/info');
   }
 
+  // todo orken integrate
   loadFactoryInfoById(factoryId: string): Observable<FactoryInfo> {
     const factoryInfo = new FactoryInfo({
       id: '1',

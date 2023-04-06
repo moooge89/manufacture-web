@@ -33,6 +33,7 @@ export class MarketController {
     return this.http.putBody('/' + material.id, material);
   }
 
+  // todo orken integrate
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
     const materials = [
       new MarketMaterial({
@@ -70,6 +71,7 @@ export class MarketController {
     return this.http.patch('/' + id, {kgToBuy});
   }
 
+  // todo orken integrate
   loadMaterialPriceInfo(id: string): Observable<MaterialPriceInfo> {
     const materialPriceInfo = new MaterialPriceInfo({
       min: 12,

@@ -16,6 +16,7 @@ export class ManufactureController {
     this.http = http.setControllerPrefix('/manufacture');
   }
 
+  // todo orken integrate
   loadManufactureRows(filter: ManufactureFilter): Observable<Manufacture[]> {
     const manufactures = [
       new Manufacture({
@@ -47,6 +48,7 @@ export class ManufactureController {
     return this.http.get('/list', {filter});
   }
 
+  // todo orken integrate
   loadManufactureTypesAsFilterElements(): Observable<FilterElement[]> {
     const filterElements = [
       {id: 'WINDOW', displayValue: 'Window'},
@@ -63,6 +65,7 @@ export class ManufactureController {
     return this.http.get('/filter-element');
   }
 
+  // todo orken integrate
   loadManufactureElements(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
       new ElementGroup('First team', 123),
