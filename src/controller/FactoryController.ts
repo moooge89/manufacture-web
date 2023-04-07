@@ -72,7 +72,7 @@ export class FactoryController {
     //   return of(factoryInfo);
     // }
 
-    return this.http.get('/info-by-id/' + factoryId);
+    return this.http.get('/info/' + factoryId);
   }
 
   makeUserDirector(userId: string): Observable<void> {
