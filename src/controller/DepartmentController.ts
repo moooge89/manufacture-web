@@ -38,6 +38,7 @@ export class DepartmentController {
   }
 
   // todo orken integrate
+  //done
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadDepartments().pipe(
@@ -47,7 +48,7 @@ export class DepartmentController {
       );
     }
 
-    return this.http.get('/filter-element');
+    return this.http.get('/filter-elements');
   }
 
   changePersonDepartment(personId: string, departmentId: string): Observable<void> {
