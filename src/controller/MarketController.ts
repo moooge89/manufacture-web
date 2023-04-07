@@ -14,7 +14,7 @@ export class MarketController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/market');
+    this.http = http.setControllerPrefix('/manufacture-api/external/market');
   }
 
   createMarketMaterial(material: MarketMaterial): Observable<string> {
@@ -34,6 +34,7 @@ export class MarketController {
   }
 
   // todo orken integrate
+  //done
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
     const materials = [
       new MarketMaterial({
@@ -48,11 +49,11 @@ export class MarketController {
       }),
     ];
 
-    if (1 == 1) {
-      return of(materials);
-    }
+    // if (1 == 1) {
+    //   return of(materials);
+    // }
 
-    return this.http.get('/list', {materialFilter});
+    return this.http.get('/filtered', {materialFilter});
   }
 
   deleteMarketMaterials(ids: Set<String>): Observable<void> {
