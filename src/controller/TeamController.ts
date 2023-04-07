@@ -10,7 +10,7 @@ export class TeamController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/external/teams');
+    this.http = http.setControllerPrefix('/manufacture-api/external/teams');
   }
 
   // todo orken integrate
