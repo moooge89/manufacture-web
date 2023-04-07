@@ -22,6 +22,7 @@ export class FactoryController {
   }
 
   // todo orken integrate
+  //done
   loadFactoriesAsFilterElements(): Observable<FilterElement[]> {
     if (1 == 1) {
       return this.loadFactories().pipe(
