@@ -32,10 +32,11 @@ export class FactoryController {
       );
     }
 
-    return this.http.get('/filter-element');
+    return this.http.get('/filter-elements');
   }
 
   // todo orken integrate
+  //done
   loadFactoryInfo(): Observable<FactoryInfo> {
     const factoryInfo = new FactoryInfo({
       id: '1',
@@ -47,14 +48,15 @@ export class FactoryController {
       year: 2022,
     });
 
-    if (1 == 1) {
-      return of(factoryInfo);
-    }
+    // if (1 == 1) {
+    //   return of(factoryInfo);
+    // }
 
     return this.http.get('/info');
   }
 
   // todo orken integrate
+  //done
   loadFactoryInfoById(factoryId: string): Observable<FactoryInfo> {
     const factoryInfo = new FactoryInfo({
       id: '1',
@@ -66,9 +68,9 @@ export class FactoryController {
       year: 2022,
     });
 
-    if (1 == 1) {
-      return of(factoryInfo);
-    }
+    // if (1 == 1) {
+    //   return of(factoryInfo);
+    // }
 
     return this.http.get('/info-by-id/' + factoryId);
   }
