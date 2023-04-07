@@ -16,6 +16,7 @@ export class DepartmentController {
   }
 
   // todo orken integrate
+  // done
   loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
     const departments = [
       {id: '1', displayValue: 'First department'},
@@ -25,11 +26,11 @@ export class DepartmentController {
       {id: '3', displayValue: 'Third department'},
     ];
 
-    if (1 == 1) {
-      return of(departments);
-    }
+    // if (1 == 1) {
+    //   return of(departments);
+    // }
 
-    return this.http.get('/factory-filter-element', {factoryId});
+    return this.http.get('/filter-elements/by-factory/', {factoryId});
   }
 
   loadDepartments(): Observable<Department[]> {

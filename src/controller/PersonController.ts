@@ -11,7 +11,7 @@ export class PersonController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/external/person');
+    this.http = http.setControllerPrefix('/user-api/external/person');
   }
 
   createPerson(person: Person): Observable<Person> {
@@ -42,6 +42,7 @@ export class PersonController {
   }
 
   // todo orken integrate
+  // done
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
     const persons = [
       new Person({
