@@ -10,10 +10,11 @@ export class TeamController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/team');
+    this.http = http.setControllerPrefix('/external/teams');
   }
 
   // todo orken integrate
+  //done
   loadTeamsOfDepartmentAsFilterElements(departmentId: string): Observable<FilterElement[]> {
     const teams = [
       {id: '1', displayValue: 'First team'},
@@ -23,11 +24,11 @@ export class TeamController {
       {id: '3', displayValue: 'Third team'},
     ];
 
-    if (1 == 1) {
-      return of(teams);
-    }
+    // if (1 == 1) {
+    //   return of(teams);
+    // }
 
-    return this.http.get('/list/' + departmentId);
+    return this.http.get('/filter-elements/' + departmentId);
   }
 
 }
