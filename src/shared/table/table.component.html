@@ -17,8 +17,6 @@
 
 </div>
 
-<!-- todo era handle empty table -->
-
 <table>
 
   <thead>
@@ -36,7 +34,7 @@
         <span>{{header}}</span>
 
         <mat-icon
-          [svgIcon]="sortIcon(header)"
+          [svgIcon]="sortIcon(header, i)"
         ></mat-icon>
 
       </div>
@@ -59,7 +57,7 @@
         (click)="$event.stopImmediatePropagation()"></mat-checkbox>
     </td>
 
-    <td *ngFor="let column of columnNames; let i = index;">
+    <td *ngFor="let column of _columnNames; let i = index;">
       <mat-icon
         *ngIf="isMatIcon(i); else commonColumn"
         [svgIcon]="row[column]"
@@ -77,7 +75,7 @@
 
   <tr *ngFor="let _ of [].constructor(7)">
 
-    <td *ngFor="let column of columnNames">
+    <td *ngFor="let column of _columnNames">
 
       <div class="loading-column"></div>
 
@@ -88,3 +86,10 @@
   </tbody>
 
 </table>
+
+<div
+  *ngIf="!isLoading && rows.length === 0"
+  class="empty-table"
+>
+  No data was found
+</div>

@@ -125,7 +125,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
         departmentIds: [departments[i].id],
         personName: '',
         factoryIds: [],
-        sorting: Sorting.emptyAsc(),
+        sorting: Sorting.asc('personName'),
       });
 
       this.unsub.sub = this.personController.loadPersons(personFilter).subscribe(persons => this.departments[i].persons = persons);

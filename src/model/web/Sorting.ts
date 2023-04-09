@@ -2,21 +2,21 @@ import {SortType} from "@model/web/SortType";
 
 export class Sorting {
 
-  // todo era make default fieldName
   fieldName: string = '';
 
   sortType: SortType = SortType.ASC;
 
-  constructor(init?: Partial<Sorting>) {
-    Object.assign(this, init);
+  constructor(_fieldName: string, _sortType: SortType) {
+    this.fieldName = _fieldName;
+    this.sortType = _sortType;
   }
 
-  static emptyAsc(): Sorting {
-    return new Sorting();
+  static asc(fieldName: string): Sorting {
+    return new Sorting(fieldName, SortType.ASC);
   }
 
-  static emptyDesc(): Sorting {
-    return new Sorting({sortType: SortType.DESC});
+  static desc(fieldName: string): Sorting {
+    return new Sorting(fieldName, SortType.ASC);
   }
 
   isAsc(): boolean {

@@ -107,3 +107,12 @@ tr td {
   }
 
 }
+
+.empty-table {
+  padding: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

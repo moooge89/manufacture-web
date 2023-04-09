@@ -20,7 +20,16 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     this.loadContent(rows$);
   }
 
-  @Input() columnNames: string[] = [];
+  @Input() set columnNames(columnNames: string[]) {
+    this._columnNames = columnNames;
+
+    const firstColName = columnNames[0];
+
+    if (firstColName) {
+      this.sorting = Sorting.asc(firstColName);
+    }
+
+  }
 
   @Input() isMatIcon: (index: number) => boolean = () => false;
 
@@ -40,10 +49,12 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Output() sortClicked = new EventEmitter<Sorting>();
 
+  _columnNames: string[] = [];
+
   rows: T[] = [];
   isLoading: boolean = true;
 
-  sorting = Sorting.emptyDesc();
+  sorting: Sorting | undefined = undefined;
 
   private readonly checkedIds = new Set<string>();
 
@@ -98,7 +109,13 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   }
 
-  sortIcon(fieldName: string): string {
+  sortIcon(headerName: string, index: number): string {
+    if (!this.sorting) {
+      return 'sort-disabled';
+    }
+
+    const fieldName = this._columnNames[index] || '';
+
     if (this.sorting.fieldName !== fieldName) {
       return 'sort-disabled';
     }
@@ -111,10 +128,16 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   }
 
-  handleSortClick(fieldName: string, index: number): void {
+  handleSortClick(headerName: string, index: number): void {
+    if (!this.sorting) {
+      return;
+    }
+
+    const fieldName = this._columnNames[index] || '';
+
     if (this.sorting.fieldName !== fieldName) {
       this.sorting.sortType = SortType.ASC;
-      this.sorting.fieldName = this.columnNames[index] || '';
+      this.sorting.fieldName = this._columnNames[index] || '';
     } else if (this.sorting.isAsc()) {
       this.sorting.sortType = SortType.DESC;
     } else if (this.sorting.isDesc()) {

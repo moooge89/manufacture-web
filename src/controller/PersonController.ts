@@ -34,6 +34,9 @@ export class PersonController {
   }
 
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
+    if ( 1== 1) {
+      return of([]);
+    }
     return this.http.postBody('/list', {...personFilter});
   }
 
