@@ -99,6 +99,11 @@ export class DropdownComponent<T> implements OnInit {
   }
 
   onValueChange(ids: string[]): void {
+    if (!this.isMultiple) {
+      // @ts-ignore
+      ids = [ids];
+    }
+
     if (!this.useElementEmitting) {
       this.onIdChange(ids);
     } else {

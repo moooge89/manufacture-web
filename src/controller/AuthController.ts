@@ -14,6 +14,7 @@ export class AuthController {
     this.http = http.setControllerPrefix('/auth');
   }
 
+  // todo era
   login(loginRequest: SecuredLoginRequest): Observable<string> {
     return this.http.postBody<any>('/login', loginRequest).pipe(map(x => x.value.id));
   }

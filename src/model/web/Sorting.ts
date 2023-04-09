@@ -2,6 +2,7 @@ import {SortType} from "@model/web/SortType";
 
 export class Sorting {
 
+  // todo era make default fieldName
   fieldName: string = '';
 
   sortType: SortType = SortType.ASC;

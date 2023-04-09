@@ -41,52 +41,8 @@ export class PersonController {
     return this.http.put('/' + personId, {index});
   }
 
-  // todo orken integrate
-  // done
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
-    const persons = [
-      new Person({
-        id: '1',
-        name: 'User 1',
-        factoryId: '1',
-        factoryName: 'Factory 1',
-        departmentId: '1',
-        departmentName: 'Department 1',
-      }),
-
-      new Person({
-        id: '2',
-        name: 'User 2',
-        factoryId: '1',
-        factoryName: 'Factory 1',
-        departmentId: '2',
-        departmentName: 'Department 2',
-      }),
-
-      new Person({
-        id: '3',
-        name: 'User 3',
-        factoryId: '2',
-        factoryName: 'Factory 2',
-        departmentId: '1',
-        departmentName: 'Department 1',
-      }),
-
-      new Person({
-        id: '4',
-        name: 'User 4',
-        factoryId: '2',
-        factoryName: 'Factory 2',
-        departmentId: '2',
-        departmentName: 'Department 2',
-      }),
-    ];
-
-    // if (1 == 1) {
-    //   return of(persons);
-    // }
-
-    return this.http.get('/list', {personFilter});
+    return this.http.postBody('/list', {...personFilter});
   }
 
   deletePersons(ids: Set<string>): Observable<void> {

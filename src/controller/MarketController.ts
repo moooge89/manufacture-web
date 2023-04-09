@@ -33,27 +33,8 @@ export class MarketController {
     return this.http.putBody('/' + material.id, material);
   }
 
-  // todo orken integrate
-  //done
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
-    const materials = [
-      new MarketMaterial({
-        id: '1',
-        icon: 'sand',
-        iconId: '6',
-        name: 'Sand',
-        country: 'Kazakhstan',
-        countryId: '1',
-        price: 16,
-        available: 150,
-      }),
-    ];
-
-    // if (1 == 1) {
-    //   return of(materials);
-    // }
-
-    return this.http.get('/filtered', {materialFilter});
+    return this.http.postBody('/filtered', {...materialFilter});
   }
 
   deleteMarketMaterials(ids: Set<String>): Observable<void> {
@@ -72,19 +53,7 @@ export class MarketController {
     return this.http.patch('/' + id, {kgToBuy});
   }
 
-  // todo orken integrate
-  // done
   loadMaterialPriceInfo(id: string): Observable<MaterialPriceInfo> {
-    const materialPriceInfo = new MaterialPriceInfo({
-      min: 12,
-      max: 24,
-      avg: 18,
-    });
-
-    if (1 == 1) {
-      return of(materialPriceInfo);
-    }
-
     return this.http.get('/price-list/' + id);
   }
 
