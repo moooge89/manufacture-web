@@ -41,7 +41,7 @@ export class CrudMarketMaterialDialogComponent implements OnInit, OnDestroy {
     private readonly confirmationService: ConfirmationService,
   ) {
     this.material = data.material;
-    this.copyMaterial = new MarketMaterial({...data.material});
+    this.copyMaterial = {...data.material};
 
     this.needToConfirm = !data.noNeedToConfirm;
     this.isSave = data.isSave;

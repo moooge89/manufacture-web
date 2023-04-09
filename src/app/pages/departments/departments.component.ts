@@ -46,6 +46,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
+  // todo era do not handle change index inside one department
   async onDrop(item: CdkDragDrop<any, any>): Promise<void> {
 
     const updates$ = this.drop(item);

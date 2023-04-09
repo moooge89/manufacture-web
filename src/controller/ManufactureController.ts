@@ -51,11 +51,11 @@ export class ManufactureController {
   // todo orken integrate
   loadManufactureTypesAsFilterElements(): Observable<FilterElement[]> {
     const filterElements = [
-      {id: 'WINDOW', displayValue: 'Window'},
+      {id: 1, displayValue: 'Window'},
 
-      {id: 'DOOR', displayValue: 'Door'},
+      {id: 2, displayValue: 'Door'},
 
-      {id: 'ASSEMBLE', displayValue: 'Assemble'},
+      {id: 3, displayValue: 'Assemble'},
     ];
 
     if (1 == 1) {
@@ -68,11 +68,22 @@ export class ManufactureController {
   // todo orken integrate
   loadManufactureElements(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
-      new ElementGroup('First team', 123),
 
-      new ElementGroup('Second team', 213),
+      {
+        label: 'First team',
+        count: 123,
+      },
 
-      new ElementGroup('Third team', 102),
+      {
+        label: 'Second team',
+        count: 213,
+      },
+
+      {
+        label: 'Third team',
+        count: 102,
+      },
+
     ];
 
     if (1 == 1) {

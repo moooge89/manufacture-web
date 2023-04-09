@@ -12,7 +12,7 @@ export class TeamController {
     this.http = http.setControllerPrefix('/manufacture-api/external/teams');
   }
 
-  loadTeamsOfDepartmentAsFilterElements(departmentId: string): Observable<FilterElement[]> {
+  loadTeamsOfDepartmentAsFilterElements(departmentId: number): Observable<FilterElement[]> {
     return this.http.get('/filter-elements/' + departmentId);
   }
 

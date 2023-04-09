@@ -1,7 +1,7 @@
 export class ProductionInfo {
-  factoryId: string = '';
-  departmentId: string = '';
-  teamId: string = '';
+  factoryId: number = -1;
+  departmentId: number = -1;
+  teamId: number = -1;
   titleToShow: string = '';
   currentPercentage: number = 0;
   millisecondsToOneIteration: number = 0;

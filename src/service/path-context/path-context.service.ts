@@ -6,12 +6,12 @@ export class PathContextService {
 
   // region lastFactoryId
 
-  set lastFactoryId(lastFactoryId: string) {
-    localStorage.setItem(FACTORY_PATH_CONTEXT, lastFactoryId);
+  set lastFactoryId(lastFactoryId: number) {
+    localStorage.setItem(FACTORY_PATH_CONTEXT, lastFactoryId + '');
   }
 
   get lastFactoryId() {
-    return localStorage.getItem(FACTORY_PATH_CONTEXT) || '';
+    return Number.parseInt(localStorage.getItem(FACTORY_PATH_CONTEXT) || '');
   }
 
   clearLastFactoryId(): void {

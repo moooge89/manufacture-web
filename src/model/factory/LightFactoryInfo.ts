@@ -1,5 +1,5 @@
 export interface LightFactoryInfo {
-  id: string;
+  id: number;
   name: string;
   number: number;
   director: string;

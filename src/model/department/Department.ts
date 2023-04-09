@@ -1,7 +1,7 @@
 import {Person} from "@model/person/Person";
 
 export class Department {
-  id: string = '';
+  id: number = -1;
   name: string = '';
   teamCount: number = 0;
   workerCount: number = 0;

@@ -14,11 +14,20 @@ export class CrudPersonService {
 
   openDialogForCreate(): Promise<PersonDialogResp> {
 
+    const person: Person = {
+      id: NaN,
+      departmentId: NaN,
+      departmentName: '',
+      factoryId: NaN,
+      name: '',
+      factoryName: '',
+    };
+
     const dialogRef = this.dialog.open(CrudPersonDialogComponent, {
       width: '800px',
       height: '400px',
       data: {
-        person: new Person(),
+        person: person,
         noNeedToConfirm: true,
         isSave: true,
       },

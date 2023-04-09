@@ -1,13 +1,9 @@
-export class MaterialPriceInfo {
+export interface MaterialPriceInfo {
 
-  min: number = 0;
+  min: number;
 
-  max: number = 0;
+  max: number;
 
-  avg: number = 0;
-
-  constructor(init?: Partial<MaterialPriceInfo>) {
-    Object.assign(this, init);
-  }
+  avg: number;
 
 }

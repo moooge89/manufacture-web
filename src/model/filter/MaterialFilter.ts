@@ -9,8 +9,8 @@ export class MaterialFilter extends TableFilter {
 
   price: NumberRange = new NumberRange();
 
-  departments: string[] = [];
+  departments: number[] = [];
 
-  countries: string[] = [];
+  countries: number[] = [];
 
 }

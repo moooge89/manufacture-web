@@ -17,12 +17,12 @@ export class PersonFilterReactor extends FilterReactor<PersonFilter> {
     this.emit();
   }
 
-  onFactoriesChange = (factoryIds: string[]): void => {
+  onFactoriesChange = (factoryIds: number[]): void => {
     this.filter.factoryIds = factoryIds;
     this.emit();
   }
 
-  onDepartmentsChange = (departmentIds: string[]): void => {
+  onDepartmentsChange = (departmentIds: number[]): void => {
     this.filter.departmentIds = departmentIds;
     this.emit();
   }

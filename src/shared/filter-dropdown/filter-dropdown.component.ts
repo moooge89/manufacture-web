@@ -20,7 +20,7 @@ export class FilterDropdownComponent<T> implements OnDestroy {
     });
   }
 
-  selectedElementId: string | undefined;
+  selectedElementId: number = NaN;
 
   elements: T[] = [];
 
@@ -32,7 +32,7 @@ export class FilterDropdownComponent<T> implements OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  onValueChange(selectedIds: string[]): void {
+  onValueChange(selectedIds: number[]): void {
     this.dropdownDescription?.onValueChange(selectedIds);
   }
 

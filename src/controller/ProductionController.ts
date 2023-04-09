@@ -17,9 +17,9 @@ export class ProductionController {
   loadProductionInfo(productionFilter: ProductionFilter): Observable<ProductionInfo[]> {
     const productionInfo = [
       new ProductionInfo({
-        factoryId: '1',
-        departmentId: '1',
-        teamId: '1',
+        factoryId: 1,
+        departmentId: 1,
+        teamId: 1,
         currentPercentage: 0,
         millisecondsToOneIteration: 5000,
         titleToShow: 'First team',
@@ -31,9 +31,9 @@ export class ProductionController {
       }),
 
       new ProductionInfo({
-        factoryId: '1',
-        departmentId: '1',
-        teamId: '1',
+        factoryId: 1,
+        departmentId: 1,
+        teamId: 1,
         currentPercentage: 40,
         millisecondsToOneIteration: 7000,
         titleToShow: 'Second team',
@@ -45,9 +45,9 @@ export class ProductionController {
       }),
 
       new ProductionInfo({
-        factoryId: '1',
-        departmentId: '1',
-        teamId: '1',
+        factoryId: 1,
+        departmentId: 1,
+        teamId: 1,
         currentPercentage: 70,
         millisecondsToOneIteration: 3000,
         titleToShow: 'Third team',

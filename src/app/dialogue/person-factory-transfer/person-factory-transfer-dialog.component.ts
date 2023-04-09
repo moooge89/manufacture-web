@@ -33,7 +33,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
     private readonly confirmationService: ConfirmationService,
   ) {
     this.person = data.person;
-    this.copyPerson = new Person({...data.person});
+    this.copyPerson = {...data.person};
   }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
 
   getName = getNameFromFe;
 
-  onFactoryChange(elementIds: string[]): void {
+  onFactoryChange(elementIds: number[]): void {
     if (elementIds?.length === 0) return;
 
     const selectedFactoryId = elementIds[0];

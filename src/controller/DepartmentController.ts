@@ -14,7 +14,7 @@ export class DepartmentController {
     this.http = http.setControllerPrefix('/manufacture-api/external/department');
   }
 
-  loadDepartmentsOfFactoryAsFilterElements(factoryId: string): Observable<FilterElement[]> {
+  loadDepartmentsOfFactoryAsFilterElements(factoryId: number): Observable<FilterElement[]> {
     return this.http.get('/filter-elements/by-factory/' + factoryId);
   }
 
@@ -26,7 +26,7 @@ export class DepartmentController {
     return this.http.get('/filter-elements');
   }
 
-  changePersonDepartment(personId: string, departmentId: string): Observable<void> {
+  changePersonDepartment(personId: number, departmentId: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }

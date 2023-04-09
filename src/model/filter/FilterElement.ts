@@ -1,6 +1,6 @@
 export interface FilterElement {
 
-  readonly id: string;
+  readonly id: number;
   readonly displayValue: string;
 
 }

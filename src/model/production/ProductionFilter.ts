@@ -1,6 +1,6 @@
 export class ProductionFilter {
-  factoryId: string = '';
-  departmentId: string = '';
+  factoryId: number = -1;
+  departmentId: number = -1;
 
   constructor(init?: Partial<ProductionFilter>) {
     Object.assign(this, init);

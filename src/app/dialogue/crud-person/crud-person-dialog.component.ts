@@ -44,7 +44,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     private readonly departmentController: DepartmentController,
   ) {
     this.person = data.person;
-    this.copyPerson = new Person({...data.person});
+    this.copyPerson = {...data.person};
 
     this.needToConfirm = !data.noNeedToConfirm;
     this.isSave = data.isSave;
@@ -90,7 +90,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
 
     this.departments = await this.cache.computeIfAbsent(selectedFactory.id, this.departmentsPromise(selectedFactory.id));
 
-    this.copyPerson.departmentId = '';
+    this.copyPerson.departmentId = NaN;
     this.copyPerson.departmentName = '';
 
     this.factoryError.clearIfHasError();
@@ -179,7 +179,7 @@ export class CrudPersonDialogComponent implements OnInit, OnDestroy {
     return this.nameError.hasError || this.factoryError.hasError || this.departmentError.hasError;
   }
 
-  private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
+  private departmentsPromise(factoryId: number): Promise<FilterElement[]> {
     return this.departmentController.loadDepartmentsOfFactoryAsFilterElements(factoryId).toPromise();
   }
 

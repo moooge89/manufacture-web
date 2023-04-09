@@ -1,15 +1,11 @@
-export class Person {
-  id: string = '';
-  name: string = '';
+export interface Person {
+  id: number;
+  name: string;
 
-  factoryId: string = '';
-  factoryName: string = '';
+  factoryId: number;
+  factoryName: string;
 
-  departmentId: string = '';
-  departmentName: string = '';
-
-  constructor(init?: Partial<Person>) {
-    Object.assign(this, init);
-  }
+  departmentId: number;
+  departmentName: string;
 
 }

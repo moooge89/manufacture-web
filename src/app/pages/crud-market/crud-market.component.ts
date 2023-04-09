@@ -72,7 +72,7 @@ export class CrudMarketComponent implements OnInit, OnDestroy {
 
   isMoney = (index: number) => index === 3;
 
-  deleteMaterials$ = (ids: Set<string>) => this.marketController.deleteMarketMaterials(ids);
+  deleteMaterials$ = (ids: Set<number>) => this.marketController.deleteMarketMaterials(ids);
 
   async onRowAddClick(): Promise<void> {
     const resp: MarketMaterialResp = await this.crudMarketService.openDialogForCreate();

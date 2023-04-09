@@ -4,9 +4,9 @@ export class PersonFilter extends TableFilter {
 
   personName: string = '';
 
-  factoryIds: string[] = [];
+  factoryIds: number[] = [];
 
-  departmentIds: string[] = [];
+  departmentIds: number[] = [];
 
   constructor(init?: Partial<PersonFilter>) {
     super();

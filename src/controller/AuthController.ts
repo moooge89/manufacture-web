@@ -4,6 +4,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {SecuredLoginRequest} from "@model/auth/SecuredLoginRequest";
 import {map} from "rxjs/operators";
 import {BooleanWrapper} from "@model/wrapper/BooleanWrapper";
+import {Token} from "@model/auth/Token";
 
 @Injectable({providedIn: 'root'})
 export class AuthController {
@@ -14,9 +15,8 @@ export class AuthController {
     this.http = http.setControllerPrefix('/auth');
   }
 
-  // todo era
   login(loginRequest: SecuredLoginRequest): Observable<string> {
-    return this.http.postBody<any>('/login', loginRequest).pipe(map(x => x.value.id));
+    return this.http.postBody<Token>('/login', loginRequest).pipe(map(token => token.id));
   }
 
   isValidToken(): Observable<boolean> {

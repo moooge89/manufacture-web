@@ -13,7 +13,7 @@ export class ManufactureFilterReactor extends FilterReactor<ManufactureFilter> {
     return new ManufactureFilter();
   }
 
-  onTypesChange = (types: string[]): void => {
+  onTypesChange = (types: number[]): void => {
     this.filter.types = types;
     this.emit();
   }

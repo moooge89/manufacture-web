@@ -2,14 +2,14 @@ import {Specialization} from "@model/user/Specialization";
 
 export interface UserInfo {
 
-  department: string;
-  factory: string;
+  department: number;
+  factory: number;
   firstName: string;
-  id: string;
+  id: number;
   lastName: string;
   phone: string;
   specialization: Specialization;
-  team: string;
+  team: number;
   username: string;
 
 }

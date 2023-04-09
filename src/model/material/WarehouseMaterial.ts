@@ -1,5 +1,5 @@
 export class WarehouseMaterial {
-  id: string = '';
+  id: number = -1;
   icon: string = '';
   name: string = '';
   available: number = 0;

@@ -83,7 +83,7 @@ export class ReportComponent implements OnInit, OnDestroy {
     this.firstTeams = await this.teamCache.computeIfAbsent(selectedDepartmentId, this.teamsToPromise(selectedDepartmentId));
   }
 
-  onFirstTeamChange(elementIds: string[]): void {
+  onFirstTeamChange(elementIds: number[]): void {
     if (elementIds?.length === 0) return;
 
     this.reportFilter.firstTeamId = elementIds[0];
@@ -112,7 +112,7 @@ export class ReportComponent implements OnInit, OnDestroy {
     this.secondTeams = await this.teamCache.computeIfAbsent(selectedDepartmentId, this.teamsToPromise(selectedDepartmentId));
   }
 
-  onSecondTeamChange(elementIds: string[]): void {
+  onSecondTeamChange(elementIds: number[]): void {
     if (elementIds?.length === 0) return;
 
     this.reportFilter.secondTeamId = elementIds[0];
@@ -144,11 +144,11 @@ export class ReportComponent implements OnInit, OnDestroy {
     });
   }
 
-  private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
+  private departmentsPromise(factoryId: number): Promise<FilterElement[]> {
     return this.departmentController.loadDepartmentsOfFactoryAsFilterElements(factoryId).toPromise();
   }
 
-  private teamsToPromise(departmentId: string): Promise<FilterElement[]> {
+  private teamsToPromise(departmentId: number): Promise<FilterElement[]> {
     return this.teamController.loadTeamsOfDepartmentAsFilterElements(departmentId).toPromise();
   }
 

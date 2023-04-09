@@ -27,11 +27,11 @@ export class FactoryController {
     return this.http.get('/info');
   }
 
-  loadFactoryInfoById(factoryId: string): Observable<FactoryInfo> {
+  loadFactoryInfoById(factoryId: number): Observable<FactoryInfo> {
     return this.http.get('/info/' + factoryId);
   }
 
-  makeUserDirector(userId: string): Observable<void> {
+  makeUserDirector(userId: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }

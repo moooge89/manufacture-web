@@ -18,12 +18,12 @@ export class MaterialFilterReactor extends FilterReactor<MaterialFilter> {
     this.emit();
   }
 
-  onCountriesChange = (countries: string[]): void => {
+  onCountriesChange = (countries: number[]): void => {
     this.filter.countries = countries;
     this.emit();
   }
 
-  onDepartmentsChange = (departments: string[]): void => {
+  onDepartmentsChange = (departments: number[]): void => {
     this.filter.departments = departments;
     this.emit();
   }

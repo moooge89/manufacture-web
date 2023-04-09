@@ -6,7 +6,7 @@ export class FilterDropdownDescription<T> implements FilterDescription {
 
   label: string = '';
 
-  getId: (element: T) => string = () => '';
+  getId: (element: T) => number = () => NaN;
 
   getName: (element: T) => string = () => '';
 
@@ -14,7 +14,7 @@ export class FilterDropdownDescription<T> implements FilterDescription {
 
   elements$: Observable<T[]> = of([]);
 
-  onValueChange: (selectedIds: string[]) => void = () => undefined;
+  onValueChange: (selectedIds: number[]) => void = () => undefined;
 
   constructor(init?: Partial<FilterDropdownDescription<T>>) {
     Object.assign(this, init);

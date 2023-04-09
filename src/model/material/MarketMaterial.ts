@@ -1,18 +1,14 @@
-export class MarketMaterial {
-  id: string = '';
-  name: string = '';
-  price: number = 0;
+export interface MarketMaterial {
+  id: number;
+  name: string;
+  price: number;
 
-  icon: string = '';
-  iconId: string = '';
+  icon: string;
+  iconId: number;
 
-  country: string = '';
-  countryId: string = '';
+  country: string;
+  countryId: number;
 
-  available: number = 0;
-
-  constructor(init?: Partial<MarketMaterial>) {
-    Object.assign(this, init);
-  }
+  available: number;
 
 }

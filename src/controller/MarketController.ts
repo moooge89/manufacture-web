@@ -5,8 +5,8 @@ import {of} from "rxjs";
 import {MarketMaterial} from "@model/material/MarketMaterial";
 import {MaterialFilter} from "@model/filter/MaterialFilter";
 import {MaterialPriceInfo} from "@model/material/MaterialPriceInfo";
-import {StringWrapper} from "@model/wrapper/StringWrapper";
 import {map} from "rxjs/operators";
+import {NumberWrapper} from "@model/wrapper/NumberWrapper";
 
 @Injectable({providedIn: 'root'})
 export class MarketController {
@@ -17,12 +17,12 @@ export class MarketController {
     this.http = http.setControllerPrefix('/manufacture-api/external/market');
   }
 
-  createMarketMaterial(material: MarketMaterial): Observable<string> {
+  createMarketMaterial(material: MarketMaterial): Observable<number> {
     if (1 == 1) {
-      return of('2');
+      return of(2);
     }
 
-    return this.http.postBody<StringWrapper>('', material).pipe(map(x => x.value));
+    return this.http.postBody<NumberWrapper>('', material).pipe(map(x => x.value));
   }
 
   updateMarketMaterial(material: MarketMaterial): Observable<void> {
@@ -37,7 +37,7 @@ export class MarketController {
     return this.http.postBody('/filtered', {...materialFilter});
   }
 
-  deleteMarketMaterials(ids: Set<String>): Observable<void> {
+  deleteMarketMaterials(ids: Set<number>): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }
@@ -45,7 +45,7 @@ export class MarketController {
     return this.http.delete('', {ids});
   }
 
-  buyMaterial(id: string, kgToBuy: number): Observable<void> {
+  buyMaterial(id: number, kgToBuy: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }
@@ -53,7 +53,7 @@ export class MarketController {
     return this.http.patch('/' + id, {kgToBuy});
   }
 
-  loadMaterialPriceInfo(id: string): Observable<MaterialPriceInfo> {
+  loadMaterialPriceInfo(id: number): Observable<MaterialPriceInfo> {
     return this.http.get('/price-list/' + id);
   }
 

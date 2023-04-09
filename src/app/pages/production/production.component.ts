@@ -58,7 +58,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
 
   getName = getNameFromFe;
 
-  async onFactoryChange(elementIds: string[]): Promise<void> {
+  async onFactoryChange(elementIds: number[]): Promise<void> {
     if (elementIds?.length === 0) return;
 
     const selectedFactoryId = elementIds[0];
@@ -76,7 +76,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
     this.emitFilter();
   }
 
-  async onDepartmentChange(elementIds: string[]): Promise<void> {
+  async onDepartmentChange(elementIds: number[]): Promise<void> {
     if (elementIds?.length === 0) return;
 
     this.filter.departmentId = elementIds[0];
@@ -149,7 +149,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
     this.filter.departmentId = this.departments[this.currentDepartmentIndex].id;
   }
 
-  private departmentsPromise(factoryId: string): Promise<FilterElement[]> {
+  private departmentsPromise(factoryId: number): Promise<FilterElement[]> {
     return this.departmentController.loadDepartmentsOfFactoryAsFilterElements(factoryId).toPromise();
   }
 

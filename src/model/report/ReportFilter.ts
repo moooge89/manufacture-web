@@ -1,28 +1,28 @@
 export class ReportFilter {
 
-  firstFactoryId: string = '';
-  secondFactoryId: string = '';
+  firstFactoryId: number = NaN;
+  secondFactoryId: number = NaN;
 
-  firstDepartmentId: string = '';
-  secondDepartmentId: string = '';
+  firstDepartmentId: number = NaN;
+  secondDepartmentId: number = NaN;
 
-  firstTeamId: string = '';
-  secondTeamId: string = '';
+  firstTeamId: number = NaN;
+  secondTeamId: number = NaN;
 
   clearFirstDepartment(): void {
-    this.firstDepartmentId = '';
+    this.firstDepartmentId = NaN;
   }
 
   clearFirstTeam(): void {
-    this.firstTeamId = '';
+    this.firstTeamId = NaN;
   }
 
   clearSecondDepartment(): void {
-    this.secondDepartmentId = '';
+    this.secondDepartmentId = NaN;
   }
 
   clearSecondTeam(): void {
-    this.secondTeamId = '';
+    this.secondTeamId = NaN;
   }
 
   hasFirstFactory(): boolean {
