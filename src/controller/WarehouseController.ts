@@ -12,10 +12,11 @@ export class WarehouseController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/warehouse');
+    this.http = http.setControllerPrefix('/manufacture-api/external/warehouse');
   }
 
   // todo orken integrate
+  // done
   loadWarehouseMaterials(materialFilter: MaterialFilter): Observable<WarehouseMaterial[]> {
     const materials = [
       new WarehouseMaterial({
@@ -31,11 +32,12 @@ export class WarehouseController {
       return of(materials);
     }
 
-    return this.http.get('/warehouse-material', {materialFilter});
+    return this.http.get('/warehouse-materials', {materialFilter});
   }
 
   // todo orken integrate
-  loadWarehouseStoredInfo(manufactureType: string): Observable<ElementGroup[]> {
+  // done
+  loadWarehouseStoredInfo(partType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
       new ElementGroup('All', 102),
 
@@ -48,7 +50,7 @@ export class WarehouseController {
       return of(manufactureElements);
     }
 
-    return this.http.get('/stored-info', {manufactureType});
+    return this.http.get('/stored-info', {partType});
   }
 
 }
