@@ -46,10 +46,14 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
     this.unsub.unsubscribe();
   }
 
-  // todo era do not handle change index inside one department
   async onDrop(item: CdkDragDrop<any, any>): Promise<void> {
 
-    const updates$ = this.drop(item);
+    // if user is changed inside one department, skip
+    if (item.container.id === item.previousContainer.id) {
+      return;
+    }
+
+    const updates$ = this.handleContainerChange(item);
 
     if (!this.confirmMode) {
       this.commitUpdates(updates$);
@@ -76,7 +80,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
       isPointerOverContainer: item.isPointerOverContainer,
     };
 
-    this.drop(copyItem);
+    this.handleContainerChange(copyItem);
   }
 
   openPersonDialog(person: Person): void {
@@ -87,30 +91,6 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
       height: '320px',
       data: {person: person},
     });
-  }
-
-  private drop(item: CdkDragDrop<any, any>): Observable<void>[] {
-    if (item.container.id === item.previousContainer.id) {
-      return this.handleIndexChange(item);
-    } else {
-      return this.handleContainerChange(item);
-    }
-  }
-
-  private handleIndexChange(item: CdkDragDrop<any, any>): Observable<void>[] {
-    if (item.currentIndex === item.previousIndex) {
-      return [];
-    }
-
-    const personToBeMoved: Person = item.container.data[item.previousIndex];
-
-    // noinspection JSMismatchedCollectionQueryUpdate
-    const persons: Person[] = item.container.data;
-
-    persons.splice(item.previousIndex, 1);
-    persons.splice(item.currentIndex, 0, personToBeMoved);
-
-    return [this.personController.updatePersonIndex(personToBeMoved.id, item.currentIndex)];
   }
 
   private handleContainerChange(item: CdkDragDrop<any, any>): Observable<void>[] {

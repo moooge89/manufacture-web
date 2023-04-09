@@ -5,7 +5,6 @@ import {of} from "rxjs";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {Person} from "@model/person/Person";
 
-// todo era remove all index related things
 @Injectable({providedIn: 'root'})
 export class PersonController {
 
@@ -32,14 +31,6 @@ export class PersonController {
     }
 
     return this.http.putBody('/' + person.id, person);
-  }
-
-  updatePersonIndex(personId: number, index: number): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
-    return this.http.put('/' + personId, {index});
   }
 
   loadPersons(personFilter: PersonFilter): Observable<Person[]> {
