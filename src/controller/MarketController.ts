@@ -73,6 +73,7 @@ export class MarketController {
   }
 
   // todo orken integrate
+  // done
   loadMaterialPriceInfo(id: string): Observable<MaterialPriceInfo> {
     const materialPriceInfo = new MaterialPriceInfo({
       min: 12,
