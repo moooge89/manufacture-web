@@ -10,10 +10,11 @@ export class CompanyController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/company');
+    this.http = http.setControllerPrefix('/manufacture-api/external/company');
   }
 
   // todo orken integrate
+  // done
   loadCompany(): Observable<Company> {
     const company = new Company({
       name: 'Kazakhstan Transport Company',
@@ -22,11 +23,11 @@ export class CompanyController {
       factoryCount: 3,
     });
 
-    if (1 == 1) {
-      return of(company);
-    }
+    // if (1 == 1) {
+    //   return of(company);
+    // }
 
-    return this.http.get('');
+    return this.http.get('/info');
   }
 
 }
