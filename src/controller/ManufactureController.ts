@@ -13,7 +13,7 @@ export class ManufactureController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/manufacture');
+    this.http = http.setControllerPrefix('/manufacture-api/external/manufacture');
   }
 
   // todo orken integrate
@@ -45,10 +45,11 @@ export class ManufactureController {
       return of(manufactures);
     }
 
-    return this.http.get('/list', {filter});
+    return this.http.get('/manufactured-parts', {filter});
   }
 
   // todo orken integrate
+  // done
   loadManufactureTypesAsFilterElements(): Observable<FilterElement[]> {
     const filterElements = [
       {id: 1, displayValue: 'Window'},
@@ -62,10 +63,11 @@ export class ManufactureController {
       return of(filterElements);
     }
 
-    return this.http.get('/filter-element');
+    return this.http.get('/parts/filter-elements');
   }
 
   // todo orken integrate
+  // done
   loadManufactureElements(manufactureType: string): Observable<ElementGroup[]> {
     const manufactureElements = [
 
@@ -90,7 +92,7 @@ export class ManufactureController {
       return of(manufactureElements);
     }
 
-    return this.http.get('/by-type', {manufactureType});
+    return this.http.get('/parts/group-by/teams', {manufactureType});
   }
 
 }
