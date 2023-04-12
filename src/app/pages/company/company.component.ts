@@ -45,7 +45,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
   }
 
   get columnNames(): string[] {
-    return ['name', 'director', 'workerCount'];
+    return ['name', 'director', 'number'];
   }
 
 }

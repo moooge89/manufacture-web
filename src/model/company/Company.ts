@@ -4,9 +4,9 @@ export class Company {
 
   directorName: string = '';
 
-  workerCount: number = 0;
+  workersCount: number = 0;
 
-  factoryCount: number = 0;
+  factoriesCount: number = 0;
 
   constructor(init?: Partial<Company>) {
     Object.assign(this, init);

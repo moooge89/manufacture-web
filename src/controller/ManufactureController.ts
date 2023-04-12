@@ -23,8 +23,8 @@ export class ManufactureController {
     return this.http.get('/parts/filter-elements');
   }
 
-  loadManufactureElements(manufactureType: string): Observable<ElementGroup[]> {
-    return this.http.get('/parts/group-by/teams', {manufactureType});
+  loadManufactureElements(partType: string): Observable<ElementGroup[]> {
+    return this.http.get('/parts/group-by/teams', {partType});
   }
 
 }
