@@ -59,7 +59,7 @@ export class ManufactureComponent implements OnInit, OnDestroy {
     this.dialogRef?.close();
     this.dialogRef = this.dialog.open(ManufactureDialogComponent, {
       width: '720px',
-      height: '320px',
+      height: '350px',
       data: {manufacture: manufacture},
     });
   }

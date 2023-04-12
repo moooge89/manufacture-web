@@ -92,7 +92,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     } else {
       this.dialogRef = this.dialog.open(PersonDialogComponent, {
         width: '720px',
-        height: '320px',
+        height: '350px',
         data: {person: person},
       });
     }

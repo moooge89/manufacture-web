@@ -79,7 +79,7 @@ export class MarketComponent implements OnInit, OnDestroy {
 
     this.dialogRef = this.dialog.open(MarketDialogComponent, {
       width: '720px',
-      height: '320px',
+      height: '350px',
       data: {material: material},
     });
   }

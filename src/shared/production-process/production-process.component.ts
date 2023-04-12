@@ -48,7 +48,7 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
     this.dialogRef?.close();
     this.dialogRef = this.dialog.open(ProductionDialogComponent, {
       width: '720px',
-      height: '320px',
+      height: '350px',
       data: {productionInfo: this.productionInfo},
     });
   }
