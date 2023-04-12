@@ -17,10 +17,12 @@ export class MenuService {
   async menuItems(): Promise<MenuItem[]> {
     const user = await this.authService.userInfo();
 
+    console.log(user);
+
     const menuItems: MenuItem[] = [];
 
     switch (user.specialization) {
-      case Specialization.CEO:
+      case Specialization.COMPANY_DIRECTOR:
         menuItems.push(...this.menuItemsForCompanyDirector());
         break;
 
@@ -103,7 +105,7 @@ export class MenuService {
     let path: string;
 
     switch (user.specialization) {
-      case Specialization.CEO:
+      case Specialization.COMPANY_DIRECTOR:
         path = '/main/company';
         break;
 

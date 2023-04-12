@@ -20,7 +20,7 @@ export class CommonPageGuard implements CanLoad {
 
     return from(this.authService.userInfo()).pipe(
       map(userInfo => userInfo.specialization),
-      map(spec => spec === Specialization.CEO || spec === Specialization.FACTORY_DIRECTOR || spec === Specialization.DEPARTMENT_DIRECTOR),
+      map(spec => spec === Specialization.COMPANY_DIRECTOR || spec === Specialization.FACTORY_DIRECTOR || spec === Specialization.DEPARTMENT_DIRECTOR),
       tap(async canLoad => {
         if (!canLoad) {
           await this.menuService.redirectToDefaultPage();

@@ -77,7 +77,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.specialization === Specialization.CEO) {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
       this.dialogRef = this.dialog.open(PersonFactoryTransferDialogComponent, {
         width: '800px',
         height: '400px',
@@ -116,7 +116,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.specialization === Specialization.CEO) {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
       const factoryDesc = new FilterDropdownDescription<FilterElement>({
         elements$: this.factoryController.loadFactoriesAsFilterElements(),
         getId: getIdFromFe,
@@ -131,7 +131,7 @@ export class PersonComponent implements OnInit, OnDestroy {
       this.descriptions.push(factoryDesc);
     }
 
-    if (userInfo.specialization === Specialization.CEO || userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR || userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
       const departmentDesc = new FilterDropdownDescription<FilterElement>({
         elements$: this.departmentController.loadDepartmentsAsFilterElements(),
         getId: getIdFromFe,

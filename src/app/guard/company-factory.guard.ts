@@ -20,7 +20,7 @@ export class CompanyFactoryGuard implements CanLoad {
 
     return from(this.authService.userInfo()).pipe(
       map(userInfo => userInfo.specialization),
-      map(spec => spec === Specialization.CEO || spec === Specialization.FACTORY_DIRECTOR),
+      map(spec => spec === Specialization.COMPANY_DIRECTOR || spec === Specialization.FACTORY_DIRECTOR),
       tap(async canLoad => {
         if (!canLoad) {
           await this.menuService.redirectToDefaultPage();

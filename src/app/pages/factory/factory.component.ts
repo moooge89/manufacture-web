@@ -40,7 +40,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
 
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.specialization === Specialization.CEO) {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
       await this.initForCompanyDirector();
     } else if (userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
       this.canShowDepartmentsLink = true;
@@ -55,7 +55,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
   async ngOnDestroy() {
     const userInfo = await this.authService.userInfo();
 
-    if (userInfo.specialization === Specialization.CEO) {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
       this.pathContextService.clearLastFactoryId();
     }
   }
