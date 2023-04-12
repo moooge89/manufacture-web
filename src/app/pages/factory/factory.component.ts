@@ -72,10 +72,21 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
     }
 
     this.factoryInfo = await this.factoryController.loadFactoryInfoById(factoryId).toPromise();
+
+    // todo era remove after
+    if (!this.factoryInfo.geoPoint) {
+      this.factoryInfo.geoPoint = {latitude: 43.26501881519278, longitude: 76.97141432814534};
+    }
   }
 
   private async initForFactoryDirector(): Promise<void> {
     this.factoryInfo = await this.factoryController.loadFactoryInfo().toPromise();
+
+    // todo era remove after
+    if (!this.factoryInfo.geoPoint) {
+      this.factoryInfo.geoPoint = {latitude: 43.26501881519278, longitude: 76.97141432814534};
+    }
+
   }
 
   private initMap(): void {
