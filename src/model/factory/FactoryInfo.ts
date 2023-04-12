@@ -4,8 +4,8 @@ export interface FactoryInfo {
   id: number;
   name: string;
   geoPoint: GeoPoint;
-  workerCount: number;
-  directorName: string;
+  workersCount: number;
+  director: string;
   departmentCount: number;
   year: number;
 }

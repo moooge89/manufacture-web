@@ -53,6 +53,10 @@ export class WarehouseDialogComponent implements OnInit, OnDestroy {
 
   private initChart(warehouseInfo: ElementGroup[]) {
 
+    if (!warehouseInfo || warehouseInfo.length === 0) {
+      warehouseInfo = [{label: 'No data', count: 1}];
+    }
+
     const labels: string[] = warehouseInfo.map(el => el.label);
     const series: number[] = warehouseInfo.map(el => el.count);
 

@@ -1,15 +1,11 @@
-export class Manufacture {
+export interface Manufacture {
 
-  manufactureType: string = '';
+  manufactureType: string;
 
-  manufactureTypeLabel: string = '';
+  manufacturedTypeLabel: string;
 
-  manufacturedCount: number = 0;
+  manufacturedCount: number;
 
-  hrInvolved: number = 0;
-
-  constructor(init?: Partial<Manufacture>) {
-    Object.assign(this, init);
-  }
+  hrInvolved: number;
 
 }

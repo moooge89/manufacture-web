@@ -11,6 +11,6 @@ export class ManufactureFilter extends TableFilter {
 
   hrInvolved: NumberRange = new NumberRange();
 
-  sorting = new Sorting('types', SortType.ASC);
+  sorting = new Sorting({fieldName: 'types', sortType: SortType.ASC});
 
 }

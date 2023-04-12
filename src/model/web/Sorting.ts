@@ -6,17 +6,16 @@ export class Sorting {
 
   sortType: SortType = SortType.ASC;
 
-  constructor(_fieldName: string, _sortType: SortType) {
-    this.fieldName = _fieldName;
-    this.sortType = _sortType;
+  constructor(init?: Partial<Sorting>) {
+    Object.assign(this, init);
   }
 
   static asc(fieldName: string): Sorting {
-    return new Sorting(fieldName, SortType.ASC);
+    return new Sorting({fieldName: fieldName, sortType: SortType.ASC});
   }
 
   static desc(fieldName: string): Sorting {
-    return new Sorting(fieldName, SortType.ASC);
+    return new Sorting({fieldName: fieldName, sortType: SortType.DESC});
   }
 
   isAsc(): boolean {

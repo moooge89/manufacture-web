@@ -20,16 +20,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     this.loadContent(rows$);
   }
 
-  @Input() set columnNames(columnNames: string[]) {
-    this._columnNames = columnNames;
-
-    const firstColName = columnNames[0];
-
-    if (firstColName) {
-      this.sorting = Sorting.asc(firstColName);
-    }
-
-  }
+  @Input() columnNames: string[] = [];
 
   @Input() isMatIcon: (index: number) => boolean = () => false;
 
@@ -49,12 +40,10 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Output() sortClicked = new EventEmitter<Sorting>();
 
-  _columnNames: string[] = [];
-
   rows: T[] = [];
   isLoading: boolean = true;
 
-  sorting: Sorting | undefined = undefined;
+  sorting: Sorting = new Sorting();
 
   private readonly checkedIds = new Set<string>();
 
@@ -110,11 +99,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   }
 
   sortIcon(headerName: string, index: number): string {
-    if (!this.sorting) {
-      return 'sort-disabled';
-    }
-
-    const fieldName = this._columnNames[index] || '';
+    const fieldName = this.columnNames[index] || '';
 
     if (this.sorting.fieldName !== fieldName) {
       return 'sort-disabled';
@@ -129,15 +114,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   }
 
   handleSortClick(headerName: string, index: number): void {
-    if (!this.sorting) {
-      return;
-    }
-
-    const fieldName = this._columnNames[index] || '';
+    const fieldName = this.columnNames[index] || '';
 
     if (this.sorting.fieldName !== fieldName) {
       this.sorting.sortType = SortType.ASC;
-      this.sorting.fieldName = this._columnNames[index] || '';
+      this.sorting.fieldName = fieldName;
     } else if (this.sorting.isAsc()) {
       this.sorting.sortType = SortType.DESC;
     } else if (this.sorting.isDesc()) {
@@ -145,6 +126,10 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     }
 
     this.sortClicked.emit(this.sorting);
+  }
+
+  toLowerCase(iconName: string): string {
+    return iconName?.toLowerCase() || '';
   }
 
   private loadContent(rows$: Observable<T[]>): void {

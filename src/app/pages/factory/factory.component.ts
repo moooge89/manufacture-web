@@ -94,7 +94,7 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
       id: 'osm-bright',
     } as any).addTo(leafletMap);
 
-    const circle = L.circleMarker([geoPoint.latitude, geoPoint.longitude], {radius: calculateFactoryRadius(this.factoryInfo.workerCount)});
+    const circle = L.circleMarker([geoPoint.latitude, geoPoint.longitude], {radius: calculateFactoryRadius(this.factoryInfo.workersCount)});
 
     circle.bindPopup(this.popupService.makeFactoryInfoPopup(this.factoryInfo));
 

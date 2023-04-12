@@ -57,10 +57,10 @@
         (click)="$event.stopImmediatePropagation()"></mat-checkbox>
     </td>
 
-    <td *ngFor="let column of _columnNames; let i = index;">
+    <td *ngFor="let column of columnNames; let i = index;">
       <mat-icon
         *ngIf="isMatIcon(i); else commonColumn"
-        [svgIcon]="row[column]"
+        [svgIcon]="toLowerCase(row[column])"
       ></mat-icon>
 
       <ng-template #commonColumn>
@@ -75,7 +75,7 @@
 
   <tr *ngFor="let _ of [].constructor(7)">
 
-    <td *ngFor="let column of _columnNames">
+    <td *ngFor="let column of columnNames">
 
       <div class="loading-column"></div>
 

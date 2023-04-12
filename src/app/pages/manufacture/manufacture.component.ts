@@ -96,7 +96,7 @@ export class ManufactureComponent implements OnInit, OnDestroy {
   }
 
   get columnNames(): string[] {
-    return ['manufactureTypeLabel', 'manufacturedCount', 'hrInvolved'];
+    return ['manufacturedTypeLabel', 'manufacturedCount', 'hrInvolved'];
   }
 
 }

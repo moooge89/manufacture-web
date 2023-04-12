@@ -64,7 +64,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     this.dialogRef?.close();
     this.dialogRef = this.dialog.open(WarehouseDialogComponent, {
       width: '720px',
-      height: '320px',
+      height: '350px',
       data: {material: material},
     });
   }

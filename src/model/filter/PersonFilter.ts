@@ -10,7 +10,7 @@ export class PersonFilter extends TableFilter {
 
   departmentIds: number[] = [];
 
-  sorting = new Sorting('personName', SortType.ASC);
+  sorting = new Sorting({fieldName: 'personName', sortType: SortType.ASC});
 
   constructor(init?: Partial<PersonFilter>) {
     super();
