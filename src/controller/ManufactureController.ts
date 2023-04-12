@@ -41,9 +41,9 @@ export class ManufactureController {
       }),
     ];
 
-    if (1 == 1) {
-      return of(manufactures);
-    }
+    // if (1 == 1) {
+    //   return of(manufactures);
+    // }
 
     return this.http.get('/manufactured-parts', {filter});
   }
@@ -59,9 +59,9 @@ export class ManufactureController {
       {id: 3, displayValue: 'Assemble'},
     ];
 
-    if (1 == 1) {
-      return of(filterElements);
-    }
+    // if (1 == 1) {
+    //   return of(filterElements);
+    // }
 
     return this.http.get('/parts/filter-elements');
   }
@@ -88,9 +88,9 @@ export class ManufactureController {
 
     ];
 
-    if (1 == 1) {
-      return of(manufactureElements);
-    }
+    // if (1 == 1) {
+    //   return of(manufactureElements);
+    // }
 
     return this.http.get('/parts/group-by/teams', {manufactureType});
   }
