@@ -28,11 +28,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() isAdminTable: boolean = false;
 
-  @Input() getId: (element: T) => string = () => '';
+  @Input() getId: (element: T) => string | number = () => '';
 
   @Input() rowUpsert = new Subject<T>();
 
-  @Input() deleteRows$: (ids: Set<string>) => Observable<void> = () => of(undefined);
+  @Input() deleteRows$: (ids: Set<string | number>) => Observable<void> = () => of(undefined);
 
   @Output() addClicked = new EventEmitter<void>();
 
@@ -45,7 +45,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   sorting: Sorting = new Sorting();
 
-  private readonly checkedIds = new Set<string>();
+  private readonly checkedIds = new Set<string | number>();
 
   private readonly unsub = new Unsub();
 
