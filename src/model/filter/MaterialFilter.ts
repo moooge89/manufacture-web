@@ -15,6 +15,6 @@ export class MaterialFilter extends TableFilter {
 
   countries: number[] = [];
 
-  sorting = new Sorting({fieldName: 'materialName', sortType: SortType.ASC});
+  sorting = new Sorting({fieldName: 'name', sortType: SortType.ASC});
 
 }
