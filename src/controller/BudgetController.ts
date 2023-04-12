@@ -15,13 +15,7 @@ export class BudgetController {
     this.http = http.setControllerPrefix('/manufacture-api/external/budget');
   }
 
-  // todo orken integrate
-  //done
   loadAvailableBudget(): Observable<number> {
-    // if (1 == 1) {
-    //   return of(1000);
-    // }
-
     return this.http.get<NumberWrapper>('/company').pipe(map(x => x.value));
   }
 

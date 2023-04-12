@@ -41,6 +41,10 @@ export class ManufactureDialogComponent implements OnInit, OnDestroy {
 
   private initChart(manufactureElements: ElementGroup[]): void {
 
+    if (!manufactureElements || manufactureElements.length === 0) {
+      this.manufactureElements = [{label: 'No data', count: 1}];
+    }
+
     this.manufactureElements = manufactureElements;
 
     const labels: string[] = manufactureElements.map(el => el.label);
