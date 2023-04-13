@@ -34,7 +34,7 @@ export class MarketController {
   }
 
   loadMarketMaterials(materialFilter: MaterialFilter): Observable<MarketMaterial[]> {
-    return this.http.postBody('/filtered', {...materialFilter});
+    return this.http.postBody('/filtered', materialFilter);
   }
 
   deleteMarketMaterials(ids: Set<number>): Observable<void> {

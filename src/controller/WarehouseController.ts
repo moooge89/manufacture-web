@@ -15,7 +15,7 @@ export class WarehouseController {
   }
 
   loadWarehouseMaterials(materialFilter: MaterialFilter): Observable<WarehouseMaterial[]> {
-    return this.http.postBody('/warehouse-materials', {materialFilter});
+    return this.http.postBody('/warehouse-materials', materialFilter);
   }
 
   loadWarehouseStoredInfo(partType: number): Observable<ElementGroup[]> {
