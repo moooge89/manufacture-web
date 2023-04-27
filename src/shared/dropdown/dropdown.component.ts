@@ -8,6 +8,7 @@ import {FormControl, FormGroupDirective, NgForm} from "@angular/forms";
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
+// todo era make dropdown component with number as string
 export class DropdownComponent<T> implements OnInit {
 
   /**

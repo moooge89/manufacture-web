@@ -75,6 +75,7 @@ export class MenuService {
       new MenuItem({label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'}),
       new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
       new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
+      new MenuItem({label: 'Budget', route: ['/main/accept-budget'], icon: 'money'}),
     ];
   }
 

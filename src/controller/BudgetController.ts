@@ -5,6 +5,7 @@ import {of} from "rxjs";
 import {BudgetRequest} from "@model/budget/BudgetRequest";
 import {map} from "rxjs/operators";
 import {NumberWrapper} from "@model/wrapper/NumberWrapper";
+import {LoadBudgetRequest} from "@model/budget/LoadBudgetRequest";
 
 @Injectable({providedIn: 'root'})
 export class BudgetController {
@@ -26,6 +27,60 @@ export class BudgetController {
     }
 
     return this.http.postBody('', request);
+  }
+
+  loadBudgetRequests(): Observable<LoadBudgetRequest[]> {
+
+    const requests: LoadBudgetRequest[] = [
+      {
+        id: 1,
+        user: 'Yerassyl',
+        amount: 10_000,
+        department: 'Some department 1',
+        reason: 'I need some money',
+      },
+
+      {
+        id: 2,
+        user: 'Dauir',
+        amount: 15_000,
+        department: 'Some department 2',
+        reason: 'I need some money',
+      },
+
+      {
+        id: 3,
+        user: 'Orken',
+        amount: 13_000,
+        department: 'Some department 3',
+        reason: 'I need some money',
+      },
+
+    ];
+
+    if (1 == 1) {
+      return of(requests);
+    }
+
+    return this.http.post('');
+  }
+
+  // todo orken
+  acceptBudgetRequest(id: number): Observable<void> {
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.post('', {id});
+  }
+
+  // todo orken
+  declineBudgetRequest(id: number): Observable<void> {
+    if (1 == 1) {
+      return of(undefined);
+    }
+
+    return this.http.post('', {id});
   }
 
 }

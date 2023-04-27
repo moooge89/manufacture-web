@@ -75,6 +75,11 @@ const routes: Routes = [
         canLoad: [CommonPageGuard],
       },
       {
+        path: 'accept-budget',
+        loadChildren: () => import('../pages/load-budget/load-budget.module').then(x => x.LoadBudgetModule),
+        canLoad: [FactoryGuard],
+      },
+      {
         path: '**',
         redirectTo: '',
         canLoad: [IsLoggedInGuard],
