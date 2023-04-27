@@ -26,6 +26,7 @@ export class DepartmentController {
     return this.http.get('/filter-elements');
   }
 
+  // todo orken
   changePersonDepartment(personId: number, departmentId: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);

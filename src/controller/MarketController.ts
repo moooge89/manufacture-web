@@ -17,6 +17,7 @@ export class MarketController {
     this.http = http.setControllerPrefix('/manufacture-api/external/market');
   }
 
+  // todo orken
   createMarketMaterial(material: MarketMaterial): Observable<number> {
     if (1 == 1) {
       return of(2);
@@ -25,6 +26,7 @@ export class MarketController {
     return this.http.postBody<NumberWrapper>('', material).pipe(map(x => x.value));
   }
 
+  // todo orken
   updateMarketMaterial(material: MarketMaterial): Observable<void> {
     if (1 == 1) {
       return of(undefined);
@@ -37,6 +39,7 @@ export class MarketController {
     return this.http.postBody('/filtered', materialFilter);
   }
 
+  // todo orken
   deleteMarketMaterials(ids: Set<number>): Observable<void> {
     if (1 == 1) {
       return of(undefined);
@@ -45,6 +48,7 @@ export class MarketController {
     return this.http.delete('', {ids});
   }
 
+  // todo orken
   buyMaterial(id: number, kgToBuy: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);

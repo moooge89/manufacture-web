@@ -14,6 +14,7 @@ export class ReportController {
     this.http = http.setControllerPrefix('/report');
   }
 
+  // todo orken
   loadReportDescription(reportFilter: ReportFilter): Observable<ReportDescription> {
     const reportDescription = new ReportDescription({
       categories: [

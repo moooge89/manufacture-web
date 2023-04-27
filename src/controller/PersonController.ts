@@ -14,6 +14,7 @@ export class PersonController {
     this.http = http.setControllerPrefix('/user-api/external/person');
   }
 
+  // todo orken
   createPerson(person: Person): Observable<Person> {
     if (1 == 1) {
       person.id = 2;
@@ -23,6 +24,7 @@ export class PersonController {
     return this.http.postBody('', person);
   }
 
+  // todo orken
   updatePerson(person: Person): Observable<Person> {
     if (1 == 1) {
       person.departmentId = 0;
@@ -37,6 +39,7 @@ export class PersonController {
     return this.http.postBody('/list', {...personFilter});
   }
 
+  // todo orken
   deletePersons(ids: Set<string>): Observable<void> {
     if (1 == 1) {
       return of(undefined);

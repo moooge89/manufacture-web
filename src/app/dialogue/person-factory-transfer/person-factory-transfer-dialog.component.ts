@@ -21,8 +21,6 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
 
   factories: FilterElement[] = [];
 
-  private isMadeFactoryDirectorClicked: boolean = false;
-
   private readonly unsub = new Unsub();
 
   constructor(
@@ -69,10 +67,6 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
     this.copyPerson.factoryName = factory.displayValue;
   }
 
-  onMadeFactoryDirectorClicked(): void {
-    this.isMadeFactoryDirectorClicked = true;
-  }
-
   async cancel() {
 
     if (!this.hasChanged()) {
@@ -102,13 +96,7 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.isPersonFactoryChanged()) {
-      this.copyPerson = await this.personController.updatePerson(this.copyPerson).toPromise();
-    }
-
-    if (this.isMadeFactoryDirectorClicked) {
-      await this.factoryController.makeUserDirector(this.copyPerson.id).toPromise();
-    }
+    this.copyPerson = await this.personController.updatePerson(this.copyPerson).toPromise();
 
     this.closeDialog(PersonDialogResp.save(this.copyPerson));
   }
@@ -122,10 +110,6 @@ export class PersonFactoryTransferDialogComponent implements OnInit, OnDestroy {
   }
 
   private hasChanged(): boolean {
-    return this.isMadeFactoryDirectorClicked || this.isPersonFactoryChanged();
-  }
-
-  private isPersonFactoryChanged(): boolean {
     return this.person.factoryId !== this.copyPerson.factoryId;
   }
 

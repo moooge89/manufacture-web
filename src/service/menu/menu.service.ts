@@ -17,8 +17,6 @@ export class MenuService {
   async menuItems(): Promise<MenuItem[]> {
     const user = await this.authService.userInfo();
 
-    console.log(user);
-
     const menuItems: MenuItem[] = [];
 
     switch (user.specialization) {

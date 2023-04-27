@@ -19,6 +19,7 @@ export class BudgetController {
     return this.http.get<NumberWrapper>('/company').pipe(map(x => x.value));
   }
 
+  // todo orken
   makeBudgetRequest(request: BudgetRequest): Observable<void> {
     if (1 == 1) {
       return of(undefined);

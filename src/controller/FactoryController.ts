@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
-import {of} from "rxjs";
 import {FactoryInfo} from "@model/factory/FactoryInfo";
 import {LightFactoryInfo} from "@model/factory/LightFactoryInfo";
 import {FilterElement} from "@model/filter/FilterElement";
@@ -29,14 +28,6 @@ export class FactoryController {
 
   loadFactoryInfoById(factoryId: number): Observable<FactoryInfo> {
     return this.http.get('/info/' + factoryId);
-  }
-
-  makeUserDirector(userId: number): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
-    return this.http.patch('/make-director/' + userId);
   }
 
 }

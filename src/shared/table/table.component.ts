@@ -12,6 +12,7 @@ import {SortType} from "@model/web/SortType";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
+// todo era make paging
 export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() headers: string[] = [];
