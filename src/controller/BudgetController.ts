@@ -21,6 +21,7 @@ export class BudgetController {
   }
 
   // todo orken
+  // done
   makeBudgetRequest(request: BudgetRequest): Observable<void> {
     if (1 == 1) {
       return of(undefined);
@@ -29,6 +30,10 @@ export class BudgetController {
     return this.http.postBody('', request);
   }
 
+  // тут вообще у нас 2 эндпоинта
+  // Один для просмотра как заявитель свои рекуесты
+  // Другой как ответственное лицо рекуесты других
+  //done
   loadBudgetRequests(): Observable<LoadBudgetRequest[]> {
 
     const requests: LoadBudgetRequest[] = [
@@ -65,22 +70,30 @@ export class BudgetController {
     return this.http.post('');
   }
 
+  // вот второй
+  loadBudgetRequestsAsResponsible(): Observable<LoadBudgetRequest[]> {
+
+    return this.http.post('/as-responsible');
+  }
+
   // todo orken
+  // done
   acceptBudgetRequest(id: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }
 
-    return this.http.post('', {id});
+    return this.http.post('/' + id + '/accept', {id});
   }
 
   // todo orken
+  // done
   declineBudgetRequest(id: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }
 
-    return this.http.post('', {id});
+    return this.http.post('/' + id + '/decline', {id});
   }
 
 }
