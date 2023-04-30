@@ -18,6 +18,7 @@ import {CrudPersonDialogModule} from "./dialogue/crud-person/crud-person-dialog.
 import {ManufactureDialogModule} from "./dialogue/manufacture/manufacture-dialog.module";
 import {WarehouseDialogModule} from "./dialogue/warehouse/warehouse-dialog.module";
 import {MarketDialogModule} from "./dialogue/market/market-dialog.module";
+import {AnalyticsDialogModule} from "./dialogue/analytics/analytics-dialog.module";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {MarketDialogModule} from "./dialogue/market/market-dialog.module";
     CrudPersonDialogModule,
     ManufactureDialogModule,
     ConfirmationModule,
+    AnalyticsDialogModule,
   ],
   providers: [
     IsLoggedInGuard,

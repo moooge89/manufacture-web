@@ -62,6 +62,7 @@ export class MenuService {
       new MenuItem({label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'}),
       new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
       new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
+      new MenuItem({label: 'Analytics', route: ['/main/analytics'], icon: 'analyze'}),
     ];
   }
 
@@ -70,12 +71,13 @@ export class MenuService {
       new MenuItem({label: 'Factory', route: ['/main/factory'], icon: 'factory'}),
       new MenuItem({label: 'Departments', route: ['/main/departments'], icon: 'team'}),
       new MenuItem({label: 'Users', route: ['/main/user'], icon: 'report'}),
+      new MenuItem({label: 'Budget', route: ['/main/accept-budget'], icon: 'money'}),
       new MenuItem({label: 'Warehouse', route: ['/main/warehouse'], icon: 'box'}),
       new MenuItem({label: 'Market', route: ['/main/market'], icon: 'market'}),
       new MenuItem({label: 'Manufacture', route: ['/main/manufacture'], icon: 'puzzle'}),
       new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
       new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
-      new MenuItem({label: 'Budget', route: ['/main/accept-budget'], icon: 'money'}),
+      new MenuItem({label: 'Analytics', route: ['/main/analytics'], icon: 'analyze'}),
     ];
   }
 
@@ -88,6 +90,7 @@ export class MenuService {
       new MenuItem({label: 'Budget', route: ['/main/budget'], icon: 'money'}),
       new MenuItem({label: 'Production', route: ['/main/production'], icon: 'conveyor'}),
       new MenuItem({label: 'Report', route: ['/main/report'], icon: 'report'}),
+      new MenuItem({label: 'Analytics', route: ['/main/analytics'], icon: 'analyze'}),
     ];
   }
 

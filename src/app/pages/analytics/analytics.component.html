@@ -1,0 +1,65 @@
+<section class="block">
+
+  <span class="big-bold">Analytics</span>
+
+  <div class="content">
+
+    <div class="filter-container">
+
+      <app-dropdown
+        label="Factory"
+        [isMultiple]="false"
+        [getId]="getId"
+        [getName]="getName"
+        [elements]="factories"
+        [selectedElementId]="analyticsFilter.factoryId"
+        [useElementEmitting]="true"
+        (elementChanged)="onFactoryChange($event)"
+      ></app-dropdown>
+
+      <app-dropdown
+        label="Department"
+        [isMultiple]="false"
+        [getId]="getId"
+        [getName]="getName"
+        [elements]="departments"
+        [selectedElementId]="analyticsFilter.departmentId"
+        [emptyMessage]="emptyMessageForDepartment"
+        [useElementEmitting]="true"
+        (elementChanged)="onDepartmentChange($event)"
+      ></app-dropdown>
+
+      <app-dropdown
+        label="Team"
+        [isMultiple]="false"
+        [getId]="getId"
+        [getName]="getName"
+        [elements]="teams"
+        [selectedElementId]="analyticsFilter.teamId"
+        [emptyMessage]="emptyMessageForTeam"
+        (idChanged)="onTeamChange($event)"
+      ></app-dropdown>
+
+    </div>
+
+  </div>
+
+  <div class="buttons-container">
+
+    <app-button
+      text="Generate"
+      [isDisabled]="isGenerateButtonDisabled"
+      [disabledMessage]="generateButtonDisableMsg"
+      (clicked)="generateAnalytics()"
+    ></app-button>
+
+    <app-button
+      text="See previous report"
+      [isDisabled]="isSeeButtonDisabled"
+      [disabledMessage]="seeButtonDisabledMsg"
+      (clicked)="seeGeneratedAnalytics()"
+    ></app-button>
+
+  </div>
+
+</section>

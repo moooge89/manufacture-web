@@ -80,6 +80,11 @@ const routes: Routes = [
         canLoad: [FactoryGuard],
       },
       {
+        path: 'analytics',
+        loadChildren: () => import('../pages/analytics/analytics.module').then(x => x.AnalyticsModule),
+        canLoad: [CommonPageGuard],
+      },
+      {
         path: '**',
         redirectTo: '',
         canLoad: [IsLoggedInGuard],
