@@ -85,6 +85,11 @@ const routes: Routes = [
         canLoad: [CommonPageGuard],
       },
       {
+        path: 'budget-request',
+        loadChildren: () => import('../pages/budget-request/budget-request.module').then(x => x.BudgetRequestModule),
+        canLoad: [DepartmentGuard],
+      },
+      {
         path: '**',
         redirectTo: '',
         canLoad: [IsLoggedInGuard],

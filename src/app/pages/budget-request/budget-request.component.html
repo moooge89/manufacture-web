@@ -1,0 +1,22 @@
+<section class="block table-section">
+
+  <span class="big-bold">My budget requests</span>
+
+  <div
+    *ngFor="let request of requests"
+    class="budget-request"
+  >
+
+    <div class="row"><b>From:</b> {{request.user}}</div>
+    <div class="row"><b>Department:</b> {{request.department}}</div>
+    <div class="row"><b>Amount:</b> {{request.amount}}</div>
+    <div class="row"><b>Reason:</b> {{request.reason}}</div>
+
+
+  </div>
+
+  <div *ngIf="requests.length === 0">
+    New budget requests are not done
+  </div>
+
+</section>

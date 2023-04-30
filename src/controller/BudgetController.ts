@@ -73,6 +73,21 @@ export class BudgetController {
   // вот второй
   loadBudgetRequestsAsResponsible(): Observable<LoadBudgetRequest[]> {
 
+    const requests: LoadBudgetRequest[] = [
+      {
+        id: 1,
+        user: 'Yerassyl',
+        amount: 10_000,
+        department: 'Some department 1',
+        reason: 'I need some money',
+      },
+
+    ];
+
+    if (1 == 1) {
+      return of(requests);
+    }
+
     return this.http.post('/as-responsible');
   }
 
