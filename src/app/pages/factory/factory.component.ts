@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import * as L from "leaflet";
-import {Browser, LeafletMouseEvent, map, tileLayer} from "leaflet";
+import {Browser, map, tileLayer} from "leaflet";
 import {PopUpService} from "@service/map-popup/pop-up.service";
 import {calculateFactoryRadius} from "@util/CalculateUtil";
 import {LEAFLET_API_TOKEN, LEAFLET_BASE_URL, LEAFLET_RETINA_URL} from "@const/LeafletConst";
@@ -111,10 +111,6 @@ export class FactoryComponent implements AfterViewInit, OnDestroy {
 
     circle.addTo(leafletMap);
 
-    leafletMap.addEventListener("click", function (event: LeafletMouseEvent) {
-      // todo era handle properly
-      console.log(event.latlng);
-    });
   }
 
 }
