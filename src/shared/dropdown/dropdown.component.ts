@@ -62,6 +62,11 @@ export class DropdownComponent<T> implements OnInit {
   @Input() useElementEmitting: boolean = false;
 
   /**
+   * If true, cannot change value by user
+   */
+  @Input() disabled: boolean = false;
+
+  /**
    * on id change it emits new set id
    */
   @Output() idChanged = new EventEmitter<string[]>();

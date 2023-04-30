@@ -11,6 +11,9 @@ import {AnalyticsDialogComponent} from "../../dialogue/analytics/analytics-dialo
 import {AnalyticsController} from "@controller/AnalyticsController";
 import {AnalyticsFilter} from "@model/analytics/AnalyticsFilter";
 import {AnalyticsDescription} from "@model/analytics/AnalyticsDescription";
+import {AuthService} from "@service/auth/auth.service";
+import {UserInfo} from "@model/auth/UserInfo";
+import {Specialization} from "@model/user/Specialization";
 
 @Component({
   selector: 'app-analytics',
@@ -28,6 +31,9 @@ export class AnalyticsComponent {
   isAnalyticsBeingGenerated: boolean = false;
   isAnalyticsGenerated: boolean = false;
 
+  isFactoryOptionDisabled: boolean = false;
+  isDepartmentOptionDisabled: boolean = false;
+
   private departmentCache = new Cache<FilterElement[]>();
   private teamCache = new Cache<FilterElement[]>();
 
@@ -37,13 +43,19 @@ export class AnalyticsComponent {
   private readonly unsub = new Unsub();
 
   constructor(private readonly dialog: MatDialog,
+              private readonly authService: AuthService,
               private readonly teamController: TeamController,
               private readonly factoryController: FactoryController,
               private readonly analyticsController: AnalyticsController,
               private readonly departmentController: DepartmentController,) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const userInfo = await this.authService.userInfo();
+
+    this.disableOptionFactoryIfNeeded(userInfo);
+    await this.disableOptionDepartmentIfNeeded(userInfo);
+
     this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
   }
 
@@ -117,6 +129,27 @@ export class AnalyticsComponent {
 
   private teamsToPromise(departmentId: number): Promise<FilterElement[]> {
     return this.teamController.loadTeamsOfDepartmentAsFilterElements(departmentId).toPromise();
+  }
+
+  private disableOptionFactoryIfNeeded(userInfo: UserInfo): void {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
+      return;
+    }
+
+    this.isFactoryOptionDisabled = true;
+    this.analyticsFilter.factoryId = userInfo.factory;
+  }
+
+  private async disableOptionDepartmentIfNeeded(userInfo: UserInfo): Promise<void> {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR ||
+      userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
+      return;
+    }
+
+    this.departments = await this.departmentCache.computeIfAbsent(userInfo.department, this.departmentsPromise(userInfo.department));
+
+    this.isDepartmentOptionDisabled = true;
+    this.analyticsFilter.departmentId = userInfo.department;
   }
 
   get emptyMessageForDepartment(): string {

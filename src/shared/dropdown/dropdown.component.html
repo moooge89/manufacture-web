@@ -7,6 +7,7 @@
     [ngModelOptions]="{standalone: true}"
     [multiple]="isMultiple"
     [errorStateMatcher]="errorStateMatcher"
+    [disabled]="disabled"
     (valueChange)="onValueChange($event)"
   >
     <app-input
