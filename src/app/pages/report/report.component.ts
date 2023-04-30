@@ -11,6 +11,9 @@ import {DepartmentController} from "@controller/DepartmentController";
 import {TeamController} from "@controller/TeamController";
 import {FactoryController} from "@controller/FactoryController";
 import {ReportFilter} from "@model/report/ReportFilter";
+import {UserInfo} from "@model/auth/UserInfo";
+import {Specialization} from "@model/user/Specialization";
+import {AuthService} from "@service/auth/auth.service";
 
 @Component({
   selector: 'app-report',
@@ -32,6 +35,9 @@ export class ReportComponent implements OnInit, OnDestroy {
   isReportBeingGenerated: boolean = false;
   isReportGenerated: boolean = false;
 
+  isFactoryOptionDisabled: boolean = false;
+  isDepartmentOptionDisabled: boolean = false;
+
   private departmentCache = new Cache<FilterElement[]>();
   private teamCache = new Cache<FilterElement[]>();
 
@@ -41,13 +47,19 @@ export class ReportComponent implements OnInit, OnDestroy {
   private readonly unsub = new Unsub();
 
   constructor(private readonly dialog: MatDialog,
+              private readonly authService: AuthService,
               private readonly teamController: TeamController,
               private readonly reportController: ReportController,
               private readonly factoryController: FactoryController,
               private readonly departmentController: DepartmentController,) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const userInfo = await this.authService.userInfo();
+
+    await this.disableOptionFactoryIfNeeded(userInfo);
+    await this.disableOptionDepartmentIfNeeded(userInfo);
+
     this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
   }
 
@@ -150,6 +162,41 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   private teamsToPromise(departmentId: number): Promise<FilterElement[]> {
     return this.teamController.loadTeamsOfDepartmentAsFilterElements(departmentId).toPromise();
+  }
+
+  private async disableOptionFactoryIfNeeded(userInfo: UserInfo): Promise<void> {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
+      return;
+    }
+
+    this.isFactoryOptionDisabled = true;
+    this.reportFilter.firstFactoryId = userInfo.factory;
+    this.reportFilter.secondFactoryId = userInfo.factory;
+
+    const departments = await this.departmentCache.computeIfAbsent(userInfo.factory, this.departmentsPromise(userInfo.factory));
+
+    this.firstDepartments = departments;
+    this.secondDepartments = departments;
+  }
+
+  private async disableOptionDepartmentIfNeeded(userInfo: UserInfo): Promise<void> {
+    if (userInfo.specialization === Specialization.COMPANY_DIRECTOR ||
+      userInfo.specialization === Specialization.FACTORY_DIRECTOR) {
+      return;
+    }
+
+    const departments = await this.departmentCache.computeIfAbsent(userInfo.factory, this.departmentsPromise(userInfo.factory));
+
+    this.firstDepartments = departments;
+    this.secondDepartments = departments;
+
+    this.isDepartmentOptionDisabled = true;
+    this.reportFilter.firstDepartmentId = userInfo.department;
+    this.reportFilter.secondDepartmentId = userInfo.department;
+
+    const teams = await this.teamCache.computeIfAbsent(userInfo.department, this.teamsToPromise(userInfo.department));
+    this.firstTeams = teams;
+    this.secondTeams = teams;
   }
 
   get emptyMessageForFirstDepartment(): string {

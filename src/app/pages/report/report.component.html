@@ -19,6 +19,7 @@
             [elements]="factories"
             [selectedElementId]="reportFilter.firstFactoryId"
             [useElementEmitting]="true"
+            [disabled]="isFactoryOptionDisabled"
             (elementChanged)="onFirstFactoryChange($event)"
           ></app-dropdown>
 
@@ -31,6 +32,7 @@
             [selectedElementId]="reportFilter.firstDepartmentId"
             [emptyMessage]="emptyMessageForFirstDepartment"
             [useElementEmitting]="true"
+            [disabled]="isDepartmentOptionDisabled"
             (elementChanged)="onFirstDepartmentChange($event)"
           ></app-dropdown>
 
@@ -62,6 +64,7 @@
             [elements]="factories"
             [selectedElementId]="reportFilter.secondFactoryId"
             [useElementEmitting]="true"
+            [disabled]="isFactoryOptionDisabled"
             (elementChanged)="onSecondFactoryChange($event)"
           ></app-dropdown>
 
@@ -74,6 +77,7 @@
             [selectedElementId]="reportFilter.secondDepartmentId"
             [emptyMessage]="emptyMessageForSecondDepartment"
             [useElementEmitting]="true"
+            [disabled]="isDepartmentOptionDisabled"
             (elementChanged)="onSecondDepartmentChange($event)"
           ></app-dropdown>
 

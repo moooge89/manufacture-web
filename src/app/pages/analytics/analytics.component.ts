@@ -53,7 +53,7 @@ export class AnalyticsComponent {
   async ngOnInit() {
     const userInfo = await this.authService.userInfo();
 
-    this.disableOptionFactoryIfNeeded(userInfo);
+    await this.disableOptionFactoryIfNeeded(userInfo);
     await this.disableOptionDepartmentIfNeeded(userInfo);
 
     this.unsub.sub = this.factoryController.loadFactoriesAsFilterElements().subscribe(factories => this.factories = factories);
@@ -131,13 +131,15 @@ export class AnalyticsComponent {
     return this.teamController.loadTeamsOfDepartmentAsFilterElements(departmentId).toPromise();
   }
 
-  private disableOptionFactoryIfNeeded(userInfo: UserInfo): void {
+  private async disableOptionFactoryIfNeeded(userInfo: UserInfo): Promise<void> {
     if (userInfo.specialization === Specialization.COMPANY_DIRECTOR) {
       return;
     }
 
     this.isFactoryOptionDisabled = true;
     this.analyticsFilter.factoryId = userInfo.factory;
+
+    this.departments = await this.departmentCache.computeIfAbsent(userInfo.factory, this.departmentsPromise(userInfo.factory));
   }
 
   private async disableOptionDepartmentIfNeeded(userInfo: UserInfo): Promise<void> {
@@ -146,10 +148,12 @@ export class AnalyticsComponent {
       return;
     }
 
-    this.departments = await this.departmentCache.computeIfAbsent(userInfo.department, this.departmentsPromise(userInfo.department));
+    this.departments = await this.departmentCache.computeIfAbsent(userInfo.factory, this.departmentsPromise(userInfo.factory));
 
     this.isDepartmentOptionDisabled = true;
     this.analyticsFilter.departmentId = userInfo.department;
+
+    this.teams = await this.teamCache.computeIfAbsent(userInfo.department, this.teamsToPromise(userInfo.department));
   }
 
   get emptyMessageForDepartment(): string {
