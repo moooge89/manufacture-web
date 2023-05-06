@@ -27,12 +27,14 @@ export class DepartmentController {
   }
 
   // todo orken
+  // departmentId это RequestParam
+  // done крч
   changePersonDepartment(personId: number, departmentId: number): Observable<void> {
     if (1 == 1) {
       return of(undefined);
     }
 
-    return this.http.patch('/change-person-department/' + personId, {departmentId});
+    return this.http.patch('/change-department/' + personId, {departmentId});
   }
 
 }
