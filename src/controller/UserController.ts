@@ -16,4 +16,8 @@ export class UserController {
     return this.http.get('/username');
   }
 
+  changePersonDepartment(personId: number, depId: number): Observable<void> {
+    return this.http.post('/person/change-department/' + personId, {depId});
+  }
+
 }

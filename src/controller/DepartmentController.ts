@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
-import {of} from "rxjs";
 import {FilterElement} from "@model/filter/FilterElement";
 import {Department} from "@model/department/Department";
 
@@ -24,17 +23,6 @@ export class DepartmentController {
 
   loadDepartmentsAsFilterElements(): Observable<FilterElement[]> {
     return this.http.get('/filter-elements');
-  }
-
-  // todo orken
-  // departmentId это RequestParam
-  // done крч
-  changePersonDepartment(personId: number, departmentId: number): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
-    return this.http.patch('/change-department/' + personId, {departmentId});
   }
 
 }

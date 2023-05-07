@@ -14,6 +14,7 @@ import {PersonController} from "@controller/PersonController";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {Department} from "@model/department/Department";
 import {Sorting} from "@model/web/Sorting";
+import {UserController} from "@controller/UserController";
 
 @Component({
   selector: 'app-departments',
@@ -34,7 +35,8 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
   constructor(private readonly dialog: MatDialog,
               private readonly personController: PersonController,
               private readonly confirmationService: ConfirmationService,
-              private readonly departmentController: DepartmentController,) {
+              private readonly departmentController: DepartmentController,
+              private readonly userController: UserController,) {
   }
 
   ngOnInit() {
@@ -106,7 +108,7 @@ export class DepartmentsComponent implements OnInit, OnDestroy {
 
     const departmentId = parseDepartmentId(item.container.id);
 
-    return [this.departmentController.changePersonDepartment(personToBeMoved.id, departmentId)];
+    return [this.userController.changePersonDepartment(personToBeMoved.id, departmentId)];
   }
 
   private commitUpdates(updates$: Observable<void>[]): void {
