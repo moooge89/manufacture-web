@@ -18,7 +18,7 @@ export class LoadBudgetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.unsub.sub = this.budgetController.loadBudgetRequests().subscribe(requests => this.requests = requests);
+    this.unsub.sub = this.budgetController.loadBudgetRequestsAsResponsible().subscribe(requests => this.requests = requests);
   }
 
   ngOnDestroy() {

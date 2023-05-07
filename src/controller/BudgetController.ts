@@ -30,65 +30,12 @@ export class BudgetController {
     return this.http.postBody('', request);
   }
 
-  // тут вообще у нас 2 эндпоинта
-  // Один для просмотра как заявитель свои рекуесты
-  // Другой как ответственное лицо рекуесты других
-  //done
   loadBudgetRequests(): Observable<LoadBudgetRequest[]> {
-
-    const requests: LoadBudgetRequest[] = [
-      {
-        id: 1,
-        user: 'Yerassyl',
-        amount: 10_000,
-        department: 'Some department 1',
-        reason: 'I need some money',
-      },
-
-      {
-        id: 2,
-        user: 'Dauir',
-        amount: 15_000,
-        department: 'Some department 2',
-        reason: 'I need some money',
-      },
-
-      {
-        id: 3,
-        user: 'Orken',
-        amount: 13_000,
-        department: 'Some department 3',
-        reason: 'I need some money',
-      },
-
-    ];
-
-    if (1 == 1) {
-      return of(requests);
-    }
-
-    return this.http.post('');
+    return this.http.get('');
   }
 
-  // вот второй
   loadBudgetRequestsAsResponsible(): Observable<LoadBudgetRequest[]> {
-
-    const requests: LoadBudgetRequest[] = [
-      {
-        id: 1,
-        user: 'Yerassyl',
-        amount: 10_000,
-        department: 'Some department 1',
-        reason: 'I need some money',
-      },
-
-    ];
-
-    if (1 == 1) {
-      return of(requests);
-    }
-
-    return this.http.post('/as-responsible');
+    return this.http.get('/as-responsible');
   }
 
   // todo orken
