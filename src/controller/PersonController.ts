@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
-import {of} from "rxjs";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {Person} from "@model/person/Person";
 import {DeletePersonWrapper} from "@model/person/DeletePersonWrapper";
@@ -15,24 +14,11 @@ export class PersonController {
     this.http = http.setControllerPrefix('/user-api/external/person');
   }
 
-  // todo orken
   createPerson(person: Person): Observable<Person> {
-    if (1 == 1) {
-      person.id = 2;
-      return of(person);
-    }
-
     return this.http.postBody('', person);
   }
 
-  // todo orken
   updatePerson(person: Person): Observable<Person> {
-    if (1 == 1) {
-      person.departmentId = 0;
-      person.departmentName = 'Default department';
-      return of(person);
-    }
-
     return this.http.putBody('/' + person.id, person);
   }
 
