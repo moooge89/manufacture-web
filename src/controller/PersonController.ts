@@ -4,6 +4,7 @@ import {Observable} from "rxjs/internal/Observable";
 import {of} from "rxjs";
 import {PersonFilter} from "@model/filter/PersonFilter";
 import {Person} from "@model/person/Person";
+import {DeletePersonWrapper} from "@model/person/DeletePersonWrapper";
 
 @Injectable({providedIn: 'root'})
 export class PersonController {
@@ -39,13 +40,8 @@ export class PersonController {
     return this.http.postBody('/list', {...personFilter});
   }
 
-  // todo orken
-  deletePersons(ids: Set<string>): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
-    return this.http.delete('', {ids});
+  deletePersons(deletePersonWrapper: DeletePersonWrapper): Observable<void> {
+    return this.http.postBody('/delete', {deletePersonWrapper});
   }
 
 }

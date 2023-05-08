@@ -66,7 +66,7 @@ export class CrudPersonComponent implements OnInit, OnDestroy {
 
   getName = getNameFromFe;
 
-  deletePersons$ = (ids: Set<string>) => this.personController.deletePersons(ids);
+  deletePersons$ = (ids: number[]) => this.personController.deletePersons({userIds: ids});
 
   async onRowAddClick(): Promise<void> {
     const resp = await this.crudPersonService.openDialogForCreate();

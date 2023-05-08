@@ -28,11 +28,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() isAdminTable: boolean = false;
 
-  @Input() getId: (element: T) => string | number = () => '';
+  @Input() getId: (element: T) => number = () => -1;
 
   @Input() rowUpsert = new Subject<T>();
 
-  @Input() deleteRows$: (ids: Set<string | number>) => Observable<void> = () => of(undefined);
+  @Input() deleteRows$: (ids: number[]) => Observable<void> = () => of(undefined);
 
   @Output() addClicked = new EventEmitter<void>();
 
@@ -45,7 +45,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
   sorting: Sorting = new Sorting();
 
-  private readonly checkedIds = new Set<string | number>();
+  private checkedIds: number[] = [];
 
   private readonly unsub = new Unsub();
 
@@ -68,9 +68,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     const id = this.getId(row);
 
     if (flag) {
-      this.checkedIds.add(id);
+      if (!this.ifHas(id)) {
+        this.checkedIds.push(id);
+      }
     } else {
-      this.checkedIds.delete(id);
+      this.checkedIds = this.checkedIds.filter(oldId => oldId !== id);
     }
   }
 
@@ -79,7 +81,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   }
 
   async deleteRows(): Promise<void> {
-    if (this.checkedIds.size === 0) {
+    if (this.checkedIds.length === 0) {
       return;
     }
 
@@ -89,11 +91,15 @@ export class TableComponent<T> implements OnInit, OnDestroy {
       return;
     }
 
+    const setOfIds = new Set<number>();
+
+    this.checkedIds.forEach(checkedId => setOfIds.add(checkedId));
+
     this.deleteRows$(this.checkedIds).pipe(
       take(1),
     ).subscribe(() => {
-      this.rows = this.rows.filter(row => !this.checkedIds.has(this.getId(row)));
-      this.checkedIds.clear();
+      this.rows = this.rows.filter(row => !setOfIds.has(this.getId(row)));
+      this.checkedIds = [];
     });
 
   }
@@ -150,6 +156,10 @@ export class TableComponent<T> implements OnInit, OnDestroy {
       this.rows[index] = row;
     }
 
+  }
+
+  private ifHas(newId: string | number): boolean {
+    return this.checkedIds.findIndex((id: string | number) => id === newId) > -1;
   }
 
 }

@@ -59,7 +59,9 @@ class OptionsBuilder {
   }
 }
 
-const keyValueAppender = (keyValue: { [p: string]: any } | undefined, appendFunc: (key: string, value: string) => void) => {
+const keyValueAppender = (keyValue: {
+  [p: string]: any
+} | undefined, appendFunc: (key: string, value: string) => void) => {
   if (!keyValue) {
     return;
   }
