@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
-import {of} from "rxjs";
 import {BudgetRequest} from "@model/budget/BudgetRequest";
 import {map} from "rxjs/operators";
 import {NumberWrapper} from "@model/wrapper/NumberWrapper";
@@ -20,13 +19,7 @@ export class BudgetController {
     return this.http.get<NumberWrapper>('/company').pipe(map(x => x.value));
   }
 
-  // todo orken
-  // done
   makeBudgetRequest(request: BudgetRequest): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
     return this.http.postBody('', request);
   }
 
@@ -38,24 +31,12 @@ export class BudgetController {
     return this.http.get('/as-responsible');
   }
 
-  // todo orken
-  // done
   acceptBudgetRequest(id: number): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
-    return this.http.post('/' + id + '/accept', {id});
+    return this.http.put('/' + id + '/approve');
   }
 
-  // todo orken
-  // done
   declineBudgetRequest(id: number): Observable<void> {
-    if (1 == 1) {
-      return of(undefined);
-    }
-
-    return this.http.post('/' + id + '/decline', {id});
+    return this.http.put('/' + id + '/decline');
   }
 
 }
