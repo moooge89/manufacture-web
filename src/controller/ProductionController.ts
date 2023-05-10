@@ -11,10 +11,11 @@ export class ProductionController {
   private readonly http: HttpService;
 
   constructor(http: HttpService) {
-    this.http = http.setControllerPrefix('/production');
+    this.http = http.setControllerPrefix('/manufacture-api/external/production');
   }
 
   // todo orken
+  // done
   loadProductionInfo(productionFilter: ProductionFilter): Observable<ProductionInfo[]> {
     const productionInfo = [
       new ProductionInfo({
@@ -64,7 +65,7 @@ export class ProductionController {
       return of(productionInfo);
     }
 
-    return this.http.get('/list', {productionFilter});
+    return this.http.post('', {productionFilter});
   }
 
 }
