@@ -13,7 +13,7 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
   @ViewChild('scaleBar')
   private scaleBar: ElementRef<HTMLDivElement> | undefined;
 
-  @Input() productionInfo: ProductionInfo = new ProductionInfo();
+  @Input() productionInfo: ProductionInfo | undefined;
 
   iterationListener: () => void = () => undefined;
 
@@ -31,7 +31,7 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
 
     const self = this;
 
-    this.iterationListener = () => self.productionInfo.increaseTodayManufactured();
+    this.iterationListener = () => self.increaseTodayManufactured();
 
     this.scaleBar.nativeElement.addEventListener('animationiteration', this.iterationListener);
   }
@@ -60,12 +60,41 @@ export class ProductionProcessComponent implements AfterViewInit, OnDestroy {
 
     const animation = this.scaleBar.nativeElement.getAnimations()[0];
 
-    if (!animation) {
+    if (!animation || !this.productionInfo) {
       return;
     }
 
-    animation.playbackRate = this.productionInfo.playbackRate();
-    animation.currentTime = this.productionInfo.startTime();
+    // todo orken do not pass milliseconds to one iteration less or equal to 0
+    if (this.productionInfo.millisecondsToOneIteration <= 0) {
+      this.productionInfo.millisecondsToOneIteration = 1_000;
+    }
+
+    animation.playbackRate = this.playbackRate();
+    animation.currentTime = this.startTime();
+  }
+
+  private startTime(): number {
+    if (!this.productionInfo) {
+      return 0;
+    }
+
+    return this.productionInfo.currentPercentage * this.productionInfo.millisecondsToOneIteration / 100;
+  }
+
+  private playbackRate(): number {
+    if (!this.productionInfo) {
+      return 0;
+    }
+
+    return 1000 / this.productionInfo.millisecondsToOneIteration;
+  }
+
+  increaseTodayManufactured(): void {
+    if (!this.productionInfo) {
+      return;
+    }
+
+    this.productionInfo.todayManufactured++;
   }
 
 }

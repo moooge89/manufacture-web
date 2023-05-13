@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from "@service/http/http.service";
 import {Observable} from "rxjs/internal/Observable";
-import {of} from "rxjs";
 import {ProductionInfo} from "@model/production/ProductionInfo";
 import {ProductionFilter} from "@model/production/ProductionFilter";
 
@@ -14,58 +13,8 @@ export class ProductionController {
     this.http = http.setControllerPrefix('/manufacture-api/external/production');
   }
 
-  // todo orken
-  // done
   loadProductionInfo(productionFilter: ProductionFilter): Observable<ProductionInfo[]> {
-    const productionInfo = [
-      new ProductionInfo({
-        factoryId: 1,
-        departmentId: 1,
-        teamId: 1,
-        currentPercentage: 0,
-        millisecondsToOneIteration: 5000,
-        titleToShow: 'First team',
-        workersCount: 3,
-        todayManufactured: 1,
-        yesterdayManufactured: 2,
-        lastWeekManufactured: 3,
-        lastMonthManufactured: 4,
-      }),
-
-      new ProductionInfo({
-        factoryId: 1,
-        departmentId: 1,
-        teamId: 1,
-        currentPercentage: 40,
-        millisecondsToOneIteration: 7000,
-        titleToShow: 'Second team',
-        workersCount: 4,
-        todayManufactured: 2,
-        yesterdayManufactured: 3,
-        lastWeekManufactured: 5,
-        lastMonthManufactured: 7,
-      }),
-
-      new ProductionInfo({
-        factoryId: 1,
-        departmentId: 1,
-        teamId: 1,
-        currentPercentage: 70,
-        millisecondsToOneIteration: 3000,
-        titleToShow: 'Third team',
-        workersCount: 3,
-        todayManufactured: 1,
-        yesterdayManufactured: 2,
-        lastWeekManufactured: 3,
-        lastMonthManufactured: 4,
-      }),
-    ];
-
-    if (1 == 1) {
-      return of(productionInfo);
-    }
-
-    return this.http.post('', {productionFilter});
+    return this.http.postBody('', productionFilter);
   }
 
 }
