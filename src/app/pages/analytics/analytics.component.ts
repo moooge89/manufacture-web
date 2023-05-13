@@ -8,12 +8,12 @@ import {FactoryController} from "@controller/FactoryController";
 import {DepartmentController} from "@controller/DepartmentController";
 import {getIdFromFe, getNameFromFe} from "@util/FilterUtil";
 import {AnalyticsDialogComponent} from "../../dialogue/analytics/analytics-dialog.component";
-import {AnalyticsController} from "@controller/AnalyticsController";
 import {AnalyticsFilter} from "@model/analytics/AnalyticsFilter";
 import {AnalyticsDescription} from "@model/analytics/AnalyticsDescription";
 import {AuthService} from "@service/auth/auth.service";
 import {UserInfo} from "@model/auth/UserInfo";
 import {Specialization} from "@model/user/Specialization";
+import {ReportController} from "@controller/ReportController";
 
 @Component({
   selector: 'app-analytics',
@@ -45,8 +45,8 @@ export class AnalyticsComponent {
   constructor(private readonly dialog: MatDialog,
               private readonly authService: AuthService,
               private readonly teamController: TeamController,
+              private readonly reportController: ReportController,
               private readonly factoryController: FactoryController,
-              private readonly analyticsController: AnalyticsController,
               private readonly departmentController: DepartmentController,) {
   }
 
@@ -99,7 +99,7 @@ export class AnalyticsComponent {
 
   generateAnalytics(): void {
     this.isAnalyticsBeingGenerated = true;
-    this.unsub.sub = this.analyticsController.loadAnalyticsDescription(this.analyticsFilter).subscribe(description => {
+    this.unsub.sub = this.reportController.loadAnalyticsDescription(this.analyticsFilter).subscribe(description => {
       this.isAnalyticsBeingGenerated = false;
       this.isAnalyticsGenerated = true;
       this.analyticsDescription = description;
