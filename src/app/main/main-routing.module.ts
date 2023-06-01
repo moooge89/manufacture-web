@@ -40,11 +40,6 @@ const routes: Routes = [
         canLoad: [CommonPageGuard],
       },
       {
-        path: 'crud-market',
-        loadChildren: () => import('../pages/crud-market/crud-market.module').then(x => x.CrudMarketModule),
-        canLoad: [AdminGuard],
-      },
-      {
         path: 'budget',
         loadChildren: () => import('../pages/budget/budget.module').then(x => x.BudgetModule),
         canLoad: [DepartmentGuard],
