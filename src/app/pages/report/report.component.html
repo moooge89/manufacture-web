@@ -108,10 +108,17 @@
       ></app-button>
 
       <app-button
-        text="See previous report"
+        text="See report with count"
         [isDisabled]="isSeeButtonDisabled"
         [disabledMessage]="seeButtonDisabledMsg"
-        (clicked)="seeGeneratedReport()"
+        (clicked)="seeGeneratedReport(false)"
+      ></app-button>
+
+      <app-button
+        text="See report with coefficient"
+        [isDisabled]="isSeeButtonDisabled"
+        [disabledMessage]="seeButtonDisabledMsg"
+        (clicked)="seeGeneratedReport(true)"
       ></app-button>
 
     </div>

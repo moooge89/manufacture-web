@@ -14,30 +14,38 @@ export class ReportDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<ReportDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: { reportDescription: ReportDescription },
+    @Inject(MAT_DIALOG_DATA) data: {
+      reportDescription: ReportDescription,
+      showCoeff: boolean
+    },
   ) {
 
     const description = data.reportDescription;
 
-    this.chartOptions = {
-      series: [
-        {
-          name: description.firstCountLabel,
-          data: description.firstCountScale,
-        },
-        {
-          name: description.secondCountLabel,
-          data: description.secondCountScale,
-        },
-        {
+    const values: any[] = [];
+
+    if (data.showCoeff) {
+      values.push({
           name: description.firstCoefLabel,
           data: description.firstCoefScale,
         },
         {
           name: description.secondCoefLabel,
           data: description.secondCoefScale,
-        }
-      ],
+        });
+    } else {
+      values.push({
+          name: description.firstCountLabel,
+          data: description.firstCountScale,
+        },
+        {
+          name: description.secondCountLabel,
+          data: description.secondCountScale,
+        });
+    }
+
+    this.chartOptions = {
+      series: values,
       chart: {
         type: "bar",
         height: 450

@@ -136,23 +136,23 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.isReportBeingGenerated = false;
       this.isReportGenerated = true;
       this.reportDescription = description;
-      this.openDialog(description);
+      this.openDialog(description, false);
     });
   }
 
-  seeGeneratedReport(): void {
+  seeGeneratedReport(useCoeff: boolean): void {
     if (!this.reportDescription) return;
 
-    this.openDialog(this.reportDescription);
+    this.openDialog(this.reportDescription, useCoeff);
   }
 
-  private openDialog(reportDescription: ReportDescription): void {
+  private openDialog(reportDescription: ReportDescription, useCoeff: boolean): void {
     this.dialogRef?.close();
 
     this.dialogRef = this.dialog.open(ReportDialogComponent, {
       width: '1080px',
       height: '500px',
-      data: {reportDescription: reportDescription},
+      data: {reportDescription: reportDescription, showCoeff: useCoeff},
     });
   }
 
