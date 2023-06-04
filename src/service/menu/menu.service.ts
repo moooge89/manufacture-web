@@ -120,7 +120,7 @@ export class MenuService {
         break;
 
       case Specialization.SYSTEM_ADMIN:
-        path = '/main/crud-market';
+        path = '/main/crud-user';
         break;
 
       default:
