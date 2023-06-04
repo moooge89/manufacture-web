@@ -15,7 +15,7 @@ export class AuthController {
     this.http = http.setControllerPrefix('/auth');
   }
 
-  login(loginRequest: SecuredLoginRequest): Observable<string> {
+  login(loginRequest: SecuredLoginRequest): Observable<string | undefined> {
     return this.http.postBody<Token>('/login', loginRequest).pipe(map(token => token.id));
   }
 
